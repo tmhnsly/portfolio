@@ -56,15 +56,16 @@ header h3{
 
 .profilePicture {
   border-radius: 50%;
-  width:200px;
+  width:250px;
   margin-top:15px;
 }
 
 .aboutMePage{
 	display:flex;
-	justify-content:space-between;
-	justify-content:baseline;
+	justify-content:center;
 }
 
-.portfolioPage{
+.aboutMeText{
+	padding-right:100px;
+	
 }
