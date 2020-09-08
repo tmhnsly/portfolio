@@ -68,7 +68,7 @@ header h1{
 	letter-spacing: 0.5rem;
 }
 
-header h3{
+header h2{
 	color:#efbe00;
 	font-size:2rem;
 	position:relative;
@@ -113,5 +113,290 @@ header h3{
 	height:20vh;
 }
 .contactPage .socialIcon{
-	width:5%;
+	width:5rem;
+}
+
+.socialLinkTray{
+	display:flex;
+	justify-content:space-;
+}
+
+@media only screen and (max-width: 1300px) {
+	* {
+		box-sizing: border-box;
+	}
+
+	body {
+		padding: 0;
+		margin: 0;
+		font-family:Helvetica;
+	}
+
+	.container {
+		width: 80%;
+		margin-left:5%;
+		margin-right:5%;
+	}
+
+	.sectionHeader{
+		font-size:2rem;
+		padding-top:15px;
+	}
+
+	.sectionBodyText{
+	
+	}
+
+	hr{
+		color: #dedede;
+	}
+
+	nav{
+		display: flex;
+		background-color: #ffffff;
+		font-family:Futura;
+		justify-items: space-between;
+		flex-wrap:nowrap;
+	}
+	
+	.navLinks{
+		width:40px;
+		display:flex;
+		
+	}
+	
+	.navLogo{
+		
+	}
+
+	nav h3{
+		color:#efbe00;
+		margin:auto;
+		padding:15px 0 0 15px;
+	}
+
+	nav a {
+		color: #7f7f7f;
+		text-decoration: none;
+		padding-right:15px;
+	}
+
+	nav a:hover{
+		color:#efbe00;
+	}
+
+	header{
+		background: url("https://images.unsplash.com/photo-1598512946582-8aa2bca6abc0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1346&q=80");
+		background-repeat: no-repeat;
+		background-position:center;
+		background-size:cover;
+		text-align: center;
+		width:100%;
+		padding:100px 0;
+	}
+
+	header h1{
+		font-family:Futura;
+		color:#ffffff;
+		font-size:4rem;
+		letter-spacing: 0.5rem;
+	}
+
+	header h2{
+		color:#efbe00;
+		font-size:2rem;
+		position:relative;
+		bottom:20px;
+	}
+
+	.aboutMePage{
+		display:flex;
+		justify-content: center;
+		align-items:center;
+		flex-direction:row;
+		flex-wrap:wrap;
+	}
+
+	.aboutMeText{
+		padding-right:30px;
+	}
+
+	.profilePicture {
+	  border-radius: 50%;
+	  width:100%;
+	  max-width:250px;
+	  min-width:150px;
+	  margin-top:30px;
+	  margin-bottom:25px;
+	}
+
+	.portfolioPage p{
+		max-width:480px;
+	}
+
+	.portfolioPage .sectionHeader{
+		padding-top:15px;
+	}
+
+	.grid-container {
+		display:grid;
+		grid-template-columns: 1fr 1fr;
+		grid-template-rows:1fr 1fr;
+		grid-column-gap:10px;
+		justify-items:stretch;
+	}
+
+	.contactPage{
+		height:20vh;
+	}
+	.contactPage .socialIcon{
+		width:5rem;
+	}
+
+	.socialLinkTray{
+		display:flex;
+		justify-content:center;
+		margin-left:15px;
+		margin-right:15px;
+	}
+	
+}
+@media only screen and (max-width: 1000px) {
+	* {
+		box-sizing: border-box;
+	}
+
+	body {
+		padding: 0;
+		margin: 0;
+		font-family:Helvetica;
+	}
+
+	.container {
+		width: 80%;
+		margin-left:5%;
+		margin-right:5%;
+	}
+
+	.sectionHeader{
+		font-size:2rem;
+		padding-top:15px;
+	}
+
+	.sectionBodyText{
+	
+	}
+
+	hr{
+		color: #dedede;
+	}
+
+	nav{
+		display: flex;
+		background-color: #ffffff;
+		font-family:Futura;
+		justify-items: space-between;
+		flex-wrap:nowrap;
+	}
+	
+	.navLinks{
+		width:40px;
+		display:flex;
+		
+	}
+	
+	.navLogo{
+		
+	}
+
+	nav h3{
+		color:#efbe00;
+		margin:auto;
+		padding:15px 0 0 15px;
+	}
+
+	nav a {
+		color: #7f7f7f;
+		text-decoration: none;
+		padding-right:15px;
+	}
+
+	nav a:hover{
+		color:#efbe00;
+	}
+
+	header{
+		background: url("https://images.unsplash.com/photo-1598512946582-8aa2bca6abc0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1346&q=80");
+		background-repeat: no-repeat;
+		background-position:center;
+		background-size:cover;
+		text-align: center;
+		width:100%;
+		padding:100px 0;
+	}
+
+	header h1{
+		font-family:Futura;
+		color:#ffffff;
+		font-size:4rem;
+		letter-spacing: 0.5rem;
+	}
+
+	header h2{
+		color:#efbe00;
+		font-size:2rem;
+		position:relative;
+		bottom:20px;
+	}
+
+	.aboutMePage{
+		display:flex;
+		justify-content: center;
+		align-items:center;
+		flex-direction:row;
+		flex-wrap:wrap;
+	}
+
+	.aboutMeText{
+		padding-right:30px;
+	}
+
+	.profilePicture {
+	  border-radius: 50%;
+	  width:100%;
+	  max-width:250px;
+	  min-width:150px;
+	  margin-top:30px;
+	  margin-bottom:25px;
+	}
+
+	.portfolioPage p{
+		max-width:480px;
+	}
+
+	.portfolioPage .sectionHeader{
+		padding-top:15px;
+	}
+
+	.grid-container {
+		display:grid;
+		grid-template-columns: 1fr;
+		grid-column-gap:10px;
+		justify-items:stretch;
+	}
+
+	.contactPage{
+		height:20vh;
+	}
+	.contactPage .socialIcon{
+		width:5rem;
+		margin-left:15px;
+		margin-right:15px;
+	}
+
+	.socialLinkTray{
+		display:flex;
+		justify-content:center;
+	}
+	
 }
