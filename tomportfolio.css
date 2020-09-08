@@ -15,7 +15,7 @@ body {
 }
 
 hr{
-	color: #969696;
+	color: #dedede;
 }
 
 nav{
@@ -23,6 +23,7 @@ nav{
 	background-color: #ffffff;
 	font-family:Futura;
 	justify-content: space-between;
+	flex-wrap:nowrap;
 }
 
 nav h3{
@@ -44,31 +45,45 @@ header{
 	background-position:center;
 	background-size:cover;
 	text-align: center;
-	padding:50px 0;
+	width:100%;
+	padding:100px 0;
 }
 
 header h1{
 	font-family:Futura;
 	color:#ffffff;
-	font-size:8vw;
+	font-size:4rem;
+	letter-spacing: 0.5rem;
 }
 
 header h3{
 	color:#efbe00;
-	font-size:2vw;
+	font-size:2rem;
 	position:relative;
 	bottom:20px;
 }
 
+
 .aboutMePage{
 	display:flex;
-	justify-content: flex-start;
+	justify-content: center;
+	align-items:center;
+}
+
+.aboutMeText{
+	padding-right:30px;
 }
 
 .profilePicture {
   border-radius: 50%;
-  width:250px;
+  width:100%;
+  max-width:250px;
+  min-width:150px;
   margin-top:15px;
+}
+
+.profilePicContainer{
+	
 }
 
 .grid-container {
