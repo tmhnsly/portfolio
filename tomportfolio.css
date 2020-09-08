@@ -5,11 +5,11 @@
 body {
 	padding: 0;
 	margin: 0;
+	font-family:Helvetica;
 }
 
 .container {
 	width: 800px;
-	margin: auto;
 }
 
 nav{
@@ -44,12 +44,12 @@ header{
 header h1{
 	font-family:Futura;
 	color:#ffffff;
-	font-size:6vw;
+	font-size:8vw;
 }
 
 header h3{
 	color:rgba(239,190,0,1);
-	font-size:1.5vw;
+	font-size:2vw;
 	position:relative;
 	bottom:20px;
 }
@@ -66,6 +66,24 @@ header h3{
 }
 
 .aboutMeText{
-	padding-right:100px;
 	
+}
+
+.portfolioPage{
+	
+}
+
+.grid-container {
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: row;
+}
+
+.grid-item {
+	flex: 0 0 50%;
+	padding: 5px;
+}
+
+.grid-item iframe {
+	width: auto; height: auto;
 }
