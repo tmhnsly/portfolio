@@ -32,7 +32,7 @@ nav{
 	background-color: #ffffff;
 	font-family:Futura;
 	justify-content: space-between;
-	flex-wrap:nowrap;
+	flex-wrap:wrap;
 }
 
 nav h3{
@@ -114,14 +114,16 @@ header h2{
 }
 .contactPage .socialIcon{
 	width:5rem;
+	margin-left:15px;
+	margin-right:15px;
 }
 
 .socialLinkTray{
 	display:flex;
-	justify-content:space-;
+	align-items:center;
 }
 
-@media only screen and (max-width: 1300px) {
+@media only screen and (max-width: 1200px) {
 	* {
 		box-sizing: border-box;
 	}
@@ -156,13 +158,6 @@ header h2{
 		background-color: #ffffff;
 		font-family:Futura;
 		justify-items: space-between;
-		flex-wrap:nowrap;
-	}
-	
-	.navLinks{
-		width:40px;
-		display:flex;
-		
 	}
 	
 	.navLogo{
@@ -171,7 +166,6 @@ header h2{
 
 	nav h3{
 		color:#efbe00;
-		margin:auto;
 		padding:15px 0 0 15px;
 	}
 
@@ -214,7 +208,6 @@ header h2{
 		justify-content: center;
 		align-items:center;
 		flex-direction:row;
-		flex-wrap:wrap;
 	}
 
 	.aboutMeText{
@@ -229,13 +222,17 @@ header h2{
 	  margin-top:30px;
 	  margin-bottom:25px;
 	}
-
+	
 	.portfolioPage p{
 		max-width:480px;
 	}
 
 	.portfolioPage .sectionHeader{
 		padding-top:15px;
+	}
+	
+	.portfolioPage iframe{
+		max-width:400px;
 	}
 
 	.grid-container {
@@ -251,17 +248,17 @@ header h2{
 	}
 	.contactPage .socialIcon{
 		width:5rem;
+		margin-left:15px;
+		margin-right:15px;
 	}
 
 	.socialLinkTray{
 		display:flex;
-		justify-content:center;
-		margin-left:15px;
-		margin-right:15px;
+		align-items:center;
 	}
 	
 }
-@media only screen and (max-width: 1000px) {
+@media only screen and (max-width: 900px) {
 	* {
 		box-sizing: border-box;
 	}
@@ -283,10 +280,6 @@ header h2{
 		padding-top:15px;
 	}
 
-	.sectionBodyText{
-	
-	}
-
 	hr{
 		color: #dedede;
 	}
@@ -299,20 +292,14 @@ header h2{
 		flex-wrap:nowrap;
 	}
 	
-	.navLinks{
-		width:40px;
-		display:flex;
-		
-	}
-	
 	.navLogo{
+		margin-left:15px;
 		
 	}
 
 	nav h3{
 		color:#efbe00;
 		margin:auto;
-		padding:15px 0 0 15px;
 	}
 
 	nav a {
@@ -347,6 +334,7 @@ header h2{
 		font-size:2rem;
 		position:relative;
 		bottom:20px;
+		padding:15px;
 	}
 
 	.aboutMePage{
@@ -354,16 +342,16 @@ header h2{
 		justify-content: center;
 		align-items:center;
 		flex-direction:row;
-		flex-wrap:wrap;
 	}
 
+
 	.aboutMeText{
-		padding-right:30px;
+		padding-right:40px;
 	}
 
 	.profilePicture {
 	  border-radius: 50%;
-	  width:100%;
+	  width:10%;
 	  max-width:250px;
 	  min-width:150px;
 	  margin-top:30px;
@@ -371,11 +359,15 @@ header h2{
 	}
 
 	.portfolioPage p{
-		max-width:480px;
+		max-width:400px;
 	}
 
 	.portfolioPage .sectionHeader{
 		padding-top:15px;
+	}
+	
+	.portfolioPage iframe{
+		max-width:400px;
 	}
 
 	.grid-container {
@@ -397,6 +389,5 @@ header h2{
 	.socialLinkTray{
 		display:flex;
 		justify-content:center;
+		align-items:center;
 	}
-	
-}
