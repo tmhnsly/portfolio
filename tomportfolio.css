@@ -19,10 +19,6 @@ body {
 	padding-top:15px;
 }
 
-.sectionBodyText{
-	
-}
-
 hr{
 	color: #dedede;
 }
@@ -145,10 +141,6 @@ header h2{
 		padding-top:15px;
 	}
 
-	.sectionBodyText{
-	
-	}
-
 	hr{
 		color: #dedede;
 	}
@@ -158,10 +150,6 @@ header h2{
 		background-color: #ffffff;
 		font-family:Futura;
 		justify-items: space-between;
-	}
-	
-	.navLogo{
-		
 	}
 
 	nav h3{
@@ -205,7 +193,7 @@ header h2{
 
 	.aboutMePage{
 		display:flex;
-		justify-content: center;
+		justify-content: space-between;
 		align-items:center;
 		flex-direction:row;
 	}
@@ -289,7 +277,10 @@ header h2{
 		background-color: #ffffff;
 		font-family:Futura;
 		justify-items: space-between;
-		flex-wrap:nowrap;
+	}
+	
+	.navLinks{
+		display:inline;
 	}
 	
 	.navLogo{
@@ -299,7 +290,7 @@ header h2{
 
 	nav h3{
 		color:#efbe00;
-		margin:auto;
+		font-size:16px;
 	}
 
 	nav a {
@@ -310,6 +301,11 @@ header h2{
 
 	nav a:hover{
 		color:#efbe00;
+	}
+	
+	ul{
+		margin-left:0;
+		padding:0;
 	}
 
 	header{
@@ -341,7 +337,6 @@ header h2{
 		display:flex;
 		justify-content: center;
 		align-items:center;
-		flex-direction:row;
 	}
 
 
@@ -381,7 +376,7 @@ header h2{
 		height:20vh;
 	}
 	.contactPage .socialIcon{
-		width:5rem;
+		width:4rem;
 		margin-left:15px;
 		margin-right:15px;
 	}
@@ -390,4 +385,6 @@ header h2{
 		display:flex;
 		justify-content:center;
 		align-items:center;
+		padding-left:40px;
 	}
+}
