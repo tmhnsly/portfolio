@@ -1,688 +1,178 @@
-* {
-	box-sizing: border-box;
-}
-
 body {
 	padding: 0;
 	margin: 0;
-	font-family:Helvetica;
+	font-family: Helvetica, sans-serif;
 }
 
 .container {
-	width: 80%;
-	margin-left:12%;
-	margin-right:12%;
+	margin-left: 12%;
+	margin-right: 12%;
 }
 
-.sectionHeader{
-	font-size:2rem;
-	padding-top:15px;
+.sectionHeader {
+	font-size: 2rem;
+	padding-top: 15px;
 }
 
-hr{
-	color: #dedede;
+p {
+	font-size: 1.2rem;
 }
 
-nav{
+nav {
 	display: flex;
 	background-color: #ffffff;
-	font-family:Futura;
+	font-family: Futura, Helvetica, sans-serif;
 	justify-content: space-between;
-	flex-wrap:wrap;
+	align-content:center;
 }
 
-nav h3{
-	color:#efbe00;
-	margin:auto;
-	padding:15px 0 0 15px;
+nav h3 {
+	color: #efbe00;
+	margin: auto;
+	padding: 15px 0 0 15px;
+	font-size:1rem;
+}
+
+nav ul {
+	font-size: 1rem;
 }
 
 nav a {
 	color: #7f7f7f;
 	text-decoration: none;
-	padding-right:15px;
+	padding-right: 15px;
 }
 
-nav a:hover{
-	color:#efbe00;
+nav a:hover {
+	color: #efbe00;
 }
 
-header{
+header {
 	background: url("https://images.unsplash.com/photo-1598512946582-8aa2bca6abc0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1346&q=80");
 	background-repeat: no-repeat;
-	background-position:center;
-	background-size:cover;
+	background-position: center;
+	background-size: cover;
 	text-align: center;
-	width:100%;
-	padding:100px 0;
+	width: 100%;
+	padding: 100px 0;
 }
-
-header h1{
-	font-family:Futura;
-	color:#ffffff;
-	font-size:4rem;
+ 
+header h1 {
+	font-family: Futura, Helvetica, sans-serif;
+	color: #ffffff;
+	font-size: 4rem;
 	letter-spacing: 0.5rem;
 }
 
-header h2{
-	color:#efbe00;
-	font-size:2rem;
-	position:relative;
-	bottom:20px;
+header h2 {
+	color: #efbe00;
+	font-size: 2rem;
+	bottom: 20px;
 }
 
-.aboutMePage{
-	display:flex;
+.aboutMePage {
+	display: flex;
 	justify-content: space-between;
-	align-items:center;
+	align-items: center;
 }
 
-.aboutMeText{
-	padding-right:30px;
+.aboutMeText {
+	padding-right: 40px;
 }
 
 .profilePicture {
   border-radius: 50%;
-  width:100%;
-  max-width:250px;
-  min-width:150px;
-  margin-top:30px;
-  margin-bottom:25px;
+  width: 100%;
+  max-width: 250px;
+  min-width: 150px;
+  margin-top: 30px;
+  margin-bottom: 25px;
 }
 
-.portfolioPage p{
-	max-width:480px;
+.portfolioPage p {
+	max-width: 480px;
 }
 
-.portfolioPage .sectionHeader{
-	padding-top:15px;
+.portfolioPage .sectionHeader {
+	padding-top: 15px;
 }
 
-.grid-container {
-	display:grid;
+.portfolioPage iframe {
+	max-width: 100%;
+}
+
+.videoGridContainer {
+	display: grid;
 	grid-template-columns: 1fr 1fr;
-	grid-template-rows:1fr 1fr;
-	grid-column-gap:10px;
+	grid-template-rows: 1fr 1fr;
+	grid-column-gap: 10px;
 }
 
-.contactPage{
-	height:20vh;
+.contactPage {
+	height: 20vh;
 }
-.contactPage .socialIcon{
-	width:5rem;
-	margin-left:15px;
-	margin-right:15px;
+.contactPage .socialIcon {
+	width: 5rem;
+	margin-left: 15px;
+	margin-right: 15px;
 }
 
-.socialLinkTray{
+.contactPage .sectionHeader {
 	display:flex;
-	align-items:center;
+	justify-content:center;
+}
+
+.socialLinkTray {
+	display: flex;
+	align-items: center;
+	justify-content:center;
 }
 
 @media only screen and (max-width: 1200px) {
-	* {
-		box-sizing: border-box;
-	}
-
-	body {
-		padding: 0;
-		margin: 0;
-		font-family:Helvetica;
-	}
 
 	.container {
 		width: 80%;
-		margin-left:5%;
-		margin-right:5%;
+		margin-left: 5%;
+		margin-right: 5%;
 	}
 
-	.sectionHeader{
-		font-size:2rem;
-		padding-top:15px;
+	header h2 {
+		font-size: 2rem;
 	}
 
-	hr{
-		color: #dedede;
+	.aboutMePage {
+		flex-direction: row;
 	}
 
-	nav{
-		display: flex;
-		background-color: #ffffff;
-		font-family:Futura;
-		justify-items: space-between;
-	}
-
-	nav h3{
-		color:#efbe00;
-		padding:15px 0 0 15px;
-	}
-
-	nav a {
-		color: #7f7f7f;
-		text-decoration: none;
-		padding-right:15px;
-	}
-
-	nav a:hover{
-		color:#efbe00;
-	}
-
-	header{
-		background: url("https://images.unsplash.com/photo-1598512946582-8aa2bca6abc0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1346&q=80");
-		background-repeat: no-repeat;
-		background-position:center;
-		background-size:cover;
-		text-align: center;
-		width:100%;
-		padding:100px 0;
-	}
-
-	header h1{
-		font-family:Futura;
-		color:#ffffff;
-		font-size:4rem;
-		letter-spacing: 0.5rem;
-	}
-
-	header h2{
-		color:#efbe00;
-		font-size:2rem;
-		position:relative;
-		bottom:20px;
-	}
-
-	.aboutMePage{
-		display:flex;
-		justify-content: space-between;
-		align-items:center;
-		flex-direction:row;
-	}
-
-	.aboutMeText{
-		padding-right:30px;
-	}
-
-	.profilePicture {
-	  border-radius: 50%;
-	  width:100%;
-	  max-width:250px;
-	  min-width:150px;
-	  margin-top:30px;
-	  margin-bottom:25px;
-	}
-	
-	.portfolioPage p{
-		max-width:480px;
-	}
-
-	.portfolioPage .sectionHeader{
-		padding-top:15px;
-	}
-	
-	.portfolioPage iframe{
-		max-width:400px;
-	}
-
-	.grid-container {
-		display:grid;
-		grid-template-columns: 1fr 1fr;
-		grid-template-rows:1fr 1fr;
-		grid-column-gap:10px;
-		justify-items:stretch;
-	}
-
-	.contactPage{
-		height:20vh;
-	}
-	.contactPage .socialIcon{
-		width:5rem;
-		margin-left:15px;
-		margin-right:15px;
-	}
-
-	.socialLinkTray{
-		display:flex;
-		align-items:center;
+	.portfolioPage iframe {
+		max-width: 100%;
 	}
 	
 }
 @media only screen and (max-width: 900px) {
-	* {
-		box-sizing: border-box;
-	}
-
-	body {
-		padding: 0;
-		margin: 0;
-		font-family:Helvetica;
-	}
 
 	.container {
-		width: 80%;
-		margin-left:5%;
-		margin-right:5%;
+		margin-left: 10%;
+		margin-right: 10%;
 	}
 
-	.sectionHeader{
-		font-size:2rem;
-		padding-top:15px;
-	}
-
-	hr{
-		color: #dedede;
-	}
-
-	nav{
-		display: flex;
-		background-color: #ffffff;
-		font-family:Futura;
-		justify-items: space-between;
-	}
-	
-	.navLinks{
-		display:inline;
-	}
-	
-	.navLogo{
-		margin-left:15px;
-		
-	}
-
-	nav h3{
-		color:#efbe00;
-		font-size:16px;
-	}
-
-	nav a {
-		color: #7f7f7f;
-		text-decoration: none;
-		padding-right:15px;
-	}
-
-	nav a:hover{
-		color:#efbe00;
-	}
-	
-	ul{
-		margin-left:0;
-		padding:0;
-	}
-
-	header{
-		background: url("https://images.unsplash.com/photo-1598512946582-8aa2bca6abc0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1346&q=80");
-		background-repeat: no-repeat;
-		background-position:center;
-		background-size:cover;
-		text-align: center;
-		width:100%;
-		padding:100px 0;
-	}
-
-	header h1{
-		font-family:Futura;
-		color:#ffffff;
-		font-size:4rem;
-		letter-spacing: 0.5rem;
-	}
-
-	header h2{
-		color:#efbe00;
-		font-size:2rem;
-		position:relative;
-		bottom:20px;
-		padding:15px;
-	}
-
-	.aboutMePage{
-		display:flex;
-		justify-content: center;
-		align-items:center;
-	}
-
-
-	.aboutMeText{
-		padding-right:40px;
-	}
-
-	.profilePicture {
-	  border-radius: 50%;
-	  width:10%;
-	  max-width:250px;
-	  min-width:150px;
-	  margin-top:30px;
-	  margin-bottom:25px;
-	}
-
-	.portfolioPage p{
-		max-width:400px;
-	}
-
-	.portfolioPage .sectionHeader{
-		padding-top:15px;
-	}
-	
-	.portfolioPage iframe{
-		max-width:500px;
-	}
-
-	.grid-container {
-		display:grid;
-		grid-template-columns: 1fr;
-		grid-column-gap:10px;
-		justify-items:stretch;
-	}
-
-	.contactPage{
-		height:20vh;
-	}
-	.contactPage .socialIcon{
-		width:4rem;
-		margin-left:15px;
-		margin-right:15px;
-	}
-
-	.socialLinkTray{
-		display:flex;
-		justify-content:center;
-		align-items:center;
-		padding-left:40px;
-	}
-}
-@media only screen and (max-width: 500px) {
-	* {
-		box-sizing: border-box;
-	}
-
-	body {
+	ul {
+		margin-left: 0;
 		padding: 0;
-		margin: 0;
-		font-family:Helvetica;
 	}
 
-	.container {
-		width: 80%;
-		margin-left:5%;
-		margin-right:5%;
+	.aboutMePage {
+		flex-direction: column;
 	}
 
-	.sectionHeader{
-		font-size:2rem;
-		padding-top:15px;
+	.portfolioPage p {
+		max-width: 350px;
 	}
 
-	hr{
-		color: #dedede;
-	}
-
-	nav{
-		display: flex;
-		background-color: #ffffff;
-		font-family:Futura;
-		justify-items: space-between;
+	.videoGridContainer {
+		display: block;
 	}
 	
-	.navLinks{
-		display:inline;
-	}
-	
-	.navLogo{
-		margin-left:15px;
-		
-	}
-
-	nav h3{
-		color:#efbe00;
-		font-size:15px;
-	}
-
-	nav a {
-		color: #7f7f7f;
-		text-decoration: none;
-		padding-right:15px;
-	}
-
-	nav a:hover{
-		color:#efbe00;
-	}
-	
-	ul{
-		margin-left:0;
-		padding:0;
-	}
-
-	header{
-		background: url("https://images.unsplash.com/photo-1598512946582-8aa2bca6abc0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1346&q=80");
-		background-repeat: no-repeat;
-		background-position:center;
-		background-size:cover;
-		text-align: center;
-		width:100%;
-		padding:100px 0;
-	}
-
-	header h1{
-		font-family:Futura;
-		color:#ffffff;
-		font-size:4rem;
-		letter-spacing: 0.5rem;
-	}
-
-	header h2{
-		color:#efbe00;
-		font-size:2rem;
-		position:relative;
-		bottom:20px;
-		padding:15px;
-	}
-
-	.aboutMePage{
-		display:flex;
-		justify-content: center;
-		align-items:center;
-	}
-
-
-	.aboutMeText{
-		padding-right:40px;
-	}
-
-	.profilePicture {
-	  border-radius: 50%;
-	  width:10%;
-	  max-width:250px;
-	  min-width:150px;
-	  margin-top:30px;
-	  margin-bottom:25px;
-	}
-
-	.portfolioPage p{
-		max-width:400px;
-	}
-
-	.portfolioPage .sectionHeader{
-		padding-top:15px;
-	}
-	
-	.portfolioPage iframe{
-		max-width:400px;
-	}
-
-	.grid-container {
-		display:grid;
-		grid-template-columns: 1fr;
-		grid-column-gap:10px;
-		justify-items:stretch;
-	}
-
-	.contactPage{
-		height:20vh;
-	}
-	.contactPage .socialIcon{
-		width:4rem;
-		margin-left:15px;
-		margin-right:15px;
-	}
-
-	.socialLinkTray{
-		display:flex;
-		justify-content:center;
-		align-items:center;
-		padding-left:40px;
-	}
-}
-@media only screen and (max-device-width: 500px) {
-	* {
-		box-sizing: border-box;
-	}
-
-	body {
-		padding: 0;
-		margin: 0;
-		font-family:Helvetica;
-	}
-
-	.container {
-		width: 80%;
-		margin-left:5%;
-		margin-right:5%;
-	}
-
-	.sectionHeader{
-		font-size:6rem;
-		padding-top:15px;
-	}
-	
-	header h2{
-		font-size:5rem;
-	}
-
-	p{
-		font-size:3rem;
-	}
-
-	hr{
-		color: #dedede;
-	}
-
-	nav{
-		display: flex;
-		background-color: #ffffff;
-		font-family:Futura;
-		justify-items: center;
-		align-items:center;
-		
-	}
-	
-	.navLinks{
-		display:inline;
-	}
-	
-	.navLogo{
-		margin-left:15px;
-		
-	}
-
-	nav h3{
-		color:#efbe00;
-		font-size:3rem;
-	}
-
-	nav a {
-		color: #7f7f7f;
-		text-decoration: none;
-		padding-right:15px;
-	}
-
-	nav a:hover{
-		color:#efbe00;
-	}
-	
-	ul{
-		display:flex;
-		margin-left:0;
-		padding:0;
-		font-size:3rem;
-	}
-
-	header{
-		background: url("https://images.unsplash.com/photo-1598512946582-8aa2bca6abc0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1346&q=80");
-		background-repeat: no-repeat;
-		background-position:center;
-		background-size:cover;
-		text-align: center;
-		width:100%;
-		padding:100px 0;
-		height:10vh;
-	}
-
-	header h1{
-		font-family:Futura;
-		color:#ffffff;
-		font-size:9rem;
-		letter-spacing: 0.5rem;
-	}
-
-	header h2{
-		color:#efbe00;
-		font-size:2rem;
-		bottom:20px;
-		padding:15px;
-	}
-
-	.aboutMePage{
-		display:flex;
-		justify-content: center;
-		align-items:center;
-	}
-
-
-	.aboutMeText{
-		padding-right:40px;
-	}
-
-	.profilePicture {
-	  border-radius: 50%;
-	  width:10%;
-	  max-width:250px;
-	  min-width:150px;
-	  margin-top:30px;
-	  margin-bottom:25px;
-	}
-
-	.portfolioPage p{
-		max-width:100%;
-	}
-
-	.portfolioPage .sectionHeader{
-		padding-top:15px;
-	}
-	
-	.portfolioPage iframe{
-		width:120%;
-	}
-
-	.grid-container {
-		display:flex;
-		flex-direction:row;
-		grid-template-columns: 1fr;
-		grid-column-gap:10px;
-		justify-items:stretch;
-	}
-
-	.contactPage{
-		height:100%;
-		margin-bottom:2vh;
-	}
-	.contactPage .socialIcon{
-		width:6rem;
-		margin-left:15px;
-		margin-right:15px;
-	}
-
-	.socialLinkTray{
-		display:flex;
-		justify-content:center;
-		align-items:center;
-		padding-left:40px;
-	}
+	.contactPage .socialIcon {
+		width: 3rem;
 }
