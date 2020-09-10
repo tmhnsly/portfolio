@@ -2,16 +2,19 @@ body {
 	padding: 0;
 	margin: 0;
 	font-family: Helvetica, sans-serif;
+	content-visibility:auto;
 }
 
 .container {
 	margin-left: 12%;
 	margin-right: 12%;
+	content-visibility:auto;
 }
 
 .sectionHeader {
 	font-size: 2rem;
 	padding-top: 15px;
+	content-visibility:auto;
 }
 
 p {
@@ -23,14 +26,14 @@ nav {
 	background-color: #ffffff;
 	font-family: Futura, Helvetica, sans-serif;
 	justify-content: space-between;
-	align-content:center;
+	align-content: center;
 }
 
 nav h3 {
 	color: #efbe00;
 	margin: auto;
 	padding: 15px 0 0 15px;
-	font-size:1rem;
+	font-size: 1rem;
 }
 
 nav ul {
@@ -118,8 +121,8 @@ header h2 {
 }
 
 .contactPage .sectionHeader {
-	display:flex;
-	justify-content:center;
+	display: flex;
+	justify-content: center;
 }
 
 .socialLinkTray {
@@ -175,4 +178,46 @@ header h2 {
 	
 	.contactPage .socialIcon {
 		width: 3rem;
+}
+@media only screen and (max-width: 450px) {
+	
+	header h1 {
+		font-size:2.5rem;
+	}
+	
+	header h2 {
+		font-size: 1.5rem;
+}
+
+	nav ul {
+		display:flex;
+		flex-direction: column;
+}
+
+	nav h3 {
+		padding-right:15px;
+		padding-top:0;
+}
+
+nav{
+	align-content:center;
+	justify-content:space-evenly;
+}
+
+	.navLogo {
+		display:flex;
+		align-content:center;
+		justify-content:center;
+		margin:0;
+		padding-top:0;
+}
+
+	nav a{
+		margin:15px 0 15px 0;
+}	
+
+	.contactPage .socialIcon {
+	width: 3.5rem;
+	margin-left: 8px;
+	margin-right: 8px;
 }
