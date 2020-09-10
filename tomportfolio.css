@@ -1,0 +1,227 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+	padding: 0;
+	margin: 0;
+	font-family: Helvetica, sans-serif;
+	content-visibility: auto;
+}
+
+.container {
+	margin-left: 12%;
+	margin-right: 12%;
+}
+
+.sectionHeader {
+	font-size: 2rem;
+	padding-top: 15px;
+}
+
+p {
+	font-size: 1.2rem;
+}
+
+nav {
+	display: flex;
+	background-color: #ffffff;
+	font-family: Futura, Helvetica, sans-serif;
+	justify-content: space-between;
+	align-content: center;
+}
+
+nav h3 {
+	color: #efbe00;
+	margin: auto;
+	padding: 15px 0 0 15px;
+	font-size: 1rem;
+}
+
+nav ul {
+	font-size: 1rem;
+}
+
+nav a {
+	color: #7f7f7f;
+	text-decoration: none;
+	padding-right: 15px;
+}
+
+nav a:hover {
+	color: #efbe00;
+}
+
+header {
+	background: url("headerbackgroundImage.webp");
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
+	text-align: center;
+	width: 100%;
+	padding: 100px 0;
+}
+ 
+header h1 {
+	font-family: Futura, Helvetica, sans-serif;
+	color: #ffffff;
+	font-size: 4rem;
+	letter-spacing: 0.5rem;
+}
+
+header h2 {
+	color: #efbe00;
+	font-size: 2rem;
+	bottom: 20px;
+}
+
+.aboutMePage {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.aboutMeText {
+	padding-right: 40px;
+}
+
+.profilePicture {
+  	border-radius: 50%;
+  	width: 100%;
+  	max-width: 250px;
+  	min-width: 150px;
+  	margin-top: 30px;
+  	margin-bottom: 25px;
+}
+
+.portfolioPage p {
+	max-width: 480px;
+}
+
+.portfolioPage .sectionHeader {
+	padding-top: 15px;
+}
+
+.portfolioPage iframe {
+	max-width: 100%;
+}
+
+.videoGridContainer {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-template-rows: 1fr 1fr;
+	grid-column-gap: 10px;
+}
+
+.contactPage {
+	height: 20vh;
+}
+.contactPage .socialIcon {
+	width: 5rem;
+	margin-left: 15px;
+	margin-right: 15px;
+}
+
+.contactPage .sectionHeader {
+	display: flex;
+	justify-content: center;
+}
+
+.socialLinkTray {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+@media only screen and (max-width: 1200px) {
+
+	.container {
+		width: 80%;
+		margin-left: 5%;
+		margin-right: 5%;
+	}
+
+	header h2 {
+		font-size: 2rem;
+	}
+
+	.aboutMePage {
+		flex-direction: row;
+	}
+
+	.portfolioPage iframe {
+		max-width: 100%;
+	}
+	
+}
+@media only screen and (max-width: 900px) {
+
+	.container {
+		margin-left: 10%;
+		margin-right: 10%;
+	}
+
+	ul {
+		margin-left: 0;
+		padding: 0;
+	}
+
+	.aboutMePage {
+		flex-direction: column;
+	}
+
+	.portfolioPage p {
+		max-width: 350px;
+	}
+
+	.videoGridContainer {
+		display: block;
+	}
+	
+	.contactPage .socialIcon {
+		width: 3rem;
+	}
+}
+@media only screen and (max-width: 450px) {
+	
+	header h1 {
+		font-size: 2.5rem;
+	}
+	
+	header h2 {
+		font-size: 1.5rem;
+	}
+
+	nav ul {
+		display: flex;
+		flex-direction: column;
+	}
+
+	nav h3 {
+		padding-right: 15px;
+		padding-top: 0;
+	}
+
+	nav {
+		align-content: center;
+		justify-content: space-evenly;
+	}
+
+	.navLogo {
+		display: flex;
+		align-content: center;
+		justify-content: center;
+		margin: 0;
+		padding-top: 0;
+	}
+
+	nav a {
+		margin: 15px 0 15px 0;
+	}	
+
+	.contactPage .socialIcon {
+		width: 3.5rem;
+		margin-left: 8px;
+		margin-right: 8px;
+	}
+}
