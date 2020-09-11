@@ -53,7 +53,7 @@ nav a:hover {
 }
 
 header {
-	background: url("headerBackgroundimage.webp");
+	background: url("headerBackgroundImage.webp");
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: cover;
