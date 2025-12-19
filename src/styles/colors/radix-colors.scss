@@ -1,0 +1,183 @@
+// styles/colors/radix-colors.scss
+//
+// Semantic Radix color helpers + descriptive Radix scale tokens.
+//
+// Readable usage:
+//   background: c(info, radix-ui-bg);
+// Autocomplete-friendly usage (type `$radix-`):
+//   background: c(info, $radix-ui-bg);
+
+@use "sass:map";
+
+/* --------------------------------------------------------------------------
+Radix color scale (1–12)
+
+Steps 1–2: Backgrounds
+Used for app backgrounds and subtle, non-interactive surfaces.
+
+1  App background
+   - Main app background
+   - Large layout surfaces
+
+2  Subtle background
+   - Cards
+   - Sidebars
+   - Striped rows
+   - Code blocks
+
+
+Steps 3–5: Component backgrounds
+Used for interactive UI element backgrounds.
+
+3  UI element background
+   - Default / rest state
+
+4  Hovered UI element background
+   - Hover state
+
+5  Active / Selected UI element background
+   - Pressed
+   - Selected
+   - Toggled-on states
+
+
+Steps 6–8: Borders
+Used for borders, separators, and focus treatment.
+
+6  Subtle borders and separators
+   - Non-interactive components
+   - Cards, panels, dividers
+
+7  UI element border and focus rings
+   - Inputs
+   - Buttons
+   - Interactive controls
+
+8  Hovered UI element border
+   - Hover state
+   - Stronger focus indication
+
+
+Steps 9–10: Solid backgrounds
+Used for high-chroma, filled surfaces.
+
+9  Solid backgrounds
+   - Primary filled buttons
+   - Accent blocks
+   - Section backgrounds
+   - Overlays, highlights
+
+10 Hovered solid backgrounds
+   - Hover state when 9 is the base
+
+
+Steps 11–12: Text
+Used for text on background steps (especially 1–2).
+
+11 Low-contrast text
+   - Secondary text
+   - Metadata
+   - Helper text
+
+12 High-contrast text
+   - Primary text
+--------------------------------------------------------------------------- */
+
+/* --------------------------------------------------------------------------
+Autocomplete-friendly constants
+Type `$radix-` and your editor should suggest these.
+--------------------------------------------------------------------------- */
+$radix-bg: radix-bg;
+$radix-bg-subtle: radix-bg-subtle;
+
+$radix-ui-bg: radix-ui-bg;
+$radix-ui-bg-hover: radix-ui-bg-hover;
+$radix-ui-bg-active: radix-ui-bg-active;
+
+$radix-border-subtle: radix-border-subtle;
+$radix-border: radix-border;
+$radix-border-hover: radix-border-hover;
+
+$radix-solid: radix-solid;
+$radix-solid-hover: radix-solid-hover;
+
+$radix-text-soft: radix-text-soft;
+$radix-text: radix-text;
+
+/* --------------------------------------------------------------------------
+Token → step mapping
+Source of truth that maps our descriptive tokens to Radix steps.
+--------------------------------------------------------------------------- */
+$radix-steps: (
+  // Backgrounds
+  radix-bg: 1,
+  radix-bg-subtle: 2,
+
+  // Component backgrounds
+  radix-ui-bg: 3,
+  radix-ui-bg-hover: 4,
+  radix-ui-bg-active: 5,
+
+  // Borders
+  radix-border-subtle: 6,
+  radix-border: 7,
+  radix-border-hover: 8,
+
+  // Solid backgrounds
+  radix-solid: 9,
+  radix-solid-hover: 10,
+
+  // Text
+  radix-text-soft: 11,
+  radix-text: 12
+);
+
+/* --------------------------------------------------------------------------
+Semantic palette aliases
+Map semantic keys (mono, accent, etc.) to actual Radix scales (sage, olive, ...).
+
+Override per-project via:
+  @use "@/styles/colors/radix-colors" as * with ($palette: (...));
+--------------------------------------------------------------------------- */
+$palette: (
+  mono: sage,
+  brand: olive,
+  accent: olive,
+  info: sky,
+  success: grass,
+  warning: amber,
+  danger: tomato,
+) !default;
+
+@function _scale($key) {
+  @return if(map.has-key($palette, $key), map.get($palette, $key), $key);
+}
+
+/* c(scaleOrSemanticKey, radix-token)
+Examples:
+  c(mono, radix-text)         -> var(--sage-12)
+  c(info, $radix-ui-bg-hover) -> var(--sky-4)
+*/
+@function c($scale, $token) {
+  @if map.has-key($radix-steps, $token) == false {
+    @error "Unknown token `#{$token}`. Allowed: #{map.keys($radix-steps)}";
+  }
+
+  $resolved: _scale($scale);
+  $step: map.get($radix-steps, $token);
+
+  @return var(--#{$resolved}-#{$step});
+}
+
+/* cA(scaleOrSemanticKey, step)
+Alpha steps are numeric 1..12:
+  cA(mono, 6) -> var(--sage-a6)
+*/
+@function cA($scale, $step) {
+  @if $step < 1 or $step > 12 {
+    @error "Alpha step must be 1..12 (got #{$step}).";
+  }
+
+  $resolved: _scale($scale);
+  @return var(--#{$resolved}-a#{$step});
+}

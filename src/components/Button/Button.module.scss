@@ -1,0 +1,40 @@
+@use "@/styles/colors/radix-colors" as *;
+
+.button {
+  appearance: none;
+  border: 1px solid c(brand, $radix-border);
+  border-radius: 6px;
+
+  padding: 8px 12px;
+
+  background: c(brand, $radix-ui-bg);
+  color: c(mono, $radix-text);
+
+  font: inherit;
+  line-height: 1;
+  cursor: pointer;
+
+  transition: background-color 120ms ease, border-color 120ms ease,
+    transform 120ms ease;
+}
+
+.button:hover {
+  background: c(brand, $radix-ui-bg-hover);
+  border-color: c(brand, $radix-border-hover);
+}
+
+.button:active {
+  background: c(brand, $radix-ui-bg-active);
+  transform: translateY(0.5px);
+}
+
+.button:focus-visible {
+  outline: 2px solid c(brand, $radix-border-hover);
+  outline-offset: 2px;
+}
+
+.button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}

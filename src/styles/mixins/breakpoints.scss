@@ -1,0 +1,21 @@
+$bp-mobile: 640px;
+$bp-tablet: 960px;
+$bp-desktop: 1200px;
+
+@mixin mobile {
+  @media (width <= $bp-mobile) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media ($bp-mobile < width) and (width <= $bp-tablet) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media ($bp-tablet < width) {
+    @content;
+  }
+}

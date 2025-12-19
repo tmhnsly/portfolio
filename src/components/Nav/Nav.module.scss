@@ -1,0 +1,195 @@
+@use "@/styles/colors/radix-colors" as *;
+@use "@/styles/mixins/glass" as glass;
+@use "@/styles/mixins/breakpoints" as breakpoint;
+
+/* Shared link text styling across desktop + mobile */
+:root {
+  /* local defaults (safe if you later tweak nav sizing) */
+}
+
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+
+  height: 48px;
+  width: fit-content;
+
+  display: flex;
+  align-items: center;
+  margin-inline: auto;
+
+  @include glass.glassPanel;
+
+  border-left: 0;
+  border-right: 0;
+  border-top: 0;
+  border-radius: 24px;
+
+  @include breakpoint.mobile {
+    position: fixed;
+    left: 50%;
+    top: auto;
+    bottom: calc(12px + env(safe-area-inset-bottom, 0px));
+    transform: translateX(-50%);
+
+    width: min(calc(100vw - 24px), 440px);
+    height: 60px;
+    border-radius: 22px;
+  }
+}
+
+.inner {
+  width: min(100%, 980px);
+  margin: 0 auto;
+  padding: 0 12px;
+
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+
+  @include breakpoint.mobile {
+    padding: 0 12px;
+    gap: 8px;
+  }
+}
+
+/* ---- Text-first interaction (no background/border fills) ---- */
+@mixin navTextInteractive {
+  /* consistent typography everywhere */
+  font-size: 0.95rem;
+  line-height: 1;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+
+  color: c(mono, $radix-text-soft);
+  text-decoration: none;
+
+  position: relative;
+  outline: none;
+
+  /* Tiny indicator line (Apple-ish) */
+  &::after {
+    content: "";
+    position: absolute;
+    left: 12px;
+    right: 12px;
+    bottom: 8px;
+    height: 2px;
+    border-radius: 999px;
+
+    background: cA(mono, 7);
+    opacity: 0;
+    transform: scaleX(0.6);
+    transition: opacity 140ms ease, transform 160ms ease, background 140ms ease;
+    pointer-events: none;
+  }
+
+  &:hover {
+    color: c(mono, $radix-text);
+    text-shadow: 0 0 1px cA(mono, 6); /* subtle “crisp” feel, not glow */
+  }
+
+  &:hover::after {
+    opacity: 0.75;
+    transform: scaleX(1);
+  }
+
+  /* Active tab: crisp text + persistent indicator */
+  &[aria-current="page"] {
+    color: c(mono, $radix-text);
+    font-weight: 650;
+  }
+
+  &[aria-current="page"]::after {
+    opacity: 1;
+    transform: scaleX(1);
+    background: cA(accent, 7);
+  }
+
+  /* Focus: keep it consistent and professional */
+  &:focus-visible {
+    outline: 2px solid c(accent, $radix-border-hover);
+    outline-offset: 3px;
+
+    color: c(mono, $radix-text);
+  }
+
+  &:focus-visible::after {
+    opacity: 1;
+    transform: scaleX(1);
+    background: cA(accent, 7);
+  }
+}
+
+.home {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  height: 100%;
+  padding: 0 10px;
+
+  @include navTextInteractive;
+
+  /* give home a touch more presence without changing size across breakpoints */
+  font-weight: 650;
+}
+
+.homeIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.homeText {
+  /* keep consistent between desktop/mobile */
+  font-size: inherit;
+  line-height: inherit;
+  font-weight: inherit;
+  letter-spacing: inherit;
+}
+
+.list {
+  display: flex;
+  gap: 6px;
+
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+
+  @include breakpoint.mobile {
+    display: none;
+  }
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 48px;
+}
+
+.link {
+  display: inline-flex;
+  align-items: center;
+
+  height: 100%;
+  padding: 0 10px;
+
+  @include navTextInteractive;
+}
+
+.mobileOnly {
+  display: none;
+
+  @include breakpoint.mobile {
+    display: flex;
+    align-items: center;
+    height: 100%;
+  }
+}

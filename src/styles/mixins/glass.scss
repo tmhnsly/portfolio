@@ -1,0 +1,18 @@
+// styles/mixins/glass.scss
+@use "@/styles/colors/radix-colors" as *;
+
+@mixin glassPanel {
+  /* Base glass tint (subtle; works in light + dark because Radix vars switch) */
+  background: cA(mono, 2);
+
+  /* The actual “glass” effect */
+  -webkit-backdrop-filter: saturate(180%) blur(12px);
+  backdrop-filter: saturate(180%) blur(12px);
+
+  /* Edge definition (hairlines) */
+  border: 1px solid cA(mono, 7);
+
+  /* Liquid glass depth: soft lift + inner highlight + top hairline */
+  box-shadow: 0 1px 0 cA(mono, 2), /* top hairline */ 0 1px 24px cA(mono, 3),
+    /* soft lift */ inset 0 1px 0 cA(mono, 8); /* inner highlight */
+}
