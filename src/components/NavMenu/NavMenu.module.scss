@@ -80,6 +80,9 @@ $item-radius: calc(#{$content-radius} - #{$content-pad});
   min-width: 220px;
   padding: $content-pad;
   border-radius: $content-radius;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
 }
 
 .menuItem {
@@ -91,7 +94,7 @@ $item-radius: calc(#{$content-radius} - #{$content-pad});
   display: flex;
   align-items: center;
 
-  min-height: 40px;
+  min-height: 48px;
   padding: 0 10px;
   border-radius: $item-radius;
 

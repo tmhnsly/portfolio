@@ -144,13 +144,16 @@ $palette: (
   brand: olive,
   accent: olive,
   info: sky,
-  success: grass,
+  success: green,
   warning: amber,
-  danger: tomato,
+  danger: red,
 ) !default;
 
 @function _scale($key) {
-  @return if(map.has-key($palette, $key), map.get($palette, $key), $key);
+  @return if(
+    sass(map.has-key($palette, $key)): map.get($palette, $key);
+    else: $key
+  );
 }
 
 /* c(scaleOrSemanticKey, radix-token)

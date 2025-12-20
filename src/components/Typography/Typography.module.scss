@@ -1,0 +1,333 @@
+@use "@/styles/colors/radix-colors" as *;
+
+/* -----------------------------------------------------------------------------
+Typography system
+
+Shared rules for:
+Text, Heading, Blockquote, Code, Kbd, LinkText, Quote, Em, Strong
+
+Principles:
+- One size scale (1–9)
+- Semantics via `as` (element selection)
+- Block-level vertical rhythm works by default
+- Semantic color comes from `data-color` + `data-tone`
+- Trim is opt-in for UI alignment (not recommended for long-form text)
+----------------------------------------------------------------------------- */
+
+.base {
+  margin: 0;
+  padding: 0;
+  font: inherit;
+}
+
+/* --- Size scale (1–9) --- */
+.size-1 {
+  font-size: 0.75rem;
+  line-height: 1.1;
+  letter-spacing: 0.01em;
+}
+.size-2 {
+  font-size: 0.875rem;
+  line-height: 1.25;
+  letter-spacing: 0.005em;
+}
+.size-3 {
+  font-size: 1rem;
+  line-height: 1.4;
+  letter-spacing: 0;
+}
+.size-4 {
+  font-size: 1.125rem;
+  line-height: 1.5;
+  letter-spacing: -0.005em;
+}
+.size-5 {
+  font-size: 1.25rem;
+  line-height: 1.55;
+  letter-spacing: -0.01em;
+}
+.size-6 {
+  font-size: 1.5rem;
+  line-height: 1.4;
+  letter-spacing: -0.015em;
+}
+.size-7 {
+  font-size: 1.875rem;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+}
+.size-8 {
+  font-size: 2.25rem;
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+}
+.size-9 {
+  font-size: 3rem;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+}
+
+/* Headings: tighter leading */
+.heading.size-1 {
+  line-height: 1.05;
+}
+.heading.size-2 {
+  line-height: 1.15;
+}
+.heading.size-3 {
+  line-height: 1.2;
+}
+.heading.size-4 {
+  line-height: 1.25;
+}
+.heading.size-5 {
+  line-height: 1.2;
+}
+.heading.size-6 {
+  line-height: 1.15;
+}
+.heading.size-7 {
+  line-height: 1.1;
+}
+.heading.size-8 {
+  line-height: 1.05;
+}
+.heading.size-9 {
+  line-height: 1;
+}
+
+/* --- Weight --- */
+.w-regular {
+  font-weight: 400;
+}
+.w-medium {
+  font-weight: 500;
+}
+.w-semibold {
+  font-weight: 600;
+}
+.w-bold {
+  font-weight: 700;
+}
+
+/* --- Alignment --- */
+.align-left {
+  text-align: left;
+}
+.align-center {
+  text-align: center;
+}
+.align-right {
+  text-align: right;
+}
+
+/* --- Wrapping / truncation --- */
+.wrap-normal {
+  text-wrap: normal;
+}
+.wrap-pretty {
+  text-wrap: pretty;
+}
+.wrap-balance {
+  text-wrap: balance;
+}
+.wrap-nowrap {
+  white-space: nowrap;
+}
+
+.truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* --- Trim (opt-in) --- */
+:root {
+  --type-trim-start: 0.42em;
+  --type-trim-end: 0.36em;
+}
+
+.trim-start {
+  margin-top: calc(var(--type-trim-start) * -1);
+}
+.trim-end {
+  margin-bottom: calc(var(--type-trim-end) * -1);
+}
+.trim-both {
+  margin-top: calc(var(--type-trim-start) * -1);
+  margin-bottom: calc(var(--type-trim-end) * -1);
+}
+
+/* -----------------------------------------------------------------------------
+Color + tone (semantic)
+
+data-color: default | accent | brand | info | success | warning | danger
+data-tone:  default | soft
+
+These resolve through the shared `$palette` in radix-colors.scss.
+----------------------------------------------------------------------------- */
+
+/* Default (mono) */
+.base[data-color="default"][data-tone="default"] {
+  color: c(mono, $radix-text);
+}
+.base[data-color="default"][data-tone="soft"] {
+  color: c(mono, $radix-text-soft);
+}
+
+/* Semantic colors — default tone */
+.base[data-color="accent"][data-tone="default"] {
+  color: c(accent, $radix-text);
+}
+.base[data-color="brand"][data-tone="default"] {
+  color: c(brand, $radix-text);
+}
+.base[data-color="info"][data-tone="default"] {
+  color: c(info, $radix-text);
+}
+.base[data-color="success"][data-tone="default"] {
+  color: c(success, $radix-text);
+}
+.base[data-color="warning"][data-tone="default"] {
+  color: c(warning, $radix-text);
+}
+.base[data-color="danger"][data-tone="default"] {
+  color: c(danger, $radix-text);
+}
+
+/* Semantic colors — soft tone */
+.base[data-color="accent"][data-tone="soft"] {
+  color: c(accent, $radix-text-soft);
+}
+.base[data-color="brand"][data-tone="soft"] {
+  color: c(brand, $radix-text-soft);
+}
+.base[data-color="info"][data-tone="soft"] {
+  color: c(info, $radix-text-soft);
+}
+.base[data-color="success"][data-tone="soft"] {
+  color: c(success, $radix-text-soft);
+}
+.base[data-color="warning"][data-tone="soft"] {
+  color: c(warning, $radix-text-soft);
+}
+.base[data-color="danger"][data-tone="soft"] {
+  color: c(danger, $radix-text-soft);
+}
+
+/* -----------------------------------------------------------------------------
+Text: nested inline elements (only when using <Text>)
+----------------------------------------------------------------------------- */
+
+.text :where(a) {
+  color: c(info, $radix-text);
+  text-decoration: underline;
+  text-decoration-color: cA(info, 7);
+  text-decoration-thickness: 0.08em;
+  text-underline-offset: 0.18em;
+}
+
+.text :where(a:hover) {
+  text-decoration-color: cA(info, 9);
+}
+
+.text :where(a:focus-visible) {
+  outline: 2px solid c(accent, $radix-border-hover);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+.text :where(code) {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.95em;
+  padding: 0.12em 0.35em;
+  border-radius: 8px;
+  background: c(mono, $radix-ui-bg);
+  border: 1px solid c(mono, $radix-border-subtle);
+}
+
+/* -----------------------------------------------------------------------------
+Standalone primitives
+----------------------------------------------------------------------------- */
+
+.blockquote {
+  padding-left: 1em;
+  border-left: 2px solid cA(mono, 6);
+  margin: 1.75em 0;
+}
+
+.link {
+  color: c(info, $radix-text);
+  text-decoration: underline;
+  text-decoration-color: cA(info, 7);
+  text-decoration-thickness: 0.08em;
+  text-underline-offset: 0.18em;
+}
+
+.link:hover {
+  text-decoration-color: cA(info, 9);
+}
+
+.link:focus-visible {
+  outline: 2px solid c(accent, $radix-border-hover);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+.code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  padding: 0.12em 0.4em;
+  border-radius: 10px;
+  background: c(mono, $radix-ui-bg);
+  border: 1px solid c(mono, $radix-border-subtle);
+}
+
+.kbd {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  padding: 0.1em 0.45em;
+  border-radius: 10px;
+  background: c(mono, $radix-ui-bg);
+  border: 1px solid c(mono, $radix-border);
+  box-shadow: inset 0 1px 0 cA(mono, 4);
+}
+
+.quote::before {
+  content: "“";
+}
+.quote::after {
+  content: "”";
+}
+
+.em {
+  font-style: italic;
+}
+.strong {
+  font-weight: 650;
+}
+
+/* -----------------------------------------------------------------------------
+Prose spacing (automatic vertical rhythm)
+
+Applies only to block-level elements:
+- Text rendered as <p>
+- Heading rendered as h1–h6
+Inline usage remains spacing-neutral.
+----------------------------------------------------------------------------- */
+
+.text:is(p) {
+  margin-top: 0;
+  margin-bottom: 1.25em;
+}
+
+.text:is(p):last-child {
+  margin-bottom: 0;
+}
+
+.heading:is(h1, h2, h3, h4, h5, h6) {
+  margin-top: 2.4em;
+  margin-bottom: 0.75em;
+}
+
+.heading:is(h1, h2, h3, h4, h5, h6):first-child {
+  margin-top: 0;
+}

@@ -1,0 +1,26 @@
+@use "@/styles/colors/radix-colors" as *;
+
+.container {
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+
+  span {
+    font-size: 1.5rem;
+    font-weight: 600;
+  }
+
+  p {
+    font-size: 1rem;
+    color: c(mono, $radix-text-soft);
+    text-align: center;
+    max-width: 400px;
+  }
+}
+
+.icon {
+  color: c(warning, $radix-solid);
+}
