@@ -1,0 +1,184 @@
+.page {
+  width: 100%;
+  min-height: 100svh;
+}
+
+/* Section */
+.section {
+  width: 100%;
+  position: relative;
+
+  --section-pad: var(--section-3);
+  padding-block: var(--section-pad);
+}
+
+.sectionSize1 {
+  --section-pad: var(--section-1);
+}
+.sectionSize2 {
+  --section-pad: var(--section-2);
+}
+.sectionSize3 {
+  --section-pad: var(--section-3);
+}
+.sectionSize4 {
+  --section-pad: var(--section-4);
+}
+
+.sectionToneDefault {
+  background: transparent;
+}
+.sectionToneMuted {
+  background: var(--layout-surface-muted, transparent);
+}
+.sectionToneInset {
+  background: var(--layout-surface-inset, transparent);
+}
+
+/* Container */
+.container {
+  width: 100%;
+  margin-inline: auto;
+  padding-inline: var(--layout-gutter);
+}
+
+.containerContent {
+  max-width: var(--layout-content-width);
+}
+.containerFluid {
+  max-width: none;
+}
+
+.containerSize1 {
+  max-width: var(--container-1);
+}
+.containerSize2 {
+  max-width: var(--container-2);
+}
+.containerSize3 {
+  max-width: var(--container-3);
+}
+.containerSize4 {
+  max-width: var(--container-4);
+}
+
+/* Breakout */
+.breakout {
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+}
+
+.breakoutKeepGutter {
+  padding-inline: var(--layout-gutter);
+}
+
+/* Grid */
+.grid {
+  display: grid;
+  gap: var(--grid-gap);
+}
+
+.gridCols1 {
+  grid-template-columns: 1fr;
+}
+.gridCols2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.gridCols3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.gridCols4 {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.gridCollapseTablet {
+  @media (width < 960px) {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+.gridCollapseMobile {
+  @media (width < 640px) {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* Presets */
+.gridPresetSidebar {
+  grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+}
+
+.gridPresetSidebarReverse {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr);
+}
+
+/* Feature layout: auto spans by child order */
+.gridPresetFeature {
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+}
+.gridPresetFeature > * {
+  grid-column: span 12;
+}
+@media (width >= 960px) {
+  .gridPresetFeature > :nth-child(1) {
+    grid-column: span 7;
+  }
+  .gridPresetFeature > :nth-child(2) {
+    grid-column: span 5;
+  }
+  .gridPresetFeature > :nth-child(3) {
+    grid-column: span 6;
+  }
+  .gridPresetFeature > :nth-child(4) {
+    grid-column: span 6;
+  }
+}
+
+/* Bento: 12-col on >= tablet, 1-col on mobile */
+.gridPresetBento {
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+}
+@media (width < 960px) {
+  .gridPresetBento {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Bento item utilities */
+.bentoItem {
+  grid-column: 1 / -1;
+}
+@media (width >= 960px) {
+  .bentoSpan3 {
+    grid-column: span 3;
+  }
+  .bentoSpan4 {
+    grid-column: span 4;
+  }
+  .bentoSpan6 {
+    grid-column: span 6;
+  }
+  .bentoSpan8 {
+    grid-column: span 8;
+  }
+  .bentoSpan9 {
+    grid-column: span 9;
+  }
+  .bentoSpan12 {
+    grid-column: span 12;
+  }
+}
+
+.bentoHeightAuto {
+  min-height: auto;
+}
+.bentoHeightSm {
+  min-height: 10rem;
+}
+.bentoHeightMd {
+  min-height: 14rem;
+}
+.bentoHeightLg {
+  min-height: 18rem;
+}

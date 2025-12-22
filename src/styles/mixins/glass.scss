@@ -1,10 +1,10 @@
 // styles/mixins/glass.scss
 @use "@/styles/colors/radix-colors" as *;
-$blur-amount: 16px;
+$blur-amount: 12px;
 
 @mixin glassPanel {
   /* Base glass tint (subtle; works in light + dark because Radix vars switch) */
-  background: cA(mono, 2);
+  background: cA(mono, 1);
 
   /* The actual “glass” effect */
   -webkit-backdrop-filter: saturate(180%) blur($blur-amount);

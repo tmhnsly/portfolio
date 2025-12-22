@@ -1,13 +1,263 @@
 @use "@/styles/colors/radix-colors" as *;
 
 .page {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  background: c(mono, $radix-bg);
+  color: c(mono, $radix-text);
 
-  section {
-    width: min(100%, 980px);
-    margin-left: auto;
-    margin-right: auto;
+  /* optional surface tokens used by Section tone */
+  --layout-surface-muted: #{c(mono, $radix-bg-subtle)};
+  --layout-surface-inset: #{c(mono, $radix-ui-bg)};
+}
+
+.mono {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace;
+  font-size: 0.95em;
+}
+
+/* HERO */
+.hero {
+  background: radial-gradient(
+      900px 600px at 12% 12%,
+      cA(brand, 7),
+      transparent 60%
+    ),
+    radial-gradient(900px 600px at 88% 0%, cA(info, 6), transparent 55%),
+    radial-gradient(900px 600px at 50% 105%, cA(mono, 3), transparent 60%),
+    c(mono, $radix-bg);
+}
+
+.heroGrid {
+  align-items: start;
+}
+
+.heroCopy {
+  max-width: 68ch;
+}
+
+.eyebrow {
+  letter-spacing: 0.02em;
+}
+
+.heroTitle {
+  margin-top: 1rem;
+  letter-spacing: -0.035em;
+}
+
+.heroSubtitle {
+  margin-top: 1rem;
+  font-size: 1.1rem;
+  max-width: 62ch;
+}
+
+.heroActions {
+  margin-top: 1.75rem;
+  display: flex;
+  gap: 0.85rem;
+  flex-wrap: wrap;
+}
+
+.heroLinks {
+  margin-top: 1.25rem;
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+/* Hero card */
+.heroCard {
+  border-radius: 1.25rem;
+  padding: 1.5rem;
+
+  background: c(mono, $radix-bg-subtle);
+  border: 1px solid c(mono, $radix-border-subtle);
+
+  box-shadow: 0 1px 0 cA(mono, 6), 0 28px 80px cA(mono, 3);
+}
+
+.cardTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.cardPill {
+  padding: 0.35rem 0.7rem;
+  border-radius: 999px;
+  background: c(mono, $radix-ui-bg);
+  border: 1px solid c(mono, $radix-border-subtle);
+}
+
+.pulseDot {
+  width: 0.65rem;
+  height: 0.65rem;
+  border-radius: 999px;
+  background: c(brand, $radix-solid);
+  box-shadow: 0 0 0 6px cA(brand, 4);
+}
+
+.cardTitle {
+  margin-top: 0.25rem;
+}
+
+.cardBody {
+  margin-top: 0.75rem;
+}
+
+.cardRows {
+  margin-top: 1.25rem;
+  display: grid;
+  gap: 0.75rem;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 4rem 1fr;
+  gap: 0.85rem;
+
+  padding: 0.85rem 0.95rem;
+  border-radius: 1rem;
+
+  background: c(mono, $radix-ui-bg);
+  border: 1px solid c(mono, $radix-border-subtle);
+}
+
+.rowLabel {
+  white-space: nowrap;
+}
+
+.rowValue {
+  letter-spacing: -0.01em;
+}
+
+/* Breakout band */
+.heroBand {
+  margin-top: 2.5rem;
+}
+
+.heroBandInner {
+  padding: 0.85rem 1rem;
+  border-radius: 1rem;
+
+  background: linear-gradient(90deg, cA(brand, 4), cA(info, 3));
+  border: 1px solid cA(mono, 6);
+}
+
+/* Sections */
+.section {
+  background: c(mono, $radix-bg);
+}
+
+.sectionAlt {
+  background: c(mono, $radix-bg-subtle);
+}
+
+.sectionHeader {
+  display: grid;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.cardsGrid {
+  margin-top: 0.25rem;
+}
+
+.card {
+  border-radius: 1.25rem;
+  padding: 1.25rem;
+
+  background: c(mono, $radix-bg-subtle);
+  border: 1px solid c(mono, $radix-border-subtle);
+  box-shadow: 0 1px 0 cA(mono, 6);
+}
+
+/* Bento */
+.bento {
+  margin-top: 0.25rem;
+}
+
+.tile {
+  border-radius: 1.35rem;
+  padding: 1.35rem;
+
+  background: c(mono, $radix-bg);
+  border: 1px solid c(mono, $radix-border-subtle);
+  box-shadow: 0 1px 0 cA(mono, 6), 0 20px 55px cA(mono, 3);
+
+  display: grid;
+  gap: 0.75rem;
+}
+
+.tileTop {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.tileKicker {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.tileTitle {
+  letter-spacing: -0.02em;
+}
+
+.tileBody {
+  max-width: 60ch;
+}
+
+/* Process tiles */
+.processGrid {
+  margin-top: 0.25rem;
+}
+
+.processTile {
+  border-radius: 1.25rem;
+  padding: 1.25rem;
+
+  background: c(mono, $radix-bg-subtle);
+  border: 1px solid c(mono, $radix-border-subtle);
+  box-shadow: 0 1px 0 cA(mono, 6);
+}
+
+/* CTA */
+.cta {
+  background: c(mono, $radix-bg);
+}
+
+.ctaBand {
+  border-radius: 1.5rem;
+  background: radial-gradient(
+      700px 260px at 20% 50%,
+      cA(brand, 6),
+      transparent 60%
+    ),
+    radial-gradient(700px 260px at 80% 50%, cA(info, 6), transparent 60%),
+    c(mono, $radix-bg-subtle);
+}
+
+.ctaInner {
+  padding: 1.75rem 0;
+  display: grid;
+  gap: 1.25rem;
+
+  @media (width >= 960px) {
+    grid-template-columns: 1.2fr 0.8fr;
+    align-items: center;
+  }
+}
+
+.ctaActions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+
+  @media (width >= 960px) {
+    justify-content: flex-end;
   }
 }

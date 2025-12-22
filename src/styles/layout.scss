@@ -1,0 +1,42 @@
+@use "@/styles/mixins/breakpoints" as breakpoint;
+
+:root {
+  --layout-gutter: 1.5rem;
+
+  --container-1: 28rem;
+  --container-2: 43rem;
+  --container-3: 55rem;
+  --container-4: 71rem;
+
+  --layout-content-width: var(--container-3);
+
+  --section-1: 1.75rem;
+  --section-2: 2.75rem;
+  --section-3: 3.75rem;
+  --section-4: 5rem;
+
+  --grid-gap: 1rem;
+}
+
+@include breakpoint.mobile {
+  :root {
+    --layout-gutter: 1rem;
+    --grid-gap: 0.85rem;
+  }
+}
+
+@include breakpoint.tablet {
+  :root {
+    --layout-gutter: 1.5rem;
+    --layout-content-width: var(--container-3);
+    --grid-gap: 1rem;
+  }
+}
+
+@include breakpoint.desktop {
+  :root {
+    --layout-gutter: 2rem;
+    --layout-content-width: var(--container-4);
+    --grid-gap: 1.25rem;
+  }
+}

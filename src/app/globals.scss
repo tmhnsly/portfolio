@@ -1,5 +1,6 @@
 @use "@/styles/colors/radix-colors" as *;
 @use "@/styles/mixins/breakpoints" as breakpoint;
+@use "@/styles/layout";
 @import "@radix-ui/colors/sage.css";
 @import "@radix-ui/colors/sage-dark.css";
 @import "@radix-ui/colors/sage-alpha.css";
