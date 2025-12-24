@@ -1,9 +1,6 @@
 import * as React from "react";
 import s from "./Layout.module.scss";
-
-function cx(...parts: Array<string | undefined | false>) {
-  return parts.filter(Boolean).join(" ");
-}
+import cx from "@/utils/cx";
 
 export type SectionSize = 1 | 2 | 3 | 4;
 export type SectionTone = "default" | "muted" | "inset";

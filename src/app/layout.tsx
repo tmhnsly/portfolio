@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { ThemeProvider } from "next-themes";
 import { Nav } from "@/components/Nav/Nav";
-import { SITE_NAME, NAV_ITEMS, SITE_DESCRIPTION } from "@/config/site";
+import { SITE_NAME, NAV_ITEMS, SITE_DESCRIPTION } from "@/content/site";
 import "./globals.scss";
 
 export const metadata: Metadata = {

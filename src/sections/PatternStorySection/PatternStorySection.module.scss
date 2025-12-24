@@ -1,0 +1,163 @@
+/* src/sections/PatternStorySection/PatternStorySection.module.scss */
+@use "@/styles/colors/radix-colors" as *;
+
+.section {
+  position: relative;
+  border-radius: 24px;
+  overflow: clip;
+
+  /* DO NOT use contain: paint; (kills backdrop-filter) */
+  isolation: isolate;
+
+  background: radial-gradient(
+      900px 560px at 18% 12%,
+      cA(info, 3) 0%,
+      transparent 60%
+    ),
+    radial-gradient(820px 560px at 80% 22%, cA(brand, 3) 0%, transparent 62%),
+    radial-gradient(700px 520px at 52% 68%, cA(mono, 3) 0%, transparent 64%),
+    linear-gradient(
+      to bottom,
+      c(mono, $radix-bg) 0%,
+      c(mono, $radix-bg-subtle) 58%,
+      c(mono, $radix-bg) 100%
+    );
+}
+
+.sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+}
+
+.canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+/* subtle vignette that still allows blur to read */
+.scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+
+  background: radial-gradient(circle at 50% 28%, cA(mono, 4), transparent 62%),
+    radial-gradient(circle at 50% 115%, cA(mono, 3), transparent 55%),
+    linear-gradient(
+      to bottom,
+      transparent 0%,
+      cA(mono, 2) 62%,
+      transparent 100%
+    );
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: grid;
+  align-items: end;
+  padding: clamp(24px, 6vw, 72px);
+  pointer-events: none;
+}
+
+/* The reliable glass pattern: blur on ::before */
+.card {
+  position: relative;
+  max-width: 640px;
+  border-radius: 24px;
+}
+
+/* This is the actual “glass” layer */
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+
+  /* Must be translucent for blur to show */
+  background: cA(mono, 2);
+
+  -webkit-backdrop-filter: saturate(180%) blur(14px);
+  backdrop-filter: saturate(180%) blur(14px);
+
+  border: 1px solid cA(mono, 7);
+
+  box-shadow: 0 1px 0 cA(mono, 2), 0 10px 40px cA(mono, 4),
+    inset 0 1px 0 cA(mono, 8);
+}
+
+/* optional subtle grain INSIDE the card (doesn’t break blur) */
+.card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0.1;
+  mix-blend-mode: overlay;
+
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)' opacity='.65'/%3E%3C/svg%3E");
+  background-size: 220px 220px;
+}
+
+.cardContent {
+  position: relative;
+  padding: 28px 32px;
+  color: c(mono, $radix-text);
+}
+
+.kicker {
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  font-weight: 650;
+  color: c(mono, $radix-text-soft);
+}
+
+.title {
+  font-size: clamp(28px, 3.5vw, 48px);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  margin: 0 0 12px 0;
+  font-weight: 720;
+  color: c(mono, $radix-text);
+}
+
+.body {
+  font-size: 17px;
+  line-height: 1.55;
+  margin: 0;
+  max-width: 52ch;
+  color: c(mono, $radix-text-soft);
+}
+
+.dots {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.dot,
+.dotActive {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  transition: transform 350ms cubic-bezier(0.16, 1, 0.3, 1),
+    background-color 350ms cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 350ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.dot {
+  background: cA(mono, 5);
+  opacity: 0.85;
+}
+
+.dotActive {
+  background: c(info, $radix-solid);
+  box-shadow: 0 0 10px cA(info, 6);
+  transform: translateY(-1px);
+}

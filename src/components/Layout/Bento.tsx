@@ -1,9 +1,7 @@
 import type { HTMLAttributes } from "react";
 import s from "./Layout.module.scss";
 import { Grid } from "./Grid";
-
-const cx = (...p: Array<string | undefined | false>) =>
-  p.filter(Boolean).join(" ");
+import cx from "@/utils/cx";
 
 export type BentoSpan = 3 | 4 | 6 | 8 | 9 | 12;
 export type BentoHeight = "auto" | "sm" | "md" | "lg";

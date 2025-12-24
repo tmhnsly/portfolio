@@ -1,8 +1,6 @@
 import type { HTMLAttributes } from "react";
 import s from "./Layout.module.scss";
-
-const cx = (...p: Array<string | undefined | false>) =>
-  p.filter(Boolean).join(" ");
+import cx from "@/utils/cx";
 
 type PageProps = HTMLAttributes<HTMLElement>;
 

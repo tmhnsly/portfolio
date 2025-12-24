@@ -1,6 +1,11 @@
+:root {
+  --nav-height: 48px;
+}
+
 .page {
   width: 100%;
   min-height: 100svh;
+  margin-top: calc(-1 * var(--nav-height));
 }
 
 /* Section */
@@ -23,6 +28,13 @@
 }
 .sectionSize4 {
   --section-pad: var(--section-4);
+}
+
+.sectionSize5 {
+  --section-pad: var(--section-5);
+}
+.sectionSize6 {
+  --section-pad: var(--section-6);
 }
 
 .sectionToneDefault {

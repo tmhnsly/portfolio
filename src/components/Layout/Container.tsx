@@ -1,8 +1,6 @@
 import type { HTMLAttributes } from "react";
 import s from "./Layout.module.scss";
-
-const cx = (...p: Array<string | undefined | false>) =>
-  p.filter(Boolean).join(" ");
+import cx from "@/utils/cx";
 
 export type ContainerSize = 1 | 2 | 3 | 4;
 export type ContainerWidth = "content" | "fluid" | ContainerSize;

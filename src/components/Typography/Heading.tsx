@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { motion } from "motion/react";
 import {
   typographyClassNames,
   type Align,
@@ -9,7 +10,9 @@ import {
   type Tone,
   type Trim,
   type Weight,
+  type Wrap,
 } from "./typography";
+import { getRevealProps } from "./getRevealProps";
 import s from "./Typography.module.scss";
 
 export type HeadingProps<TAs extends React.ElementType = "h2"> = {
@@ -19,7 +22,11 @@ export type HeadingProps<TAs extends React.ElementType = "h2"> = {
   align?: Align;
   color?: Color;
   tone?: Tone;
+  wrap?: Wrap;
+  truncate?: boolean;
   trim?: Trim;
+  reveal?: boolean;
+  revealDelay?: number;
   className?: string;
   children?: React.ReactNode;
 } & Omit<React.ComponentPropsWithoutRef<TAs>, "as" | "color">;
@@ -27,17 +34,22 @@ export type HeadingProps<TAs extends React.ElementType = "h2"> = {
 export function Heading<TAs extends React.ElementType = "h2">({
   as,
   size = 6,
-  weight = "bold",
+  weight = "medium",
   align = "left",
   color = "default",
   tone = "default",
+  wrap = "pretty",
+  truncate = false,
   trim = "none",
+  reveal = false,
+  revealDelay,
   className,
   ...props
 }: HeadingProps<TAs>) {
   const Comp = (as ?? "h2") as React.ElementType;
+  const revealProps = getRevealProps({ reveal, delay: revealDelay });
 
-  return (
+  const content = (
     <Comp
       data-color={color}
       data-tone={tone}
@@ -45,13 +57,17 @@ export function Heading<TAs extends React.ElementType = "h2">({
         size,
         weight,
         align,
-        wrap: "balance",
+        wrap,
         trim,
-        truncate: false,
+        truncate,
         className,
         extra: s.heading,
       })}
       {...props}
     />
   );
+
+  if (!revealProps) return content;
+
+  return <motion.div {...revealProps}>{content}</motion.div>;
 }

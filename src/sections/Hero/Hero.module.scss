@@ -1,0 +1,220 @@
+@use "@/styles/colors/radix-colors" as *;
+
+.hero {
+  background: c(mono, $radix-bg);
+  position: relative;
+  overflow: clip;
+}
+
+/* Controlled “glass wash” + subtle vignette for depth */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: -40% -25% auto -25%;
+  height: 95%;
+  background: linear-gradient(
+    135deg,
+    cA(brand, 7),
+    transparent 45%,
+    cA(info, 7)
+  );
+  filter: blur(44px);
+  opacity: 0.32;
+  pointer-events: none;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    1200px 800px at 30% 40%,
+    transparent 40%,
+    rgba(0, 0, 0, 0.55)
+  );
+  pointer-events: none;
+  opacity: 0.22;
+}
+
+/* Stop “floating block in space” */
+.frame {
+  min-height: clamp(560px, 72svh, 820px);
+  display: grid;
+  align-items: center;
+}
+
+.grid {
+  align-items: center;
+  gap: clamp(2rem, 4vw, 4rem);
+}
+
+.copy {
+  max-width: 62ch;
+  display: grid;
+  gap: 1rem;
+}
+
+.status {
+  --status-color: #{c(success, $radix-solid)};
+  --status-glow: #{cA(success, 5)};
+  --status-glow-soft: #{cA(success, 3)};
+
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.35rem 0.75rem;
+  border-radius: 999px;
+  background: linear-gradient(135deg, cA(mono, 2), transparent 70%);
+  border: 1px solid cA(mono, 6);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  opacity: 0.88;
+}
+
+.statusDot {
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 999px;
+  background: var(--status-color);
+  box-shadow: 0 0 0 5px var(--status-glow);
+  animation: statusPulse 2.6s ease-in-out infinite;
+}
+
+.statusLabel {
+  margin: 0;
+}
+
+/* Typography upgrade: more premium headline treatment */
+.h1 {
+  letter-spacing: -0.045em;
+  font-size: clamp(3.2rem, 5.1vw, 5.2rem);
+  margin: 0;
+
+  /* Subtle “sheen” without being tacky */
+  background: linear-gradient(90deg, c(mono, $radix-text), cA(mono, 9));
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+.emphasis {
+  position: relative;
+  white-space: nowrap;
+  display: inline-block;
+  padding-block: 0.04em;
+  letter-spacing: inherit;
+
+  /* faint gradient highlight behind a key phrase */
+  background: linear-gradient(90deg, c(brand, $radix-text), cA(info, 8));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.inlineStrong {
+  color: c(mono, $radix-text);
+  font-weight: 600;
+}
+
+.sub {
+  font-size: clamp(1.05rem, 1.2vw, 1.2rem);
+  max-width: 60ch;
+  opacity: 0.9;
+}
+
+.actions {
+  margin-top: 1.8rem;
+  display: flex;
+  gap: 1.25rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.links {
+  margin-top: 1.6rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  opacity: 0.9;
+}
+
+.linkIcon {
+  font-size: 1rem;
+}
+
+/* Right visual — designed to be replaced by mascots */
+.visual {
+  width: 100%;
+  max-width: 580px;
+  justify-self: end;
+}
+
+@media (width < 960px) {
+  .visual {
+    justify-self: start;
+    max-width: 680px;
+  }
+}
+
+.visualInner {
+  border-radius: 1.85rem;
+  padding: 1.2rem;
+  position: relative;
+
+  background: linear-gradient(180deg, cA(mono, 2), transparent 60%),
+    c(mono, $radix-bg-subtle);
+  border: 1px solid c(mono, $radix-border-subtle);
+  box-shadow: 0 1px 0 cA(mono, 6), 0 34px 110px cA(mono, 3);
+  overflow: hidden;
+}
+
+.visualLabel {
+  width: fit-content;
+  padding: 0.35rem 0.7rem;
+  border-radius: 999px;
+  background: c(mono, $radix-ui-bg);
+  border: 1px solid c(mono, $radix-border-subtle);
+  opacity: 0.9;
+  font-size: 0.9rem;
+}
+
+.visualFrame {
+  margin-top: 1rem;
+  height: clamp(260px, 30vw, 390px);
+  border-radius: 1.4rem;
+  border: 1px solid c(mono, $radix-border-subtle);
+
+  background: linear-gradient(135deg, cA(brand, 7), transparent 55%),
+    linear-gradient(225deg, cA(info, 6), transparent 60%), c(mono, $radix-ui-bg);
+}
+
+/* extra glow layer for “transparency” vibe */
+.visualGlow {
+  position: absolute;
+  inset: -25% -25% auto auto;
+  width: 70%;
+  height: 70%;
+  background: linear-gradient(135deg, cA(brand, 7), cA(info, 6));
+  filter: blur(55px);
+  opacity: 0.18;
+  pointer-events: none;
+}
+
+@keyframes statusPulse {
+  0%,
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 5px var(--status-glow);
+  }
+  50% {
+    transform: scale(1.12);
+    box-shadow: 0 0 0 10px var(--status-glow-soft);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .statusDot {
+    animation: none;
+  }
+}

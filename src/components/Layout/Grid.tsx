@@ -6,9 +6,7 @@ import type { CSSProperties, ReactNode } from "react";
 import s from "./Layout.module.scss";
 import { animation } from "@/styles/animation";
 import { motion } from "motion/react";
-
-const cx = (...p: Array<string | undefined | false>) =>
-  p.filter(Boolean).join(" ");
+import cx from "@/utils/cx";
 
 export type GridCols = 1 | 2 | 3 | 4;
 export type GridPreset =

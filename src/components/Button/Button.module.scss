@@ -2,39 +2,158 @@
 
 .button {
   appearance: none;
-  border: 1px solid c(brand, $radix-border);
-  border-radius: 6px;
-
-  padding: 8px 12px;
-
-  background: c(brand, $radix-ui-bg);
-  color: c(mono, $radix-text);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
 
   font: inherit;
   line-height: 1;
+  text-decoration: none;
+  user-select: none;
+  white-space: nowrap;
+
+  border-radius: 12px;
+  border: 1px solid transparent;
   cursor: pointer;
 
-  transition: background-color 120ms ease, border-color 120ms ease,
-    transform 120ms ease;
+  transition: background-color 160ms ease, border-color 160ms ease,
+    box-shadow 160ms ease, transform 120ms ease;
 }
 
-.button:hover {
-  background: c(brand, $radix-ui-bg-hover);
-  border-color: c(brand, $radix-border-hover);
+/* ---------------- Sizes ---------------- */
+
+.size_sm {
+  padding: 0.55rem 0.85rem;
+  font-size: 0.95rem;
 }
 
-.button:active {
-  background: c(brand, $radix-ui-bg-active);
+.size_md {
+  padding: 0.7rem 1.05rem;
+  font-size: 1rem;
+}
+
+.size_lg {
+  padding: 0.85rem 1.25rem;
+  font-size: 1.05rem;
+}
+
+/* ---------------- Variants ---------------- */
+
+/**
+ * Solid = step 9 base, step 10 hover.
+ * Active reuses 10 (since you don't define a solid-active token).
+ */
+.variant_solid {
+  background: c(brand, $radix-solid);
+  color: c(mono, $radix-bg);
+  border-color: cA(brand, 7);
+  box-shadow: 0 1px 0 cA(mono, 6), 0 18px 55px cA(mono, 3);
+}
+
+.variant_solid:hover {
+  background: c(brand, $radix-solid-hover);
+}
+
+.variant_solid:active {
+  background: c(brand, $radix-solid-hover);
   transform: translateY(0.5px);
 }
 
+/**
+ * Soft = component bg steps (3–5)
+ */
+.variant_soft {
+  background: c(mono, $radix-ui-bg);
+  color: c(mono, $radix-text);
+  border-color: c(mono, $radix-border-subtle);
+  box-shadow: 0 1px 0 cA(mono, 6);
+}
+
+.variant_soft:hover {
+  background: c(mono, $radix-ui-bg-hover);
+  border-color: c(mono, $radix-border-hover);
+}
+
+.variant_soft:active {
+  background: c(mono, $radix-ui-bg-active);
+  transform: translateY(0.5px);
+}
+
+/**
+ * Outline = transparent bg, border steps (6–8), subtle hover bg (2)
+ */
+.variant_outline {
+  background: transparent;
+  color: c(mono, $radix-text);
+  border-color: c(mono, $radix-border);
+}
+
+.variant_outline:hover {
+  background: c(mono, $radix-bg-subtle);
+  border-color: c(mono, $radix-border-hover);
+}
+
+.variant_outline:active {
+  background: c(mono, $radix-ui-bg-active);
+  transform: translateY(0.5px);
+}
+
+/**
+ * Ghost = minimal, uses subtle bg on hover.
+ */
+.variant_ghost {
+  background: transparent;
+  color: c(mono, $radix-text);
+  border-color: transparent;
+}
+
+.variant_ghost:hover {
+  background: c(mono, $radix-bg-subtle);
+}
+
+.variant_ghost:active {
+  background: c(mono, $radix-ui-bg-active);
+  transform: translateY(0.5px);
+}
+
+/**
+ * Glass = translucent, blurred surface with subtle glow.
+ */
+.variant_glass {
+  background: linear-gradient(135deg, cA(mono, 3), cA(info, 3));
+  color: c(mono, $radix-text);
+  border-color: cA(mono, 6);
+  box-shadow: 0 1px 0 cA(mono, 6), 0 18px 40px cA(mono, 3);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.variant_glass:hover {
+  background: linear-gradient(135deg, cA(mono, 4), cA(info, 4));
+  border-color: cA(mono, 7);
+}
+
+.variant_glass:active {
+  background: linear-gradient(135deg, cA(mono, 4), cA(info, 5));
+  transform: translateY(0.5px);
+}
+
+/* ---------------- Focus ---------------- */
+
 .button:focus-visible {
-  outline: 2px solid c(brand, $radix-border-hover);
+  outline: 2px solid cA(info, 8);
   outline-offset: 2px;
 }
 
-.button:disabled {
-  opacity: 0.6;
+/* ---------------- Disabled ---------------- */
+
+.button:disabled,
+.button[aria-disabled="true"],
+.button[data-disabled] {
+  opacity: 0.55;
   cursor: not-allowed;
+  pointer-events: none;
+  box-shadow: none;
   transform: none;
 }

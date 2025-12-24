@@ -1,10 +1,8 @@
 import type { HTMLAttributes } from "react";
 import s from "./Layout.module.scss";
+import cx from "@/utils/cx";
 
-const cx = (...p: Array<string | undefined | false>) =>
-  p.filter(Boolean).join(" ");
-
-export type SectionSize = 1 | 2 | 3 | 4;
+export type SectionSize = 1 | 2 | 3 | 4 | 5 | 6;
 export type SectionTone = "default" | "muted" | "inset";
 
 type SectionProps = HTMLAttributes<HTMLElement> & {
@@ -17,6 +15,8 @@ const SIZE_CLASS: Record<SectionSize, string> = {
   2: s.sectionSize2,
   3: s.sectionSize3,
   4: s.sectionSize4,
+  5: s.sectionSize5,
+  6: s.sectionSize6,
 };
 
 const TONE_CLASS: Record<SectionTone, string> = {

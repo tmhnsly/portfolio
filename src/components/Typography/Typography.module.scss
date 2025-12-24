@@ -314,20 +314,20 @@ Applies only to block-level elements:
 Inline usage remains spacing-neutral.
 ----------------------------------------------------------------------------- */
 
-.text:is(p) {
+.text:where(p) {
   margin-top: 0;
   margin-bottom: 1.25em;
 }
 
-.text:is(p):last-child {
+.text:where(p):last-child {
   margin-bottom: 0;
 }
 
-.heading:is(h1, h2, h3, h4, h5, h6) {
+.heading:where(h1, h2, h3, h4, h5, h6) {
   margin-top: 2.4em;
   margin-bottom: 0.75em;
 }
 
-.heading:is(h1, h2, h3, h4, h5, h6):first-child {
+.heading:where(h1, h2, h3, h4, h5, h6):first-child {
   margin-top: 0;
 }
