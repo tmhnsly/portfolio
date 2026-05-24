@@ -4,10 +4,3 @@
   font-family: var(--font-mono); font-size: var(--fs-mono); color: var(--text-soft);
   letter-spacing: var(--ls-mono); white-space: nowrap;
 }
-/* discipline-tinted: --chip is the discipline colour (set inline). color-mix keeps
-   it theme-safe (tint mixes into the current surface/text, works light + dark). */
-.tinted {
-  background: color-mix(in srgb, var(--chip) 16%, var(--surface-soft));
-  border-color: color-mix(in srgb, var(--chip) 45%, transparent);
-  color: color-mix(in srgb, var(--chip) 50%, var(--text));
-}
