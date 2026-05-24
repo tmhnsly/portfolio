@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { SITE } from '@/data';
 import { Marquee } from '@/components/motion/Marquee';
 import { Container } from '../Container';
@@ -31,11 +32,11 @@ export function Footer() {
           </div>
           <div className={styles.col}>
             <div className={styles.label}>Sections</div>
-            {SITE.nav.filter((n) => n.label !== 'About').map((n) => <div key={n.href}>{n.label}</div>)}
+            {SITE.nav.filter((n) => n.label !== 'About').map((n) => <Link className={styles.link} href={n.href} key={n.href}>{n.label}</Link>)}
           </div>
           <div className={styles.col}>
             <div className={styles.label}>Elsewhere</div>
-            {SITE.socials.map((s) => <div key={s.label}>{s.label}</div>)}
+            {SITE.socials.map((s) => <a className={styles.link} href={s.href} key={s.label}>{s.label}</a>)}
           </div>
           <div className={styles.col}>
             <div className={styles.label}>Colophon</div>
