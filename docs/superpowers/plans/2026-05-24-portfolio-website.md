@@ -10,7 +10,7 @@
 
 **Reference:** Exact values, copy, layout and dimensions for every page are in `docs/design-reference/project/pages/*.jsx`. The spec is `docs/superpowers/specs/2026-05-24-portfolio-website-design.md`. These files exist in the repo — open the named prototype when a task says "match the prototype".
 
-**Conventions for every task:** component lives in its own folder (`Component/Component.tsx` + `Component.module.scss` + `index.ts`). SCSS uses `var(--token)` only — never a raw px/hex that a token exists for. **Every image surface renders through the `Media` component (Task 15b): responsive `next/image` when a `src` is present, the discipline gradient as fallback — never a bare `<img>`.** Image files live under `public/images/…`. Commit after each task with the message shown.
+**Conventions for every task:** component lives in its own folder (`Component/Component.tsx` + `Component.module.scss` + `index.ts`). SCSS uses `var(--token)` only — never a raw px/hex that a token exists for. **SCSS `@use` of tokens/mixins must use RELATIVE paths** (e.g. `@use '../../styles/mixins/breakpoints' as *;`) — Next 16 uses Turbopack, which ignores `sassOptions.includePaths`, so bare paths like `'styles/tokens'` fail to resolve. **Every image surface renders through the `Media` component (Task 15b): responsive `next/image` when a `src` is present, the discipline gradient as fallback — never a bare `<img>`.** Image files live under `public/images/…`. Commit after each task with the message shown.
 
 ---
 
