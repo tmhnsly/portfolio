@@ -3,6 +3,7 @@ import type { Discipline } from '@/types';
 import { DISCIPLINES, DISCIPLINE_ORDER } from '@/lib/disciplines';
 import { Eyebrow } from '@/components/ui/Eyebrow';
 import { GlassCard } from '@/components/ui/GlassCard';
+import { LinkArrow } from '@/components/ui/LinkArrow';
 import styles from './OtherDisciplines.module.scss';
 
 export function OtherDisciplines({ current }: { current: Discipline }) {
@@ -18,7 +19,7 @@ export function OtherDisciplines({ current }: { current: Discipline }) {
               <GlassCard soft>
                 <span className={styles.dot} style={{ background: d.color }} aria-hidden />
                 <span className={styles.route}>{d.route}</span>
-                <span className={styles.arrow} aria-hidden>→</span>
+                <LinkArrow className={styles.arrow} />
               </GlassCard>
             </Link>
           );

@@ -74,15 +74,11 @@
 }
 .arrow {
   margin-left: auto;
-  font-family: var(--font-mono);
-  font-size: var(--fs-body);          /* 16px — was 11px, too small to read as a link cue */
   color: var(--text-soft);
   transition: transform var(--duration-hover) var(--ease-standard), color var(--duration-hover) var(--ease-standard);
-
-  @include desktop-up { font-size: var(--fs-h4); } /* 18px — more presence on desktop */
 }
 /* nudge + accent on hover to signal the card is a link */
-.link:hover .arrow { transform: translate(2px, -2px); color: var(--accent); }
+.link:hover .arrow { transform: translateX(3px); color: var(--accent); }
 .tools {
   display: flex;
   flex-wrap: wrap;

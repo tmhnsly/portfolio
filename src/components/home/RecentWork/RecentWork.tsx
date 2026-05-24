@@ -9,6 +9,7 @@ import { FilterPills } from '@/components/ui/FilterPills';
 import { TechChip } from '@/components/ui/TechChip';
 import { Media } from '@/components/ui/Media';
 import { Pill } from '@/components/ui/Pill';
+import { LinkArrow } from '@/components/ui/LinkArrow';
 import { formatMonthYear } from '@/lib/format';
 import styles from './RecentWork.module.scss';
 
@@ -49,7 +50,7 @@ export function RecentWork({ projects }: { projects: Project[] }) {
               {featured.desc && <div className={styles.featuredDesc}>{featured.desc}</div>}
               <div className={styles.chips}>{featured.tech.slice(0, 4).map((t) => <TechChip key={t} label={t} />)}</div>
             </div>
-            <span className={styles.date}>{formatMonthYear(featured.date)} →</span>
+            <span className={styles.date}>{formatMonthYear(featured.date)} <LinkArrow /></span>
           </div>
         </Link>
         <div className={styles.thumbs}>

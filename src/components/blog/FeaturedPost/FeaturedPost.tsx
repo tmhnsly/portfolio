@@ -5,6 +5,7 @@ import { Eyebrow } from '@/components/ui/Eyebrow';
 import { Media } from '@/components/ui/Media';
 import { Pill } from '@/components/ui/Pill';
 import { TechChip } from '@/components/ui/TechChip';
+import { LinkArrow } from '@/components/ui/LinkArrow';
 import { formatMonthYear, readingLabel } from '@/lib/format';
 import styles from './FeaturedPost.module.scss';
 
@@ -40,7 +41,7 @@ export function FeaturedPost({ post }: { post: BlogPost }) {
               ))}
             </div>
             <div className={styles.readMore}>
-              Read the post <span className={styles.arrow}>→</span>
+              Read the post <LinkArrow className={styles.arrow} />
             </div>
           </div>
         </div>

@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import type { BlogPost } from '@/lib/schemas';
 import { TechChip } from '@/components/ui/TechChip';
+import { LinkArrow } from '@/components/ui/LinkArrow';
 import { formatMonthYear, readingLabel } from '@/lib/format';
 import styles from './PostCard.module.scss';
 
@@ -22,7 +23,7 @@ export function PostCard({ post }: { post: BlogPost }) {
       </div>
       <div className={styles.right}>
         <span className={styles.readTime}>{readingLabel(post.readingTime)}</span>
-        <span className={styles.readLink}>read <span className={styles.arrow}>→</span></span>
+        <span className={styles.readLink}>read <LinkArrow className={styles.arrow} /></span>
       </div>
     </Link>
   );

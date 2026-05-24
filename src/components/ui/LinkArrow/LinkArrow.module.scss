@@ -1,0 +1,5 @@
+.arrow {
+  font-size: 1.2em;          /* consistent size relative to its context */
+  vertical-align: -0.18em;   /* baseline-align in inline text (flex parents center it) */
+  flex: none;
+}

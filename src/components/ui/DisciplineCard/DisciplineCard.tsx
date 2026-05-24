@@ -2,6 +2,7 @@ import Link from 'next/link';
 import type { Discipline } from '@/types';
 import { DISCIPLINES } from '@/lib/disciplines';
 import { TechChip } from '@/components/ui/TechChip';
+import { LinkArrow } from '@/components/ui/LinkArrow';
 import styles from './DisciplineCard.module.scss';
 
 export interface DisciplineCardProps {
@@ -23,7 +24,7 @@ export function DisciplineCard({ discipline, tools, href, showArrow = false, max
       <div className={styles.head}>
         <span className={styles.dot} style={{ background: d.color }} />
         <span className={styles.label}>{d.route}</span>
-        {showArrow && <span className={styles.arrow} aria-hidden>↗</span>}
+        {showArrow && <LinkArrow className={styles.arrow} />}
       </div>
       <div className={styles.tools}>
         {shown.map((t) => (
