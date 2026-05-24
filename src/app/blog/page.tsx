@@ -1,4 +1,4 @@
-import { Page, Nav, Footer, Container } from '@/components/layout';
+import { Page, Nav, Footer, Container, Stack } from '@/components/layout';
 import { BlogHero } from '@/components/blog/BlogHero';
 import { FeaturedPost } from '@/components/blog/FeaturedPost';
 import { PostList } from '@/components/blog/PostList';
@@ -11,9 +11,11 @@ export default function BlogPage() {
     <Page discipline="blog">
       <Nav active="blog" />
       <Container>
-        <BlogHero count={posts.length} />
-        {featured && <FeaturedPost post={featured} />}
-        <PostList posts={rest} />
+        <Stack>
+          <BlogHero count={posts.length} />
+          {featured && <FeaturedPost post={featured} />}
+          <PostList posts={rest} />
+        </Stack>
       </Container>
       <Footer />
     </Page>

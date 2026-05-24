@@ -1,4 +1,4 @@
-import { Page, Nav, Footer, Container } from '@/components/layout';
+import { Page, Nav, Footer, Container, Stack } from '@/components/layout';
 import { Hero } from '@/components/home/Hero';
 import { DisciplineScroller } from '@/components/home/DisciplineScroller';
 import { RecentWork } from '@/components/home/RecentWork';
@@ -11,9 +11,11 @@ export default function Home() {
     <Page>
       <Nav />
       <Container>
-        <Hero featured={deck} />
-        <DisciplineScroller />
-        <RecentWork projects={projects} />
+        <Stack>
+          <Hero featured={deck} />
+          <DisciplineScroller />
+          <RecentWork projects={projects} />
+        </Stack>
       </Container>
       <Footer />
     </Page>

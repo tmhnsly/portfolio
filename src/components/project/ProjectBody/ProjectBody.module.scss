@@ -5,7 +5,6 @@
   display: grid;
   grid-template-columns: 1fr;
   gap: var(--space-10);
-  padding: var(--space-10) 0;
 
   @include desktop-up {
     grid-template-columns: 1.55fr 1fr;

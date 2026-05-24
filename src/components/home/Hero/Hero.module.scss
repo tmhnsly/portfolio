@@ -1,5 +1,5 @@
 @use '../../../styles/mixins/breakpoints' as *;
-.hero { display: grid; grid-template-columns: 1fr; gap: var(--space-8); padding-block: var(--space-9) var(--space-8);
+.hero { display: grid; grid-template-columns: 1fr; gap: var(--space-8);
   @include desktop-up { grid-template-columns: 1.55fr 1fr; gap: var(--space-11); align-items: start; } }
 .lead { display: flex; flex-direction: column; }
 .title { margin: var(--space-7) 0 0; font-family: var(--font-display); font-weight: 600;

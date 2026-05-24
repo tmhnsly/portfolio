@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Page, Nav, Footer, Container } from '@/components/layout';
+import { Page, Nav, Footer, Container, Stack } from '@/components/layout';
 import { DISCIPLINE_ORDER, DISCIPLINES } from '@/lib/disciplines';
 import { Eyebrow } from '@/components/ui/Eyebrow';
 import { Button } from '@/components/ui/Button';
@@ -12,6 +12,7 @@ export default function NotFound() {
     <Page>
       <Nav />
       <Container>
+        <Stack>
         <section className={styles.wrap}>
           <Eyebrow withDot>Error · 404</Eyebrow>
           <h1 className={styles.code}>404<span className={styles.period}>.</span></h1>
@@ -38,6 +39,7 @@ export default function NotFound() {
             <Button variant="primary" href={`mailto:${SITE.email}`}>{SITE.email} →</Button>
           </div>
         </section>
+        </Stack>
       </Container>
       <Footer />
     </Page>

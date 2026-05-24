@@ -1,5 +1,5 @@
 @use '../styles/mixins/breakpoints' as *;
-.wrap { padding-block: var(--space-12); max-width: 900px; }
+.wrap { max-width: 900px; }
 .code { margin: var(--space-6) 0 0; font-family: var(--font-display); font-weight: 600;
   font-size: clamp(96px, 22vw, var(--fs-display-xxl)); letter-spacing: var(--ls-display-xxl);
   line-height: var(--lh-display); color: var(--text); }

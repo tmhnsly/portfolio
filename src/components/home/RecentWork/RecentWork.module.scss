@@ -1,5 +1,5 @@
 @use '../../../styles/mixins/breakpoints' as *;
-.section { margin-block: var(--space-12); }
+.section { }
 .head { display: flex; align-items: flex-end; justify-content: space-between; gap: var(--space-4);
   padding-bottom: var(--space-6); border-bottom: 1px solid var(--rule-soft); flex-wrap: wrap; }
 .title { margin: var(--space-2) 0 0; font-family: var(--font-display); font-weight: 600;

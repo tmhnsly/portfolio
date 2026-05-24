@@ -1,4 +1,4 @@
-import { Page, Nav, Footer, Container } from '@/components/layout';
+import { Page, Nav, Footer, Container, Stack } from '@/components/layout';
 import { AboutHero } from '@/components/about/AboutHero';
 import { Intro } from '@/components/about/Intro';
 import { Timeline } from '@/components/about/Timeline';
@@ -11,11 +11,13 @@ export default function AboutPage() {
     <Page>
       <Nav active="about" />
       <Container>
-        <AboutHero />
-        <Intro />
-        <Timeline entries={TIMELINE} />
-        <Skills skills={SKILLS} />
-        <ContactCTA />
+        <Stack>
+          <AboutHero />
+          <Intro />
+          <Timeline entries={TIMELINE} />
+          <Skills skills={SKILLS} />
+          <ContactCTA />
+        </Stack>
       </Container>
       <Footer />
     </Page>

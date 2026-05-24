@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { getAllPosts, getPost } from '@/lib/content';
 import { DISCIPLINES } from '@/lib/disciplines';
 import { SITE } from '@/data';
-import { Page, Nav, Footer, Container } from '@/components/layout';
+import { Page, Nav, Footer, Container, Stack } from '@/components/layout';
 import { Eyebrow } from '@/components/ui/Eyebrow';
 import { TechChip } from '@/components/ui/TechChip';
 import { Pill } from '@/components/ui/Pill';
@@ -35,7 +35,8 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
     <Page discipline="blog">
       <Nav active="blog" />
       <Container>
-        <BlogPostHero post={post} />
+        <Stack>
+          <BlogPostHero post={post} />
         <Media
           grad={blogGrad}
           src={post.cover?.src}
@@ -103,6 +104,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
             </div>
           </section>
         )}
+        </Stack>
       </Container>
       <Footer />
     </Page>

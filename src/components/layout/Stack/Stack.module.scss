@@ -1,0 +1,8 @@
+@use '../../../styles/mixins/breakpoints' as *;
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--section-space);
+  padding-block: var(--space-8) var(--space-12);
+}

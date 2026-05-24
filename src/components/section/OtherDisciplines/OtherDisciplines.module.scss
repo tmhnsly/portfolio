@@ -1,5 +1,5 @@
 @use '../../../styles/mixins/breakpoints' as *;
-.wrap { margin-block: var(--space-10); }
+.wrap { }
 .row {
   display: flex;
   flex-wrap: wrap;
