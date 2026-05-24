@@ -61,7 +61,7 @@
   padding: var(--space-4) var(--space-5);
   border-radius: var(--radius-lg);
   text-decoration: none;
-  transition: background 0.15s ease;
+  transition: background var(--duration-fast) var(--ease-standard);
 
   &:hover {
     background: var(--surface-soft);

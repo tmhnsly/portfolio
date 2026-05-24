@@ -14,7 +14,7 @@ function Item({ entry, index }: { entry: TimelineEntry; index: number }) {
       className={styles.item}
       initial={reduce ? false : { opacity: 0, y: OFFSET.revealY }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.4 }}
+      viewport={{ once: true, amount: 0.25 }}
       transition={{
         duration: DURATION.reveal,
         ease: EASING.standard,

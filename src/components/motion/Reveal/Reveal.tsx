@@ -10,7 +10,7 @@ export function Reveal({ children, delay = 0 }: { children: React.ReactNode; del
       variants={revealVariants}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, amount: 0.4 }}
+      viewport={{ once: true, amount: 0.2 }}
       transition={{ delay }}
     >
       {children}

@@ -2,6 +2,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import { AnimatePresence, motion, useReducedMotion, type PanInfo, type Variants } from 'motion/react';
 import type { Project } from '@/types';
+import { EASING } from '@/lib/motion';
 import { DISCIPLINES } from '@/lib/disciplines';
 import { Media } from '@/components/ui/Media';
 import { Pill } from '@/components/ui/Pill';
@@ -17,7 +18,9 @@ const PEEK_SCALE = 0.05;     // scale step per depth
 const SWIPE_DIST = 80;       // px offset to count as a swipe
 const SWIPE_VELOCITY = 450;  // or fast enough flick
 
-const stackSpring = { type: 'spring', stiffness: 340, damping: 34, mass: 0.9 } as const;
+// softer, near-critically-damped spring → a weighty, smooth glide (was 340/34/0.9,
+// which snapped/settled hard). The exit fly-off uses its own quick ease (below).
+const stackSpring = { type: 'spring', stiffness: 240, damping: 30, mass: 1 } as const;
 
 const pad = (n: number) => String(n).padStart(2, '0');
 
@@ -89,7 +92,9 @@ export function CardDeck({ items }: { items: Project[] }) {
   const variants: Variants = {
     enter: (pos: number) => ({ y: pos * PEEK_Y, scale: 1 - pos * PEEK_SCALE, opacity: 0, x: 0, rotate: 0 }),
     stack: (pos: number) => ({ y: pos * PEEK_Y, scale: 1 - pos * PEEK_SCALE, opacity: 1, x: 0, rotate: 0 }),
-    exit: reduce ? { opacity: 0 } : { x: dir * 460, rotate: dir * -8, opacity: 0 },
+    exit: reduce
+      ? { opacity: 0 }
+      : { x: dir * 480, rotate: dir * -6, opacity: 0, transition: { duration: 0.32, ease: EASING.standard } },
   };
 
   const onDragEnd = (_e: unknown, info: PanInfo) => {
@@ -127,11 +132,21 @@ export function CardDeck({ items }: { items: Project[] }) {
                 exit="exit"
                 transition={reduce ? { duration: 0 } : stackSpring}
                 drag={isFront && !reduce ? 'x' : false}
-                dragElastic={0.6}
-                dragConstraints={{ left: 0, right: 0 }}
+                dragMomentum={false}
                 onDragEnd={isFront ? onDragEnd : undefined}
               >
-                {isFront ? <CardFace project={items[itemIndex]} /> : <div className={styles.face} aria-hidden />}
+                {isFront ? (
+                  <motion.div
+                    className={styles.faceFade}
+                    initial={reduce ? false : { opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.3, ease: EASING.standard }}
+                  >
+                    <CardFace project={items[itemIndex]} />
+                  </motion.div>
+                ) : (
+                  <div className={styles.face} aria-hidden />
+                )}
               </motion.div>
             );
           })}

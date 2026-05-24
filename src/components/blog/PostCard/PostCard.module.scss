@@ -59,7 +59,7 @@
   letter-spacing: -0.025em;
   line-height: 1.15;
   color: var(--text);
-  transition: color 0.15s ease;
+  transition: color var(--duration-fast) var(--ease-standard);
 }
 
 .excerpt {
