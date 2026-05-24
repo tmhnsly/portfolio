@@ -49,7 +49,7 @@ export function Footer() {
             {SITE.socials.map((s) => <a className={styles.link} href={s.href} key={s.label}>{s.label}</a>)}
           </div>
           <div className={styles.col}>
-            <div className={styles.label}>{COPY.footer.colophonLabel}</div>
+            <div className={styles.label}>{COPY.footer.factLabel}</div>
             <FooterFact />
           </div>
           <div className={`${styles.col} ${styles.right}`}>

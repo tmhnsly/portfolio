@@ -37,7 +37,7 @@ export const COPY = {
     // Column header labels
     sections: 'Sections',
     elsewhere: 'Elsewhere',
-    colophonLabel: 'Useless fact',
+    factLabel: 'Useless fact',
     // Copyright / version block — the year is appended at render time (current year)
     copyright: '©',
     version: 'v1.0',
