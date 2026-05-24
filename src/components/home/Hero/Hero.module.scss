@@ -1,0 +1,11 @@
+@use '../../../styles/mixins/breakpoints' as *;
+.hero { display: grid; grid-template-columns: 1fr; gap: var(--space-8); padding-block: var(--space-9) var(--space-8);
+  @include desktop-up { grid-template-columns: 1.55fr 1fr; gap: var(--space-11); align-items: start; } }
+.lead { display: flex; flex-direction: column; }
+.title { margin: var(--space-7) 0 0; font-family: var(--font-display); font-weight: 600;
+  letter-spacing: var(--ls-display-xxl); line-height: var(--lh-display); color: var(--text);
+  font-size: clamp(var(--fs-display), 12vw, var(--fs-display-xxl)); text-wrap: pretty; }
+.muted { color: var(--text-soft); font-weight: 500; }
+.period { color: var(--accent); }
+.sub { margin-top: var(--space-7); max-width: 580px; font-size: var(--fs-body-l); color: var(--text-soft); line-height: var(--lh-body); }
+.deckCol { display: flex; flex-direction: column; gap: var(--space-4); }

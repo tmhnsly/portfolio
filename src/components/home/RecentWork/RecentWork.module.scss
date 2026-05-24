@@ -1,0 +1,28 @@
+@use '../../../styles/mixins/breakpoints' as *;
+.section { margin-block: var(--space-12); }
+.head { display: flex; align-items: flex-end; justify-content: space-between; gap: var(--space-4);
+  padding-bottom: var(--space-6); border-bottom: 1px solid var(--rule-soft); flex-wrap: wrap; }
+.title { margin: var(--space-2) 0 0; font-family: var(--font-display); font-weight: 600;
+  font-size: clamp(40px, 8vw, 68px); letter-spacing: var(--ls-display-l); line-height: var(--lh-display); color: var(--text); }
+.period { color: var(--accent); }
+.grid { margin-top: var(--space-7); display: grid; grid-template-columns: 1fr; gap: var(--space-7);
+  @include desktop-up { grid-template-columns: 1.55fr 1fr; } }
+.featured { display: flex; flex-direction: column; gap: var(--space-5); }
+.featuredMedia { box-shadow: var(--shadow-lg); }
+.pillTL { position: absolute; left: 18px; top: 18px; z-index: 2; }
+.featuredMeta { display: flex; align-items: flex-end; justify-content: space-between; gap: var(--space-6); }
+.featuredTitle { font-family: var(--font-display); font-size: var(--fs-h2); font-weight: 600; letter-spacing: -0.028em; line-height: 1.05; color: var(--text); }
+.featuredDesc { font-size: var(--fs-body); color: var(--text-soft); line-height: 1.4; margin-top: 6px; }
+.chips { display: flex; gap: 5px; flex-wrap: wrap; margin-top: var(--space-3); }
+.date { font-family: var(--font-mono); font-size: var(--fs-mono-s); color: var(--text-muted); white-space: nowrap; }
+.thumbs { display: flex; flex-direction: column; gap: var(--space-4); }
+.thumb { display: grid; grid-template-columns: 140px 1fr; gap: var(--space-4); align-items: center;
+  padding: 10px; border-radius: var(--radius-xl); border: 1px solid var(--surface-edge); background: var(--surface-soft); }
+.pillSm { position: absolute; left: 8px; top: 8px; z-index: 2; }
+.thumbTitle { font-family: var(--font-display); font-size: var(--fs-h4); font-weight: 600; letter-spacing: -0.025em; color: var(--text); }
+.thumbDesc { font-size: var(--fs-caption); color: var(--text-soft); line-height: 1.4; margin-top: 2px; }
+.dateSm { display: block; margin-top: var(--space-2); font-family: var(--font-mono); font-size: var(--fs-mono-xs); color: var(--text-muted); }
+.foot { margin-top: var(--space-6); padding-top: var(--space-4); border-top: 1px solid var(--rule-soft);
+  display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: var(--fs-mono-s);
+  color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em; }
+.everything { color: var(--text); font-family: var(--font-display); font-weight: 600; text-transform: none; letter-spacing: -0.005em; }
