@@ -1,11 +1,13 @@
 'use client';
 import Link from 'next/link';
-import { BiMoon, BiSun, BiMenu } from 'react-icons/bi';
+import type { IconType } from 'react-icons';
+import { BiMoon, BiSun, BiMenu, BiCodeAlt, BiVideo, BiCamera, BiMusic, BiHeadphone, BiPencil, BiUser } from 'react-icons/bi';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import { tomato } from '@radix-ui/colors';
 import { SITE, COPY } from '@/data';
 import { DISCIPLINES, isDiscipline } from '@/lib/disciplines';
 import { useTheme } from '@/lib/theme';
+import { LinkArrow } from '@/components/ui/LinkArrow';
 import { Container } from '../Container';
 import styles from './Nav.module.scss';
 
@@ -13,6 +15,17 @@ export interface NavProps {
   /** active discipline slug or 'about' */
   active?: string;
 }
+
+/** A relevant boxicon per nav destination, shown in the mobile burger menu. */
+const NAV_ICONS: Record<string, IconType> = {
+  '/code': BiCodeAlt,
+  '/video': BiVideo,
+  '/photo': BiCamera,
+  '/music': BiMusic,
+  '/sound': BiHeadphone,
+  '/blog': BiPencil,
+  '/about': BiUser,
+};
 
 export function Nav({ active }: NavProps) {
   const { theme, toggle } = useTheme();
@@ -25,10 +38,11 @@ export function Nav({ active }: NavProps) {
     <header className={styles.header}>
       <Container>
         <nav className={styles.bar} aria-label="Primary">
-          <div className={styles.brand}>
-            <Link href="/" className={styles.monogram} aria-label={COPY.nav.homeAria}>TH</Link>
+          {/* monogram + wordmark are two visual pieces but one "home" button */}
+          <Link href="/" className={styles.brand} aria-label={COPY.nav.homeAria}>
+            <span className={styles.monogram}>TH</span>
             <span className={styles.name}>Tom Hinsley</span>
-          </div>
+          </Link>
 
           {/* Desktop: inline items */}
           <ul className={styles.items}>
@@ -56,8 +70,8 @@ export function Nav({ active }: NavProps) {
               {theme === 'dark' ? <BiSun aria-hidden /> : <BiMoon aria-hidden />}
             </button>
             <a className={styles.cta} href={`mailto:${SITE.email}`}>
-              <span className={styles.ctaFull}>{SITE.email} →</span>
-              <span className={styles.ctaShort} aria-hidden="true">{COPY.nav.sayHi}</span>
+              <span className={styles.ctaFull}>{SITE.email} <LinkArrow /></span>
+              <span className={styles.ctaShort} aria-hidden="true">{COPY.nav.sayHi} <LinkArrow /></span>
             </a>
           </div>
 
@@ -76,20 +90,24 @@ export function Nav({ active }: NavProps) {
                 collisionPadding={16}
                 style={{ '--accent': accent } as React.CSSProperties}
               >
-                {SITE.nav.map((item) => (
-                  <DropdownMenu.Item key={item.href} asChild>
-                    <Link
-                      href={item.href}
-                      className={isActive(item.label) ? `${styles.menuItem} ${styles.menuItemActive}` : styles.menuItem}
-                      aria-current={isActive(item.label) ? 'page' : undefined}
-                    >
-                      {item.label}
-                    </Link>
-                  </DropdownMenu.Item>
-                ))}
+                {SITE.nav.map((item) => {
+                  const Icon = NAV_ICONS[item.href];
+                  return (
+                    <DropdownMenu.Item key={item.href} asChild>
+                      <Link
+                        href={item.href}
+                        className={isActive(item.label) ? `${styles.menuItem} ${styles.menuItemActive}` : styles.menuItem}
+                        aria-current={isActive(item.label) ? 'page' : undefined}
+                      >
+                        {Icon && <Icon className={styles.menuIcon} aria-hidden />}
+                        {item.label}
+                      </Link>
+                    </DropdownMenu.Item>
+                  );
+                })}
                 <DropdownMenu.Separator className={styles.menuSep} />
                 <DropdownMenu.Item asChild>
-                  <a href={`mailto:${SITE.email}`} className={styles.menuCta}>{SITE.email} →</a>
+                  <a href={`mailto:${SITE.email}`} className={styles.menuCta}>{SITE.email} <LinkArrow /></a>
                 </DropdownMenu.Item>
                 <DropdownMenu.Item
                   className={styles.menuItem}
@@ -98,6 +116,7 @@ export function Nav({ active }: NavProps) {
                     toggle();
                   }}
                 >
+                  {theme === 'dark' ? <BiSun className={styles.menuIcon} aria-hidden /> : <BiMoon className={styles.menuIcon} aria-hidden />}
                   {theme === 'dark' ? 'Light mode' : 'Dark mode'}
                 </DropdownMenu.Item>
               </DropdownMenu.Content>

@@ -20,13 +20,20 @@
     padding: var(--nav-pad-wide);
   }
 }
-.brand { display: flex; align-items: center; gap: var(--space-3); flex-shrink: 0; }
+/* monogram + wordmark are one "home" link (two visual pieces) */
+.brand {
+  display: flex; align-items: center; gap: var(--space-3); flex-shrink: 0;
+  text-decoration: none; color: inherit; border-radius: var(--radius-md);
+}
+.brand:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+.brand:hover .monogram { transform: scale(1.06); }
 .monogram {
   width: 30px; height: 30px; border-radius: var(--radius-md);
   background: var(--accent); color: var(--text-on-accent);
   display: inline-flex; align-items: center; justify-content: center;
   font-weight: 700; font-size: 14px; letter-spacing: -0.02em;
   flex-shrink: 0;
+  transition: transform var(--duration-hover) var(--ease-standard);
 }
 .name {
   /* brand watermark — stays on the bar at every width (incl. burger mode) */
@@ -107,6 +114,8 @@
   z-index: var(--z-overlay);
   transform-origin: var(--radix-dropdown-menu-content-transform-origin);
   animation: menuIn var(--duration-fast) var(--ease-standard);
+  outline: none; /* Radix focuses the panel on open — don't show a ring around it;
+                    the highlighted item ([data-highlighted]) is the keyboard cue */
 }
 @include reduced-motion { .menu { animation: none; } }
 @keyframes menuIn {
@@ -114,11 +123,13 @@
   to   { opacity: 1; transform: none; }
 }
 .menuItem {
-  display: block; padding: 10px 14px; border-radius: var(--radius-lg);
+  display: flex; align-items: center; gap: var(--space-3);
+  padding: 10px 14px; border-radius: var(--radius-lg);
   font-size: 15px; font-weight: 500; color: var(--text); text-decoration: none; cursor: pointer;
   outline: none; white-space: nowrap;
   transition: background var(--duration-fast) var(--ease-standard);
 }
+.menuIcon { font-size: 18px; flex: none; } /* react-icons render at 1em (currentColor) */
 .menuItem[data-highlighted], .menuItem:hover { background: var(--surface-soft); }
 .menuItemActive, .menuItemActive[data-highlighted] { background: var(--text); color: var(--bg); }
 .menuSep { height: 1px; background: var(--rule-soft); margin: var(--space-2) 4px; }
