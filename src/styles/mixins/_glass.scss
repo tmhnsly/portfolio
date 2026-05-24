@@ -1,4 +1,4 @@
-@mixin glass($surface: var(--surface), $blur: 24px, $saturate: 170%) {
+@mixin glass($surface: var(--surface), $blur: 12px, $saturate: 160%) {
   background: $surface;
   border: 1px solid var(--surface-edge);
   backdrop-filter: blur($blur) saturate($saturate);

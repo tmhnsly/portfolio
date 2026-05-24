@@ -2,9 +2,9 @@
   /* surfaces / backgrounds */
   --bg: var(--sand-1);
   --bg-subtle: var(--sand-2);
-  --surface: var(--sand-a2);        /* translucent glass fill (frosts over blooms) */
+  --surface: var(--sand-a4);        /* translucent glass fill (frosts over blooms) */
   --surface-soft: var(--sand-a3);
-  --surface-edge: var(--sand-6);    /* card border (subtle, step 6) */
+  --surface-edge: var(--sand-7);    /* card border (subtle, step 7) */
 
   /* text */
   --text: var(--sand-12);
@@ -25,10 +25,10 @@
   --accent-glow: var(--tomato-a5);
 
   /* shadows — black-alpha */
-  --shadow-sm: 0 4px 12px var(--black-a3);
-  --shadow-md: 0 12px 30px var(--black-a4);
-  --shadow-lg: 0 22px 50px var(--black-a5);
-  --shadow-xl: 0 36px 70px var(--black-a6);
+  --shadow-sm: 0 2px 8px var(--black-a3);
+  --shadow-md: 0 6px 16px var(--black-a4);
+  --shadow-lg: 0 14px 28px var(--black-a4);
+  --shadow-xl: 0 22px 40px var(--black-a5);
 
   /* overlays / on-media (used by the component sweep next) */
   --overlay-hatch: var(--white-a3);
@@ -43,10 +43,10 @@
   --code-text: var(--gray-1);
 }
 .dark {
-  --shadow-sm: 0 4px 12px var(--black-a6);
-  --shadow-md: 0 12px 30px var(--black-a8);
-  --shadow-lg: 0 22px 50px var(--black-a10);
-  --shadow-xl: 0 36px 70px var(--black-a11);
+  --shadow-sm: 0 2px 8px var(--black-a5);
+  --shadow-md: 0 6px 16px var(--black-a7);
+  --shadow-lg: 0 14px 28px var(--black-a8);
+  --shadow-xl: 0 22px 40px var(--black-a9);
   --code-bg: var(--gray-2);   /* dark-scale dark surface */
   --code-text: var(--gray-12);
 }
