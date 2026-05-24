@@ -27,7 +27,9 @@
 
 .spineTrack {
   position: absolute;
-  top: 0;
+  /* start at the first marker's centre (markerCol padding-top 6 + marker radius 7),
+     not above the first dot */
+  top: 13px;
   bottom: 0;
   /* mobile: aligned to mobile marker centre (11px = half of 22px marker col) */
   left: 11px;
@@ -92,7 +94,7 @@
   width: 14px;
   height: 14px;
   border-radius: 50%;
-  box-shadow: 0 0 0 4px var(--accent-glow);
+  box-shadow: 0 0 0 4px var(--marker-glow, var(--accent-glow)); /* ring matches the entry's own colour */
   position: relative;
   z-index: var(--z-card-overlay);
   display: block;

@@ -25,7 +25,7 @@ function Item({ entry, index }: { entry: TimelineEntry; index: number }) {
       <div className={styles.markerCol}>
         <motion.span
           className={styles.marker}
-          style={{ background: entry.accent }}
+          style={{ background: entry.accent, '--marker-glow': `color-mix(in srgb, ${entry.accent} 25%, transparent)` } as React.CSSProperties}
           initial={reduce ? false : { scale: 1 }}
           whileInView={reduce ? undefined : { scale: [1, 1.18, 1] }}
           viewport={{ once: true, amount: 0.6 }}
