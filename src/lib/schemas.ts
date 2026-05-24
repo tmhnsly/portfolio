@@ -60,6 +60,5 @@ export const siteConfigSchema = z.object({
   experienceSince: z.string(), // ISO month/date — "years of experience" is computed from this
   socials: z.array(z.object({ label: z.string(), href: z.string() })),
   nav: z.array(z.object({ label: z.string(), href: z.string() })),
-  colophon: z.string(),
 });
 export type SiteConfig = z.infer<typeof siteConfigSchema>;

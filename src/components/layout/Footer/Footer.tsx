@@ -2,28 +2,36 @@ import Link from 'next/link';
 import { SITE, COPY } from '@/data';
 import { Marquee } from '@/components/motion/Marquee';
 import { Container } from '../Container';
-import { FullBleed } from '../FullBleed';
+import { FooterFact } from './FooterFact';
 import styles from './Footer.module.scss';
 
 export function Footer() {
-  const marqueeItems = [SITE.name, SITE.email, ...COPY.footer.marqueeExtra];
+  const mailto = `mailto:${SITE.email}`;
+  const marqueeItems: { text: string; href?: string }[] = [
+    { text: SITE.name },
+    { text: SITE.email, href: mailto },
+    ...COPY.footer.marqueeExtra.map((text) => ({ text, href: /touch/i.test(text) ? mailto : undefined })),
+  ];
+
   return (
     <footer className={styles.footer}>
-      <FullBleed>
-        <div className={styles.rules}>
+      <Container>
+        <div className={styles.bar}>
           <Marquee faded>
             <span className={styles.row}>
               {marqueeItems.map((item, i) => (
                 <span key={i} className={styles.item}>
-                  {item}
+                  {item.href ? (
+                    <a href={item.href} className={styles.marqueeLink}>{item.text}</a>
+                  ) : (
+                    item.text
+                  )}
                   <span className={styles.dot} aria-hidden>●</span>
                 </span>
               ))}
             </span>
           </Marquee>
         </div>
-      </FullBleed>
-      <Container>
         <div className={styles.grid}>
           <div className={styles.col}>
             <div className={styles.label}>{SITE.name}</div>
@@ -39,7 +47,7 @@ export function Footer() {
           </div>
           <div className={styles.col}>
             <div className={styles.label}>{COPY.footer.colophonLabel}</div>
-            <p>{SITE.colophon}</p>
+            <FooterFact />
           </div>
           <div className={`${styles.col} ${styles.right}`}>
             <div className={styles.label}>{COPY.footer.copyright} {new Date().getFullYear()}</div>

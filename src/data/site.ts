@@ -22,5 +22,4 @@ export const SITE = siteConfigSchema.parse({
   socials: [
     { label: 'GitHub', href: '#' },
   ],
-  colophon: 'Set in Space Grotesk + Space Mono. Built with Next.js. Colours from Radix.',
 });
