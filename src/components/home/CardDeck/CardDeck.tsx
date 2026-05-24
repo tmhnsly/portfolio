@@ -8,9 +8,7 @@ import { EASING } from '@/lib/motion';
 import { DISCIPLINES } from '@/lib/disciplines';
 import { Media } from '@/components/ui/Media';
 import { Pill } from '@/components/ui/Pill';
-import { TechChip } from '@/components/ui/TechChip';
 import { Button } from '@/components/ui/Button';
-import { formatMonthYear } from '@/lib/format';
 import styles from './CardDeck.module.scss';
 
 const AUTO_MS = 8000;
@@ -39,16 +37,11 @@ function CardFace({ project }: { project: Project }) {
         ratio="5/4"
         sizes="(min-width: 1200px) 30vw, (min-width: 768px) 40vw, 90vw"
         className={styles.thumb}
-      >
-        <span className={styles.pillTL}><Pill label={d.label} tone="solid" /></span>
-      </Media>
+      />
       <div className={styles.meta}>
         <div className={styles.title}>{project.title}</div>
         {project.desc && <div className={styles.desc}>{project.desc}</div>}
-        <div className={styles.foot}>
-          <div className={styles.chips}>{project.tech.slice(0, 3).map((t) => <TechChip key={t} label={t} />)}</div>
-          <span className={styles.date}>{formatMonthYear(project.date)}</span>
-        </div>
+        <span className={styles.pill}><Pill label={d.label} tone="discipline" color={d.color} /></span>
       </div>
     </Link>
   );
