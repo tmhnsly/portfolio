@@ -1,21 +1,33 @@
 @use '../../../styles/mixins/breakpoints' as *;
 
 .wrap { display: flex; flex-direction: column; }
-.deck { position: relative; height: 440px; outline: none; isolation: isolate; }
+.deck {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1.04;     /* height tracks width — responsive across breakpoints */
+  outline: none;
+  isolation: isolate;
+}
 .deck:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: var(--radius-xs); }
-.card { position: absolute; inset: 0; transform-origin: 50% 95%; }
+
+.card { position: absolute; inset: 0; transform-origin: 50% 100%; will-change: transform; }
+.cardFront { cursor: grab; touch-action: pan-y; }
+.cardFront:active { cursor: grabbing; }
+
 .face {
   height: 100%; border-radius: var(--radius-3xl);
   background: var(--bg-subtle);
-  box-shadow: var(--shadow-sm);
+  box-shadow: var(--shadow-sm);     /* soft depth on the cards behind */
   padding: var(--space-3); display: flex; flex-direction: column; gap: var(--space-3);
+  overflow: hidden;
 }
+/* the active card is defined by a crisp edge + deeper shadow. No backdrop-filter:
+   blurring a dragged/animated element re-rasterises every frame (the lag). */
 .cardFront .face {
-  background: color-mix(in srgb, var(--bg-subtle) 78%, transparent);
   border: 1px solid var(--surface-edge);
-  backdrop-filter: blur(12px);
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--shadow-lg);
 }
+
 .thumb { flex: 1 1 auto; }
 .pillTL { position: absolute; left: 12px; top: 12px; z-index: var(--z-card-overlay); }
 .swatches { position: absolute; right: 12px; top: 12px; display: flex; gap: var(--gap-chip); z-index: var(--z-card-overlay); }
@@ -26,7 +38,9 @@
 .foot { display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); }
 .chips { display: flex; gap: var(--gap-chip); overflow: hidden; }
 .date { font-family: var(--font-mono); font-size: var(--fs-mono-xs); color: var(--text-muted); white-space: nowrap; }
-.controls { margin-top: var(--space-5); display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); padding-top: var(--space-4); border-top: 1px solid var(--rule-soft); }
+
+/* controls — no top rule (it read as a stray line under the deck); spacing only */
+.controls { margin-top: var(--space-6); display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); }
 .ticks { display: inline-flex; align-items: center; gap: var(--space-2); flex: 1; }
 // pagination dots — neutral, circle -> pill on active (matches mandydennis)
 .tick, .tickActive {

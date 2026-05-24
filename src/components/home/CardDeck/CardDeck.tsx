@@ -1,8 +1,7 @@
 'use client';
 import { useCallback, useEffect, useState } from 'react';
-import { AnimatePresence, motion, useReducedMotion, type PanInfo } from 'motion/react';
+import { AnimatePresence, motion, useReducedMotion, type PanInfo, type Variants } from 'motion/react';
 import type { Project } from '@/types';
-import { DURATION, EASING, OFFSET } from '@/lib/motion';
 import { DISCIPLINES } from '@/lib/disciplines';
 import { Media } from '@/components/ui/Media';
 import { Pill } from '@/components/ui/Pill';
@@ -12,12 +11,14 @@ import { formatMonthYear } from '@/lib/format';
 import styles from './CardDeck.module.scss';
 
 const AUTO_MS = 8000;
-const STACK = [
-  { y: 0, scale: 1, rotate: 0, opacity: 1 },
-  { y: 10, scale: 0.97, rotate: 0, opacity: 0.85 },
-  { y: 20, scale: 0.94, rotate: 0, opacity: 0.6 },
-  { y: 30, scale: 0.91, rotate: 0, opacity: 0.4 },
-];
+const VISIBLE = 3;            // front card + 2 peeking behind
+const PEEK_Y = 16;           // px each card sits below the one in front
+const PEEK_SCALE = 0.05;     // scale step per depth
+const SWIPE_DIST = 80;       // px offset to count as a swipe
+const SWIPE_VELOCITY = 450;  // or fast enough flick
+
+const stackSpring = { type: 'spring', stiffness: 340, damping: 34, mass: 0.9 } as const;
+
 const pad = (n: number) => String(n).padStart(2, '0');
 
 function CardFace({ project }: { project: Project }) {
@@ -29,7 +30,7 @@ function CardFace({ project }: { project: Project }) {
         src={project.cover?.src}
         alt={project.cover?.alt ?? project.title}
         ratio="5/4"
-        sizes="(min-width: 1200px) 30vw, 90vw"
+        sizes="(min-width: 1200px) 30vw, (min-width: 768px) 40vw, 90vw"
         className={styles.thumb}
       >
         <span className={styles.pillTL}><Pill label={d.label} tone="solid" /></span>
@@ -51,25 +52,50 @@ function CardFace({ project }: { project: Project }) {
 
 export function CardDeck({ items }: { items: Project[] }) {
   const n = items.length;
-  const [index, setIndex] = useState(0);
+  // `order` holds item indices; order[0] is the front card. Advancing rotates it,
+  // so every card springs to its new stack slot together (feels like a real deck).
+  const [order, setOrder] = useState<number[]>(() => items.map((_, i) => i));
+  const [dir, setDir] = useState(-1); // exit/enter direction for the swap
   const [hovered, setHovered] = useState(false);
   const reduce = useReducedMotion();
-  const transition = reduce ? { duration: 0 } : { duration: DURATION.medium, ease: EASING.standard };
 
-  const advance = useCallback((dir: number) => setIndex((i) => (i + dir + n) % n), [n]);
+  const advance = useCallback((d: number) => {
+    setDir(d);
+    setOrder((o) => (d < 0 ? [...o.slice(1), o[0]] : [o[o.length - 1], ...o.slice(0, -1)]));
+  }, []);
+
+  const jumpTo = useCallback((itemIndex: number) => {
+    setOrder((o) => {
+      const k = o.indexOf(itemIndex);
+      if (k <= 0) return o;
+      setDir(-1);
+      return [...o.slice(k), ...o.slice(0, k)];
+    });
+  }, []);
 
   useEffect(() => {
     if (reduce || hovered || n <= 1) return;
-    const id = setInterval(() => advance(1), AUTO_MS);
+    const id = setInterval(() => advance(-1), AUTO_MS);
     return () => clearInterval(id);
   }, [reduce, hovered, n, advance]);
 
-  const onDragEnd = (_e: unknown, info: PanInfo) => {
-    if (info.offset.x < -60) advance(1);
-    else if (info.offset.x > 60) advance(-1);
+  if (n === 0) return null;
+
+  const visible = order.slice(0, Math.min(VISIBLE, n));
+  const activeIndex = order[0];
+
+  // enter/stack are position-driven (custom = pos); exit flies in the swap
+  // direction (closure `dir`), so the same card never mixes the two up.
+  const variants: Variants = {
+    enter: (pos: number) => ({ y: pos * PEEK_Y, scale: 1 - pos * PEEK_SCALE, opacity: 0, x: 0, rotate: 0 }),
+    stack: (pos: number) => ({ y: pos * PEEK_Y, scale: 1 - pos * PEEK_SCALE, opacity: 1, x: 0, rotate: 0 }),
+    exit: reduce ? { opacity: 0 } : { x: dir * 460, rotate: dir * -8, opacity: 0 },
   };
 
-  if (n === 0) return null;
+  const onDragEnd = (_e: unknown, info: PanInfo) => {
+    if (info.offset.x < -SWIPE_DIST || info.velocity.x < -SWIPE_VELOCITY) advance(-1);
+    else if (info.offset.x > SWIPE_DIST || info.velocity.x > SWIPE_VELOCITY) advance(1);
+  };
 
   return (
     <div className={styles.wrap}>
@@ -82,28 +108,33 @@ export function CardDeck({ items }: { items: Project[] }) {
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
         onKeyDown={(e) => {
-          if (e.key === 'ArrowRight') advance(1);
-          if (e.key === 'ArrowLeft') advance(-1);
+          if (e.key === 'ArrowRight') advance(-1);
+          if (e.key === 'ArrowLeft') advance(1);
         }}
       >
-        {[3, 2, 1].filter((d) => d < n).map((depth) => {
-          const s = STACK[depth];
-          return (
-            <motion.div key={`slot-${depth}`} className={styles.card}
-              animate={{ y: s.y, scale: s.scale, rotate: s.rotate, opacity: s.opacity }} transition={transition}>
-              <div className={styles.face} aria-hidden />
-            </motion.div>
-          );
-        })}
-        <AnimatePresence initial={false}>
-          <motion.div key={`front-${index}`} className={`${styles.card} ${styles.cardFront}`} style={{ willChange: 'transform' }}
-            initial={reduce ? false : { y: STACK[1].y, scale: STACK[1].scale, rotate: STACK[1].rotate, opacity: STACK[1].opacity }}
-            animate={{ y: 0, scale: 1, rotate: 0, opacity: 1 }}
-            exit={reduce ? { opacity: 0 } : { y: OFFSET.deckExitY, scale: OFFSET.deckExitScale, opacity: 0 }}
-            transition={{ duration: DURATION.base, ease: EASING.standard }}
-            drag={reduce ? false : 'x'} dragConstraints={{ left: 0, right: 0 }} dragElastic={0.4} onDragEnd={onDragEnd}>
-            <CardFace project={items[index]} />
-          </motion.div>
+        <AnimatePresence initial={false} custom={dir}>
+          {visible.map((itemIndex, pos) => {
+            const isFront = pos === 0;
+            return (
+              <motion.div
+                key={itemIndex}
+                className={`${styles.card} ${isFront ? styles.cardFront : ''}`}
+                style={{ zIndex: VISIBLE - pos }}
+                custom={pos}
+                variants={variants}
+                initial="enter"
+                animate="stack"
+                exit="exit"
+                transition={reduce ? { duration: 0 } : stackSpring}
+                drag={isFront && !reduce ? 'x' : false}
+                dragElastic={0.6}
+                dragConstraints={{ left: 0, right: 0 }}
+                onDragEnd={isFront ? onDragEnd : undefined}
+              >
+                {isFront ? <CardFace project={items[itemIndex]} /> : <div className={styles.face} aria-hidden />}
+              </motion.div>
+            );
+          })}
         </AnimatePresence>
       </div>
 
@@ -113,17 +144,17 @@ export function CardDeck({ items }: { items: Project[] }) {
             <button
               key={i}
               type="button"
-              className={i === index ? styles.tickActive : styles.tick}
+              className={i === activeIndex ? styles.tickActive : styles.tick}
               aria-label={`Show item ${i + 1}`}
-              aria-current={i === index ? 'true' : undefined}
-              onClick={() => setIndex(i)}
+              aria-current={i === activeIndex ? 'true' : undefined}
+              onClick={() => jumpTo(i)}
             />
           ))}
         </span>
-        <span className={styles.counter}>{pad(index + 1)} / {pad(n)}</span>
+        <span className={styles.counter}>{pad(activeIndex + 1)} / {pad(n)}</span>
         <span className={styles.buttons}>
-          <Button variant="icon" aria-label="previous" onClick={() => advance(-1)}>←</Button>
-          <Button variant="icon" aria-label="next" onClick={() => advance(1)}>→</Button>
+          <Button variant="icon" aria-label="previous" onClick={() => advance(1)}>←</Button>
+          <Button variant="icon" aria-label="next" onClick={() => advance(-1)}>→</Button>
         </span>
       </div>
     </div>
