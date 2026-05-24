@@ -27,7 +27,8 @@ visual output (not copied structurally — they are React-on-a-canvas mockups).
 | Colour | **Radix Colors**; **tomato** is the primary accent (`#e54d2e`) |
 | Animation | **Motion (Framer Motion) + CSS hybrid**, driven by shared motion tokens |
 | Dark mode | **System default + persisted manual toggle**, no flash-of-wrong-theme |
-| CMS | **Sanity — later.** This pass builds on local TS constants shaped to the future schema |
+| Content | **No external CMS.** Markdown files (Zod-validated frontmatter) for long-form content + typed TS constants. Images self-hosted. |
+| Types | **Zod schemas are the source of truth** — TS types are inferred (`z.infer`), schemas also validate content at load |
 | Build scope | **Full flow straight through** — all templates, responsive + dark + animations |
 | Package manager / runtime | **pnpm**, Node 20 (`.nvmrc`) |
 | Fonts | **Space Grotesk** (display + body) + **Space Mono** (chrome/meta) via `next/font` |
@@ -128,9 +129,14 @@ src/
   lib/
     theme/    ThemeProvider.tsx · theme-script.ts · useTheme.ts
     motion/   tokens.ts · variants.ts
+    schemas.ts        (Zod schemas — source of truth; types inferred)
+    content.ts        (markdown loaders: gray-matter + Zod .parse)
     disciplines.ts · format.ts
-  types/      discipline · project · blog · timeline · skill · site · block · index.ts
-  data/       projects · posts · timeline · skills · site.ts   (local constants)
+  types/      index.ts  (re-exports inferred types from lib/schemas)
+  data/       timeline · skills · site · sections.ts   (TS constants, Zod-validated)
+content/                          (repo root, outside src)
+  projects/<slug>.md              (frontmatter + markdown body)
+  blog/<slug>.md
   components/
     layout/   Page · Container · Nav · Footer · Bloom
     ui/       Button · TechChip · FilterPills · Pill · GlassCard · Eyebrow · DisciplineDot
@@ -142,23 +148,43 @@ src/
     blog/     BlogHero · FeaturedPost · PostList · PostCard · PostBody · PullQuote · CodeBlock · AuthorCard
 ```
 
-## 5. Data model & types (Sanity-ready)
+## 5. Data model & content
 
-Bodies use a typed `Block` union (`paragraph | heading | pullquote | code |
-image`) so they map to Portable Text with no reshaping later.
+**Zod schemas in `src/lib/schemas.ts` are the single source of truth.** TS types
+are inferred (`type X = z.infer<typeof xSchema>`); the same schemas `.parse()`
+content at load so bad data fails the build loudly. No `Block` union — long-form
+bodies are **Markdown strings** rendered by a `Markdown` component (react-markdown
++ remark-gfm) whose component map styles headings, blockquotes (pull-quote),
+code fences (dark `CodeBlock`), links and images with our tokens.
+
+Inferred types (shapes):
 
 - `Discipline = 'code' | 'music' | 'sound' | 'photo' | 'video' | 'blog'`
-- `DisciplineMeta { slug: Discipline; label; color; gradient; swatches: [string,string,string]; route }`
-- `Project { slug; title; desc?; discipline; date /*ISO*/; tech: string[]; featured?; role?; year?; status?; repo?; liveUrl?; body: Block[]; gallery: { grad?: string; src?: string; caption: string }[]; tags?: string[] }`
-- `BlogPost { slug; title; excerpt; date /*ISO*/; category; readingTime; tags: string[]; cover?: { grad?; src? }; author: Author; body: Block[] }`
-- `TimelineEntry { id; period; role; place; description; tags: string[]; accent: string }`
-- `SkillGroup { discipline: Discipline; tools: string[] }`
-- `Author { name; bio; role }`
-- `SiteConfig { name; role; email; location; socials: {label;href}[]; nav: NavItem[]; colophon: string }`
+- `DisciplineMeta { slug; label; color; gradient; swatches: [string,string,string]; route }`
+- `Project = ProjectFrontmatter & { slug: string; body: string /*markdown*/ }` where
+  `ProjectFrontmatter { title; desc?; discipline; date /*ISO*/; tech: string[]; featured?; role?; year?; status?; repo?; liveUrl?; cover?: {src?;grad?}; gallery: {src?;grad?;caption}[]; tags?: string[] }`
+- `BlogPost = PostFrontmatter & { slug; body: string; readingTime: number; author: Author }` where
+  `PostFrontmatter { title; excerpt; date /*ISO*/; category; readingTime?; tags: string[]; cover?: {src?;grad?} }`
+- `TimelineEntry { id; period; role; place; description; tags: string[]; accent }`
+- `SkillGroup { discipline; tools: string[] }` · `Author { name; role; bio }`
+- `SiteConfig { name; role; email; location; socials:{label;href}[]; nav:NavItem[]; colophon }`
 
-Local fixtures in `src/data/` reproduce the prototype content (Boucle, Tape
-loops, Lisbon, Walks, the 9 `/code` projects, 9 blog posts, 7 timeline entries,
-6 skill groups). `email = hello@tomhinsley.com`.
+**Content sources:**
+
+- **Markdown** in `content/projects/<slug>.md` and `content/blog/<slug>.md` —
+  YAML frontmatter (validated by the frontmatter schemas) + markdown body. Loaders
+  in `src/lib/content.ts` (`getAllProjects/getProject/getAllPosts/getPost`) read at
+  build time; `slug` derives from the filename; `readingTime` is computed from word
+  count when absent.
+- **TS constants** in `src/data/` for structured, non-prose data — `timeline.ts`,
+  `skills.ts`, `site.ts`, `sections.ts` (per-discipline intro + tools) — each
+  declared `satisfies` its inferred type (and parsed by its schema in a test).
+- Content reproduces the prototype copy (Boucle + the 9 `/code` projects, the cross-
+  discipline items, 9 blog posts, 7 timeline entries, 6 skill groups).
+  `email = hello@tomhinsley.com`; colophon: "Set in Space Grotesk + Space Mono.
+  Built with Next.js. Colours from Radix."
+- **Images** are self-hosted: any `src` is a `public/…` path or a URL the owner
+  controls. Where no image exists yet, the discipline gradient is the placeholder.
 
 ## 6. Pages / templates
 
@@ -215,10 +241,18 @@ Per `docs/design-reference/project/pages/animations.jsx`. Principles:
 6. **Footer marquee** — CSS keyframes `40s` linear infinite, right-to-left,
    seamless, `animation-play-state: paused` on hover.
 
-## 8. Responsive & dark mode
+## 8. Responsive, media & dark mode
 
 - Fluid layouts via `_breakpoints` mixins anchored to **390 / 768 / 1440**;
   consistent gutters 16 / 24 / 40px.
+- **Images**: a single `Media` component wraps `next/image` (`fill` inside an
+  aspect-ratio box) for responsive `srcset` + AVIF/WebP + lazy-loading, with the
+  discipline gradient as the fallback when no `src` exists yet. Every image
+  surface uses it — never a bare `<img>`. Self-hosted files live under
+  `public/images/{projects,blog,about,og}/…`; each `src` carries an `alt`. Per-
+  usage `sizes` hints tune the responsive set (full-bleed vs grid vs thumb).
+  `next.config` enables AVIF/WebP. Art-directed per-breakpoint sources can be
+  layered onto `Media` later if needed.
 - `ThemeProvider` + inline pre-paint script sets `data-theme` before first paint
   (no flash); nav toggle persists to `localStorage`; falls back to
   `prefers-color-scheme`.
@@ -232,8 +266,9 @@ Per `docs/design-reference/project/pages/animations.jsx`. Principles:
 
 ## 10. Out of scope (this pass)
 
-- **Sanity**: no Studio, no GROQ, no live content. UI runs on `src/data/`
-  constants shaped to the section-5 types; swapping to Sanity later is a
-  data-layer change only.
-- Real media assets (use the gradient placeholders from the prototypes).
+- **No external CMS** (no Sanity/Studio/GROQ). Content is Markdown + TS constants,
+  loaded at build time and validated by Zod. The loaders in `src/lib/content.ts`
+  are the seam if a CMS is ever wanted later — a data-layer swap, no UI change.
+- Real media assets beyond what the owner self-hosts (discipline gradients are the
+  placeholder until real `src`s are added).
 - Contact form backend (CTA is a `mailto:`/link for now).
