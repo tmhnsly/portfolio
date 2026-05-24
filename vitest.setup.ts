@@ -8,7 +8,7 @@ if (!window.matchMedia) {
   }) as unknown as MediaQueryList;
 }
 if (!('IntersectionObserver' in window)) {
-  class IO { observe(){} unobserve(){} disconnect(){} takeRecords(){ return []; } root=null; rootMargin=''; thresholds=[]; constructor(_cb: unknown){} }
+  class IO { observe(){} unobserve(){} disconnect(){} takeRecords(){ return []; } root=null; rootMargin=''; thresholds=[]; }
   // @ts-expect-error test stub
   window.IntersectionObserver = IO;
 }

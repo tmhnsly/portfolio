@@ -9,7 +9,10 @@ export const ThemeContext = createContext<ThemeContextValue | null>(null);
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [theme, setTheme] = useState<Theme>('light');
   useEffect(() => {
+    // Sync React state to the theme the pre-paint script already applied to <html>
+    // (read-after-hydration is intentional here, hence the rule exception).
     const current = (document.documentElement.getAttribute('data-theme') as Theme) || 'light';
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setTheme(current);
   }, []);
   const toggle = useCallback(() => {
