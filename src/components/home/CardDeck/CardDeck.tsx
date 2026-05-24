@@ -97,11 +97,11 @@ export function CardDeck({ items }: { items: Project[] }) {
           );
         })}
         <AnimatePresence initial={false}>
-          <motion.div key={`front-${index}`} className={styles.card} style={{ zIndex: 10 }}
+          <motion.div key={`front-${index}`} className={`${styles.card} ${styles.cardFront}`} style={{ zIndex: 10, willChange: 'transform' }}
             initial={reduce ? false : { y: STACK[1].y, scale: STACK[1].scale, rotate: STACK[1].rotate, opacity: STACK[1].opacity }}
             animate={{ y: 0, scale: 1, rotate: 0, opacity: 1 }}
-            exit={reduce ? { opacity: 0 } : { x: OFFSET.deckX, rotate: OFFSET.deckRotate, opacity: 0 }}
-            transition={transition}
+            exit={reduce ? { opacity: 0 } : { y: OFFSET.deckExitY, scale: OFFSET.deckExitScale, opacity: 0 }}
+            transition={{ duration: DURATION.base, ease: EASING.standard }}
             drag={reduce ? false : 'x'} dragConstraints={{ left: 0, right: 0 }} dragElastic={0.4} onDragEnd={onDragEnd}>
             <CardFace project={items[index]} />
           </motion.div>

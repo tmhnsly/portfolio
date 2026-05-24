@@ -9,3 +9,11 @@ export const staggerParent: Variants = {
   hidden: {},
   visible: { transition: { staggerChildren: STAGGER.entries } },
 };
+export const entranceStagger: Variants = {
+  hidden: {},
+  visible: { transition: { staggerChildren: STAGGER.entries, delayChildren: 0.05 } },
+};
+export const entranceItem: Variants = {
+  hidden: { opacity: 0, y: 12 },
+  visible: { opacity: 1, y: 0, transition: { duration: DURATION.reveal, ease: EASING.standard } },
+};
