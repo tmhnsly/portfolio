@@ -1,5 +1,5 @@
 'use client';
-import { usePathname } from 'next/navigation';
+import { useEffect, useState } from 'react';
 import { motion, useReducedMotion } from 'motion/react';
 import { entranceStagger, entranceItem, titleReveal } from '@/lib/motion';
 import styles from './Entrance.module.scss';
@@ -7,17 +7,36 @@ import styles from './Entrance.module.scss';
 /**
  * Shared page-entrance system (one config in lib/motion → tweak everywhere).
  *
- * <Entrance> is the staggered parent; it re-keys on the route so the whole
- * sequence replays on navigation. <EntranceItem> = a staggered element
- * (eyebrow / subtitle / cards). <EntranceTitle> = the heading mask-reveal.
+ * <Entrance> is the staggered parent. The cinematic reveal plays once, on the
+ * first load of the session — on subsequent client navigations the content
+ * renders visible immediately (the persistent bloom / --accent morph / eyebrow
+ * roll carry the sense of motion), so navigating no longer flashes the whole
+ * hero out and back in. The flag is module-scoped, so it survives client
+ * navigations but resets on a full page reload.
+ * <EntranceItem> = a staggered element (eyebrow / subtitle / cards).
+ * <EntranceTitle> = the heading mask-reveal.
  * All respect prefers-reduced-motion (render plain, no transform).
  */
+let hasEntered = false;
+
 export function Entrance({ children, className }: { children: React.ReactNode; className?: string }) {
-  const pathname = usePathname();
   const reduce = useReducedMotion();
+  // Decide once, at mount: animate only if the entrance hasn't played yet this
+  // session. Reading the module flag here (not in render-after-mount) keeps the
+  // server + first-client render in agreement (both see `false`).
+  const [animate] = useState(() => !hasEntered);
+  useEffect(() => {
+    hasEntered = true;
+  }, []);
+
   if (reduce) return <div className={className}>{children}</div>;
   return (
-    <motion.div key={pathname} className={className} variants={entranceStagger} initial="hidden" animate="visible">
+    <motion.div
+      className={className}
+      variants={entranceStagger}
+      initial={animate ? 'hidden' : 'visible'}
+      animate="visible"
+    >
       {children}
     </motion.div>
   );
