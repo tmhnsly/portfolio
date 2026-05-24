@@ -1,0 +1,61 @@
+@use '../../../styles/mixins/breakpoints' as *;
+
+.section {
+  padding-block: var(--space-12) var(--space-8);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-8);
+  margin-top: var(--space-6);
+  align-items: end;
+
+  @include tablet-up {
+    grid-template-columns: 360px 1fr;
+    gap: var(--space-11);
+  }
+}
+
+.portrait {
+  max-width: 360px;
+
+  @include tablet-up {
+    max-width: none;
+  }
+}
+
+.copy {
+  padding-bottom: var(--space-2);
+}
+
+.name {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(var(--fs-display), 12vw, var(--fs-display-xxl));
+  font-weight: 600;
+  letter-spacing: var(--ls-display-xxl);
+  line-height: var(--lh-display);
+  color: var(--text);
+}
+
+.dot {
+  color: var(--accent);
+}
+
+.intro {
+  margin: var(--space-6) 0 0;
+  max-width: 640px;
+  font-family: var(--font-display);
+  font-size: var(--fs-h3);
+  line-height: 1.4;
+  color: var(--text-soft);
+  font-weight: 400;
+}
+
+.chips {
+  margin-top: var(--space-7);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
