@@ -1,0 +1,14 @@
+@use '../../../styles/mixins/breakpoints' as *;
+
+.viewport { overflow: hidden; white-space: nowrap; }
+.track {
+  display: inline-flex;
+  animation: scroll var(--marquee-duration) linear infinite;
+  &:hover { animation-play-state: paused; }
+  @include reduced-motion { animation: none; }
+}
+.group { display: inline-flex; }
+@keyframes scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
