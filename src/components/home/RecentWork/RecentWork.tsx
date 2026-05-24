@@ -72,8 +72,8 @@ export function RecentWork({ projects }: { projects: Project[] }) {
         </div>
       </div>
       <div className={styles.foot}>
-        <span>{thumbs.length + 1} of {projects.length} shown</span>
-        <Link href="/code" className={styles.everything}>Everything →</Link>
+        <span>{thumbs.length + 1} of {filtered.length} shown</span>
+        <Link href={featured ? `/${featured.discipline}` : '/'} className={styles.everything}>Everything →</Link>
       </div>
     </section>
   );

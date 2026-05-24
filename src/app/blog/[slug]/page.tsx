@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { getAllPosts, getPost } from '@/lib/content';
 import { DISCIPLINES } from '@/lib/disciplines';
+import { SITE } from '@/data';
 import { Page, Nav, Footer, Container } from '@/components/layout';
 import { Eyebrow } from '@/components/ui/Eyebrow';
 import { TechChip } from '@/components/ui/TechChip';
@@ -53,7 +54,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
           </div>
           <div className={styles.endNote}>
             <span className={styles.endNoteLabel}>Found this useful?</span>
-            <Button variant="ghost" href={`mailto:tomhinsley@me.com?subject=Re: ${encodeURIComponent(post.title)}`}>
+            <Button variant="ghost" href={`mailto:${SITE.email}?subject=Re: ${encodeURIComponent(post.title)}`}>
               Send a note ↗
             </Button>
           </div>

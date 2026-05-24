@@ -8,7 +8,7 @@ import { ProjectGrid } from '@/components/section/ProjectGrid';
 import { OtherDisciplines } from '@/components/section/OtherDisciplines';
 
 export function generateStaticParams() {
-  return DISCIPLINE_ORDER.map((discipline) => ({ discipline }));
+  return DISCIPLINE_ORDER.filter((d) => d !== 'blog').map((discipline) => ({ discipline }));
 }
 
 export default async function SectionPage({ params }: { params: Promise<{ discipline: string }> }) {

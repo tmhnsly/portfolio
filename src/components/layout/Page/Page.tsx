@@ -6,7 +6,7 @@ import styles from './Page.module.scss';
 export function Page({ discipline, children }: { discipline?: Discipline; children: React.ReactNode }) {
   const accent = discipline ? DISCIPLINES[discipline].color : '#e54d2e';
   return (
-    <div className={styles.page} style={{ '--accent': accent } as React.CSSProperties}>
+    <div className={styles.page} style={{ '--accent': accent, '--accent-glow': `color-mix(in srgb, ${accent} 25%, transparent)` } as React.CSSProperties}>
       <Bloom />
       <div className={styles.content}>{children}</div>
     </div>
