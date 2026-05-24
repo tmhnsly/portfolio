@@ -1,19 +1,10 @@
 import Link from 'next/link';
 import { DISCIPLINE_ORDER, DISCIPLINES } from '@/lib/disciplines';
-import type { Discipline } from '@/types';
+import { toolsByDiscipline } from '@/data';
 import { Eyebrow } from '@/components/ui/Eyebrow';
 import { TechChip } from '@/components/ui/TechChip';
 import { GlassCard } from '@/components/ui/GlassCard';
 import styles from './DisciplineScroller.module.scss';
-
-const TOOLS: Record<Discipline, string[]> = {
-  code: ['React', 'TypeScript', 'Three.js', 'Sanity', 'Godot'],
-  music: ['Logic Pro X', 'Ableton', 'Tape'],
-  sound: ['Pro Tools', 'Reaper', 'Field rec.'],
-  photo: ['35mm', 'Portra 400', 'Leica M6', 'Lightroom'],
-  video: ['Final Cut Pro X', 'DaVinci', 'RED'],
-  blog: ['Notes', 'Essays', 'Dev logs'],
-};
 
 export function DisciplineScroller() {
   return (
@@ -33,7 +24,7 @@ export function DisciplineScroller() {
                   <span className={styles.arrow} aria-hidden>↗</span>
                 </div>
                 <div className={styles.tools}>
-                  {TOOLS[slug].map((t) => <TechChip key={t} label={t} />)}
+                  {toolsByDiscipline[slug].slice(0, 5).map((t) => <TechChip key={t} label={t} />)}
                 </div>
               </GlassCard>
             </Link>
