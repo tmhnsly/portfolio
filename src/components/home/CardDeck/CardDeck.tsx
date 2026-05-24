@@ -41,9 +41,6 @@ function CardFace({ project }: { project: Project }) {
         className={styles.thumb}
       >
         <span className={styles.pillTL}><Pill label={d.label} tone="solid" /></span>
-        <span className={styles.swatches} aria-hidden>
-          {d.swatches.map((c, i) => <span key={i} style={{ background: c }} />)}
-        </span>
       </Media>
       <div className={styles.meta}>
         <div className={styles.title}>{project.title}</div>

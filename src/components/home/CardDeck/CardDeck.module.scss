@@ -34,8 +34,6 @@
 .faceFade { height: 100%; } /* wraps the front CardFace so its content fades in on advance */
 .thumb { flex: 1 1 auto; }
 .pillTL { position: absolute; left: var(--space-3); top: var(--space-3); z-index: var(--z-card-overlay); }
-.swatches { position: absolute; right: var(--space-3); top: var(--space-3); display: flex; gap: var(--gap-chip); z-index: var(--z-card-overlay); }
-.swatches span { width: 11px; height: 11px; border-radius: 50%; border: 1px solid var(--on-media-border); }
 /* no padding — the meta must align flush with the thumb edges (face padding handles
    the inset); the old `2px 4px` pushed the title/chips/date 4px past the image. */
 .meta { display: flex; flex-direction: column; gap: var(--space-2); }

@@ -10,12 +10,11 @@
   @include desktop-up { grid-template-columns: 1.55fr 1fr; } }
 .featured { display: flex; flex-direction: column; gap: var(--space-5); }
 .featuredMedia { box-shadow: var(--shadow-lg); }
-.pillTL { position: absolute; left: 18px; top: 18px; z-index: var(--z-card-overlay); }
-.featuredMeta { display: flex; align-items: flex-end; justify-content: space-between; gap: var(--space-6); }
+.featuredMeta { display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-3); }
 .featuredTitle { font-family: var(--font-display); font-size: var(--fs-h2); font-weight: 600; letter-spacing: -0.028em; line-height: 1.05; color: var(--text); }
-.featuredDesc { font-size: var(--fs-body); color: var(--text-soft); line-height: 1.4; margin-top: 6px; }
-.chips { display: flex; gap: 5px; flex-wrap: wrap; margin-top: var(--space-3); }
-.date { font-family: var(--font-mono); font-size: var(--fs-mono-s); color: var(--text-muted); white-space: nowrap; }
+.featuredDesc { font-size: var(--fs-body); color: var(--text-soft); line-height: 1.4; }
+/* discipline-coloured pill, now in the meta (was a top-left media overlay) */
+.pill { display: inline-flex; margin-top: var(--space-1); }
 /* link affordance: a frosted arrow chip in the media's top-right corner (mirrors
    the top-left pill), nudging + turning accent when the whole card is hovered */
 .arrowTR, .arrowTRSm {
@@ -39,11 +38,9 @@
 .thumb { display: grid; grid-template-columns: 100px 1fr; gap: var(--space-4); align-items: center;
   @include tablet-up { grid-template-columns: 140px 1fr; }
   padding: 10px; border-radius: var(--radius-xl); border: 1px solid var(--surface-edge); background: var(--surface-soft); }
-.pillSm { position: absolute; left: 8px; top: 8px; z-index: var(--z-card-overlay); }
-.thumbMeta { display: flex; flex-direction: column; gap: var(--space-2); }
+.thumbMeta { display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-2); }
 .thumbTitle { font-family: var(--font-display); font-size: var(--fs-h4); font-weight: 600; letter-spacing: -0.025em; color: var(--text); }
 .thumbDesc { font-size: var(--fs-caption); color: var(--text-soft); line-height: 1.4; }
-.dateSm { display: block; font-family: var(--font-mono); font-size: var(--fs-mono-xs); color: var(--text-muted); }
 .foot { margin-top: var(--space-6); padding-top: var(--space-4); border-top: 1px solid var(--rule-soft);
   display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: var(--fs-mono-s);
   color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em; }

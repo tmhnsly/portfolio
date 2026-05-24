@@ -6,11 +6,9 @@ import { DISCIPLINE_ORDER, DISCIPLINES } from '@/lib/disciplines';
 import { COPY } from '@/data';
 import { Eyebrow } from '@/components/ui/Eyebrow';
 import { FilterPills } from '@/components/ui/FilterPills';
-import { TechChip } from '@/components/ui/TechChip';
 import { Media } from '@/components/ui/Media';
 import { Pill } from '@/components/ui/Pill';
 import { LinkArrow } from '@/components/ui/LinkArrow';
-import { formatMonthYear } from '@/lib/format';
 import styles from './RecentWork.module.scss';
 
 export function RecentWork({ projects }: { projects: Project[] }) {
@@ -42,16 +40,12 @@ export function RecentWork({ projects }: { projects: Project[] }) {
         <Link href={`/${featured.discipline}/${featured.slug}`} className={styles.featured}>
           <Media grad={fd.gradient} src={featured.cover?.src} alt={featured.cover?.alt ?? featured.title}
             ratio="16/10" sizes="(min-width: 1200px) 60vw, 100vw" className={styles.featuredMedia}>
-            <span className={styles.pillTL}><Pill label={`${fd.label} — featured`} tone="solid" /></span>
             <span className={styles.arrowTR}><LinkArrow className={styles.arrow} /></span>
           </Media>
           <div className={styles.featuredMeta}>
-            <div>
-              <div className={styles.featuredTitle}>{featured.title}</div>
-              {featured.desc && <div className={styles.featuredDesc}>{featured.desc}</div>}
-              <div className={styles.chips}>{featured.tech.slice(0, 4).map((t) => <TechChip key={t} label={t} />)}</div>
-            </div>
-            <span className={styles.date}>{formatMonthYear(featured.date)}</span>
+            <div className={styles.featuredTitle}>{featured.title}</div>
+            {featured.desc && <div className={styles.featuredDesc}>{featured.desc}</div>}
+            <span className={styles.pill}><Pill label={`${fd.label} — featured`} tone="discipline" color={fd.color} /></span>
           </div>
         </Link>
         <div className={styles.thumbs}>
@@ -61,14 +55,12 @@ export function RecentWork({ projects }: { projects: Project[] }) {
               <Link key={p.slug} href={`/${p.discipline}/${p.slug}`} className={styles.thumb}>
                 <Media grad={d.gradient} src={p.cover?.src} alt={p.cover?.alt ?? p.title}
                   ratio="4/3" sizes="(min-width: 768px) 200px, 40vw" className={styles.thumbMedia}>
-                  <span className={styles.pillSm}><Pill label={d.label} tone="solid" /></span>
                   <span className={styles.arrowTRSm}><LinkArrow className={styles.arrow} /></span>
                 </Media>
                 <div className={styles.thumbMeta}>
                   <div className={styles.thumbTitle}>{p.title}</div>
                   {p.desc && <div className={styles.thumbDesc}>{p.desc}</div>}
-                  <div className={styles.chips}>{p.tech.slice(0, 2).map((t) => <TechChip key={t} label={t} />)}</div>
-                  <span className={styles.dateSm}>{formatMonthYear(p.date)}</span>
+                  <span className={styles.pill}><Pill label={d.label} tone="discipline" color={d.color} /></span>
                 </div>
               </Link>
             );

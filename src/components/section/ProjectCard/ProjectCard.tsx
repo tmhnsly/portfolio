@@ -16,7 +16,6 @@ export function ProjectCard({ project, index }: { project: Project; index?: numb
         <span className={styles.hatch} aria-hidden />
         {index != null && <span className={styles.number} aria-hidden>{String(index + 1).padStart(2, '0')}</span>}
         <span className={styles.pillTL}><Pill label={d.label} tone="solid" /></span>
-        <span className={styles.swatches} aria-hidden>{d.swatches.map((c, i) => <span key={i} style={{ background: c }} />)}</span>
       </Media>
       <div className={styles.body}>
         <div className={styles.titleRow}>
