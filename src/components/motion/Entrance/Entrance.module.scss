@@ -1,5 +1,48 @@
-/* heading mask: clip the heading box and let the inner slide up from below it.
-   padding-bottom gives descenders room so overflow:hidden doesn't shear them
-   (display titles use line-height < 1). */
-.clipTitle { overflow: hidden; padding-bottom: 0.12em; }
-.inner { display: block; will-change: transform; }
+/* Per-word title reveal (ported from Chork's RevealText): each word slides up
+   from behind its own clip, staggered by --i. The whole-title clip is gone —
+   each .wordClip masks its own word. */
+.clipTitle {
+}
+.inner {
+  display: block;
+}
+
+.wordClip {
+  display: inline-block;
+  vertical-align: baseline;
+  /* room so glyphs aren't shaved at rest — extra below for descenders, a little
+     each side for AA/wide glyphs — then negate it for layout so word spacing +
+     line spacing are unchanged. clip-path (not overflow:hidden) avoids the
+     inline-block baseline shift overflow:hidden causes. */
+  padding: 0.08em 0.12em 0.22em;
+  margin: -0.08em -0.12em -0.22em;
+  clip-path: inset(0);
+}
+.word {
+  display: inline-block;
+  transform: translateY(110%); /* start fully below the clip */
+  animation: titleWordUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation-delay: calc(var(--i, 0) * 0.05s);
+  will-change: transform;
+  backface-visibility: hidden;
+}
+@keyframes titleWordUp {
+  from {
+    transform: translateY(110%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .wordClip {
+    clip-path: none;
+    padding: 0;
+    margin: 0;
+  }
+  .word {
+    animation: none;
+    transform: none;
+    will-change: auto;
+  }
+}
