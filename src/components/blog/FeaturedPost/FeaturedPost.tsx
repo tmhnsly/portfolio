@@ -30,6 +30,7 @@ export function FeaturedPost({ post }: { post: BlogPost }) {
               <span className={styles.categoryPill}>
                 <Pill label={post.category} tone="solid" />
               </span>
+              <span className={styles.arrowTR}><LinkArrow className={styles.arrow} /></span>
             </Media>
           </div>
           <div className={styles.content}>
@@ -40,9 +41,7 @@ export function FeaturedPost({ post }: { post: BlogPost }) {
                 <TechChip key={tag} label={tag} />
               ))}
             </div>
-            <div className={styles.readMore}>
-              Read the post <LinkArrow className={styles.arrow} />
-            </div>
+            <div className={styles.readMore}>Read the post</div>
           </div>
         </div>
       </Link>

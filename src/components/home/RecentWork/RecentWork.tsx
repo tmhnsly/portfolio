@@ -43,6 +43,7 @@ export function RecentWork({ projects }: { projects: Project[] }) {
           <Media grad={fd.gradient} src={featured.cover?.src} alt={featured.cover?.alt ?? featured.title}
             ratio="16/10" sizes="(min-width: 1200px) 60vw, 100vw" className={styles.featuredMedia}>
             <span className={styles.pillTL}><Pill label={`${fd.label} — featured`} tone="solid" /></span>
+            <span className={styles.arrowTR}><LinkArrow className={styles.arrow} /></span>
           </Media>
           <div className={styles.featuredMeta}>
             <div>
@@ -50,7 +51,7 @@ export function RecentWork({ projects }: { projects: Project[] }) {
               {featured.desc && <div className={styles.featuredDesc}>{featured.desc}</div>}
               <div className={styles.chips}>{featured.tech.slice(0, 4).map((t) => <TechChip key={t} label={t} />)}</div>
             </div>
-            <span className={styles.date}>{formatMonthYear(featured.date)} <LinkArrow className={styles.arrow} /></span>
+            <span className={styles.date}>{formatMonthYear(featured.date)}</span>
           </div>
         </Link>
         <div className={styles.thumbs}>
@@ -61,12 +62,13 @@ export function RecentWork({ projects }: { projects: Project[] }) {
                 <Media grad={d.gradient} src={p.cover?.src} alt={p.cover?.alt ?? p.title}
                   ratio="4/3" sizes="(min-width: 768px) 200px, 40vw" className={styles.thumbMedia}>
                   <span className={styles.pillSm}><Pill label={d.label} tone="solid" /></span>
+                  <span className={styles.arrowTRSm}><LinkArrow className={styles.arrow} /></span>
                 </Media>
                 <div className={styles.thumbMeta}>
                   <div className={styles.thumbTitle}>{p.title}</div>
                   {p.desc && <div className={styles.thumbDesc}>{p.desc}</div>}
                   <div className={styles.chips}>{p.tech.slice(0, 2).map((t) => <TechChip key={t} label={t} />)}</div>
-                  <span className={styles.dateSm}>{formatMonthYear(p.date)} <LinkArrow className={styles.arrow} /></span>
+                  <span className={styles.dateSm}>{formatMonthYear(p.date)}</span>
                 </div>
               </Link>
             );
