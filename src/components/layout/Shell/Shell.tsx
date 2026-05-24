@@ -6,7 +6,7 @@ import { DISCIPLINES, isDiscipline } from '@/lib/disciplines';
 import { Nav } from '../Nav';
 import { Footer } from '../Footer';
 import { Bloom } from '../Bloom';
-import { SectionEyebrow } from '@/components/section/SectionEyebrow';
+import { Breadcrumb } from '../Breadcrumb';
 import styles from './Shell.module.scss';
 
 /** The current "zone" derived from the URL — drives accent, bloom and nav highlight. */
@@ -26,9 +26,13 @@ function zoneFromPath(pathname: string): { discipline?: Discipline; active?: str
 export function Shell({
   children,
   projectCounts,
+  titleMap,
+  postCount,
 }: {
   children: React.ReactNode;
   projectCounts: Partial<Record<Discipline, number>>;
+  titleMap: Record<string, string>;
+  postCount: number;
 }) {
   const pathname = usePathname();
   const { discipline, active } = zoneFromPath(pathname);
@@ -43,9 +47,9 @@ export function Shell({
       <Bloom zone={discipline ?? 'default'} tint={accent} />
       <Nav active={active} />
       <main className={styles.content}>
-        {/* persistent section eyebrow — stays mounted across hub↔hub so it morphs
-            in place (renders null on non-discipline routes) */}
-        <SectionEyebrow counts={projectCounts} />
+        {/* persistent breadcrumb — one consistent, clickable trail for every
+            route, so its position never shifts and the changing segment rolls */}
+        <Breadcrumb projectCounts={projectCounts} titleMap={titleMap} postCount={postCount} />
         {children}
       </main>
       <Footer />

@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { Space_Grotesk, Space_Mono } from 'next/font/google';
 import { ThemeProvider, THEME_SCRIPT } from '@/lib/theme';
 import { Shell } from '@/components/layout/Shell';
-import { getAllProjects } from '@/lib/content';
+import { getAllProjects, getAllPosts } from '@/lib/content';
 import type { Discipline } from '@/types';
 import { COPY } from '@/data';
 import '@radix-ui/colors/sand.css';
@@ -28,9 +28,18 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  // project counts per discipline — handed to the persistent section eyebrow in the Shell
+  // Data for the persistent breadcrumb in the Shell: per-discipline project
+  // counts, post count, and a path→title map for project/post leaf segments.
+  const projects = getAllProjects();
+  const posts = getAllPosts();
   const projectCounts: Partial<Record<Discipline, number>> = {};
-  for (const p of getAllProjects()) projectCounts[p.discipline] = (projectCounts[p.discipline] ?? 0) + 1;
+  const titleMap: Record<string, string> = {};
+  for (const p of projects) {
+    projectCounts[p.discipline] = (projectCounts[p.discipline] ?? 0) + 1;
+    titleMap[`/${p.discipline}/${p.slug}`] = p.title;
+  }
+  for (const p of posts) titleMap[`/blog/${p.slug}`] = p.title;
+
   return (
     <html lang="en" className={`${display.variable} ${mono.variable}`} suppressHydrationWarning>
       <head>
@@ -38,7 +47,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body>
         <ThemeProvider>
-          <Shell projectCounts={projectCounts}>{children}</Shell>
+          <Shell projectCounts={projectCounts} titleMap={titleMap} postCount={posts.length}>
+            {children}
+          </Shell>
         </ThemeProvider>
       </body>
     </html>

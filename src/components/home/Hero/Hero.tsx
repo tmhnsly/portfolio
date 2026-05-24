@@ -1,5 +1,5 @@
 import type { Project } from '@/types';
-import { SITE, COPY } from '@/data';
+import { COPY } from '@/data';
 import { Eyebrow } from '@/components/ui/Eyebrow';
 import { Entrance, EntranceItem, EntranceTitle } from '@/components/motion/Entrance';
 import { CardDeck } from '../CardDeck';
@@ -9,9 +9,6 @@ export function Hero({ featured }: { featured: Project[] }) {
   return (
     <Entrance className={styles.hero}>
       <div className={styles.lead}>
-        <EntranceItem>
-          <Eyebrow withDot>{SITE.name} · {SITE.location}</Eyebrow>
-        </EntranceItem>
         <EntranceTitle className={styles.title}>
           {COPY.hero.titleLead}<br />
           <span className={styles.muted}>{COPY.hero.titleMuted}</span><span className={styles.period}>.</span>

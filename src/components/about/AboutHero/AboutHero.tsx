@@ -1,7 +1,6 @@
 import { SITE, COPY } from '@/data';
 import { DISCIPLINES } from '@/lib/disciplines';
 import { yearsSince } from '@/lib/format';
-import { Eyebrow } from '@/components/ui/Eyebrow';
 import { Media } from '@/components/ui/Media';
 import { TechChip } from '@/components/ui/TechChip';
 import { Entrance, EntranceItem, EntranceTitle } from '@/components/motion/Entrance';
@@ -11,9 +10,6 @@ export function AboutHero() {
   const intro = COPY.about.intro.replace('{years}', String(yearsSince(SITE.experienceSince)));
   return (
     <Entrance className={styles.section}>
-      <EntranceItem>
-        <Eyebrow withDot>About · {SITE.name} · {COPY.about.eyebrowLocation}</Eyebrow>
-      </EntranceItem>
       <div className={styles.grid}>
         <EntranceItem className={styles.portrait}>
           <Media

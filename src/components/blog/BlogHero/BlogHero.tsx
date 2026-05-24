@@ -1,14 +1,10 @@
 import { COPY } from '@/data';
-import { Eyebrow } from '@/components/ui/Eyebrow';
 import { Entrance, EntranceItem, EntranceTitle } from '@/components/motion/Entrance';
 import styles from './BlogHero.module.scss';
 
-export function BlogHero({ count }: { count: number }) {
+export function BlogHero() {
   return (
     <Entrance className={styles.section}>
-      <EntranceItem>
-        <Eyebrow withDot>/blog · {count} posts · {COPY.blog.heroSince}</Eyebrow>
-      </EntranceItem>
       <div className={styles.grid}>
         <div className={styles.left}>
           <EntranceTitle className={styles.heading}>

@@ -1,0 +1,25 @@
+.clip {
+  display: inline-flex;
+  vertical-align: baseline;
+  /* clip top/bottom for the slide; leave the sides open so glyph overhang
+     (descenders, italics) is never cut off */
+  clip-path: inset(-8% -100% -8% -100%);
+}
+.item { display: inline-block; white-space: nowrap; }
+.static { display: inline-block; white-space: nowrap; }
+
+.up { animation: rollUp var(--duration-fast) var(--ease-standard); }
+.down { animation: rollDown var(--duration-fast) var(--ease-standard); }
+
+@media (prefers-reduced-motion: reduce) {
+  .up, .down { animation: none; }
+}
+
+@keyframes rollUp {
+  from { transform: translateY(60%); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+@keyframes rollDown {
+  from { transform: translateY(-60%); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}

@@ -8,16 +8,6 @@ import styles from './BlogPostHero.module.scss';
 export function BlogPostHero({ post }: { post: BlogPost }) {
   return (
     <Entrance className={styles.hero}>
-      <EntranceItem>
-        <p className={styles.breadcrumb}>
-          <span>Home</span>
-          <span>/</span>
-          <span>Blog</span>
-          <span>/</span>
-          <span>{post.title}</span>
-        </p>
-      </EntranceItem>
-
       <EntranceItem className={styles.metaRow}>
         <Pill label={post.category} tone="discipline" />
         <span className={styles.metaMono}>

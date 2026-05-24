@@ -1,2 +1,1 @@
-export { Roll } from './Roll';
-export { RollNumber } from './RollNumber';
+export { Rolling } from './Rolling';

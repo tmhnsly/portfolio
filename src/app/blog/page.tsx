@@ -10,7 +10,7 @@ export default function BlogPage() {
   return (
     <Container>
       <Stack>
-        <BlogHero count={posts.length} />
+        <BlogHero />
         {featured && <FeaturedPost post={featured} />}
         <PostList posts={rest} />
       </Stack>

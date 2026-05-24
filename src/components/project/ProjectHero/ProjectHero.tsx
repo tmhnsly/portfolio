@@ -15,16 +15,6 @@ export function ProjectHero({ project }: { project: Project }) {
 
   return (
     <Entrance className={styles.hero}>
-      <EntranceItem>
-        <p className={styles.breadcrumb}>
-          <span>Home</span>
-          <span>/</span>
-          <span>{d.label}</span>
-          <span>/</span>
-          <span>{project.title}</span>
-        </p>
-      </EntranceItem>
-
       <div className={styles.layout}>
         <div className={styles.main}>
           <EntranceItem className={styles.pillRow}>

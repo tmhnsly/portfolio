@@ -3,19 +3,6 @@
 .hero {
 }
 
-.breadcrumb {
-  display: flex;
-  align-items: center;
-  gap: var(--space-3);
-  flex-wrap: wrap;
-  font-family: var(--font-mono);
-  font-size: var(--fs-caption);
-  color: var(--text-muted);
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  margin: 0 0 var(--space-7);
-}
-
 .layout {
   display: grid;
   grid-template-columns: 1fr;
