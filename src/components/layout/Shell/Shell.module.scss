@@ -12,8 +12,9 @@
   --accent-glow: color-mix(in srgb, var(--accent) 25%, transparent);
   /* Smoothly morph the accent across the whole app on a zone change (nav, bloom,
      accent text crossfade together). --accent is a registered @property, so this
-     actually interpolates. Doesn't run on first load (no value change). */
-  transition: --accent var(--duration-bloom) var(--ease-standard);
+     actually interpolates. Doesn't run on first load (no value change). A longer
+     duration + ease-in-out (smooth) makes navigating ease gently rather than snap. */
+  transition: --accent var(--duration-zone) var(--ease-smooth);
 }
 @include reduced-motion {
   .shell {

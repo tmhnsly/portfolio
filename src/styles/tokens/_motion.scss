@@ -1,7 +1,8 @@
 :root {
   --duration-fast: 160ms; --duration-base: 240ms; --duration-medium: 320ms;
-  --duration-reveal: 420ms; --duration-bloom: 520ms; --duration-hover: 260ms;
+  --duration-reveal: 420ms; --duration-bloom: 520ms; --duration-hover: 260ms; --duration-zone: 720ms;
   --ease-standard: cubic-bezier(0.22, 1, 0.36, 1); /* smooth ease-out (quint) */
+  --ease-smooth: cubic-bezier(0.65, 0, 0.35, 1);   /* easeInOutCubic — gentle zone/page morph */
   --ease-out: ease-out; --ease-in-out: ease-in-out;
   --marquee-duration: 40s;
 }

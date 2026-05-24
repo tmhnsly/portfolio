@@ -42,7 +42,7 @@ export function Bloom({ zone = 'default', tint }: { zone?: string; tint?: string
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        transition={{ duration: DURATION.bloom, ease: EASING.standard }}
+        transition={{ duration: DURATION.zone, ease: EASING.smooth }}
       >
         {layers}
       </motion.div>
