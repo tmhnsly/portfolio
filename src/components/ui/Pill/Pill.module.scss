@@ -1,4 +1,10 @@
 .pill { display: inline-flex; align-items: center; padding: 5px 12px; border-radius: var(--radius-full);
   font-family: var(--font-display); font-size: 12px; font-weight: 600; letter-spacing: -0.005em; }
 .discipline { background: var(--accent); color: var(--text-on-accent); }
-.solid { background: var(--on-media); color: var(--black-a12); }
+/* frosted chip — sits on coloured gradient thumbs, so the blur reads */
+.solid {
+  background: color-mix(in srgb, white 60%, transparent);
+  backdrop-filter: blur(6px);
+  border: 1px solid var(--white-a6);
+  color: var(--black-a12);
+}
