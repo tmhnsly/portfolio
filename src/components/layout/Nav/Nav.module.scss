@@ -15,7 +15,7 @@
   font-family: var(--font-display);
   min-width: 0; /* prevent overflow */
 
-  @include tablet-up {
+  @include desktop-up {
     gap: var(--space-4);
     padding: var(--nav-pad-wide);
   }
@@ -29,19 +29,17 @@
   flex-shrink: 0;
 }
 .name {
+  /* brand watermark — stays on the bar at every width (incl. burger mode) */
   font-size: 16px; font-weight: 600; letter-spacing: -0.02em; color: var(--text);
-  display: none;
-
-  @include tablet-up {
-    display: block;
-  }
+  display: block;
 }
 
-/* ── Desktop inline nav (items + actions) — hidden on mobile (burger takes over) ── */
+/* ── Inline nav (items + actions) — shown ≥desktop; below that the burger takes
+   over (the full row of 7 items + CTA only fits comfortably at ≥1200) ── */
 .items {
   display: none;
 
-  @include tablet-up {
+  @include desktop-up {
     display: flex; align-items: center; gap: var(--nav-item-gap);
     flex-wrap: nowrap; min-width: 0;
   }
@@ -58,7 +56,7 @@
 .actions {
   display: none;
 
-  @include tablet-up {
+  @include desktop-up {
     display: flex; align-items: center; gap: var(--space-2); flex-shrink: 0;
   }
 }
@@ -78,10 +76,15 @@
   box-shadow: 0 6px 18px color-mix(in srgb, var(--accent) 27%, transparent);
   flex-shrink: 0;
 }
-.ctaFull { display: inline; }
-.ctaShort { display: none; }
+/* CTA scales: "Say hi →" in the lower desktop range, full email from 1440 up */
+.ctaFull { display: none; }
+.ctaShort { display: inline; }
+@media (min-width: 1440px) {
+  .ctaFull { display: inline; }
+  .ctaShort { display: none; }
+}
 
-/* ── Mobile burger → glass dropdown ── */
+/* ── Burger → glass dropdown (shown below desktop) ── */
 .burger {
   width: var(--control-size); height: var(--control-size); border-radius: var(--radius-lg);
   color: var(--text-soft); background: transparent; border: 0; cursor: pointer;
@@ -89,7 +92,7 @@
   font-size: 24px; flex-shrink: 0;
   transition: background var(--duration-fast) var(--ease-standard), color var(--duration-fast) var(--ease-standard);
 
-  @include tablet-up { display: none; }
+  @include desktop-up { display: none; }
 }
 .burger:hover, .burger[data-state='open'] { background: var(--surface-soft); color: var(--text); }
 
@@ -124,4 +127,6 @@
   background: var(--accent); color: var(--text-on-accent); text-decoration: none; cursor: pointer;
   font-size: 15px; font-weight: 600; outline: none; white-space: nowrap;
 }
-.menuCta[data-highlighted] { background: var(--accent-hover); }
+/* derive the hover from --accent (set inline on the portaled Content) so the
+   menu CTA matches the zone, not the root accent-hover */
+.menuCta[data-highlighted] { background: color-mix(in srgb, var(--accent) 88%, black); }

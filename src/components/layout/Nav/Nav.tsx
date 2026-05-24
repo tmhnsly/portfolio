@@ -2,7 +2,9 @@
 import Link from 'next/link';
 import { BiMoon, BiSun, BiMenu } from 'react-icons/bi';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
+import { tomato } from '@radix-ui/colors';
 import { SITE, COPY } from '@/data';
+import { DISCIPLINES, isDiscipline } from '@/lib/disciplines';
 import { useTheme } from '@/lib/theme';
 import { Container } from '../Container';
 import styles from './Nav.module.scss';
@@ -15,6 +17,9 @@ export interface NavProps {
 export function Nav({ active }: NavProps) {
   const { theme, toggle } = useTheme();
   const isActive = (label: string) => active != null && label.toLowerCase() === active.toLowerCase();
+  // The dropdown portals to <body>, outside the Shell's --accent scope, so set
+  // the zone accent inline on the Content (mirrors how the Shell derives it).
+  const accent = active && isDiscipline(active) ? DISCIPLINES[active].color : tomato.tomato9;
 
   return (
     <header className={styles.header}>
@@ -64,7 +69,13 @@ export function Nav({ active }: NavProps) {
               </button>
             </DropdownMenu.Trigger>
             <DropdownMenu.Portal>
-              <DropdownMenu.Content className={styles.menu} align="end" sideOffset={12} collisionPadding={16}>
+              <DropdownMenu.Content
+                className={styles.menu}
+                align="end"
+                sideOffset={12}
+                collisionPadding={16}
+                style={{ '--accent': accent } as React.CSSProperties}
+              >
                 {SITE.nav.map((item) => (
                   <DropdownMenu.Item key={item.href} asChild>
                     <Link
