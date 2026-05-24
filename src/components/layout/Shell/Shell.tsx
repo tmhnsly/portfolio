@@ -33,7 +33,7 @@ export function Shell({ children }: { children: React.ReactNode }) {
   // when navigation swaps the value.
   return (
     <div className={styles.shell} style={{ '--accent': accent } as React.CSSProperties}>
-      <Bloom zone={discipline ?? 'default'} />
+      <Bloom zone={discipline ?? 'default'} tint={accent} />
       <Nav active={active} />
       <main className={styles.content}>{children}</main>
       <Footer />

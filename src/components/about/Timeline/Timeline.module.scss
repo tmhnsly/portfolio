@@ -143,6 +143,6 @@
 
 .chips {
   display: flex;
-  gap: 5px;
+  gap: var(--gap-chip);
   flex-wrap: wrap;
 }

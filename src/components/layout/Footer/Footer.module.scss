@@ -15,7 +15,7 @@
   font-weight: 600;
   letter-spacing: -0.05em; line-height: 1.2; padding-block: 0.06em; color: var(--text); white-space: nowrap;
 }
-.dot { color: var(--accent); font-size: 24px; }
+.dot { color: var(--text-muted); font-size: 24px; } /* neutral separator, consistent with the · in eyebrows */
 .grid {
   padding-top: var(--space-7);
   display: grid;

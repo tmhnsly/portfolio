@@ -11,10 +11,10 @@
   position: relative;
   overflow: hidden;
   box-shadow: var(--shadow-xl);
-  min-height: 480px;
+  min-height: var(--embed-min-h);
 
   @include desktop-up {
-    min-height: 560px;
+    min-height: var(--embed-min-h-wide);
   }
 }
 
@@ -30,7 +30,7 @@
   position: absolute;
   left: 0;
   right: 0;
-  padding: 0 28px;
+  padding: var(--embed-chrome-pad);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -61,7 +61,7 @@
 .chromaRight {
   display: flex;
   align-items: center;
-  gap: 18px;
+  gap: var(--gap-controls);
 }
 
 .chromaTime {
@@ -80,7 +80,7 @@
 .padGrid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 14px;
+  gap: var(--embed-pad-gap);
   width: 100%;
   max-width: 520px;
 
@@ -97,7 +97,7 @@
   display: flex;
   align-items: flex-end;
   justify-content: flex-start;
-  padding: 10px 12px;
+  padding: var(--cta-pad);
   font-family: var(--font-mono);
   font-size: 11px;
   color: var(--white-a9);

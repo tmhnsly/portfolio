@@ -34,6 +34,11 @@
   --rule: var(--sand-7);
   --rule-strong: var(--sand-8);
 
+  /* pagination / indicator dots — neutral secondary (ink at opacity), auto-themes */
+  --dot-idle: color-mix(in srgb, var(--text) 15%, transparent);
+  --dot-idle-hover: color-mix(in srgb, var(--text) 25%, transparent);
+  --dot-active: color-mix(in srgb, var(--text) 50%, transparent);
+
   /* accent (tomato default; the Shell overrides --accent per zone). --accent-glow
      is derived so it crossfades along with --accent during zone transitions. */
   --accent: var(--tomato-9);

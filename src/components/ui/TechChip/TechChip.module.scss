@@ -1,5 +1,5 @@
 .chip {
-  display: inline-flex; padding: 4px 10px; border-radius: var(--radius-sm);
+  display: inline-flex; padding: var(--pad-chip); border-radius: var(--radius-sm);
   border: 1px solid var(--rule-soft); background: var(--surface-soft);
   font-family: var(--font-mono); font-size: var(--fs-mono); color: var(--text-soft);
   letter-spacing: var(--ls-mono); white-space: nowrap;

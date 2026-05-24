@@ -12,11 +12,11 @@
 .hatch { position: absolute; inset: 0; background: var(--overlay-hatch); }
 .number { position: absolute; right: -8px; bottom: -22px; font-family: var(--font-display); font-size: 160px; font-weight: 600; letter-spacing: -0.06em; line-height: 0.9; color: var(--white-a5); z-index: 1; }
 .pillTL { position: absolute; left: 14px; top: 14px; z-index: var(--z-card-overlay); }
-.swatches { position: absolute; right: 14px; top: 14px; display: flex; gap: 5px; z-index: var(--z-card-overlay); }
+.swatches { position: absolute; right: 14px; top: 14px; display: flex; gap: var(--gap-chip); z-index: var(--z-card-overlay); }
 .swatches span { width: 11px; height: 11px; border-radius: 50%; border: 1px solid var(--on-media-border); }
 .body { display: flex; flex-direction: column; gap: var(--space-2); }
 .titleRow { display: flex; align-items: baseline; justify-content: space-between; gap: var(--space-4); }
 .title { font-family: var(--font-display); font-size: var(--fs-h3); font-weight: 600; letter-spacing: -0.025em; line-height: 1.15; color: var(--text); }
 .date { font-family: var(--font-mono); font-size: var(--fs-mono-xs); color: var(--text-muted); white-space: nowrap; }
 .desc { font-size: var(--fs-body-s); color: var(--text-soft); line-height: 1.4; }
-.chips { display: flex; gap: 4px; flex-wrap: wrap; }
+.chips { display: flex; gap: var(--space-1); flex-wrap: wrap; }

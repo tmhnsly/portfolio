@@ -32,7 +32,7 @@
   left: var(--space-3);
   display: inline-flex;
   align-items: center;
-  padding: 4px 10px;
+  padding: var(--pad-chip);
   border-radius: var(--radius-full);
   background: var(--overlay-scrim);
   color: var(--on-media-soft);

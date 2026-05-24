@@ -108,8 +108,17 @@ export function CardDeck({ items }: { items: Project[] }) {
       </div>
 
       <div className={styles.controls}>
-        <span className={styles.ticks} aria-hidden>
-          {items.map((_, i) => <span key={i} className={i === index ? styles.tickActive : styles.tick} />)}
+        <span className={styles.ticks}>
+          {items.map((_, i) => (
+            <button
+              key={i}
+              type="button"
+              className={i === index ? styles.tickActive : styles.tick}
+              aria-label={`Show item ${i + 1}`}
+              aria-current={i === index ? 'true' : undefined}
+              onClick={() => setIndex(i)}
+            />
+          ))}
         </span>
         <span className={styles.counter}>{pad(index + 1)} / {pad(n)}</span>
         <span className={styles.buttons}>

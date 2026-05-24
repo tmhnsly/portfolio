@@ -7,8 +7,8 @@
   flex-direction: column;
   justify-content: space-between;
   gap: var(--space-3);
-  min-height: 148px;
-  padding: var(--space-4) 18px;
+  min-height: var(--card-min-h);
+  padding: var(--pad-card);
   border-radius: var(--radius-xl);
   @include glass(var(--surface-soft), 20px);
   box-shadow: var(--shadow-sm); /* light resting shadow — keeps text legible over the bloom */
@@ -79,5 +79,5 @@
 .tools {
   display: flex;
   flex-wrap: wrap;
-  gap: 5px;
+  gap: var(--gap-chip);
 }

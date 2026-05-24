@@ -3,9 +3,12 @@
    spots on taller pages (the blog looked different). Fixed = identical everywhere. */
 .bloom { position: fixed; inset: 0; overflow: hidden; pointer-events: none; z-index: var(--z-base); contain: paint; }
 .primary, .cool, .warm { position: absolute; border-radius: 50%; filter: blur(50px); }
+/* colour is the STATIC per-instance --bloom-tint (set by Shell), not the live
+   --accent — so the blur layers rasterise once and never re-paint mid-transition.
+   Falls back to --accent if no tint is provided. */
 .primary {
   left: 45%; top: -25%; width: 1040px; height: 1040px;
-  background: radial-gradient(circle, color-mix(in srgb, var(--accent) 26%, transparent), transparent 60%);
+  background: radial-gradient(circle, color-mix(in srgb, var(--bloom-tint, var(--accent)) 26%, transparent), transparent 60%);
 }
 .cool {
   left: -20%; top: 25%; width: 800px; height: 800px;
@@ -13,7 +16,7 @@
 }
 .warm {
   right: -15%; bottom: -15%; width: 880px; height: 880px;
-  background: radial-gradient(circle, color-mix(in srgb, var(--accent) 18%, transparent), transparent 60%);
+  background: radial-gradient(circle, color-mix(in srgb, var(--bloom-tint, var(--accent)) 18%, transparent), transparent 60%);
 }
 .grain {
   position: absolute; inset: 0;

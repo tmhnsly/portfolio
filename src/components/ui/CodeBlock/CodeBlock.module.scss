@@ -1,6 +1,6 @@
 .block {
   margin: var(--space-7) 0;
-  padding: 20px 22px;
+  padding: var(--pad-code-block);
   border-radius: var(--radius-lg);
   background: var(--code-bg);
   color: var(--code-text);

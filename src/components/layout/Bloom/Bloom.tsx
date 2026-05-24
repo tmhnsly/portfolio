@@ -1,15 +1,18 @@
 'use client';
-import { motion, useReducedMotion } from 'motion/react';
+import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import { DURATION, EASING } from '@/lib/motion';
 import styles from './Bloom.module.scss';
 
 /**
- * Ambient background bloom. Viewport-anchored (so it reads identically on every
- * page regardless of content height) and re-keyed on `zone` so it does a subtle
- * scale+fade "breath" on a zone change while its colour (var(--accent)) crossfades
- * via the Shell's @property transition.
+ * Ambient background bloom. Viewport-anchored so it reads identically on every page.
+ *
+ * Performance: the colour is a STATIC per-instance tint (`--bloom-tint`), not the
+ * live (transitioning) `--accent` — otherwise the three blur(50px) layers would
+ * re-rasterise every frame for the whole transition. On a zone change we instead
+ * crossfade two tinted instances via OPACITY (GPU-composited), which also avoids
+ * the hard edge the old scale animation produced by clipping the blurred halo.
  */
-export function Bloom({ zone = 'default' }: { zone?: string }) {
+export function Bloom({ zone = 'default', tint }: { zone?: string; tint?: string }) {
   const reduce = useReducedMotion();
   const layers = (
     <>
@@ -19,25 +22,30 @@ export function Bloom({ zone = 'default' }: { zone?: string }) {
       <div className={styles.grain} />
     </>
   );
+  const style = tint ? ({ '--bloom-tint': tint } as React.CSSProperties) : undefined;
 
   if (reduce) {
     return (
-      <div className={styles.bloom} aria-hidden>
+      <div className={styles.bloom} aria-hidden style={style}>
         {layers}
       </div>
     );
   }
 
   return (
-    <motion.div
-      key={zone}
-      className={styles.bloom}
-      aria-hidden
-      initial={{ scale: 0.96, opacity: 0.5 }}
-      animate={{ scale: 1, opacity: 1 }}
-      transition={{ duration: DURATION.bloom, ease: EASING.standard }}
-    >
-      {layers}
-    </motion.div>
+    <AnimatePresence initial={false}>
+      <motion.div
+        key={zone}
+        className={styles.bloom}
+        aria-hidden
+        style={style}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: DURATION.bloom, ease: EASING.standard }}
+      >
+        {layers}
+      </motion.div>
+    </AnimatePresence>
   );
 }

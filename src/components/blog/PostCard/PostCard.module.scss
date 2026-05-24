@@ -73,7 +73,7 @@
 
 .chips {
   display: flex;
-  gap: 5px;
+  gap: var(--gap-chip);
   flex-wrap: wrap;
 }
 
@@ -105,7 +105,7 @@
   color: var(--text);
   display: inline-flex;
   align-items: center;
-  gap: 4px;
+  gap: var(--space-1);
 }
 
 .arrow {
