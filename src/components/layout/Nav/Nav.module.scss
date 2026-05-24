@@ -26,7 +26,7 @@
   text-decoration: none; color: inherit; border-radius: var(--radius-md);
 }
 .brand:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
-.brand:hover .monogram { transform: scale(1.06); }
+@include can-hover { .brand:hover .monogram { transform: scale(1.06); } }
 .monogram {
   width: 30px; height: 30px; border-radius: var(--radius-md);
   background: var(--accent); color: var(--text-on-accent);
@@ -57,7 +57,7 @@
   transition: background var(--duration-fast) var(--ease-standard);
   white-space: nowrap; flex-shrink: 0;
 }
-.item:hover { background: var(--surface-soft); }
+@include can-hover { .item:hover { background: var(--surface-soft); } }
 .active, .active:hover { background: var(--text); color: var(--bg); }
 
 .actions {
@@ -75,7 +75,7 @@
   flex-shrink: 0;
   transition: background var(--duration-fast) var(--ease-standard), color var(--duration-fast) var(--ease-standard);
 }
-.toggle:hover { background: var(--surface-soft); color: var(--text); }
+@include can-hover { .toggle:hover { background: var(--surface-soft); color: var(--text); } }
 .cta {
   padding: var(--cta-pad-wide); border-radius: var(--radius-lg);
   background: var(--accent); color: var(--text-on-accent);
@@ -101,7 +101,8 @@
 
   @include desktop-up { display: none; }
 }
-.burger:hover, .burger[data-state='open'] { background: var(--surface-soft); color: var(--text); }
+.burger[data-state='open'] { background: var(--surface-soft); color: var(--text); }
+@include can-hover { .burger:hover { background: var(--surface-soft); color: var(--text); } }
 
 .menu {
   min-width: 196px;
@@ -130,7 +131,8 @@
   transition: background var(--duration-fast) var(--ease-standard);
 }
 .menuIcon { font-size: 18px; flex: none; } /* react-icons render at 1em (currentColor) */
-.menuItem[data-highlighted], .menuItem:hover { background: var(--surface-soft); }
+.menuItem[data-highlighted] { background: var(--surface-soft); }
+@include can-hover { .menuItem:hover { background: var(--surface-soft); } }
 .menuItemActive, .menuItemActive[data-highlighted] { background: var(--text); color: var(--bg); }
 .menuSep { height: 1px; background: var(--rule-soft); margin: var(--space-2) 4px; }
 .menuCta {

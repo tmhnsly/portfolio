@@ -2,7 +2,7 @@
 .card { display: flex; flex-direction: column; gap: var(--space-4);
   transition: transform var(--duration-hover) var(--ease-standard);
   @include reduced-motion { transition: none; } }
-.card:hover { transform: translateY(-6px); }
+@include can-hover { .card:hover { transform: translateY(-6px); } }
 @include reduced-motion { .card:hover { transform: none; } }
 /* Static, light shadow only. Was md→lg on a `transition: box-shadow`, which
    repaints every frame and made the lift feel rough; the transform lift alone

@@ -4,7 +4,7 @@
 .track {
   display: inline-flex;
   animation: scroll var(--marquee-duration) linear infinite;
-  &:hover { animation-play-state: paused; }
+  @include can-hover { &:hover { animation-play-state: paused; } }
   @include reduced-motion { animation: none; }
 }
 .paused { animation-play-state: paused; }

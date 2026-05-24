@@ -31,8 +31,10 @@
 .arrowTR { right: 14px; top: 14px; width: 34px; height: 34px; }
 .arrowTRSm { right: 8px; top: 8px; width: 26px; height: 26px; }
 .arrow { color: var(--text-soft); }
-.featured:hover .arrow,
-.thumb:hover .arrow { transform: translateX(3px); color: var(--accent); }
+@include can-hover {
+  .featured:hover .arrow,
+  .thumb:hover .arrow { transform: translateX(3px); color: var(--accent); }
+}
 .thumbs { display: flex; flex-direction: column; gap: var(--space-4); }
 .thumb { display: grid; grid-template-columns: 100px 1fr; gap: var(--space-4); align-items: center;
   @include tablet-up { grid-template-columns: 140px 1fr; }

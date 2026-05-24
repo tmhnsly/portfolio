@@ -10,8 +10,10 @@
   color: inherit;
   margin-top: var(--space-5);
 
-  &:hover .title {
-    color: var(--accent);
+  @include can-hover {
+    &:hover .title {
+      color: var(--accent);
+    }
   }
 }
 
@@ -106,4 +108,6 @@
 .arrow {
   color: var(--text-soft);
 }
-.card:hover .arrow { transform: translateX(3px); color: var(--accent); }
+@include can-hover {
+  .card:hover .arrow { transform: translateX(3px); color: var(--accent); }
+}

@@ -3,3 +3,6 @@ $bp-desktop: 1200px;
 @mixin tablet-up { @media (min-width: $bp-tablet) { @content; } }
 @mixin desktop-up { @media (min-width: $bp-desktop) { @content; } }
 @mixin reduced-motion { @media (prefers-reduced-motion: reduce) { @content; } }
+// Hover effects only on devices with a real hovering pointer (mouse) — stops
+// touch taps/swipes from leaving cards stuck in their :hover state.
+@mixin can-hover { @media (hover: hover) { @content; } }

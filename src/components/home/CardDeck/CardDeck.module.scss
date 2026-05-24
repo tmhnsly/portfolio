@@ -56,7 +56,7 @@
   transition: width var(--duration-medium) var(--ease-standard), background var(--duration-medium) var(--ease-standard);
 }
 .tick { width: 10px; }
-.tick:hover { background: color-mix(in srgb, var(--accent) 40%, transparent); }
+@include can-hover { .tick:hover { background: color-mix(in srgb, var(--accent) 40%, transparent); } }
 .tickActive { width: 32px; background: var(--accent); }
 @include reduced-motion { .tick, .tickActive { transition: none; } }
 .counter { font-family: var(--font-mono); font-size: var(--fs-mono-s); color: var(--text-muted); }
