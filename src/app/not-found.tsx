@@ -4,7 +4,7 @@ import { DISCIPLINE_ORDER, DISCIPLINES } from '@/lib/disciplines';
 import { Eyebrow } from '@/components/ui/Eyebrow';
 import { Button } from '@/components/ui/Button';
 import { GlassCard } from '@/components/ui/GlassCard';
-import { SITE } from '@/data';
+import { SITE, COPY } from '@/data';
 import styles from './not-found.module.scss';
 
 export default function NotFound() {
@@ -14,12 +14,12 @@ export default function NotFound() {
       <Container>
         <Stack>
         <section className={styles.wrap}>
-          <Eyebrow withDot>Error · 404</Eyebrow>
+          <Eyebrow withDot>{COPY.notFound.eyebrow}</Eyebrow>
           <h1 className={styles.code}>404<span className={styles.period}>.</span></h1>
           <div className={styles.urlbar} aria-hidden>
-            tomhinsley.com<span className={styles.path}>/the-page-you-wanted</span>
+            {COPY.notFound.urlHost}<span className={styles.path}>{COPY.notFound.urlPath}</span>
           </div>
-          <p className={styles.lead}>That page doesn&rsquo;t exist — but here&rsquo;s everything that does.</p>
+          <p className={styles.lead}>{COPY.notFound.lead}</p>
           <div className={styles.grid}>
             {DISCIPLINE_ORDER.map((slug) => {
               const d = DISCIPLINES[slug];
@@ -35,7 +35,7 @@ export default function NotFound() {
             })}
           </div>
           <div className={styles.cta}>
-            <span className={styles.ctaText}>Or get in touch.</span>
+            <span className={styles.ctaText}>{COPY.notFound.cta}</span>
             <Button variant="primary" href={`mailto:${SITE.email}`}>{SITE.email} →</Button>
           </div>
         </section>

@@ -1,6 +1,6 @@
 'use client';
 import Link from 'next/link';
-import { SITE } from '@/data';
+import { SITE, COPY } from '@/data';
 import { useTheme } from '@/lib/theme';
 import { Container } from '../Container';
 import styles from './Nav.module.scss';
@@ -17,7 +17,7 @@ export function Nav({ active }: NavProps) {
       <Container>
         <nav className={styles.bar} aria-label="Primary">
           <div className={styles.brand}>
-            <Link href="/" className={styles.monogram} aria-label="Tom Hinsley — home">TH</Link>
+            <Link href="/" className={styles.monogram} aria-label={COPY.nav.homeAria}>TH</Link>
             <span className={styles.name}>Tom Hinsley</span>
           </div>
           <ul className={styles.items}>
@@ -47,7 +47,7 @@ export function Nav({ active }: NavProps) {
             </button>
             <a className={styles.cta} href={`mailto:${SITE.email}`}>
               <span className={styles.ctaFull}>{SITE.email} →</span>
-              <span className={styles.ctaShort} aria-hidden="true">Say hi →</span>
+              <span className={styles.ctaShort} aria-hidden="true">{COPY.nav.sayHi}</span>
             </a>
           </div>
         </nav>

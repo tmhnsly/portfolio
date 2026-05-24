@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { DISCIPLINE_ORDER, DISCIPLINES } from '@/lib/disciplines';
-import { toolsByDiscipline } from '@/data';
+import { toolsByDiscipline, COPY } from '@/data';
 import { Eyebrow } from '@/components/ui/Eyebrow';
 import { TechChip } from '@/components/ui/TechChip';
 import { GlassCard } from '@/components/ui/GlassCard';
@@ -8,9 +8,9 @@ import styles from './DisciplineScroller.module.scss';
 
 export function DisciplineScroller() {
   return (
-    <section className={styles.section} aria-label="Explore by discipline">
+    <section className={styles.section} aria-label={COPY.home.exploreByDiscipline}>
       <div className={styles.head}>
-        <Eyebrow>Explore by discipline</Eyebrow>
+        <Eyebrow>{COPY.home.exploreByDiscipline}</Eyebrow>
       </div>
       <div className={styles.track}>
         {DISCIPLINE_ORDER.map((slug) => {

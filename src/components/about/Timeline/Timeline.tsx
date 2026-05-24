@@ -3,6 +3,7 @@ import { useRef } from 'react';
 import { motion, useReducedMotion, useScroll, useTransform } from 'motion/react';
 import type { TimelineEntry } from '@/types';
 import { DURATION, EASING, OFFSET, STAGGER } from '@/lib/motion';
+import { COPY } from '@/data';
 import { Eyebrow } from '@/components/ui/Eyebrow';
 import { TechChip } from '@/components/ui/TechChip';
 import styles from './Timeline.module.scss';
@@ -56,9 +57,9 @@ export function Timeline({ entries }: { entries: TimelineEntry[] }) {
   return (
     <section className={styles.section}>
       <div className={styles.head}>
-        <Eyebrow withDot>§ Career timeline · scroll-revealed</Eyebrow>
+        <Eyebrow withDot>{COPY.about.timelineEyebrow}</Eyebrow>
         <h2 className={styles.title}>
-          Where I&rsquo;ve been<span className={styles.accent}>.</span>
+          {COPY.about.timelineHeading}<span className={styles.accent}>.</span>
         </h2>
       </div>
       <div className={styles.timeline} ref={ref}>

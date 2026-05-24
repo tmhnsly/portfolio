@@ -3,6 +3,7 @@ import { useMemo, useState } from 'react';
 import Link from 'next/link';
 import type { Project } from '@/types';
 import { DISCIPLINE_ORDER, DISCIPLINES } from '@/lib/disciplines';
+import { COPY } from '@/data';
 import { Eyebrow } from '@/components/ui/Eyebrow';
 import { FilterPills } from '@/components/ui/FilterPills';
 import { TechChip } from '@/components/ui/TechChip';
@@ -31,8 +32,8 @@ export function RecentWork({ projects }: { projects: Project[] }) {
     <section className={styles.section}>
       <div className={styles.head}>
         <div>
-          <Eyebrow>Selected work</Eyebrow>
-          <h2 className={styles.title}>Recent<span className={styles.period}>.</span></h2>
+          <Eyebrow>{COPY.home.selectedWork}</Eyebrow>
+          <h2 className={styles.title}>{COPY.home.recent}<span className={styles.period}>.</span></h2>
         </div>
         <FilterPills items={filters} active={active} onSelect={setActive} />
       </div>
@@ -73,7 +74,7 @@ export function RecentWork({ projects }: { projects: Project[] }) {
       </div>
       <div className={styles.foot}>
         <span>{thumbs.length + 1} of {filtered.length} shown</span>
-        <Link href={featured ? `/${featured.discipline}` : '/'} className={styles.everything}>Everything →</Link>
+        <Link href={featured ? `/${featured.discipline}` : '/'} className={styles.everything}>{COPY.home.everything}</Link>
       </div>
     </section>
   );

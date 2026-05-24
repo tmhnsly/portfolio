@@ -1,14 +1,13 @@
+import { SITE, COPY } from '@/data';
 import { Eyebrow } from '@/components/ui/Eyebrow';
 import { Media } from '@/components/ui/Media';
 import { TechChip } from '@/components/ui/TechChip';
 import styles from './AboutHero.module.scss';
 
-const CHIPS = ['Frontend', '3D', 'Generative', 'Music', 'Sound design', 'Photography', 'Video', 'Writing'];
-
 export function AboutHero() {
   return (
     <section className={styles.section}>
-      <Eyebrow withDot>About · Tom Hinsley · London 51.5°N</Eyebrow>
+      <Eyebrow withDot>About · {SITE.name} · {COPY.about.eyebrowLocation}</Eyebrow>
       <div className={styles.grid}>
         <div className={styles.portrait}>
           <Media
@@ -22,14 +21,13 @@ export function AboutHero() {
         </div>
         <div className={styles.copy}>
           <h1 className={styles.name}>
-            Tom Hinsley<span className={styles.dot}>.</span>
+            {SITE.name}<span className={styles.dot}>.</span>
           </h1>
           <p className={styles.intro}>
-            Trained as a designer, now a frontend engineer in London —
-            with side practices in music, sound, photo, video and writing.
+            {COPY.about.intro}
           </p>
           <div className={styles.chips}>
-            {CHIPS.map((c) => (
+            {COPY.about.chips.map((c) => (
               <TechChip key={c} label={c} />
             ))}
           </div>

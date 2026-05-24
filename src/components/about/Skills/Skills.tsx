@@ -1,5 +1,6 @@
 import type { SkillGroup } from '@/types';
 import { DISCIPLINES } from '@/lib/disciplines';
+import { COPY } from '@/data';
 import { Eyebrow } from '@/components/ui/Eyebrow';
 import { GlassCard } from '@/components/ui/GlassCard';
 import { TechChip } from '@/components/ui/TechChip';
@@ -9,9 +10,9 @@ export function Skills({ skills }: { skills: SkillGroup[] }) {
   return (
     <section className={styles.section}>
       <div className={styles.head}>
-        <Eyebrow>§ Tools and craft</Eyebrow>
+        <Eyebrow>{COPY.about.skillsEyebrow}</Eyebrow>
         <h2 className={styles.title}>
-          What I work with<span className={styles.accent}>.</span>
+          {COPY.about.skillsHeading}<span className={styles.accent}>.</span>
         </h2>
       </div>
       <div className={styles.grid}>

@@ -14,11 +14,10 @@ export const SITE = siteConfigSchema.parse({
     { label: 'Blog',  href: '/blog'  },
     { label: 'About', href: '/about' },
   ],
+  // Your social links — add/remove freely; rendered in the footer "Elsewhere" column.
+  // Set href to your real URL. Remove this entry or add more as needed.
   socials: [
-    { label: 'Github',  href: '#' },
-    { label: 'Are.na',  href: '#' },
-    { label: 'Read.cv', href: '#' },
-    { label: 'Bluesky', href: '#' },
+    { label: 'GitHub', href: '#' },
   ],
   colophon: 'Set in Space Grotesk + Space Mono. Built with Next.js. Colours from Radix.',
 });

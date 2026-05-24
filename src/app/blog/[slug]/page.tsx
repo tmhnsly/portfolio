@@ -2,7 +2,7 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { getAllPosts, getPost } from '@/lib/content';
 import { DISCIPLINES } from '@/lib/disciplines';
-import { SITE } from '@/data';
+import { SITE, COPY } from '@/data';
 import { Page, Nav, Footer, Container, Stack } from '@/components/layout';
 import { Eyebrow } from '@/components/ui/Eyebrow';
 import { TechChip } from '@/components/ui/TechChip';
@@ -54,9 +54,9 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
             ))}
           </div>
           <div className={styles.endNote}>
-            <span className={styles.endNoteLabel}>Found this useful?</span>
+            <span className={styles.endNoteLabel}>{COPY.blog.foundUseful}</span>
             <Button variant="ghost" href={`mailto:${SITE.email}?subject=Re: ${encodeURIComponent(post.title)}`}>
-              Send a note ↗
+              {COPY.blog.sendNote}
             </Button>
           </div>
         </div>
@@ -68,7 +68,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
           <nav className={styles.prevNext} aria-label="Post navigation">
             {older ? (
               <Link href={`/blog/${older.slug}`} className={styles.navCard}>
-                <span className={styles.navDir}>← Older post</span>
+                <span className={styles.navDir}>{COPY.blog.olderPost}</span>
                 <span className={styles.navTitle}>{older.title}</span>
               </Link>
             ) : (
@@ -76,7 +76,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
             )}
             {newer ? (
               <Link href={`/blog/${newer.slug}`} className={`${styles.navCard} ${styles.navCardRight}`}>
-                <span className={styles.navDir}>Newer post →</span>
+                <span className={styles.navDir}>{COPY.blog.newerPost}</span>
                 <span className={styles.navTitle}>{newer.title}</span>
               </Link>
             ) : (
@@ -90,12 +90,12 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
           <section className={styles.related}>
             <div className={styles.relatedHeader}>
               <div>
-                <Eyebrow>Related posts</Eyebrow>
+                <Eyebrow>{COPY.blog.relatedEyebrow}</Eyebrow>
                 <h2 className={styles.relatedHeading}>
-                  More from the blog<span className={styles.period}>.</span>
+                  {COPY.blog.relatedHeading}<span className={styles.period}>.</span>
                 </h2>
               </div>
-              <Link href="/blog" className={styles.allPostsLink}>↗ All posts</Link>
+              <Link href="/blog" className={styles.allPostsLink}>{COPY.blog.allPosts}</Link>
             </div>
             <div className={styles.relatedGrid}>
               {related.map((p) => (
