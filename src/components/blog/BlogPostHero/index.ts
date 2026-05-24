@@ -1,0 +1,1 @@
+export { BlogPostHero } from './BlogPostHero';
