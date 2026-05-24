@@ -1,6 +1,8 @@
 @use '../../../styles/mixins/breakpoints' as *;
 
-.wrap { display: flex; flex-direction: column; }
+/* --deck-peek = (VISIBLE-1) × PEEK_Y from CardDeck.tsx: the back cards translate
+   down PAST the deck's layout box, so the controls must clear that overhang. */
+.wrap { display: flex; flex-direction: column; --deck-peek: 32px; }
 .deck {
   position: relative;
   width: 100%;
@@ -20,6 +22,7 @@
   box-shadow: var(--shadow-sm);     /* soft depth on the cards behind */
   padding: var(--space-3); display: flex; flex-direction: column; gap: var(--space-3);
   overflow: hidden;
+  text-decoration: none; color: inherit; /* the front .face is a <Link> */
 }
 /* the active card is defined by a crisp edge + deeper shadow. No backdrop-filter:
    blurring a dragged/animated element re-rasterises every frame (the lag). */
@@ -42,8 +45,9 @@
 .chips { display: flex; gap: var(--gap-chip); overflow: hidden; }
 .date { font-family: var(--font-mono); font-size: var(--fs-mono-xs); color: var(--text-muted); white-space: nowrap; }
 
-/* controls — no top rule (it read as a stray line under the deck); spacing only */
-.controls { margin-top: var(--space-6); display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); }
+/* controls — clear the peeking back cards (--deck-peek) THEN add the real gap,
+   so the buttons aren't crammed against the bottom of the stack. No top rule. */
+.controls { margin-top: calc(var(--deck-peek) + var(--space-6)); display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); }
 .ticks { display: inline-flex; align-items: center; gap: var(--space-2); flex: 1; }
 // pagination dots — neutral, circle -> pill on active (matches mandydennis)
 .tick, .tickActive {

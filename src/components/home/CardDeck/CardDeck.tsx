@@ -1,4 +1,5 @@
 'use client';
+import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
 import { AnimatePresence, motion, useReducedMotion, type PanInfo, type Variants } from 'motion/react';
 import type { Project } from '@/types';
@@ -27,7 +28,9 @@ const pad = (n: number) => String(n).padStart(2, '0');
 function CardFace({ project }: { project: Project }) {
   const d = DISCIPLINES[project.discipline];
   return (
-    <div className={styles.face}>
+    // The whole front card links to the project. A flick drags the card and Motion
+    // suppresses the trailing click, so only a real (non-dragged) click navigates.
+    <Link href={`/${project.discipline}/${project.slug}`} className={styles.face} draggable={false}>
       <Media
         grad={d.gradient}
         src={project.cover?.src}
@@ -49,7 +52,7 @@ function CardFace({ project }: { project: Project }) {
           <span className={styles.date}>{formatMonthYear(project.date)}</span>
         </div>
       </div>
-    </div>
+    </Link>
   );
 }
 
