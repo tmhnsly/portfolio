@@ -6,6 +6,12 @@
   --surface-soft: var(--sand-a3);
   --surface-edge: var(--sand-7);    /* card border (subtle, step 7) */
 
+  /* apple-style glass (nav): milky translucent fill from --bg so it frosts
+     whatever scrolls behind it (incl. coloured hero cards) while keeping text
+     readable; auto-themes because --bg swaps. --glass-sheen = top rim light. */
+  --glass: color-mix(in srgb, var(--bg) 72%, transparent);
+  --glass-sheen: var(--white-a8);
+
   /* text */
   --text: var(--sand-12);
   --text-mid: var(--sand-12);
@@ -43,6 +49,10 @@
   --code-text: var(--gray-1);
 }
 .dark {
+  /* dark glass: a touch more opaque (dark bg needs body to read as frosted),
+     fainter sheen so the rim light stays subtle on a dark panel */
+  --glass: color-mix(in srgb, var(--bg) 64%, transparent);
+  --glass-sheen: var(--white-a4);
   --shadow-sm: 0 2px 8px var(--black-a5);
   --shadow-md: 0 6px 16px var(--black-a7);
   --shadow-lg: 0 14px 28px var(--black-a8);

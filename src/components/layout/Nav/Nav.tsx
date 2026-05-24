@@ -1,5 +1,6 @@
 'use client';
 import Link from 'next/link';
+import { BiMoon, BiSun } from 'react-icons/bi';
 import { SITE, COPY } from '@/data';
 import { useTheme } from '@/lib/theme';
 import { Container } from '../Container';
@@ -43,7 +44,7 @@ export function Nav({ active }: NavProps) {
               onClick={toggle}
               aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
             >
-              {theme === 'dark' ? '☀' : '☾'}
+              {theme === 'dark' ? <BiSun aria-hidden /> : <BiMoon aria-hidden />}
             </button>
             <a className={styles.cta} href={`mailto:${SITE.email}`}>
               <span className={styles.ctaFull}>{SITE.email} →</span>

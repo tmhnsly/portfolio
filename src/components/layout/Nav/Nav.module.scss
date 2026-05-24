@@ -6,8 +6,12 @@
   display: flex; align-items: center; justify-content: space-between; gap: var(--space-2);
   height: 56px; padding: 10px 10px 10px 12px;
   border-radius: var(--radius-2xl);
-  @include glass;
-  box-shadow: var(--shadow-md);
+  // borderless apple glass: milky fill + strong blur (frost), no outline.
+  @include glass($surface: var(--glass), $blur: 20px, $border: false);
+  // depth without a border: a 1px top sheen (rim light) + a soft, wide shadow.
+  box-shadow:
+    inset 0 1px 0 var(--glass-sheen),
+    var(--shadow-md);
   font-family: var(--font-display);
   min-width: 0; /* prevent overflow */
 
@@ -64,7 +68,8 @@
 .toggle {
   width: 38px; height: 38px; border-radius: var(--radius-lg);
   color: var(--text-soft);
-  display: inline-flex; align-items: center; justify-content: center; font-size: 16px;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-size: 19px; /* react-icons render at 1em — controls the svg size */
   flex-shrink: 0;
   transition: background var(--duration-fast) var(--ease-standard), color var(--duration-fast) var(--ease-standard);
 }
