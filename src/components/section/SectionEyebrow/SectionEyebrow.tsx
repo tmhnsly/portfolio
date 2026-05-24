@@ -6,7 +6,7 @@ import { isDiscipline } from '@/lib/disciplines';
 import { DURATION, EASING } from '@/lib/motion';
 import { Container } from '@/components/layout/Container';
 import { Eyebrow } from '@/components/ui/Eyebrow';
-import { Roll } from '@/components/motion/Roll';
+import { Roll, RollNumber } from '@/components/motion/Roll';
 import styles from './SectionEyebrow.module.scss';
 
 /**
@@ -27,7 +27,7 @@ export function SectionEyebrow({ counts }: { counts: Partial<Record<Discipline, 
 
   const inner = (
     <Eyebrow withDot>
-      Section · <Roll value={`/${discipline}`} /> · <Roll value={count} /> project{count === 1 ? '' : 's'}
+      Section · /<Roll value={discipline} /> · <RollNumber value={count} /> project{count === 1 ? '' : 's'}
     </Eyebrow>
   );
 

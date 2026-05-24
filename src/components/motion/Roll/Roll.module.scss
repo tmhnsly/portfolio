@@ -1,3 +1,21 @@
 .clip { display: inline-flex; overflow: hidden; vertical-align: bottom; }
 .item { display: inline-block; white-space: nowrap; }
 .static { display: inline-block; }
+
+/* odometer (RollNumber) — one clip per digit, each a 0–9 column slid to the
+   active digit. Heights are 1em so the digits sit on the surrounding text line. */
+.odometer { display: inline-flex; }
+.odometerDigits { display: inline-flex; }
+.digitClip { display: inline-block; overflow: hidden; height: 1em; line-height: 1em; vertical-align: bottom; }
+.digitColumn { display: flex; flex-direction: column; }
+.digitCell { display: block; height: 1em; line-height: 1em; text-align: center; }
+
+.srOnly {
+  position: absolute;
+  width: 1px; height: 1px;
+  margin: -1px; padding: 0; border: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
