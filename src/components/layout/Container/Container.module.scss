@@ -1,0 +1,11 @@
+@use '../../../styles/mixins/breakpoints' as *;
+
+.container {
+  --gutter: 16px;
+  width: 100%;
+  max-width: 1440px;
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+  @include tablet-up { --gutter: 24px; }
+  @include desktop-up { --gutter: 40px; }
+}
