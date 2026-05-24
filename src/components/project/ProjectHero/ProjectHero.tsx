@@ -1,6 +1,7 @@
 import type { Project } from '@/types';
 import { DISCIPLINES } from '@/lib/disciplines';
 import { Pill } from '@/components/ui/Pill';
+import { Entrance, EntranceItem, EntranceTitle } from '@/components/motion/Entrance';
 import styles from './ProjectHero.module.scss';
 
 export function ProjectHero({ project }: { project: Project }) {
@@ -13,18 +14,20 @@ export function ProjectHero({ project }: { project: Project }) {
   if (project.repo)   metaRows.push(['Repo',   project.repo]);
 
   return (
-    <section className={styles.hero}>
-      <p className={styles.breadcrumb}>
-        <span>Home</span>
-        <span>/</span>
-        <span>{d.label}</span>
-        <span>/</span>
-        <span>{project.title}</span>
-      </p>
+    <Entrance className={styles.hero}>
+      <EntranceItem>
+        <p className={styles.breadcrumb}>
+          <span>Home</span>
+          <span>/</span>
+          <span>{d.label}</span>
+          <span>/</span>
+          <span>{project.title}</span>
+        </p>
+      </EntranceItem>
 
       <div className={styles.layout}>
         <div className={styles.main}>
-          <div className={styles.pillRow}>
+          <EntranceItem className={styles.pillRow}>
             <Pill label={d.label} tone="discipline" />
             {project.status && (
               <span className={styles.statusPill}>{project.status}</span>
@@ -32,28 +35,30 @@ export function ProjectHero({ project }: { project: Project }) {
             {project.liveUrl && (
               <span className={styles.liveUrl}>{project.liveUrl.replace('https://', '')} ↗</span>
             )}
-          </div>
+          </EntranceItem>
 
-          <h1 className={styles.title}>
+          <EntranceTitle className={styles.title}>
             {project.title}<span className={styles.period}>.</span>
-          </h1>
+          </EntranceTitle>
 
           {project.desc && (
-            <p className={styles.lead}>{project.desc}</p>
+            <EntranceItem>
+              <p className={styles.lead}>{project.desc}</p>
+            </EntranceItem>
           )}
         </div>
 
         {metaRows.length > 0 && (
-          <div className={styles.meta}>
+          <EntranceItem className={styles.meta}>
             {metaRows.map(([key, val]) => (
               <div key={key} className={styles.metaRow}>
                 <div className={styles.metaKey}>{key}</div>
                 <div className={styles.metaVal}>{val}</div>
               </div>
             ))}
-          </div>
+          </EntranceItem>
         )}
       </div>
-    </section>
+    </Entrance>
   );
 }

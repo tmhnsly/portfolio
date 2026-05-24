@@ -3,14 +3,17 @@ import { DISCIPLINES } from '@/lib/disciplines';
 import { Eyebrow } from '@/components/ui/Eyebrow';
 import { Media } from '@/components/ui/Media';
 import { TechChip } from '@/components/ui/TechChip';
+import { Entrance, EntranceItem, EntranceTitle } from '@/components/motion/Entrance';
 import styles from './AboutHero.module.scss';
 
 export function AboutHero() {
   return (
-    <section className={styles.section}>
-      <Eyebrow withDot>About · {SITE.name} · {COPY.about.eyebrowLocation}</Eyebrow>
+    <Entrance className={styles.section}>
+      <EntranceItem>
+        <Eyebrow withDot>About · {SITE.name} · {COPY.about.eyebrowLocation}</Eyebrow>
+      </EntranceItem>
       <div className={styles.grid}>
-        <div className={styles.portrait}>
+        <EntranceItem className={styles.portrait}>
           <Media
             src="/images/about/portrait.jpg"
             grad={DISCIPLINES.code.gradient}
@@ -19,21 +22,21 @@ export function AboutHero() {
             sizes="(min-width:768px) 360px, 90vw"
             rounded
           />
-        </div>
+        </EntranceItem>
         <div className={styles.copy}>
-          <h1 className={styles.name}>
+          <EntranceTitle className={styles.name}>
             {SITE.name}<span className={styles.dot}>.</span>
-          </h1>
-          <p className={styles.intro}>
-            {COPY.about.intro}
-          </p>
-          <div className={styles.chips}>
+          </EntranceTitle>
+          <EntranceItem>
+            <p className={styles.intro}>{COPY.about.intro}</p>
+          </EntranceItem>
+          <EntranceItem className={styles.chips}>
             {COPY.about.chips.map((c) => (
               <TechChip key={c} label={c} />
             ))}
-          </div>
+          </EntranceItem>
         </div>
       </div>
-    </section>
+    </Entrance>
   );
 }

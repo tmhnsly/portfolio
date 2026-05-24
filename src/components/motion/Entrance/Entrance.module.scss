@@ -1,0 +1,5 @@
+/* heading mask: clip the heading box and let the inner slide up from below it.
+   padding-bottom gives descenders room so overflow:hidden doesn't shear them
+   (display titles use line-height < 1). */
+.clipTitle { overflow: hidden; padding-bottom: 0.12em; }
+.inner { display: block; will-change: transform; }
