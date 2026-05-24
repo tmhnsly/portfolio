@@ -1,0 +1,92 @@
+@use '../../../styles/mixins/breakpoints' as *;
+
+.section {
+  margin-block: var(--space-10);
+}
+
+.card {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  margin-top: var(--space-5);
+
+  &:hover .title {
+    color: var(--accent);
+  }
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-7);
+  align-items: start;
+
+  @include desktop-up {
+    grid-template-columns: 1fr 1.2fr;
+    gap: var(--space-8);
+  }
+}
+
+.mediaWrap {
+  position: relative;
+}
+
+.media {
+  box-shadow: var(--shadow-lg);
+}
+
+.categoryPill {
+  position: absolute;
+  left: 18px;
+  top: 18px;
+  z-index: 2;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--space-5);
+  padding-block: var(--space-3);
+}
+
+.title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(var(--fs-h3), 4vw, var(--fs-display));
+  font-weight: 600;
+  letter-spacing: -0.035em;
+  line-height: 1.05;
+  color: var(--text);
+  transition: color 0.15s ease;
+}
+
+.excerpt {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: var(--fs-body);
+  color: var(--text-soft);
+  line-height: 1.5;
+  max-width: 560px;
+}
+
+.chips {
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+}
+
+.readMore {
+  font-family: var(--font-display);
+  font-size: var(--fs-caption);
+  font-weight: 600;
+  letter-spacing: -0.005em;
+  color: var(--text);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.arrow {
+  color: var(--accent);
+}
