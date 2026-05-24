@@ -30,10 +30,12 @@
 
 .faceFade { height: 100%; } /* wraps the front CardFace so its content fades in on advance */
 .thumb { flex: 1 1 auto; }
-.pillTL { position: absolute; left: 12px; top: 12px; z-index: var(--z-card-overlay); }
-.swatches { position: absolute; right: 12px; top: 12px; display: flex; gap: var(--gap-chip); z-index: var(--z-card-overlay); }
+.pillTL { position: absolute; left: var(--space-3); top: var(--space-3); z-index: var(--z-card-overlay); }
+.swatches { position: absolute; right: var(--space-3); top: var(--space-3); display: flex; gap: var(--gap-chip); z-index: var(--z-card-overlay); }
 .swatches span { width: 11px; height: 11px; border-radius: 50%; border: 1px solid var(--on-media-border); }
-.meta { padding: 2px 4px; display: flex; flex-direction: column; gap: var(--space-2); }
+/* no padding — the meta must align flush with the thumb edges (face padding handles
+   the inset); the old `2px 4px` pushed the title/chips/date 4px past the image. */
+.meta { display: flex; flex-direction: column; gap: var(--space-2); }
 .title { font-family: var(--font-display); font-size: var(--fs-h4); font-weight: 600; letter-spacing: -0.025em; line-height: 1.2; color: var(--text); }
 .desc { font-size: var(--fs-caption); color: var(--text-soft); line-height: 1.4; }
 .foot { display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); }

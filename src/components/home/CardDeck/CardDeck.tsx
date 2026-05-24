@@ -15,8 +15,8 @@ const AUTO_MS = 8000;
 const VISIBLE = 3;            // front card + 2 peeking behind
 const PEEK_Y = 16;           // px each card sits below the one in front
 const PEEK_SCALE = 0.05;     // scale step per depth
-const SWIPE_DIST = 80;       // px offset to count as a swipe
-const SWIPE_VELOCITY = 450;  // or fast enough flick
+const SWIPE_DIST = 64;       // small pointer offset is enough — it's a flick, not a drag
+const SWIPE_VELOCITY = 300;  // a quick flick advances even without much travel
 
 // softer, near-critically-damped spring → a weighty, smooth glide (was 340/34/0.9,
 // which snapped/settled hard). The exit fly-off uses its own quick ease (below).
@@ -132,6 +132,8 @@ export function CardDeck({ items }: { items: Project[] }) {
                 exit="exit"
                 transition={reduce ? { duration: 0 } : stackSpring}
                 drag={isFront && !reduce ? 'x' : false}
+                dragConstraints={{ left: 0, right: 0 }}
+                dragElastic={0.16}
                 dragMomentum={false}
                 onDragEnd={isFront ? onDragEnd : undefined}
               >
