@@ -1,7 +1,6 @@
 import type { Project } from '@/types';
 import { DISCIPLINES } from '@/lib/disciplines';
 import { Media } from '@/components/ui/Media';
-import { ProjectLinks } from '@/components/project/ProjectLinks';
 import styles from './ProjectEmbed.module.scss';
 
 const ACTIVE_PADS = new Set([0, 4, 6, 10, 11, 13]);
@@ -68,7 +67,6 @@ export function ProjectEmbed({ project }: { project: Project }) {
         ratio="16/9"
         sizes="(min-width: 1200px) 60vw, 100vw"
       />
-      <ProjectLinks project={project} />
     </div>
   );
 }

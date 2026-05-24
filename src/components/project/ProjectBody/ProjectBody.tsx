@@ -2,6 +2,7 @@ import type { Project } from '@/types';
 import { Eyebrow } from '@/components/ui/Eyebrow';
 import { TechChip } from '@/components/ui/TechChip';
 import { Markdown } from '@/components/ui/Markdown';
+import { ProjectLinks } from '@/components/project/ProjectLinks';
 import styles from './ProjectBody.module.scss';
 
 export function ProjectBody({ project }: { project: Project }) {
@@ -25,6 +26,12 @@ export function ProjectBody({ project }: { project: Project }) {
                 </li>
               ))}
             </ul>
+          </div>
+        )}
+        {(project.liveUrl || project.repo) && (
+          <div className={styles.sideSection}>
+            <Eyebrow>Links</Eyebrow>
+            <ProjectLinks project={project} />
           </div>
         )}
       </aside>
