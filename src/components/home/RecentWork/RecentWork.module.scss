@@ -16,7 +16,8 @@
 .chips { display: flex; gap: 5px; flex-wrap: wrap; margin-top: var(--space-3); }
 .date { font-family: var(--font-mono); font-size: var(--fs-mono-s); color: var(--text-muted); white-space: nowrap; }
 .thumbs { display: flex; flex-direction: column; gap: var(--space-4); }
-.thumb { display: grid; grid-template-columns: 140px 1fr; gap: var(--space-4); align-items: center;
+.thumb { display: grid; grid-template-columns: 100px 1fr; gap: var(--space-4); align-items: center;
+  @include tablet-up { grid-template-columns: 140px 1fr; }
   padding: 10px; border-radius: var(--radius-xl); border: 1px solid var(--surface-edge); background: var(--surface-soft); }
 .pillSm { position: absolute; left: 8px; top: 8px; z-index: 2; }
 .thumbTitle { font-family: var(--font-display); font-size: var(--fs-h4); font-weight: 600; letter-spacing: -0.025em; color: var(--text); }

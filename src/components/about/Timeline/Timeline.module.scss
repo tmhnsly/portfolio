@@ -30,8 +30,13 @@
   position: absolute;
   top: 0;
   bottom: 0;
-  left: calc(200px + var(--space-7) + 20px);
+  /* mobile: aligned to mobile marker centre (11px = half of 22px marker col) */
+  left: 11px;
   width: 1px;
+
+  @include tablet-up {
+    left: calc(200px + var(--space-7) + 20px);
+  }
 
   @include reduced-motion {
     display: none;
@@ -46,19 +51,23 @@
 }
 
 .item {
+  /* Mobile: two-column — 22px marker rail + content */
   display: grid;
-  grid-template-columns: 200px 40px 1fr;
-  gap: var(--space-7);
+  grid-template-columns: 22px 1fr;
+  gap: var(--space-4);
   align-items: start;
   padding-bottom: var(--space-9);
 
-  @media (max-width: 767px) {
-    grid-template-columns: 1fr;
-    gap: var(--space-3);
+  @include tablet-up {
+    grid-template-columns: 200px 40px 1fr;
+    gap: var(--space-7);
   }
 }
 
 .year {
+  /* On mobile the year moves into .content as a label above the role;
+     on tablet+ it stays in the left column */
+  display: none;
   text-align: right;
   padding-top: 6px;
   font-family: var(--font-mono);
@@ -67,8 +76,9 @@
   letter-spacing: 0.06em;
   text-transform: uppercase;
 
-  @media (max-width: 767px) {
-    text-align: left;
+  @include tablet-up {
+    display: block;
+    text-align: right;
   }
 }
 
@@ -76,10 +86,7 @@
   display: flex;
   justify-content: center;
   padding-top: 6px;
-
-  @media (max-width: 767px) {
-    display: none;
-  }
+  /* On mobile: first column, holds the marker centred on the 22px rail */
 }
 
 .marker {
@@ -94,6 +101,23 @@
 
 .content {
   padding-top: 2px;
+  /* On mobile the .year is hidden in the grid left-col, so we show it inline
+     at the top of the content block */
+}
+
+/* Mobile-only year label, rendered above role inside the content column */
+.yearMobile {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: var(--fs-mono);
+  color: var(--text);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: var(--space-2);
+
+  @include tablet-up {
+    display: none;
+  }
 }
 
 .role {

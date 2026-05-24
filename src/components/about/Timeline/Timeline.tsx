@@ -33,6 +33,7 @@ function Item({ entry, index }: { entry: TimelineEntry; index: number }) {
         />
       </div>
       <div className={styles.content}>
+        <span className={styles.yearMobile}>{entry.period}</span>
         <div className={styles.role}>
           {entry.role} <span className={styles.place}>· {entry.place}</span>
         </div>

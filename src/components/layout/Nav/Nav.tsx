@@ -45,7 +45,10 @@ export function Nav({ active }: NavProps) {
             >
               {theme === 'dark' ? '☀' : '☾'}
             </button>
-            <a className={styles.cta} href={`mailto:${SITE.email}`}>{SITE.email} →</a>
+            <a className={styles.cta} href={`mailto:${SITE.email}`}>
+              <span className={styles.ctaFull}>{SITE.email} →</span>
+              <span className={styles.ctaShort} aria-hidden="true">Say hi →</span>
+            </a>
           </div>
         </nav>
       </Container>

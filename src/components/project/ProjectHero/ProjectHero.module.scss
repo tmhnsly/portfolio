@@ -8,6 +8,7 @@
   display: flex;
   align-items: center;
   gap: var(--space-3);
+  flex-wrap: wrap;
   font-family: var(--font-mono);
   font-size: var(--fs-caption);
   color: var(--text-muted);
