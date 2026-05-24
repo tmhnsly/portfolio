@@ -5,6 +5,9 @@ export const SITE = siteConfigSchema.parse({
   role: 'Frontend engineer',
   email: 'hello@tomhinsley.com',
   location: 'London',
+  // first professional dev role — "X+ years" copy is computed from this, so it
+  // stays current on every build. Bump only if the story changes.
+  experienceSince: '2021-07',
   nav: [
     { label: 'Code',  href: '/code'  },
     { label: 'Music', href: '/music' },

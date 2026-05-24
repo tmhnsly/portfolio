@@ -38,8 +38,8 @@ export const COPY = {
     sections: 'Sections',
     elsewhere: 'Elsewhere',
     colophonLabel: 'Colophon',
-    // Copyright / version block
-    copyright: '© 2026',
+    // Copyright / version block — the year is appended at render time (current year)
+    copyright: '©',
     version: 'v1.0',
   },
 
@@ -47,7 +47,8 @@ export const COPY = {
     // AboutHero eyebrow suffix after "About · Tom Hinsley · "
     eyebrowLocation: 'London 51.5°N',
     // AboutHero intro paragraph
-    intro: 'Frontend developer in London — four years building responsive, accessible interfaces for agencies, a software consultancy and editorial publishers. Sound-design background, still making things in the margins.',
+    // {years} is replaced at render time from SITE.experienceSince — stays current.
+    intro: 'Frontend developer in London — {years}+ years building responsive, accessible interfaces for agencies, a software consultancy and editorial publishers. Sound-design background, still making things in the margins.',
     // AboutHero discipline chips
     chips: ['Frontend', 'React', 'Next.js', 'TypeScript', 'Accessibility', 'Sound design', 'Photography', 'Writing'] as string[],
 
@@ -59,7 +60,7 @@ export const COPY = {
     // note block (two lines separated by <br />)
     currentlyNote: 'Contract frontend for digital publishers, including the Financial Times.\nBuilding Chork — a competition-tracker PWA — on the side.',
     // body paragraphs (rsquo entities written as the real Unicode chars here; JSX can use &rsquo; or the char)
-    bodyPara1: 'I’ve been building for the web for four years — across agencies, a software consultancy and editorial publishers like the Financial Times. Strong React, Next.js and TypeScript foundations, with full-stack capability when a project calls for it.',
+    bodyPara1: 'I’ve been building for the web for {years}+ years — across agencies, a software consultancy and editorial publishers like the Financial Times. Strong React, Next.js and TypeScript foundations, with full-stack capability when a project calls for it.',
     bodyPara2: 'Most of what’s here is self-initiated — code that wanders into sound, image and writing, which is where the sound-design degree still leaks through. If it looks like the sort of thing you’d want to commission, send me a note.',
 
     // Timeline section

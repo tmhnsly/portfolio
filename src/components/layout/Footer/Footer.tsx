@@ -42,7 +42,7 @@ export function Footer() {
             <p>{SITE.colophon}</p>
           </div>
           <div className={`${styles.col} ${styles.right}`}>
-            <div className={styles.label}>{COPY.footer.copyright}</div>
+            <div className={styles.label}>{COPY.footer.copyright} {new Date().getFullYear()}</div>
             <div>{COPY.footer.version}</div>
           </div>
         </div>

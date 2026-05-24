@@ -1,9 +1,11 @@
-import { COPY } from '@/data';
+import { COPY, SITE } from '@/data';
+import { yearsSince } from '@/lib/format';
 import { Eyebrow } from '@/components/ui/Eyebrow';
 import styles from './Intro.module.scss';
 
 export function Intro() {
   const [noteLine1, noteLine2] = COPY.about.currentlyNote.split('\n');
+  const bodyPara1 = COPY.about.bodyPara1.replace('{years}', String(yearsSince(SITE.experienceSince)));
   return (
     <section className={styles.section}>
       <div className={styles.grid}>
@@ -18,7 +20,7 @@ export function Intro() {
           </p>
         </div>
         <div className={styles.right}>
-          <p className={styles.body}>{COPY.about.bodyPara1}</p>
+          <p className={styles.body}>{bodyPara1}</p>
           <p className={styles.body}>{COPY.about.bodyPara2}</p>
         </div>
       </div>

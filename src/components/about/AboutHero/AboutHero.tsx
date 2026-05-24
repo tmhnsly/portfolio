@@ -1,5 +1,6 @@
 import { SITE, COPY } from '@/data';
 import { DISCIPLINES } from '@/lib/disciplines';
+import { yearsSince } from '@/lib/format';
 import { Eyebrow } from '@/components/ui/Eyebrow';
 import { Media } from '@/components/ui/Media';
 import { TechChip } from '@/components/ui/TechChip';
@@ -7,6 +8,7 @@ import { Entrance, EntranceItem, EntranceTitle } from '@/components/motion/Entra
 import styles from './AboutHero.module.scss';
 
 export function AboutHero() {
+  const intro = COPY.about.intro.replace('{years}', String(yearsSince(SITE.experienceSince)));
   return (
     <Entrance className={styles.section}>
       <EntranceItem>
@@ -28,7 +30,7 @@ export function AboutHero() {
             {SITE.name}<span className={styles.dot}>.</span>
           </EntranceTitle>
           <EntranceItem>
-            <p className={styles.intro}>{COPY.about.intro}</p>
+            <p className={styles.intro}>{intro}</p>
           </EntranceItem>
           <EntranceItem className={styles.chips}>
             {COPY.about.chips.map((c) => (
