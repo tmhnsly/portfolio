@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Page, Nav, Footer, Container, Stack } from '@/components/layout';
+import { Container, Stack } from '@/components/layout';
 import { DISCIPLINE_ORDER, DISCIPLINES } from '@/lib/disciplines';
 import { Eyebrow } from '@/components/ui/Eyebrow';
 import { Button } from '@/components/ui/Button';
@@ -9,10 +9,8 @@ import styles from './not-found.module.scss';
 
 export default function NotFound() {
   return (
-    <Page>
-      <Nav />
-      <Container>
-        <Stack>
+    <Container>
+      <Stack>
         <section className={styles.wrap}>
           <Eyebrow withDot>{COPY.notFound.eyebrow}</Eyebrow>
           <h1 className={styles.code}>404<span className={styles.period}>.</span></h1>
@@ -39,9 +37,7 @@ export default function NotFound() {
             <Button variant="primary" href={`mailto:${SITE.email}`}>{SITE.email} →</Button>
           </div>
         </section>
-        </Stack>
-      </Container>
-      <Footer />
-    </Page>
+      </Stack>
+    </Container>
   );
 }

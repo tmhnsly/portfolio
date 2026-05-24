@@ -2,7 +2,7 @@ import { notFound } from 'next/navigation';
 import { isDiscipline, DISCIPLINE_ORDER } from '@/lib/disciplines';
 import { getAllProjects } from '@/lib/content';
 import { SECTIONS } from '@/data';
-import { Page, Nav, Footer, Container, Stack } from '@/components/layout';
+import { Container, Stack } from '@/components/layout';
 import { SectionHero } from '@/components/section/SectionHero';
 import { ProjectGrid } from '@/components/section/ProjectGrid';
 import { OtherDisciplines } from '@/components/section/OtherDisciplines';
@@ -17,16 +17,12 @@ export default async function SectionPage({ params }: { params: Promise<{ discip
   const projects = getAllProjects().filter((p) => p.discipline === discipline);
   const section = SECTIONS[discipline];
   return (
-    <Page discipline={discipline}>
-      <Nav active={discipline} />
-      <Container>
-        <Stack>
-          <SectionHero discipline={discipline} count={projects.length} intro={section.intro} tools={section.tools} />
-          <ProjectGrid projects={projects} />
-          <OtherDisciplines current={discipline} />
-        </Stack>
-      </Container>
-      <Footer />
-    </Page>
+    <Container>
+      <Stack>
+        <SectionHero discipline={discipline} count={projects.length} intro={section.intro} tools={section.tools} />
+        <ProjectGrid projects={projects} />
+        <OtherDisciplines current={discipline} />
+      </Stack>
+    </Container>
   );
 }

@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { getAllPosts, getPost } from '@/lib/content';
 import { DISCIPLINES } from '@/lib/disciplines';
 import { SITE, COPY } from '@/data';
-import { Page, Nav, Footer, Container, Stack } from '@/components/layout';
+import { Container, Stack } from '@/components/layout';
 import { Eyebrow } from '@/components/ui/Eyebrow';
 import { TechChip } from '@/components/ui/TechChip';
 import { Pill } from '@/components/ui/Pill';
@@ -32,10 +32,8 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
   const blogGrad = DISCIPLINES.blog.gradient;
 
   return (
-    <Page discipline="blog">
-      <Nav active="blog" />
-      <Container>
-        <Stack>
+    <Container>
+      <Stack>
           <BlogPostHero post={post} />
         <Media
           grad={blogGrad}
@@ -104,10 +102,8 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
             </div>
           </section>
         )}
-        </Stack>
-      </Container>
-      <Footer />
-    </Page>
+      </Stack>
+    </Container>
   );
 }
 

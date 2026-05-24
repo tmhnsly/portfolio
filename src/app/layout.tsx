@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Space_Grotesk, Space_Mono } from 'next/font/google';
 import { ThemeProvider, THEME_SCRIPT } from '@/lib/theme';
+import { Shell } from '@/components/layout/Shell';
 import { COPY } from '@/data';
 import '@radix-ui/colors/sand.css';
 import '@radix-ui/colors/sand-dark.css';
@@ -31,7 +32,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }} />
       </head>
       <body>
-        <ThemeProvider>{children}</ThemeProvider>
+        <ThemeProvider>
+          <Shell>{children}</Shell>
+        </ThemeProvider>
       </body>
     </html>
   );

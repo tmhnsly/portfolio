@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation';
 import { getAllProjects, getProject } from '@/lib/content';
-import { Page, Nav, Footer, Container, Stack } from '@/components/layout';
+import { Container, Stack } from '@/components/layout';
 import { ProjectHero } from '@/components/project/ProjectHero';
 import { ProjectEmbed } from '@/components/project/ProjectEmbed';
 import { ProjectBody } from '@/components/project/ProjectBody';
@@ -24,19 +24,15 @@ export default async function ProjectPage({ params }: { params: Promise<{ discip
   const related = getAllProjects().filter((p) => p.slug !== project.slug).slice(0, 3);
 
   return (
-    <Page discipline={project.discipline}>
-      <Nav active={project.discipline} />
-      <Container>
-        <Stack>
-          <ProjectHero project={project} />
-          <ProjectEmbed project={project} />
-          <ProjectBody project={project} />
-          <Gallery frames={project.gallery} />
-          <PrevNext discipline={project.discipline} prev={prev} next={next} />
-          <RelatedWork projects={related} />
-        </Stack>
-      </Container>
-      <Footer />
-    </Page>
+    <Container>
+      <Stack>
+        <ProjectHero project={project} />
+        <ProjectEmbed project={project} />
+        <ProjectBody project={project} />
+        <Gallery frames={project.gallery} />
+        <PrevNext discipline={project.discipline} prev={prev} next={next} />
+        <RelatedWork projects={related} />
+      </Stack>
+    </Container>
   );
 }

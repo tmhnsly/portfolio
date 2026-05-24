@@ -1,4 +1,7 @@
-.bloom { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: var(--z-base); contain: paint; }
+/* Viewport-anchored (fixed, not absolute-to-page): the glow offsets are
+   percentages, so anchoring to the page meant the same %s landed in different
+   spots on taller pages (the blog looked different). Fixed = identical everywhere. */
+.bloom { position: fixed; inset: 0; overflow: hidden; pointer-events: none; z-index: var(--z-base); contain: paint; }
 .primary, .cool, .warm { position: absolute; border-radius: 50%; filter: blur(50px); }
 .primary {
   left: 45%; top: -25%; width: 1040px; height: 1040px;

@@ -1,4 +1,4 @@
-export { Page } from './Page';
+export { Shell } from './Shell';
 export { Container } from './Container';
 export { Stack } from './Stack';
 export { Nav } from './Nav';

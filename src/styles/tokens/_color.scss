@@ -1,3 +1,13 @@
+/* Register --accent as a typed custom property so it can be *transitioned*
+   (CSS only animates registered custom properties). The persistent Shell sets
+   --accent per zone and transitions it → nav accent, bloom and accent text all
+   crossfade together on route change. */
+@property --accent {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #e54d2e; /* tomato-9 */
+}
+
 :root {
   /* surfaces / backgrounds */
   --bg: var(--sand-1);
@@ -24,11 +34,12 @@
   --rule: var(--sand-7);
   --rule-strong: var(--sand-8);
 
-  /* accent (tomato; per-discipline override is set inline on Page) */
+  /* accent (tomato default; the Shell overrides --accent per zone). --accent-glow
+     is derived so it crossfades along with --accent during zone transitions. */
   --accent: var(--tomato-9);
   --accent-hover: var(--tomato-10);
   --accent-subtle: var(--tomato-3);
-  --accent-glow: var(--tomato-a5);
+  --accent-glow: color-mix(in srgb, var(--accent) 25%, transparent);
 
   /* shadows — black-alpha */
   --shadow-sm: 0 2px 8px var(--black-a3);

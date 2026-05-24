@@ -1,0 +1,23 @@
+@use '../../../styles/mixins/breakpoints' as *;
+
+.shell {
+  position: relative;
+  min-height: 100vh;
+  overflow-x: clip; /* contain FullBleed breakouts; clip (not hidden) keeps sticky nav working */
+  background: var(--bg);
+  color: var(--text);
+  /* Smoothly morph the accent across the whole app on a zone change (nav, bloom,
+     accent text crossfade together). --accent is a registered @property, so this
+     actually interpolates. Doesn't run on first load (no value change). */
+  transition: --accent var(--duration-bloom) var(--ease-standard);
+}
+@include reduced-motion {
+  .shell {
+    transition: none;
+  }
+}
+
+.content {
+  position: relative;
+  z-index: var(--z-content);
+}
