@@ -1,7 +1,8 @@
 'use client';
 import Link from 'next/link';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion, useReducedMotion, type PanInfo, type Variants } from 'motion/react';
+import { BiChevronLeft, BiChevronRight } from 'react-icons/bi';
 import type { Project } from '@/types';
 import { EASING } from '@/lib/motion';
 import { DISCIPLINES } from '@/lib/disciplines';
@@ -64,8 +65,13 @@ export function CardDeck({ items }: { items: Project[] }) {
   const [dir, setDir] = useState(-1); // exit/enter direction for the swap
   const [hovered, setHovered] = useState(false);
   const reduce = useReducedMotion();
+  // one advance per gesture — a fast mobile swipe was firing several at once
+  const lockUntil = useRef(0);
 
   const advance = useCallback((d: number) => {
+    const now = Date.now();
+    if (now < lockUntil.current) return;
+    lockUntil.current = now + 380;
     setDir(d);
     setOrder((o) => (d < 0 ? [...o.slice(1), o[0]] : [o[o.length - 1], ...o.slice(0, -1)]));
   }, []);
@@ -113,8 +119,8 @@ export function CardDeck({ items }: { items: Project[] }) {
         aria-roledescription="carousel"
         aria-label="Featured work"
         tabIndex={0}
-        onMouseEnter={() => setHovered(true)}
-        onMouseLeave={() => setHovered(false)}
+        onPointerEnter={() => setHovered(true)}
+        onPointerLeave={() => setHovered(false)}
         onKeyDown={(e) => {
           if (e.key === 'ArrowRight') advance(-1);
           if (e.key === 'ArrowLeft') advance(1);
@@ -173,8 +179,8 @@ export function CardDeck({ items }: { items: Project[] }) {
         </span>
         <span className={styles.counter}>{pad(activeIndex + 1)} / {pad(n)}</span>
         <span className={styles.buttons}>
-          <Button variant="icon" aria-label="previous" onClick={() => advance(1)}>←</Button>
-          <Button variant="icon" aria-label="next" onClick={() => advance(-1)}>→</Button>
+          <Button variant="icon" aria-label="previous" onClick={() => advance(1)}><BiChevronLeft className={styles.caret} aria-hidden /></Button>
+          <Button variant="icon" aria-label="next" onClick={() => advance(-1)}><BiChevronRight className={styles.caret} aria-hidden /></Button>
         </span>
       </div>
     </div>

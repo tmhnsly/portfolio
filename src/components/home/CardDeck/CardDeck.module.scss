@@ -49,15 +49,16 @@
    so the buttons aren't crammed against the bottom of the stack. No top rule. */
 .controls { margin-top: calc(var(--deck-peek) + var(--space-6)); display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); }
 .ticks { display: inline-flex; align-items: center; gap: var(--space-2); flex: 1; }
-// pagination dots — neutral, circle -> pill on active (matches mandydennis)
+// pagination dots — circle -> pill on active, themed to the zone accent
 .tick, .tickActive {
   height: 10px; padding: 0; border: 0; border-radius: var(--radius-full); cursor: pointer;
-  background: var(--dot-idle);
+  background: color-mix(in srgb, var(--accent) 22%, transparent);
   transition: width var(--duration-medium) var(--ease-standard), background var(--duration-medium) var(--ease-standard);
 }
 .tick { width: 10px; }
-.tick:hover { background: var(--dot-idle-hover); }
-.tickActive { width: 32px; background: var(--dot-active); }
+.tick:hover { background: color-mix(in srgb, var(--accent) 40%, transparent); }
+.tickActive { width: 32px; background: var(--accent); }
 @include reduced-motion { .tick, .tickActive { transition: none; } }
 .counter { font-family: var(--font-mono); font-size: var(--fs-mono-s); color: var(--text-muted); }
 .buttons { display: inline-flex; gap: var(--space-2); }
+.caret { font-size: 22px; } /* boxicon chevron in the prev/next icon buttons */
