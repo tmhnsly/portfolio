@@ -2,6 +2,18 @@ import type { Metadata } from 'next';
 import { Space_Grotesk, Space_Mono } from 'next/font/google';
 import { ThemeProvider, THEME_SCRIPT } from '@/lib/theme';
 import { COPY } from '@/data';
+import '@radix-ui/colors/sand.css';
+import '@radix-ui/colors/sand-dark.css';
+import '@radix-ui/colors/sand-alpha.css';
+import '@radix-ui/colors/sand-dark-alpha.css';
+import '@radix-ui/colors/gray.css';
+import '@radix-ui/colors/gray-dark.css';
+import '@radix-ui/colors/tomato.css';
+import '@radix-ui/colors/tomato-dark.css';
+import '@radix-ui/colors/tomato-alpha.css';
+import '@radix-ui/colors/tomato-dark-alpha.css';
+import '@radix-ui/colors/white-alpha.css';
+import '@radix-ui/colors/black-alpha.css';
 import './globals.scss';
 
 const display = Space_Grotesk({ subsets: ['latin'], weight: ['400', '500', '600', '700'], variable: '--font-space-grotesk', display: 'swap' });
