@@ -50,7 +50,7 @@ export function RecentWork({ projects }: { projects: Project[] }) {
               {featured.desc && <div className={styles.featuredDesc}>{featured.desc}</div>}
               <div className={styles.chips}>{featured.tech.slice(0, 4).map((t) => <TechChip key={t} label={t} />)}</div>
             </div>
-            <span className={styles.date}>{formatMonthYear(featured.date)} <LinkArrow /></span>
+            <span className={styles.date}>{formatMonthYear(featured.date)} <LinkArrow className={styles.arrow} /></span>
           </div>
         </Link>
         <div className={styles.thumbs}>
@@ -66,7 +66,7 @@ export function RecentWork({ projects }: { projects: Project[] }) {
                   <div className={styles.thumbTitle}>{p.title}</div>
                   {p.desc && <div className={styles.thumbDesc}>{p.desc}</div>}
                   <div className={styles.chips}>{p.tech.slice(0, 2).map((t) => <TechChip key={t} label={t} />)}</div>
-                  <span className={styles.dateSm}>{formatMonthYear(p.date)}</span>
+                  <span className={styles.dateSm}>{formatMonthYear(p.date)} <LinkArrow className={styles.arrow} /></span>
                 </div>
               </Link>
             );

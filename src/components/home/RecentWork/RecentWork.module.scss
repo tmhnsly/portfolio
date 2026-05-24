@@ -15,6 +15,10 @@
 .featuredDesc { font-size: var(--fs-body); color: var(--text-soft); line-height: 1.4; margin-top: 6px; }
 .chips { display: flex; gap: 5px; flex-wrap: wrap; margin-top: var(--space-3); }
 .date { font-family: var(--font-mono); font-size: var(--fs-mono-s); color: var(--text-muted); white-space: nowrap; }
+/* link affordance: arrow nudges + turns accent when the card is hovered */
+.arrow { color: var(--text-soft); }
+.featured:hover .arrow,
+.thumb:hover .arrow { transform: translateX(3px); color: var(--accent); }
 .thumbs { display: flex; flex-direction: column; gap: var(--space-4); }
 .thumb { display: grid; grid-template-columns: 100px 1fr; gap: var(--space-4); align-items: center;
   @include tablet-up { grid-template-columns: 140px 1fr; }

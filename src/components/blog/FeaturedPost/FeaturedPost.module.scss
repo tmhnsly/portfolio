@@ -87,5 +87,7 @@
 }
 
 .arrow {
-  color: var(--accent);
+  color: var(--text-soft);
 }
+/* nudge + accent on hover to signal the card is a link */
+.card:hover .arrow { transform: translateX(3px); color: var(--accent); }
