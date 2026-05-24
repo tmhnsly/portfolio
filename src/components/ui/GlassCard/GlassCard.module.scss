@@ -1,0 +1,3 @@
+@use '../../../styles/mixins/glass' as *;
+.card { @include glass; border-radius: var(--radius-xl); box-shadow: var(--shadow-md); }
+.soft { @include glass(var(--surface-soft), 20px, 160%); box-shadow: var(--shadow-sm); }

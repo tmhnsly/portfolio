@@ -1,0 +1,8 @@
+@use '../../../styles/mixins/glass' as *;
+.group { display: inline-flex; gap: var(--space-2); padding: 5px; border-radius: var(--radius-xl);
+  @include glass(var(--surface-soft), 20px, 160%); }
+.pill { display: inline-flex; align-items: center; gap: var(--space-2); padding: 9px 13px;
+  border-radius: var(--radius-lg); font-family: var(--font-display); font-size: 13px; font-weight: 600;
+  color: var(--text); cursor: pointer; }
+.active { background: var(--text); color: var(--bg); }
+.count { font-family: var(--font-mono); font-size: var(--fs-mono-xs); font-weight: 400; opacity: 0.55; }
