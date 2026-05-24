@@ -6,11 +6,11 @@
 .card:hover .media { box-shadow: var(--shadow-lg); }
 @include reduced-motion { .card:hover { transform: none; } }
 .media { box-shadow: var(--shadow-md); transition: box-shadow var(--duration-hover) var(--ease-standard); }
-.hatch { position: absolute; inset: 0; background: repeating-linear-gradient(45deg, rgba(255,255,255,0.07) 0 14px, transparent 14px 28px); }
-.number { position: absolute; right: -8px; bottom: -22px; font-family: var(--font-display); font-size: 160px; font-weight: 600; letter-spacing: -0.06em; line-height: 0.9; color: rgba(255,255,255,0.18); z-index: 1; }
+.hatch { position: absolute; inset: 0; background: var(--overlay-hatch); }
+.number { position: absolute; right: -8px; bottom: -22px; font-family: var(--font-display); font-size: 160px; font-weight: 600; letter-spacing: -0.06em; line-height: 0.9; color: var(--white-a5); z-index: 1; }
 .pillTL { position: absolute; left: 14px; top: 14px; z-index: 2; }
 .swatches { position: absolute; right: 14px; top: 14px; display: flex; gap: 5px; z-index: 2; }
-.swatches span { width: 11px; height: 11px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.5); }
+.swatches span { width: 11px; height: 11px; border-radius: 50%; border: 1px solid var(--on-media-border); }
 .body { display: flex; flex-direction: column; gap: var(--space-2); }
 .titleRow { display: flex; align-items: baseline; justify-content: space-between; gap: var(--space-4); }
 .title { font-family: var(--font-display); font-size: var(--fs-h3); font-weight: 600; letter-spacing: -0.025em; line-height: 1.15; color: var(--text); }

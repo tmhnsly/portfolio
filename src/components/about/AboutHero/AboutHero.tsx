@@ -1,4 +1,5 @@
 import { SITE, COPY } from '@/data';
+import { DISCIPLINES } from '@/lib/disciplines';
 import { Eyebrow } from '@/components/ui/Eyebrow';
 import { Media } from '@/components/ui/Media';
 import { TechChip } from '@/components/ui/TechChip';
@@ -12,7 +13,7 @@ export function AboutHero() {
         <div className={styles.portrait}>
           <Media
             src="/images/about/portrait.jpg"
-            grad="linear-gradient(160deg,#dd4a2e,#5e1c14)"
+            grad={DISCIPLINES.code.gradient}
             alt="Tom Hinsley — portrait"
             ratio="4/5"
             sizes="(min-width:768px) 360px, 90vw"

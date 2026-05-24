@@ -11,8 +11,8 @@
   height: 52px;
   border-radius: 50%;
   flex-shrink: 0;
-  background: radial-gradient(circle at 30% 30%, #fff, var(--accent) 65%, #1f2d5c);
-  box-shadow: inset -4px -4px 8px rgba(0, 0, 0, 0.18), 0 4px 12px rgba(0, 0, 0, 0.14);
+  background: radial-gradient(circle at 30% 30%, var(--on-media), var(--accent) 65%, color-mix(in srgb, var(--accent) 45%, black) 100%);
+  box-shadow: inset -4px -4px 8px var(--black-a5), 0 4px 12px var(--black-a4);
 }
 
 .info {

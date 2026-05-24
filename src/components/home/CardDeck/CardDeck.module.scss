@@ -12,7 +12,7 @@
 .thumb { flex: 1 1 auto; }
 .pillTL { position: absolute; left: 12px; top: 12px; z-index: 2; }
 .swatches { position: absolute; right: 12px; top: 12px; display: flex; gap: 5px; z-index: 2; }
-.swatches span { width: 11px; height: 11px; border-radius: 50%; border: 1px solid rgba(255, 255, 255, 0.5); }
+.swatches span { width: 11px; height: 11px; border-radius: 50%; border: 1px solid var(--on-media-border); }
 .meta { padding: 2px 4px; display: flex; flex-direction: column; gap: var(--space-2); }
 .title { font-family: var(--font-display); font-size: var(--fs-h4); font-weight: 600; letter-spacing: -0.025em; line-height: 1.2; color: var(--text); }
 .desc { font-size: var(--fs-caption); color: var(--text-soft); line-height: 1.4; }
