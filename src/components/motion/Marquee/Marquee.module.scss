@@ -12,3 +12,8 @@
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }
 }
+
+.faded {
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 var(--space-8), #000 calc(100% - var(--space-8)), transparent);
+  mask-image: linear-gradient(to right, transparent, #000 var(--space-8), #000 calc(100% - var(--space-8)), transparent);
+}

@@ -1,17 +1,14 @@
 .section { }
-.head { display: flex; align-items: flex-end; justify-content: space-between; gap: var(--space-4); margin-bottom: var(--space-4); }
-.arrows { display: inline-flex; gap: var(--space-2); }
-.viewport { position: relative; }
+.head { margin-bottom: var(--space-4); }
 .track {
-  display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory;
-  padding-bottom: var(--space-2); scrollbar-width: none;
-  &::-webkit-scrollbar { display: none; }
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--space-4);
 }
-.cardLink { flex: 0 0 232px; scroll-snap-align: start; }
+.cardLink { text-decoration: none; }
 .card { height: 148px; padding: 16px 18px; display: flex; flex-direction: column; justify-content: space-between; }
 .cardHead { display: flex; align-items: center; gap: var(--space-2); }
 .dot { width: 10px; height: 10px; border-radius: 50%; flex: none; }
 .slug { font-family: var(--font-display); font-size: var(--fs-h4); font-weight: 600; letter-spacing: -0.025em; color: var(--text); }
 .arrow { margin-left: auto; font-family: var(--font-mono); font-size: var(--fs-mono-s); color: var(--text-muted); }
 .tools { display: flex; flex-wrap: wrap; gap: 5px; }
-.fade { position: absolute; right: 0; top: 0; bottom: 0; width: 80px; pointer-events: none; background: linear-gradient(to right, transparent, var(--bg)); }

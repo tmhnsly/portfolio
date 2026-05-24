@@ -13,10 +13,10 @@
 .pillTL { position: absolute; left: 12px; top: 12px; z-index: 2; }
 .swatches { position: absolute; right: 12px; top: 12px; display: flex; gap: 5px; z-index: 2; }
 .swatches span { width: 11px; height: 11px; border-radius: 50%; border: 1px solid rgba(255, 255, 255, 0.5); }
-.meta { padding: 2px 4px; }
+.meta { padding: 2px 4px; display: flex; flex-direction: column; gap: var(--space-2); }
 .title { font-family: var(--font-display); font-size: var(--fs-h4); font-weight: 600; letter-spacing: -0.025em; line-height: 1.2; color: var(--text); }
-.desc { font-size: var(--fs-caption); color: var(--text-soft); line-height: 1.4; margin-top: 4px; }
-.foot { display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); margin-top: var(--space-2); }
+.desc { font-size: var(--fs-caption); color: var(--text-soft); line-height: 1.4; }
+.foot { display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); }
 .chips { display: flex; gap: 5px; overflow: hidden; }
 .date { font-family: var(--font-mono); font-size: var(--fs-mono-xs); color: var(--text-muted); white-space: nowrap; }
 .controls { margin-top: var(--space-5); display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); padding-top: var(--space-4); border-top: 1px solid var(--rule-soft); }

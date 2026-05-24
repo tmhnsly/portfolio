@@ -71,6 +71,12 @@
   box-shadow: inset -3px -3px 6px rgba(0, 0, 0, 0.18), 0 4px 10px rgba(0, 0, 0, 0.12);
 }
 
+.authorInfo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
 .authorName {
   font-family: var(--font-display);
   font-size: var(--fs-body-s);
@@ -85,7 +91,6 @@
   color: var(--text-muted);
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  margin-top: 2px;
 }
 
 .chips {

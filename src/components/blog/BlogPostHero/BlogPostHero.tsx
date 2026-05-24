@@ -29,7 +29,7 @@ export function BlogPostHero({ post }: { post: BlogPost }) {
       <div className={styles.authorRow}>
         <div className={styles.authorLeft}>
           <div className={styles.avatar} aria-hidden="true" />
-          <div>
+          <div className={styles.authorInfo}>
             <div className={styles.authorName}>{post.author.name}</div>
             <div className={styles.authorRole}>{post.author.role}</div>
           </div>

@@ -1,6 +1,7 @@
 import { SITE } from '@/data';
 import { Marquee } from '@/components/motion/Marquee';
 import { Container } from '../Container';
+import { FullBleed } from '../FullBleed';
 import styles from './Footer.module.scss';
 
 const MARQUEE_ITEMS = ['Tom Hinsley', SITE.email, 'London 51.5°N', 'Get in touch'];
@@ -8,9 +9,9 @@ const MARQUEE_ITEMS = ['Tom Hinsley', SITE.email, 'London 51.5°N', 'Get in touc
 export function Footer() {
   return (
     <footer className={styles.footer}>
-      <Container>
+      <FullBleed>
         <div className={styles.rules}>
-          <Marquee>
+          <Marquee faded>
             <span className={styles.row}>
               {MARQUEE_ITEMS.map((item, i) => (
                 <span key={i} className={styles.item}>
@@ -21,6 +22,8 @@ export function Footer() {
             </span>
           </Marquee>
         </div>
+      </FullBleed>
+      <Container>
         <div className={styles.grid}>
           <div className={styles.col}>
             <div className={styles.label}>Tom Hinsley</div>
