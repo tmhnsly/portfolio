@@ -1,0 +1,14 @@
+@mixin eyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--fs-mono-s);
+  letter-spacing: var(--ls-eyebrow);
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+@mixin display($size: var(--fs-display), $ls: var(--ls-display)) {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: $size;
+  letter-spacing: $ls;
+  line-height: var(--lh-display);
+}
