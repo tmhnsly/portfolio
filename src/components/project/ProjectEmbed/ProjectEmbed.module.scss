@@ -1,6 +1,9 @@
 @use '../../../styles/mixins/breakpoints' as *;
 
 .embed {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
 }
 
 /* ---- Boucle live-demo placeholder ---- */

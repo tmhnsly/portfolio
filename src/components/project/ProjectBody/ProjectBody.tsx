@@ -8,7 +8,7 @@ export function ProjectBody({ project }: { project: Project }) {
   return (
     <section className={styles.body}>
       <div className={styles.notes}>
-        <Eyebrow>§ 01 — Notes</Eyebrow>
+        <Eyebrow>Notes</Eyebrow>
         <div className={styles.prose}>
           <Markdown>{project.body}</Markdown>
         </div>

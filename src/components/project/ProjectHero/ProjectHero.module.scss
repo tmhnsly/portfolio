@@ -1,5 +1,4 @@
 @use '../../../styles/mixins/breakpoints' as *;
-@use '../../../styles/mixins/glass' as *;
 
 .hero {
 }
@@ -113,48 +112,4 @@
 
 .metaVal {
   color: var(--text);
-}
-
-/* Links sit beneath the Role/Year/Status meta rows in the same column */
-.linksBlock {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-4);
-  margin-top: var(--space-2);
-}
-
-.links {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-2);
-}
-
-.linkRow {
-  @include glass;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--space-4);
-  padding: var(--space-4) var(--space-5);
-  border-radius: var(--radius-lg);
-  text-decoration: none;
-  transition: background var(--duration-fast) var(--ease-standard);
-
-  &:hover {
-    background: var(--surface-soft);
-  }
-}
-
-.linkLabel {
-  font-family: var(--font-display);
-  font-size: var(--fs-body);
-  font-weight: 500;
-  color: var(--text);
-}
-
-.linkUrl {
-  font-family: var(--font-mono);
-  font-size: var(--fs-caption);
-  color: var(--text-muted);
-  letter-spacing: 0.04em;
 }

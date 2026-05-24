@@ -10,7 +10,7 @@ export function Gallery({ frames }: { frames: GalleryFrame[] }) {
 
   return (
     <section className={styles.gallery}>
-      <Eyebrow>§ 02 — Gallery</Eyebrow>
+      <Eyebrow>Gallery</Eyebrow>
       <div className={styles.grid}>
         {frames.map((frame, i) => (
           <div key={i} className={styles.item}>
