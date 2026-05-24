@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { SITE, COPY } from '@/data';
 import { Marquee } from '@/components/motion/Marquee';
 import { Container } from '../Container';
+import { FullBleed } from '../FullBleed';
 import { FooterFact } from './FooterFact';
 import styles from './Footer.module.scss';
 
@@ -15,8 +16,8 @@ export function Footer() {
 
   return (
     <footer className={styles.footer}>
-      <Container>
-        <div className={styles.bar}>
+      <FullBleed>
+        <div className={styles.rules}>
           <Marquee faded>
             <span className={styles.row}>
               {marqueeItems.map((item, i) => (
@@ -32,6 +33,8 @@ export function Footer() {
             </span>
           </Marquee>
         </div>
+      </FullBleed>
+      <Container>
         <div className={styles.grid}>
           <div className={styles.col}>
             <div className={styles.label}>{SITE.name}</div>
