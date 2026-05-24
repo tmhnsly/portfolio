@@ -19,7 +19,7 @@ export default async function SectionPage({ params }: { params: Promise<{ discip
   return (
     <Container>
       <Stack>
-        <SectionHero discipline={discipline} count={projects.length} intro={section.intro} tools={section.tools} />
+        <SectionHero discipline={discipline} intro={section.intro} tools={section.tools} />
         <ProjectGrid projects={projects} />
         <OtherDisciplines current={discipline} />
       </Stack>

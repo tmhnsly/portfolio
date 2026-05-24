@@ -2,6 +2,8 @@ import type { Metadata } from 'next';
 import { Space_Grotesk, Space_Mono } from 'next/font/google';
 import { ThemeProvider, THEME_SCRIPT } from '@/lib/theme';
 import { Shell } from '@/components/layout/Shell';
+import { getAllProjects } from '@/lib/content';
+import type { Discipline } from '@/types';
 import { COPY } from '@/data';
 import '@radix-ui/colors/sand.css';
 import '@radix-ui/colors/sand-dark.css';
@@ -26,6 +28,9 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  // project counts per discipline — handed to the persistent section eyebrow in the Shell
+  const projectCounts: Partial<Record<Discipline, number>> = {};
+  for (const p of getAllProjects()) projectCounts[p.discipline] = (projectCounts[p.discipline] ?? 0) + 1;
   return (
     <html lang="en" className={`${display.variable} ${mono.variable}`} suppressHydrationWarning>
       <head>
@@ -33,7 +38,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body>
         <ThemeProvider>
-          <Shell>{children}</Shell>
+          <Shell projectCounts={projectCounts}>{children}</Shell>
         </ThemeProvider>
       </body>
     </html>

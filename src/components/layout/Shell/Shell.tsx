@@ -6,6 +6,7 @@ import { DISCIPLINES, isDiscipline } from '@/lib/disciplines';
 import { Nav } from '../Nav';
 import { Footer } from '../Footer';
 import { Bloom } from '../Bloom';
+import { SectionEyebrow } from '@/components/section/SectionEyebrow';
 import styles from './Shell.module.scss';
 
 /** The current "zone" derived from the URL — drives accent, bloom and nav highlight. */
@@ -22,7 +23,13 @@ function zoneFromPath(pathname: string): { discipline?: Discipline; active?: str
  * per route. `usePathname()` resolves during SSR, so the accent is correct on
  * first paint (no flash); the colour transition is only enabled after mount.
  */
-export function Shell({ children }: { children: React.ReactNode }) {
+export function Shell({
+  children,
+  projectCounts,
+}: {
+  children: React.ReactNode;
+  projectCounts: Partial<Record<Discipline, number>>;
+}) {
   const pathname = usePathname();
   const { discipline, active } = zoneFromPath(pathname);
   const accent = discipline ? DISCIPLINES[discipline].color : tomato.tomato9;
@@ -35,7 +42,12 @@ export function Shell({ children }: { children: React.ReactNode }) {
     <div className={styles.shell} style={{ '--accent': accent } as React.CSSProperties}>
       <Bloom zone={discipline ?? 'default'} tint={accent} />
       <Nav active={active} />
-      <main className={styles.content}>{children}</main>
+      <main className={styles.content}>
+        {/* persistent section eyebrow — stays mounted across hub↔hub so it morphs
+            in place (renders null on non-discipline routes) */}
+        <SectionEyebrow counts={projectCounts} />
+        {children}
+      </main>
       <Footer />
     </div>
   );

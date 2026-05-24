@@ -7,23 +7,18 @@ import styles from './SectionHero.module.scss';
 
 export function SectionHero({
   discipline,
-  count,
   intro,
   tools,
 }: {
   discipline: Discipline;
-  count: number;
   intro: string;
   tools: string[];
 }) {
   const d = DISCIPLINES[discipline];
   return (
     <Entrance className={styles.hero}>
-      <EntranceItem>
-        <Eyebrow withDot>
-          Section · {d.route} · {count} projects
-        </Eyebrow>
-      </EntranceItem>
+      {/* the "Section · /code · N projects" eyebrow now lives in
+          app/[discipline]/layout.tsx so it persists + morphs across hubs */}
       <div className={styles.grid}>
         <div className={styles.left}>
           <EntranceTitle className={styles.title}>
