@@ -1,0 +1,1 @@
+export { OtherDisciplines } from './OtherDisciplines';
