@@ -1,6 +1,11 @@
 @mixin glass($surface: var(--surface), $blur: 12px, $saturate: 160%) {
   background: $surface;
   border: 1px solid var(--surface-edge);
-  backdrop-filter: blur($blur) saturate($saturate);
-  -webkit-backdrop-filter: blur($blur) saturate($saturate);
+  // UNPREFIXED + single-function only. The CSS minifier autoprefixes
+  // backdrop-filter for us; writing our own `-webkit-backdrop-filter` made it
+  // DROP the standard property (Chrome/Firefox then got nothing → computed
+  // `none`). Multi-function values (`blur() saturate()`) also get serialised
+  // without a space → invalid. So: one function, no manual prefix.
+  // `$saturate` is kept for call-site API compatibility but intentionally unused.
+  backdrop-filter: blur($blur);
 }
