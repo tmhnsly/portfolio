@@ -272,3 +272,37 @@ Per `docs/design-reference/project/pages/animations.jsx`. Principles:
 - Real media assets beyond what the owner self-hosts (discipline gradients are the
   placeholder until real `src`s are added).
 - Contact form backend (CTA is a `mailto:`/link for now).
+
+## 11. Amendments since the spec
+
+Sections 1–10 are the original approved design (2026-05-24). Two later refinement
+batches changed some of it; the list below is current where it diverges. Code is
+authoritative — see the project memory (`portfolio-build.md`).
+
+- **Nav order:** `code, video, photo, music, sound, blog, about` (`DISCIPLINE_ORDER` matches).
+- **Nav responsiveness:** full inline nav at **≥1200px**; below that a **burger** →
+  glass Radix dropdown, with the "TH Tom Hinsley" watermark kept on the bar. CTA
+  shows "Say hi →" at 1200–1439 and the full email ≥1440. The dropdown is portaled,
+  so the zone `--accent` is set inline on it to match the page.
+- **Section eyebrow → unified breadcrumb:** the per-page eyebrows/breadcrumbs and the
+  persistent `SectionEyebrow` are replaced by ONE persistent `Breadcrumb` in the
+  Shell — a clickable trail with route meta (`Home / Code · 8 projects`,
+  `Home / Code / Chork`, `Home / Blog · N posts`), consistent position on every
+  route; the changing segment + count slide via `Rolling`.
+- **Number/text roll:** the odometer (`RollNumber`, which rendered all 0–9 hidden) is
+  replaced by `Rolling` — a single value sliding by direction in a clipped box
+  (ported from the Chork leaderboard scroller). `Roll`/`RollNumber` removed.
+- **Route motion:** the hero entrance is first-load-only EXCEPT the title, whose
+  mask-reveal replays on every navigation (no full-hero flash).
+- **Colophon → rotating fact:** the `colophon` field is removed from `SiteConfig`; the
+  footer slot shows a short, verified, randomly-picked fact (`src/data/facts.ts` +
+  `FooterFact`). The marquee is a full-bleed ruled ticker (a glass-bar treatment was
+  tried and reverted); its `●` separators take the zone `--accent`.
+- **Tags:** `TechChip` is **mono everywhere** (a discipline colour-coding pass was tried
+  and reverted — the tool→discipline mapping was ambiguous).
+- **Project page:** Live/Repo links sit **below the cover image** (not in the hero meta);
+  the `§ NN —` prefixes on the Notes/Gallery labels are dropped.
+- **Link affordance:** route cards use a shared `LinkArrow` boxicon that nudges right +
+  turns accent on the card's hover (replacing assorted unicode `→`/`↗`).
+- **Self-updating copy:** years-of-experience + footer year derive from dates
+  (`SITE.experienceSince`, `new Date().getFullYear()`), not hardcoded.
