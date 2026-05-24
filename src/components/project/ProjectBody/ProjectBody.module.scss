@@ -1,0 +1,84 @@
+@use '../../../styles/mixins/glass' as *;
+@use '../../../styles/mixins/breakpoints' as *;
+
+.body {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-10);
+  padding: var(--space-10) 0;
+
+  @include desktop-up {
+    grid-template-columns: 1.55fr 1fr;
+    gap: var(--space-12, var(--space-10));
+  }
+}
+
+.notes {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.prose {
+  max-width: 780px;
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+
+.sideSection {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.techList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.techRow {
+  display: flex;
+}
+
+.links {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.linkRow {
+  @include glass;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-4) var(--space-5);
+  border-radius: var(--radius-lg);
+  text-decoration: none;
+  transition: background 0.15s ease;
+
+  &:hover {
+    background: var(--surface-soft);
+  }
+}
+
+.linkLabel {
+  font-family: var(--font-display);
+  font-size: var(--fs-body);
+  font-weight: 500;
+  color: var(--text);
+}
+
+.linkUrl {
+  font-family: var(--font-mono);
+  font-size: var(--fs-caption);
+  color: var(--text-muted);
+  letter-spacing: 0.04em;
+}

@@ -1,0 +1,115 @@
+@use '../../../styles/mixins/breakpoints' as *;
+
+.hero {
+  padding: var(--space-8) 0 var(--space-10);
+}
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-family: var(--font-mono);
+  font-size: var(--fs-caption);
+  color: var(--text-muted);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  margin: 0 0 var(--space-7);
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-8);
+
+  @include desktop-up {
+    grid-template-columns: 1.4fr 1fr;
+    gap: var(--space-10);
+  }
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+}
+
+.pillRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-7);
+  flex-wrap: wrap;
+}
+
+.statusPill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: var(--fs-caption);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.liveUrl {
+  font-family: var(--font-mono);
+  font-size: var(--fs-caption);
+  color: var(--text-muted);
+  letter-spacing: 0.06em;
+}
+
+.title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(var(--fs-display), 12vw, var(--fs-display-xxl));
+  line-height: 0.88;
+  letter-spacing: -0.05em;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.period {
+  color: var(--accent);
+}
+
+.lead {
+  margin: var(--space-6) 0 0;
+  max-width: 620px;
+  font-family: var(--font-display);
+  font-size: var(--fs-h3);
+  line-height: 1.35;
+  color: var(--text-soft);
+  font-weight: 400;
+}
+
+.meta {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: var(--space-5);
+  padding-bottom: var(--space-3);
+}
+
+.metaRow {
+  display: grid;
+  grid-template-columns: 90px 1fr;
+  gap: var(--space-5);
+  padding-bottom: var(--space-4);
+  border-bottom: 1px solid var(--rule-soft);
+  font-family: var(--font-mono);
+  font-size: var(--fs-body);
+}
+
+.metaKey {
+  color: var(--text-muted);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-size: var(--fs-caption);
+}
+
+.metaVal {
+  color: var(--text);
+}

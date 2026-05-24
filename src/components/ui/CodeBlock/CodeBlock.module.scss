@@ -1,0 +1,17 @@
+.block {
+  margin: var(--space-7) 0;
+  padding: 20px 22px;
+  border-radius: var(--radius-lg);
+  background: #1a1c22;
+  color: #e8e6e0;
+  font-family: var(--font-mono);
+  font-size: var(--fs-caption);
+  line-height: 1.7;
+  letter-spacing: var(--ls-mono);
+  box-shadow: var(--shadow-md);
+  overflow-x: auto;
+
+  code {
+    font-family: inherit;
+  }
+}
