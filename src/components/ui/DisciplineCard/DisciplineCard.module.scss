@@ -1,0 +1,83 @@
+@use '../../../styles/mixins/glass' as *;
+@use '../../../styles/mixins/breakpoints' as *;
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--space-3);
+  min-height: 148px;
+  padding: var(--space-4) 18px;
+  border-radius: var(--radius-xl);
+  @include glass(var(--surface-soft), 20px);
+  box-shadow: var(--shadow-sm); /* light resting shadow — keeps text legible over the bloom */
+  text-decoration: none;
+}
+
+/* Hover depth via an opacity-crossfaded pseudo (compositable) instead of
+   animating box-shadow (a repaint every frame). */
+.card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: var(--shadow-md);
+  opacity: 0;
+  transition: opacity var(--duration-hover) var(--ease-standard);
+  pointer-events: none;
+}
+
+.link {
+  transition: transform var(--duration-hover) var(--ease-standard);
+}
+.link:hover {
+  transform: translateY(-6px);
+}
+.link:hover::after {
+  opacity: 1;
+}
+.link:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+@include reduced-motion {
+  .link,
+  .card::after {
+    transition: none;
+  }
+  .link:hover {
+    transform: none;
+  }
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex: none;
+}
+.label {
+  font-family: var(--font-display);
+  font-size: var(--fs-h4);
+  font-weight: 600;
+  letter-spacing: var(--ls-h3);
+  color: var(--text);
+}
+.arrow {
+  margin-left: auto;
+  font-family: var(--font-mono);
+  font-size: var(--fs-mono-s);
+  color: var(--text-muted);
+}
+.tools {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}

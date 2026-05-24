@@ -3,9 +3,12 @@
   transition: transform var(--duration-hover) var(--ease-standard);
   @include reduced-motion { transition: none; } }
 .card:hover { transform: translateY(-6px); }
-.card:hover .media { box-shadow: var(--shadow-lg); }
 @include reduced-motion { .card:hover { transform: none; } }
-.media { box-shadow: var(--shadow-md); transition: box-shadow var(--duration-hover) var(--ease-standard); }
+/* Static, light shadow only. Was md→lg on a `transition: box-shadow`, which
+   repaints every frame and made the lift feel rough; the transform lift alone
+   is the hover feedback now. (`.media` is overflow:hidden so a child pseudo's
+   drop shadow would clip — the element's own box-shadow is fine.) */
+.media { box-shadow: var(--shadow-sm); }
 .hatch { position: absolute; inset: 0; background: var(--overlay-hatch); }
 .number { position: absolute; right: -8px; bottom: -22px; font-family: var(--font-display); font-size: 160px; font-weight: 600; letter-spacing: -0.06em; line-height: 0.9; color: var(--white-a5); z-index: 1; }
 .pillTL { position: absolute; left: 14px; top: 14px; z-index: var(--z-card-overlay); }

@@ -36,36 +36,3 @@
     grid-template-columns: repeat(3, 1fr);
   }
 }
-
-.card {
-  padding: var(--space-4);
-}
-
-.cardHead {
-  display: flex;
-  align-items: center;
-  gap: 9px;
-  margin-bottom: var(--space-3);
-}
-
-.dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  display: block;
-  flex-shrink: 0;
-}
-
-.label {
-  font-family: var(--font-display);
-  font-size: var(--fs-h4);
-  font-weight: 600;
-  letter-spacing: var(--ls-h3);
-  color: var(--text);
-}
-
-.tools {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 4px;
-}
