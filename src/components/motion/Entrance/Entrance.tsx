@@ -1,5 +1,6 @@
 'use client';
 import { useEffect, useState } from 'react';
+import { usePathname } from 'next/navigation';
 import { motion, useReducedMotion } from 'motion/react';
 import { entranceStagger, entranceItem, titleReveal } from '@/lib/motion';
 import styles from './Entrance.module.scss';
@@ -7,14 +8,13 @@ import styles from './Entrance.module.scss';
 /**
  * Shared page-entrance system (one config in lib/motion → tweak everywhere).
  *
- * <Entrance> is the staggered parent. The cinematic reveal plays once, on the
- * first load of the session — on subsequent client navigations the content
- * renders visible immediately (the persistent bloom / --accent morph / eyebrow
- * roll carry the sense of motion), so navigating no longer flashes the whole
- * hero out and back in. The flag is module-scoped, so it survives client
- * navigations but resets on a full page reload.
- * <EntranceItem> = a staggered element (eyebrow / subtitle / cards).
- * <EntranceTitle> = the heading mask-reveal.
+ * <Entrance>/<EntranceItem> play the staggered reveal once, on the first load of
+ * the session — subsequent navigations render the supporting items (lead, cards,
+ * meta) visible immediately, so the whole hero never flashes out and back in.
+ * <EntranceTitle>, however, replays its mask-reveal on EVERY route (keyed on the
+ * pathname): the heading slides up from its clip on each navigation, which gives
+ * routes a considered text entrance without blanking the rest of the hero. The
+ * module-scoped flag resets on a full page reload.
  * All respect prefers-reduced-motion (render plain, no transform).
  */
 let hasEntered = false;
@@ -52,13 +52,24 @@ export function EntranceItem({ children, className }: { children: React.ReactNod
   );
 }
 
-/** The heading itself is the clip (keeps its own margins); the inner slides up. */
+/**
+ * The heading itself is the clip (keeps its own margins); the inner slides up.
+ * Keyed on the pathname + its own initial/animate (decoupled from the parent
+ * stagger) so the mask-reveal replays on every navigation, not just first load.
+ */
 export function EntranceTitle({ children, className }: { children: React.ReactNode; className?: string }) {
+  const pathname = usePathname();
   const reduce = useReducedMotion();
   if (reduce) return <h1 className={className}>{children}</h1>;
   return (
     <h1 className={`${styles.clipTitle} ${className ?? ''}`}>
-      <motion.span className={styles.inner} variants={titleReveal}>
+      <motion.span
+        key={pathname}
+        className={styles.inner}
+        variants={titleReveal}
+        initial="hidden"
+        animate="visible"
+      >
         {children}
       </motion.span>
     </h1>
