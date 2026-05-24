@@ -10,10 +10,10 @@ export const SITE = siteConfigSchema.parse({
   experienceSince: '2021-07',
   nav: [
     { label: 'Code',  href: '/code'  },
+    { label: 'Video', href: '/video' },
+    { label: 'Photo', href: '/photo' },
     { label: 'Music', href: '/music' },
     { label: 'Sound', href: '/sound' },
-    { label: 'Photo', href: '/photo' },
-    { label: 'Video', href: '/video' },
     { label: 'Blog',  href: '/blog'  },
     { label: 'About', href: '/about' },
   ],

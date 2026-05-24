@@ -36,38 +36,35 @@
     display: block;
   }
 }
-.items {
-  display: flex; align-items: center; gap: var(--nav-item-gap);
-  overflow-x: auto;
-  flex-wrap: nowrap;
-  scrollbar-width: none;
-  min-width: 0;
-  flex: 1;
 
-  &::-webkit-scrollbar { display: none; }
+/* ── Desktop inline nav (items + actions) — hidden on mobile (burger takes over) ── */
+.items {
+  display: none;
 
   @include tablet-up {
-    overflow-x: visible;
-    flex: unset;
+    display: flex; align-items: center; gap: var(--nav-item-gap);
+    flex-wrap: nowrap; min-width: 0;
   }
 }
 .item {
-  display: inline-block; padding: var(--nav-item-pad); border-radius: var(--radius-lg);
-  font-size: 13px; font-weight: 500; letter-spacing: -0.005em; color: var(--text);
+  display: inline-block; padding: var(--nav-item-pad-wide); border-radius: var(--radius-lg);
+  font-size: 14px; font-weight: 500; letter-spacing: -0.005em; color: var(--text);
   transition: background var(--duration-fast) var(--ease-standard);
   white-space: nowrap; flex-shrink: 0;
-
-  @include tablet-up {
-    padding: var(--nav-item-pad-wide);
-    font-size: 14px;
-  }
 }
 .item:hover { background: var(--surface-soft); }
 .active, .active:hover { background: var(--text); color: var(--bg); }
-.actions { display: flex; align-items: center; gap: var(--space-2); flex-shrink: 0; }
+
+.actions {
+  display: none;
+
+  @include tablet-up {
+    display: flex; align-items: center; gap: var(--space-2); flex-shrink: 0;
+  }
+}
 .toggle {
   width: var(--control-size); height: var(--control-size); border-radius: var(--radius-lg);
-  color: var(--text-soft);
+  color: var(--text-soft); background: transparent; border: 0; cursor: pointer;
   display: inline-flex; align-items: center; justify-content: center;
   font-size: 19px; /* react-icons render at 1em — controls the svg size */
   flex-shrink: 0;
@@ -75,28 +72,56 @@
 }
 .toggle:hover { background: var(--surface-soft); color: var(--text); }
 .cta {
-  padding: var(--cta-pad); border-radius: var(--radius-lg);
+  padding: var(--cta-pad-wide); border-radius: var(--radius-lg);
   background: var(--accent); color: var(--text-on-accent);
   font-weight: 600; font-size: 14px; letter-spacing: -0.005em; white-space: nowrap;
   box-shadow: 0 6px 18px color-mix(in srgb, var(--accent) 27%, transparent);
   flex-shrink: 0;
-
-  @include tablet-up {
-    padding: var(--cta-pad-wide);
-  }
 }
-/* Mobile: show short label; desktop: show full email */
-.ctaShort {
-  display: inline;
+.ctaFull { display: inline; }
+.ctaShort { display: none; }
 
-  @include tablet-up {
-    display: none;
-  }
-}
-.ctaFull {
-  display: none;
+/* ── Mobile burger → glass dropdown ── */
+.burger {
+  width: var(--control-size); height: var(--control-size); border-radius: var(--radius-lg);
+  color: var(--text-soft); background: transparent; border: 0; cursor: pointer;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-size: 24px; flex-shrink: 0;
+  transition: background var(--duration-fast) var(--ease-standard), color var(--duration-fast) var(--ease-standard);
 
-  @include tablet-up {
-    display: inline;
-  }
+  @include tablet-up { display: none; }
 }
+.burger:hover, .burger[data-state='open'] { background: var(--surface-soft); color: var(--text); }
+
+.menu {
+  min-width: 196px;
+  display: flex; flex-direction: column; gap: 2px;
+  padding: var(--space-2);
+  border-radius: var(--radius-xl);
+  @include glass($surface: var(--glass), $blur: 20px, $border: false);
+  box-shadow: inset 0 1px 0 var(--glass-sheen), var(--shadow-lg);
+  font-family: var(--font-display);
+  z-index: var(--z-overlay);
+  transform-origin: var(--radix-dropdown-menu-content-transform-origin);
+  animation: menuIn var(--duration-fast) var(--ease-standard);
+}
+@include reduced-motion { .menu { animation: none; } }
+@keyframes menuIn {
+  from { opacity: 0; transform: scale(0.96) translateY(-4px); }
+  to   { opacity: 1; transform: none; }
+}
+.menuItem {
+  display: block; padding: 10px 14px; border-radius: var(--radius-lg);
+  font-size: 15px; font-weight: 500; color: var(--text); text-decoration: none; cursor: pointer;
+  outline: none; white-space: nowrap;
+  transition: background var(--duration-fast) var(--ease-standard);
+}
+.menuItem[data-highlighted], .menuItem:hover { background: var(--surface-soft); }
+.menuItemActive, .menuItemActive[data-highlighted] { background: var(--text); color: var(--bg); }
+.menuSep { height: 1px; background: var(--rule-soft); margin: var(--space-2) 4px; }
+.menuCta {
+  display: block; padding: 10px 14px; border-radius: var(--radius-lg);
+  background: var(--accent); color: var(--text-on-accent); text-decoration: none; cursor: pointer;
+  font-size: 15px; font-weight: 600; outline: none; white-space: nowrap;
+}
+.menuCta[data-highlighted] { background: var(--accent-hover); }

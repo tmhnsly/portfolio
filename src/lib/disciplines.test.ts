@@ -3,7 +3,7 @@ import { DISCIPLINES, DISCIPLINE_ORDER, isDiscipline } from './disciplines';
 
 describe('disciplines', () => {
   it('has all six in order', () => {
-    expect(DISCIPLINE_ORDER).toEqual(['code','music','sound','photo','video','blog']);
+    expect(DISCIPLINE_ORDER).toEqual(['code','video','photo','music','sound','blog']);
   });
   it('every entry is self-consistent', () => {
     for (const slug of DISCIPLINE_ORDER) {

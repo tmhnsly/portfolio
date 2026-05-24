@@ -1,6 +1,7 @@
 'use client';
 import Link from 'next/link';
-import { BiMoon, BiSun } from 'react-icons/bi';
+import { BiMoon, BiSun, BiMenu } from 'react-icons/bi';
+import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import { SITE, COPY } from '@/data';
 import { useTheme } from '@/lib/theme';
 import { Container } from '../Container';
@@ -13,6 +14,8 @@ export interface NavProps {
 
 export function Nav({ active }: NavProps) {
   const { theme, toggle } = useTheme();
+  const isActive = (label: string) => active != null && label.toLowerCase() === active.toLowerCase();
+
   return (
     <header className={styles.header}>
       <Container>
@@ -21,22 +24,23 @@ export function Nav({ active }: NavProps) {
             <Link href="/" className={styles.monogram} aria-label={COPY.nav.homeAria}>TH</Link>
             <span className={styles.name}>Tom Hinsley</span>
           </div>
+
+          {/* Desktop: inline items */}
           <ul className={styles.items}>
-            {SITE.nav.map((item) => {
-              const isActive = active != null && item.label.toLowerCase() === active.toLowerCase();
-              return (
-                <li key={item.href}>
-                  <Link
-                    href={item.href}
-                    className={isActive ? `${styles.item} ${styles.active}` : styles.item}
-                    aria-current={isActive ? 'page' : undefined}
-                  >
-                    {item.label}
-                  </Link>
-                </li>
-              );
-            })}
+            {SITE.nav.map((item) => (
+              <li key={item.href}>
+                <Link
+                  href={item.href}
+                  className={isActive(item.label) ? `${styles.item} ${styles.active}` : styles.item}
+                  aria-current={isActive(item.label) ? 'page' : undefined}
+                >
+                  {item.label}
+                </Link>
+              </li>
+            ))}
           </ul>
+
+          {/* Desktop: theme toggle + email CTA */}
           <div className={styles.actions}>
             <button
               type="button"
@@ -51,6 +55,43 @@ export function Nav({ active }: NavProps) {
               <span className={styles.ctaShort} aria-hidden="true">{COPY.nav.sayHi}</span>
             </a>
           </div>
+
+          {/* Mobile: burger → glass dropdown */}
+          <DropdownMenu.Root>
+            <DropdownMenu.Trigger asChild>
+              <button type="button" className={styles.burger} aria-label="Open menu">
+                <BiMenu aria-hidden />
+              </button>
+            </DropdownMenu.Trigger>
+            <DropdownMenu.Portal>
+              <DropdownMenu.Content className={styles.menu} align="end" sideOffset={12} collisionPadding={16}>
+                {SITE.nav.map((item) => (
+                  <DropdownMenu.Item key={item.href} asChild>
+                    <Link
+                      href={item.href}
+                      className={isActive(item.label) ? `${styles.menuItem} ${styles.menuItemActive}` : styles.menuItem}
+                      aria-current={isActive(item.label) ? 'page' : undefined}
+                    >
+                      {item.label}
+                    </Link>
+                  </DropdownMenu.Item>
+                ))}
+                <DropdownMenu.Separator className={styles.menuSep} />
+                <DropdownMenu.Item asChild>
+                  <a href={`mailto:${SITE.email}`} className={styles.menuCta}>{SITE.email} →</a>
+                </DropdownMenu.Item>
+                <DropdownMenu.Item
+                  className={styles.menuItem}
+                  onSelect={(e) => {
+                    e.preventDefault();
+                    toggle();
+                  }}
+                >
+                  {theme === 'dark' ? 'Light mode' : 'Dark mode'}
+                </DropdownMenu.Item>
+              </DropdownMenu.Content>
+            </DropdownMenu.Portal>
+          </DropdownMenu.Root>
         </nav>
       </Container>
     </header>

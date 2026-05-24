@@ -10,5 +10,5 @@ export const DISCIPLINES: Record<Discipline, DisciplineMeta> = {
   blog:  { slug: 'blog',  label: 'Blog',  color: grass.grass9,   gradient: `linear-gradient(135deg, ${grass.grass8}, ${grass.grass12})`,     swatches: [grass.grass6, grass.grass9, grass.grass12],   route: '/blog' },
 };
 
-export const DISCIPLINE_ORDER: Discipline[] = ['code', 'music', 'sound', 'photo', 'video', 'blog'];
+export const DISCIPLINE_ORDER: Discipline[] = ['code', 'video', 'photo', 'music', 'sound', 'blog'];
 export const isDiscipline = (s: string): s is Discipline => Object.prototype.hasOwnProperty.call(DISCIPLINES, s);
