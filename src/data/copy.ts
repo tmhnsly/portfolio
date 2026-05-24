@@ -47,28 +47,28 @@ export const COPY = {
     // AboutHero eyebrow suffix after "About · Tom Hinsley · "
     eyebrowLocation: 'London 51.5°N',
     // AboutHero intro paragraph
-    intro: 'Trained as a designer, now a frontend engineer in London — with side practices in music, sound, photo, video and writing.',
+    intro: 'Frontend developer in London — four years building responsive, accessible interfaces for agencies, a software consultancy and editorial publishers. Sound-design background, still making things in the margins.',
     // AboutHero discipline chips
-    chips: ['Frontend', '3D', 'Generative', 'Music', 'Sound design', 'Photography', 'Video', 'Writing'] as string[],
+    chips: ['Frontend', 'React', 'Next.js', 'TypeScript', 'Accessibility', 'Sound design', 'Photography', 'Writing'] as string[],
 
     // Intro section
     currentlyEyebrow: 'Currently',
     // headline parts — trailing '.' stays in JSX
-    currentlyLead: 'Frontend Engineer at ',
-    currentlyAccent: 'a research lab',
+    currentlyLead: 'Freelance frontend developer, ',
+    currentlyAccent: 'building Chork',
     // note block (two lines separated by <br />)
-    currentlyNote: 'Mostly building research interfaces.\nWorking on side things in the evenings.',
+    currentlyNote: 'Contract frontend for digital publishers, including the Financial Times.\nBuilding Chork — a competition-tracker PWA — on the side.',
     // body paragraphs (rsquo entities written as the real Unicode chars here; JSX can use &rsquo; or the char)
-    bodyPara1: 'I’ve been building things on the web since 2018 — first as a designer, then increasingly as an engineer. My day job is shipping production interfaces; the rest of my time goes into smaller, weirder projects that mix code with sound, image and writing.',
-    bodyPara2: 'Most of what’s here is self-initiated. If something looks like the sort of thing you’d like to commission, send me a note.',
+    bodyPara1: 'I’ve been building for the web for four years — across agencies, a software consultancy and editorial publishers like the Financial Times. Strong React, Next.js and TypeScript foundations, with full-stack capability when a project calls for it.',
+    bodyPara2: 'Most of what’s here is self-initiated — code that wanders into sound, image and writing, which is where the sound-design degree still leaks through. If it looks like the sort of thing you’d want to commission, send me a note.',
 
     // Timeline section
-    timelineEyebrow: '§ Career timeline · scroll-revealed',
+    timelineEyebrow: 'Career timeline',
     // heading — accent period stays in JSX
     timelineHeading: 'Where I’ve been',
 
     // Skills section
-    skillsEyebrow: '§ Tools and craft',
+    skillsEyebrow: 'Tools and craft',
     // heading — accent period stays in JSX
     skillsHeading: 'What I work with',
 

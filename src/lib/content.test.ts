@@ -4,9 +4,9 @@ import { getAllProjects, getProject, getAllPosts } from './content';
 describe('content loaders', () => {
   it('loads + validates projects, derives slug from filename', () => {
     expect(getAllProjects().length).toBeGreaterThan(0);
-    const boucle = getProject('boucle');
-    expect(boucle?.featured).toBe(true);
-    expect(boucle?.body).toContain('Boucle');
+    const chork = getProject('chork');
+    expect(chork?.featured).toBe(true);
+    expect(chork?.body).toContain('Chork');
   });
   it('loads posts and computes reading time when absent', () => {
     const posts = getAllPosts();

@@ -3,7 +3,7 @@ import { toolsByDiscipline } from './tools';
 
 export const SECTIONS: Record<Discipline, { intro: string; tools: string[] }> = {
   code: {
-    intro: 'Production frontend, generative builds and the occasional creative experiment. Things I make on the web.',
+    intro: 'Production frontend for agencies, publishers and product teams — plus the things I build for myself. Responsive, accessible, shipped.',
     tools: toolsByDiscipline.code,
   },
   music: {

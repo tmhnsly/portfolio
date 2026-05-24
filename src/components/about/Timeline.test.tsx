@@ -7,6 +7,8 @@ describe('Timeline', () => {
   it('renders the heading and every entry role', () => {
     render(<Timeline entries={TIMELINE} />);
     expect(screen.getByText(/Where I.ve been/)).toBeInTheDocument();
-    for (const e of TIMELINE) expect(screen.getByText(new RegExp(e.role.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')))).toBeInTheDocument();
+    // getAllByText: some roles are substrings of others (e.g. "Frontend Developer"
+    // ⊂ "Freelance Frontend Developer"), so just assert each role appears at least once.
+    for (const e of TIMELINE) expect(screen.getAllByText(new RegExp(e.role.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'))).length).toBeGreaterThan(0);
   });
 });

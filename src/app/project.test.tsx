@@ -5,10 +5,10 @@ import ProjectPage from './[discipline]/[slug]/page';
 import { getProject } from '@/lib/content';
 
 describe('Project detail', () => {
-  it('renders Boucle', async () => {
-    const p = getProject('boucle')!;
+  it('renders a project', async () => {
+    const p = getProject('chork')!;
     const ui = await ProjectPage({ params: Promise.resolve({ discipline: p.discipline, slug: p.slug }) });
     render(<ThemeProvider>{ui}</ThemeProvider>);
-    expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(/Boucle/);
+    expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(/Chork/);
   });
 });
