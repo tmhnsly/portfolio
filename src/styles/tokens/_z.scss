@@ -1,0 +1,8 @@
+:root {
+  --z-base: 0;        /* page base / background bloom */
+  --z-content: 1;     /* page content above the bloom */
+  --z-card-overlay: 2;/* labels/swatches over a card's media */
+  --z-raised: 10;     /* raised UI within content */
+  --z-nav: 100;       /* sticky nav — above content + raised */
+  --z-overlay: 1000;  /* modals / toasts (future) */
+}

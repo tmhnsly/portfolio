@@ -1,4 +1,4 @@
-.bloom { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 0; contain: paint; }
+.bloom { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: var(--z-base); contain: paint; }
 .primary, .cool, .warm { position: absolute; border-radius: 50%; filter: blur(50px); }
 .primary {
   left: 45%; top: -25%; width: 1040px; height: 1040px;

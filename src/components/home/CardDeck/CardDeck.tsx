@@ -14,9 +14,9 @@ import styles from './CardDeck.module.scss';
 const AUTO_MS = 8000;
 const STACK = [
   { y: 0, scale: 1, rotate: 0, opacity: 1 },
-  { y: 8, scale: 0.98, rotate: 2, opacity: 0.94 },
-  { y: 18, scale: 0.95, rotate: -2, opacity: 0.78 },
-  { y: 32, scale: 0.9, rotate: -4, opacity: 0.5 },
+  { y: 10, scale: 0.97, rotate: 0, opacity: 0.85 },
+  { y: 20, scale: 0.94, rotate: 0, opacity: 0.6 },
+  { y: 30, scale: 0.91, rotate: 0, opacity: 0.4 },
 ];
 const pad = (n: number) => String(n).padStart(2, '0');
 
@@ -87,17 +87,16 @@ export function CardDeck({ items }: { items: Project[] }) {
         }}
       >
         {[3, 2, 1].filter((d) => d < n).map((depth) => {
-          const p = items[(index + depth) % n];
           const s = STACK[depth];
           return (
-            <motion.div key={`slot-${depth}`} className={styles.card} style={{ zIndex: 10 - depth }}
+            <motion.div key={`slot-${depth}`} className={styles.card}
               animate={{ y: s.y, scale: s.scale, rotate: s.rotate, opacity: s.opacity }} transition={transition}>
-              <CardFace project={p} />
+              <div className={styles.face} aria-hidden />
             </motion.div>
           );
         })}
         <AnimatePresence initial={false}>
-          <motion.div key={`front-${index}`} className={`${styles.card} ${styles.cardFront}`} style={{ zIndex: 10, willChange: 'transform' }}
+          <motion.div key={`front-${index}`} className={`${styles.card} ${styles.cardFront}`} style={{ willChange: 'transform' }}
             initial={reduce ? false : { y: STACK[1].y, scale: STACK[1].scale, rotate: STACK[1].rotate, opacity: STACK[1].opacity }}
             animate={{ y: 0, scale: 1, rotate: 0, opacity: 1 }}
             exit={reduce ? { opacity: 0 } : { y: OFFSET.deckExitY, scale: OFFSET.deckExitScale, opacity: 0 }}

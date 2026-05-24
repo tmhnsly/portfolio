@@ -1,7 +1,7 @@
 @use '../../../styles/mixins/glass' as *;
 @use '../../../styles/mixins/breakpoints' as *;
 
-.header { position: sticky; top: 0; z-index: 10; padding-block: var(--space-6); }
+.header { position: sticky; top: 0; z-index: var(--z-nav); padding-block: var(--space-6); }
 .bar {
   display: flex; align-items: center; justify-content: space-between; gap: var(--space-2);
   height: 56px; padding: 10px 10px 10px 12px;

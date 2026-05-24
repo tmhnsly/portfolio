@@ -9,7 +9,7 @@
   @include desktop-up { grid-template-columns: 1.55fr 1fr; } }
 .featured { display: flex; flex-direction: column; gap: var(--space-5); }
 .featuredMedia { box-shadow: var(--shadow-lg); }
-.pillTL { position: absolute; left: 18px; top: 18px; z-index: 2; }
+.pillTL { position: absolute; left: 18px; top: 18px; z-index: var(--z-card-overlay); }
 .featuredMeta { display: flex; align-items: flex-end; justify-content: space-between; gap: var(--space-6); }
 .featuredTitle { font-family: var(--font-display); font-size: var(--fs-h2); font-weight: 600; letter-spacing: -0.028em; line-height: 1.05; color: var(--text); }
 .featuredDesc { font-size: var(--fs-body); color: var(--text-soft); line-height: 1.4; margin-top: 6px; }
@@ -19,7 +19,7 @@
 .thumb { display: grid; grid-template-columns: 100px 1fr; gap: var(--space-4); align-items: center;
   @include tablet-up { grid-template-columns: 140px 1fr; }
   padding: 10px; border-radius: var(--radius-xl); border: 1px solid var(--surface-edge); background: var(--surface-soft); }
-.pillSm { position: absolute; left: 8px; top: 8px; z-index: 2; }
+.pillSm { position: absolute; left: 8px; top: 8px; z-index: var(--z-card-overlay); }
 .thumbMeta { display: flex; flex-direction: column; gap: var(--space-2); }
 .thumbTitle { font-family: var(--font-display); font-size: var(--fs-h4); font-weight: 600; letter-spacing: -0.025em; color: var(--text); }
 .thumbDesc { font-size: var(--fs-caption); color: var(--text-soft); line-height: 1.4; }
