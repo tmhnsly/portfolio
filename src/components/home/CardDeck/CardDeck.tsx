@@ -7,6 +7,7 @@ import type { Project } from '@/types';
 import { EASING } from '@/lib/motion';
 import { IMG_SIZES } from '@/lib/breakpoints';
 import { projectPresentation } from '@/lib/project-presentation';
+import { rotate, rotateTo, swipeDir } from '@/lib/deck';
 import { Media } from '@/components/ui/Media';
 import { Pill } from '@/components/ui/Pill';
 import { Button } from '@/components/ui/Button';
@@ -75,15 +76,14 @@ export function CardDeck({ items }: { items: Project[] }) {
     if (now < lockUntil.current) return;
     lockUntil.current = now + 380;
     setDir(d);
-    setOrder((o) => (d < 0 ? [...o.slice(1), o[0]] : [o[o.length - 1], ...o.slice(0, -1)]));
+    setOrder((o) => rotate(o, d));
   }, []);
 
   const jumpTo = useCallback((itemIndex: number) => {
     setOrder((o) => {
-      const k = o.indexOf(itemIndex);
-      if (k <= 0) return o;
-      setDir(-1);
-      return [...o.slice(k), ...o.slice(0, k)];
+      const next = rotateTo(o, itemIndex);
+      if (next !== o) setDir(-1); // only when it actually moves
+      return next;
     });
   }, []);
 
@@ -109,8 +109,8 @@ export function CardDeck({ items }: { items: Project[] }) {
   };
 
   const onDragEnd = (_e: unknown, info: PanInfo) => {
-    if (info.offset.x < -SWIPE_DIST || info.velocity.x < -SWIPE_VELOCITY) advance(-1);
-    else if (info.offset.x > SWIPE_DIST || info.velocity.x > SWIPE_VELOCITY) advance(1);
+    const d = swipeDir(info.offset.x, info.velocity.x, SWIPE_DIST, SWIPE_VELOCITY);
+    if (d) advance(d);
   };
 
   return (
