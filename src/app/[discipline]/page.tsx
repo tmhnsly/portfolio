@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation';
 import { isDiscipline, DISCIPLINE_ORDER } from '@/lib/disciplines';
-import { getAllProjects } from '@/lib/content';
+import { projectsInDiscipline } from '@/lib/content';
 import { SECTIONS } from '@/data';
 import { Container, Stack } from '@/components/layout';
 import { SectionHero } from '@/components/section/SectionHero';
@@ -14,7 +14,7 @@ export function generateStaticParams() {
 export default async function SectionPage({ params }: { params: Promise<{ discipline: string }> }) {
   const { discipline } = await params;
   if (!isDiscipline(discipline)) notFound();
-  const projects = getAllProjects().filter((p) => p.discipline === discipline);
+  const projects = projectsInDiscipline(discipline);
   const section = SECTIONS[discipline];
   return (
     <Container>
