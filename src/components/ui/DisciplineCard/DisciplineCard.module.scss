@@ -40,7 +40,7 @@
   }
 }
 .link:focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 2px solid var(--accent-ink);
   outline-offset: 3px;
 }
 
@@ -81,7 +81,7 @@
 }
 /* nudge + accent on hover to signal the card is a link */
 @include can-hover {
-  .link:hover .arrow { transform: translateX(3px); color: var(--accent); }
+  .link:hover .arrow { transform: translateX(3px); color: var(--accent-ink); }
 }
 .tools {
   display: flex;

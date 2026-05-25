@@ -45,7 +45,7 @@ export function RecentWork({ projects }: { projects: Project[] }) {
           <div className={styles.featuredMeta}>
             <div className={styles.featuredTitle}>{featured.title}</div>
             {featured.desc && <div className={styles.featuredDesc}>{featured.desc}</div>}
-            <span className={styles.pill}><Pill label={`${fd.label} — featured`} tone="discipline" color={fd.color} /></span>
+            <span className={styles.pill}><Pill label={`${fd.label} — featured`} tone="discipline" color={fd.color} onColor={fd.onAccent} /></span>
           </div>
         </Link>
         <div className={styles.thumbs}>
@@ -60,7 +60,7 @@ export function RecentWork({ projects }: { projects: Project[] }) {
                 <div className={styles.thumbMeta}>
                   <div className={styles.thumbTitle}>{p.title}</div>
                   {p.desc && <div className={styles.thumbDesc}>{p.desc}</div>}
-                  <span className={styles.pill}><Pill label={d.label} tone="discipline" color={d.color} /></span>
+                  <span className={styles.pill}><Pill label={d.label} tone="discipline" color={d.color} onColor={d.onAccent} /></span>
                 </div>
               </Link>
             );

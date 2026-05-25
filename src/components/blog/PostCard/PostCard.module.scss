@@ -20,7 +20,7 @@
 
   @include can-hover {
     &:hover .title {
-      color: var(--accent);
+      color: var(--accent-ink);
     }
   }
 }
@@ -115,5 +115,5 @@
 }
 /* nudge + accent on hover to signal the row is a link */
 @include can-hover {
-  .row:hover .arrow { transform: translateX(3px); color: var(--accent); }
+  .row:hover .arrow { transform: translateX(3px); color: var(--accent-ink); }
 }

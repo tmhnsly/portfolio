@@ -3,7 +3,6 @@ import Link from 'next/link';
 import type { IconType } from 'react-icons';
 import { BiMoon, BiSun, BiMenu, BiCodeAlt, BiVideo, BiCamera, BiMusic, BiHeadphone, BiPencil, BiUser } from 'react-icons/bi';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
-import { tomato } from '@radix-ui/colors';
 import { SITE, COPY } from '@/data';
 import { DISCIPLINES, isDiscipline } from '@/lib/disciplines';
 import { useTheme } from '@/lib/theme';
@@ -31,8 +30,11 @@ export function Nav({ active }: NavProps) {
   const { theme, toggle } = useTheme();
   const isActive = (label: string) => active != null && label.toLowerCase() === active.toLowerCase();
   // The dropdown portals to <body>, outside the Shell's --accent scope, so set
-  // the zone accent inline on the Content (mirrors how the Shell derives it).
-  const accent = active && isDiscipline(active) ? DISCIPLINES[active].color : tomato.tomato9;
+  // the zone accent + ink + on-accent inline on the Content (mirrors the Shell).
+  const zone = active && isDiscipline(active) ? DISCIPLINES[active] : null;
+  const accent = zone ? zone.color : 'var(--tomato-9)';
+  const accentInk = zone ? zone.ink : 'var(--tomato-11)';
+  const onAccent = zone ? zone.onAccent : 'var(--white-a12)';
 
   return (
     <header className={styles.header}>
@@ -88,7 +90,7 @@ export function Nav({ active }: NavProps) {
                 align="end"
                 sideOffset={12}
                 collisionPadding={16}
-                style={{ '--accent': accent } as React.CSSProperties}
+                style={{ '--accent': accent, '--accent-ink': accentInk, '--on-accent': onAccent } as React.CSSProperties}
               >
                 {SITE.nav.map((item) => {
                   const Icon = NAV_ICONS[item.href];

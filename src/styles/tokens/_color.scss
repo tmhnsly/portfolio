@@ -7,6 +7,14 @@
   inherits: true;
   initial-value: #e54d2e; /* tomato-9 */
 }
+/* --accent-ink = the legible coloured-TEXT version (Radix step-11). Registered
+   so it crossfades with --accent on zone change. Used for periods, links, focus
+   rings — anything where the accent is foreground text on the page. */
+@property --accent-ink {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #ca3214; /* tomato-11 */
+}
 
 :root {
   /* surfaces / backgrounds */
@@ -38,6 +46,8 @@
   /* accent (tomato default; the Shell overrides --accent per zone). --accent-glow
      is derived so it crossfades along with --accent during zone transitions. */
   --accent: var(--tomato-9);
+  --accent-ink: var(--tomato-11);   /* legible coloured text (the Shell sets it per zone) */
+  --on-accent: var(--white-a12);    /* text on the accent fill (dark for light hues) */
   --accent-hover: var(--tomato-10);
   --accent-subtle: var(--tomato-3);
   --accent-glow: color-mix(in srgb, var(--accent) 25%, transparent);

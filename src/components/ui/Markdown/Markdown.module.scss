@@ -29,7 +29,7 @@
 }
 
 .a {
-  color: var(--accent);
+  color: var(--accent-ink);
   text-decoration: underline;
   text-underline-offset: 2px;
 }
@@ -37,7 +37,7 @@
 .quote {
   margin: var(--space-8) 0;
   padding: var(--space-6) var(--space-7);
-  border-left: 3px solid var(--accent);
+  border-left: 3px solid var(--accent-ink);
   background: var(--surface-soft);
   border-radius: var(--radius-md);
   font-size: var(--fs-h3);

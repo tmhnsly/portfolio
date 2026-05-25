@@ -25,11 +25,11 @@
   display: flex; align-items: center; gap: var(--space-3); flex-shrink: 0;
   text-decoration: none; color: inherit; border-radius: var(--radius-md);
 }
-.brand:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+.brand:focus-visible { outline: 2px solid var(--accent-ink); outline-offset: 4px; }
 @include can-hover { .brand:hover .monogram { transform: scale(1.06); } }
 .monogram {
   width: 30px; height: 30px; border-radius: var(--radius-md);
-  background: var(--accent); color: var(--text-on-accent);
+  background: var(--accent); color: var(--on-accent, var(--text-on-accent));
   display: inline-flex; align-items: center; justify-content: center;
   font-weight: 700; font-size: 14px; letter-spacing: -0.02em;
   flex-shrink: 0;
@@ -78,7 +78,7 @@
 @include can-hover { .toggle:hover { background: var(--surface-soft); color: var(--text); } }
 .cta {
   padding: var(--cta-pad-wide); border-radius: var(--radius-lg);
-  background: var(--accent); color: var(--text-on-accent);
+  background: var(--accent); color: var(--on-accent, var(--text-on-accent));
   font-weight: 600; font-size: 14px; letter-spacing: -0.005em; white-space: nowrap;
   box-shadow: 0 6px 18px color-mix(in srgb, var(--accent) 27%, transparent);
   flex-shrink: 0;
@@ -137,7 +137,7 @@
 .menuSep { height: 1px; background: var(--rule-soft); margin: var(--space-2) 4px; }
 .menuCta {
   display: block; padding: 10px 14px; border-radius: var(--radius-lg);
-  background: var(--accent); color: var(--text-on-accent); text-decoration: none; cursor: pointer;
+  background: var(--accent); color: var(--on-accent, var(--text-on-accent)); text-decoration: none; cursor: pointer;
   font-size: 15px; font-weight: 600; outline: none; white-space: nowrap;
 }
 /* derive the hover from --accent (set inline on the portaled Content) so the

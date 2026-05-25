@@ -9,7 +9,7 @@
   @include tablet-up { font-size: clamp(44px, 6.5vw, var(--fs-display-l)); }
   @include desktop-up { font-size: clamp(var(--fs-display-l), 9vw, var(--fs-display-xxl)); } }
 .muted { color: var(--text-soft); font-weight: 500; }
-.period { color: var(--accent); }
+.period { color: var(--accent-ink); }
 .sub { margin-top: var(--space-7); max-width: 580px; font-size: var(--fs-body-l); color: var(--text-soft); line-height: var(--lh-body); }
 .deckCol { display: flex; flex-direction: column; gap: var(--space-4); width: 100%; max-width: 440px;
   @include tablet-up { justify-self: end; } }

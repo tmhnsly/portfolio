@@ -30,5 +30,5 @@
 }
 /* nudge + accent on hover to signal the card is a link */
 @include can-hover {
-  .link:hover .arrow { transform: translateX(3px); color: var(--accent); }
+  .link:hover .arrow { transform: translateX(3px); color: var(--accent-ink); }
 }

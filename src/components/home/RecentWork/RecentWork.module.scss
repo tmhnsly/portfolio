@@ -5,7 +5,7 @@
   padding-bottom: var(--space-6); border-bottom: 1px solid var(--rule-soft); flex-wrap: wrap; }
 .title { margin: var(--space-2) 0 0; font-family: var(--font-display); font-weight: 600;
   font-size: clamp(40px, 8vw, 68px); letter-spacing: var(--ls-display-l); line-height: var(--lh-display); color: var(--text); }
-.period { color: var(--accent); }
+.period { color: var(--accent-ink); }
 .grid { margin-top: var(--space-7); display: grid; grid-template-columns: 1fr; gap: var(--space-7);
   @include desktop-up { grid-template-columns: 1.55fr 1fr; } }
 .featured { display: flex; flex-direction: column; gap: var(--space-5); }
@@ -32,7 +32,7 @@
 .arrow { color: var(--text-soft); }
 @include can-hover {
   .featured:hover .arrow,
-  .thumb:hover .arrow { transform: translateX(3px); color: var(--accent); }
+  .thumb:hover .arrow { transform: translateX(3px); color: var(--accent-ink); }
 }
 .thumbs { display: flex; flex-direction: column; gap: var(--space-4); }
 .thumb { display: grid; grid-template-columns: 100px 1fr; gap: var(--space-4); align-items: center;

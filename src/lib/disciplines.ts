@@ -1,14 +1,48 @@
-import { tomato, indigo, iris, brown, cyan, grass } from '@radix-ui/colors';
 import type { Discipline, DisciplineMeta } from '@/types';
 
-export const DISCIPLINES: Record<Discipline, DisciplineMeta> = {
-  code:  { slug: 'code',  label: 'Code',  color: tomato.tomato9, gradient: `linear-gradient(135deg, ${tomato.tomato8}, ${tomato.tomato12})`, swatches: [tomato.tomato6, tomato.tomato9, tomato.tomato12], route: '/code' },
-  music: { slug: 'music', label: 'Music', color: indigo.indigo9, gradient: `linear-gradient(135deg, ${indigo.indigo8}, ${indigo.indigo12})`, swatches: [indigo.indigo6, indigo.indigo9, indigo.indigo12], route: '/music' },
-  sound: { slug: 'sound', label: 'Sound', color: iris.iris9,     gradient: `linear-gradient(135deg, ${iris.iris8}, ${iris.iris12})`,         swatches: [iris.iris6, iris.iris9, iris.iris12],         route: '/sound' },
-  photo: { slug: 'photo', label: 'Photo', color: brown.brown9,   gradient: `linear-gradient(135deg, ${brown.brown8}, ${brown.brown12})`,     swatches: [brown.brown6, brown.brown9, brown.brown12],   route: '/photo' },
-  video: { slug: 'video', label: 'Video', color: cyan.cyan9,     gradient: `linear-gradient(135deg, ${cyan.cyan8}, ${cyan.cyan12})`,         swatches: [cyan.cyan6, cyan.cyan9, cyan.cyan12],         route: '/video' },
-  blog:  { slug: 'blog',  label: 'Blog',  color: grass.grass9,   gradient: `linear-gradient(135deg, ${grass.grass8}, ${grass.grass12})`,     swatches: [grass.grass6, grass.grass9, grass.grass12],   route: '/blog' },
+/**
+ * Each discipline maps to a Radix hue. Colours are emitted as CSS vars
+ * (`var(--{hue}-N)`) so they theme-swap with the Radix light/dark scales —
+ * step 9 = solid fill (pills/nav/bloom), step 11 = legible coloured text
+ * (periods/links), per the Radix scale. To recolour a discipline, change its
+ * hue here AND import that hue's scale in `src/app/layout.tsx`.
+ * blog uses `tomato` = the primary brand accent.
+ */
+const HUE: Record<Discipline, string> = {
+  code: 'green',
+  music: 'teal',
+  sound: 'blue',
+  photo: 'yellow',
+  video: 'orange',
+  blog: 'tomato',
 };
 
+const LABEL: Record<Discipline, string> = {
+  code: 'Code', music: 'Music', sound: 'Sound', photo: 'Photo', video: 'Video', blog: 'Blog',
+};
+
+/** Hues whose step-9 solid is light → need DARK text on the pill (else white). */
+const LIGHT_SOLID = new Set(['yellow', 'amber', 'orange', 'gold', 'lime', 'mint', 'sky']);
+
+function meta(slug: Discipline): DisciplineMeta {
+  const h = HUE[slug];
+  return {
+    slug,
+    label: LABEL[slug],
+    color: `var(--${h}-9)`,
+    ink: `var(--${h}-11)`,
+    onAccent: LIGHT_SOLID.has(h) ? 'var(--gray-12)' : 'var(--white-a12)',
+    gradient: `linear-gradient(135deg, var(--${h}-8), var(--${h}-12))`,
+    swatches: [`var(--${h}-6)`, `var(--${h}-9)`, `var(--${h}-12)`],
+    route: `/${slug}`,
+  };
+}
+
 export const DISCIPLINE_ORDER: Discipline[] = ['code', 'video', 'photo', 'music', 'sound', 'blog'];
-export const isDiscipline = (s: string): s is Discipline => Object.prototype.hasOwnProperty.call(DISCIPLINES, s);
+
+export const DISCIPLINES = Object.fromEntries(
+  (Object.keys(HUE) as Discipline[]).map((d) => [d, meta(d)]),
+) as Record<Discipline, DisciplineMeta>;
+
+export const isDiscipline = (s: string): s is Discipline =>
+  Object.prototype.hasOwnProperty.call(DISCIPLINES, s);

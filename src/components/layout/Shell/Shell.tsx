@@ -1,6 +1,5 @@
 'use client';
 import { usePathname } from 'next/navigation';
-import { tomato } from '@radix-ui/colors';
 import type { Discipline } from '@/types';
 import { DISCIPLINES, isDiscipline } from '@/lib/disciplines';
 import { Nav } from '../Nav';
@@ -36,14 +35,21 @@ export function Shell({
 }) {
   const pathname = usePathname();
   const { discipline, active } = zoneFromPath(pathname);
-  const accent = discipline ? DISCIPLINES[discipline].color : tomato.tomato9;
+  const meta = discipline ? DISCIPLINES[discipline] : null;
+  // default zone (home/about) = tomato brand accent
+  const accent = meta ? meta.color : 'var(--tomato-9)';
+  const accentInk = meta ? meta.ink : 'var(--tomato-11)';
+  const onAccent = meta ? meta.onAccent : 'var(--white-a12)';
 
   // The accent transition (Shell.module.scss) only fires on a *change* of
-  // --accent. On first load the value is already in the SSR'd inline style, so
-  // CSS doesn't transition it — no flash, no load animation. It animates only
-  // when navigation swaps the value.
+  // --accent/--accent-ink. On first load the values are already in the SSR'd
+  // inline style, so CSS doesn't transition them — no flash. They animate only
+  // when navigation swaps the values.
   return (
-    <div className={styles.shell} style={{ '--accent': accent } as React.CSSProperties}>
+    <div
+      className={styles.shell}
+      style={{ '--accent': accent, '--accent-ink': accentInk, '--on-accent': onAccent } as React.CSSProperties}
+    >
       <Bloom zone={discipline ?? 'default'} tint={accent} />
       <Nav active={active} />
       <main className={styles.content}>

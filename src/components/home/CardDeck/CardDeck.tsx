@@ -41,7 +41,7 @@ function CardFace({ project }: { project: Project }) {
       <div className={styles.meta}>
         <div className={styles.title}>{project.title}</div>
         {project.desc && <div className={styles.desc}>{project.desc}</div>}
-        <span className={styles.pill}><Pill label={d.label} tone="discipline" color={d.color} /></span>
+        <span className={styles.pill}><Pill label={d.label} tone="discipline" color={d.color} onColor={d.onAccent} /></span>
       </div>
     </Link>
   );

@@ -5,7 +5,11 @@ export type Discipline = z.infer<typeof disciplineSchema>;
 
 // Static map shape (not parsed from content — implemented by a later disciplines map).
 export interface DisciplineMeta {
-  slug: Discipline; label: string; color: string; gradient: string;
+  slug: Discipline; label: string;
+  color: string;     // step-9 solid (pill/nav/bloom fill) — a CSS var, theme-aware
+  ink: string;       // step-11 — the legible coloured-text version (periods, links)
+  onAccent: string;  // text colour on the step-9 fill (white, or dark for light hues)
+  gradient: string;
   swatches: [string, string, string]; route: string;
 }
 

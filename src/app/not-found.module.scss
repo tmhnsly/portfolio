@@ -3,11 +3,11 @@
 .code { margin: var(--space-6) 0 0; font-family: var(--font-display); font-weight: 600;
   font-size: clamp(96px, 22vw, var(--fs-display-xxl)); letter-spacing: var(--ls-display-xxl);
   line-height: var(--lh-display); color: var(--text); }
-.period { color: var(--accent); }
+.period { color: var(--accent-ink); }
 .urlbar { margin-top: var(--space-5); display: inline-flex; padding: 10px 16px; border-radius: var(--radius-lg);
   border: 1px solid var(--rule-soft); background: var(--surface-soft); font-family: var(--font-mono);
   font-size: var(--fs-mono); color: var(--text-muted); }
-.path { color: var(--accent); }
+.path { color: var(--accent-ink); }
 .lead { margin-top: var(--space-6); font-size: var(--fs-body-l); color: var(--text-soft); }
 .grid { margin-top: var(--space-8); display: grid; grid-template-columns: 1fr; gap: var(--space-3);
   @include tablet-up { grid-template-columns: repeat(2, 1fr); }

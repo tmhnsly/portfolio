@@ -15,6 +15,18 @@ import '@radix-ui/colors/tomato.css';
 import '@radix-ui/colors/tomato-dark.css';
 import '@radix-ui/colors/tomato-alpha.css';
 import '@radix-ui/colors/tomato-dark-alpha.css';
+/* discipline hue scales (light + dark) — each discipline maps to one in
+   src/lib/disciplines.ts; add a scale here to make a new hue available to swap to. */
+import '@radix-ui/colors/green.css';
+import '@radix-ui/colors/green-dark.css';
+import '@radix-ui/colors/teal.css';
+import '@radix-ui/colors/teal-dark.css';
+import '@radix-ui/colors/blue.css';
+import '@radix-ui/colors/blue-dark.css';
+import '@radix-ui/colors/yellow.css';
+import '@radix-ui/colors/yellow-dark.css';
+import '@radix-ui/colors/orange.css';
+import '@radix-ui/colors/orange-dark.css';
 import '@radix-ui/colors/white-alpha.css';
 import '@radix-ui/colors/black-alpha.css';
 import './globals.scss';

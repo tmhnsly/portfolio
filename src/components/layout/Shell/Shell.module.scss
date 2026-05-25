@@ -14,7 +14,8 @@
      accent text crossfade together). --accent is a registered @property, so this
      actually interpolates. Doesn't run on first load (no value change). A longer
      duration + ease-in-out (smooth) makes navigating ease gently rather than snap. */
-  transition: --accent var(--duration-zone) var(--ease-smooth);
+  transition: --accent var(--duration-zone) var(--ease-smooth),
+              --accent-ink var(--duration-zone) var(--ease-smooth);
 }
 @include reduced-motion {
   .shell {
