@@ -53,6 +53,7 @@ export type BlogPost = PostFrontmatter & { slug: string; body: string; readingTi
 export const timelineEntrySchema = z.object({
   id: z.string(), period: z.string(), role: z.string(), place: z.string(),
   description: z.string(), tags: z.array(z.string()), accent: z.string(),
+  companyUrl: z.string().optional(), // links the company name in `place` (see data/companies.ts)
 });
 export type TimelineEntry = z.infer<typeof timelineEntrySchema>;
 
