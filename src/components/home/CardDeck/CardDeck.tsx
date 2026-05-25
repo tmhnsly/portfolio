@@ -6,7 +6,7 @@ import { BiChevronLeft, BiChevronRight } from 'react-icons/bi';
 import type { Project } from '@/types';
 import { EASING } from '@/lib/motion';
 import { IMG_SIZES } from '@/lib/breakpoints';
-import { DISCIPLINES } from '@/lib/disciplines';
+import { projectPresentation } from '@/lib/project-presentation';
 import { Media } from '@/components/ui/Media';
 import { Pill } from '@/components/ui/Pill';
 import { Button } from '@/components/ui/Button';
@@ -26,13 +26,13 @@ const stackSpring = { type: 'spring', stiffness: 240, damping: 30, mass: 1 } as 
 const pad = (n: number) => String(n).padStart(2, '0');
 
 function CardFace({ project }: { project: Project }) {
-  const d = DISCIPLINES[project.discipline];
+  const p = projectPresentation(project);
   return (
     // The whole front card links to the project. A flick drags the card and Motion
     // suppresses the trailing click, so only a real (non-dragged) click navigates.
-    <Link href={`/${project.discipline}/${project.slug}`} className={styles.face} draggable={false}>
+    <Link href={p.href} className={styles.face} draggable={false}>
       <Media
-        grad={d.gradient}
+        grad={p.gradient}
         src={project.cover?.src}
         alt={project.cover?.alt ?? project.title}
         ratio="5/4"
@@ -42,7 +42,7 @@ function CardFace({ project }: { project: Project }) {
       <div className={styles.meta}>
         <div className={styles.title}>{project.title}</div>
         {project.desc && <div className={styles.desc}>{project.desc}</div>}
-        <span className={styles.pill}><Pill label={d.label} tone="discipline" color={d.color} onColor={d.onAccent} /></span>
+        <span className={styles.pill}><Pill label={p.label} tone="discipline" color={p.color} onColor={p.onColor} /></span>
       </div>
     </Link>
   );

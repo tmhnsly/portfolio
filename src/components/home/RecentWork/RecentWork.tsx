@@ -3,6 +3,7 @@ import { useMemo, useState } from 'react';
 import Link from 'next/link';
 import type { Project } from '@/types';
 import { DISCIPLINE_ORDER, DISCIPLINES } from '@/lib/disciplines';
+import { projectPresentation } from '@/lib/project-presentation';
 import { IMG_SIZES } from '@/lib/breakpoints';
 import { COPY } from '@/data';
 import { Eyebrow } from '@/components/ui/Eyebrow';
@@ -26,7 +27,7 @@ export function RecentWork({ projects }: { projects: Project[] }) {
   const featured = filtered.find((p) => p.featured) ?? filtered[0];
   const thumbs = filtered.filter((p) => p !== featured).slice(0, 3);
   if (!featured) return null;
-  const fd = DISCIPLINES[featured.discipline];
+  const fp = projectPresentation(featured);
 
   return (
     <section className={styles.section}>
@@ -38,30 +39,30 @@ export function RecentWork({ projects }: { projects: Project[] }) {
         <FilterPills items={filters} active={active} onSelect={setActive} />
       </div>
       <div className={styles.grid}>
-        <Link href={`/${featured.discipline}/${featured.slug}`} className={styles.featured}>
-          <Media grad={fd.gradient} src={featured.cover?.src} alt={featured.cover?.alt ?? featured.title}
+        <Link href={fp.href} className={styles.featured}>
+          <Media grad={fp.gradient} src={featured.cover?.src} alt={featured.cover?.alt ?? featured.title}
             ratio="16/10" sizes={IMG_SIZES.full} className={styles.featuredMedia}>
             <span className={styles.arrowTR}><LinkArrow className={styles.arrow} /></span>
           </Media>
           <div className={styles.featuredMeta}>
             <div className={styles.featuredTitle}>{featured.title}</div>
             {featured.desc && <div className={styles.featuredDesc}>{featured.desc}</div>}
-            <span className={styles.pill}><Pill label={`${fd.label} — featured`} tone="discipline" color={fd.color} onColor={fd.onAccent} /></span>
+            <span className={styles.pill}><Pill label={`${fp.label} — featured`} tone="discipline" color={fp.color} onColor={fp.onColor} /></span>
           </div>
         </Link>
         <div className={styles.thumbs}>
           {thumbs.map((p) => {
-            const d = DISCIPLINES[p.discipline];
+            const tp = projectPresentation(p);
             return (
-              <Link key={p.slug} href={`/${p.discipline}/${p.slug}`} className={styles.thumb}>
-                <Media grad={d.gradient} src={p.cover?.src} alt={p.cover?.alt ?? p.title}
+              <Link key={p.slug} href={tp.href} className={styles.thumb}>
+                <Media grad={tp.gradient} src={p.cover?.src} alt={p.cover?.alt ?? p.title}
                   ratio="4/3" sizes={IMG_SIZES.thumb} className={styles.thumbMedia}>
                   <span className={styles.arrowTRSm}><LinkArrow className={styles.arrow} /></span>
                 </Media>
                 <div className={styles.thumbMeta}>
                   <div className={styles.thumbTitle}>{p.title}</div>
                   {p.desc && <div className={styles.thumbDesc}>{p.desc}</div>}
-                  <span className={styles.pill}><Pill label={d.label} tone="discipline" color={d.color} onColor={d.onAccent} /></span>
+                  <span className={styles.pill}><Pill label={tp.label} tone="discipline" color={tp.color} onColor={tp.onColor} /></span>
                 </div>
               </Link>
             );
