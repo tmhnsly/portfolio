@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { Space_Grotesk, Space_Mono } from 'next/font/google';
 import { ThemeProvider, THEME_SCRIPT } from '@/lib/theme';
 import { Shell } from '@/components/layout/Shell';
-import { disciplineCounts, titleMap, postCount } from '@/lib/content';
+import { breadcrumbData } from '@/lib/content';
 import { COPY } from '@/data';
 import '@radix-ui/colors/sand.css';
 import '@radix-ui/colors/sand-dark.css';
@@ -48,7 +48,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body>
         <ThemeProvider>
-          <Shell projectCounts={disciplineCounts()} titleMap={titleMap()} postCount={postCount()}>
+          <Shell breadcrumbData={breadcrumbData()}>
             {children}
           </Shell>
         </ThemeProvider>
