@@ -7,12 +7,15 @@
   background: var(--bg);
   color: var(--text);
   /* Morph the accent across the whole app on a zone change by interpolating
-     from→to in OKLCH (hue stays saturated — no muddy sRGB midpoints), driven by
-     --zone-mix (0→1, animated by the Shell). from/to/--zone-mix are set inline;
-     consumers just read var(--accent)/var(--accent-ink). Being unregistered, these
-     also re-resolve the Radix scale on a dark/light toggle. */
-  --accent: color-mix(in oklch, var(--accent-from, var(--tomato-9)), var(--accent-to, var(--tomato-9)) calc(var(--zone-mix, 1) * 100%));
-  --accent-ink: color-mix(in oklch, var(--accent-ink-from, var(--tomato-11)), var(--accent-ink-to, var(--tomato-11)) calc(var(--zone-mix, 1) * 100%));
+     from→to in OKLab, driven by --zone-mix (0→1, animated by the Shell). OKLab is
+     Cartesian (L/a/b), so it takes a STRAIGHT line between the two colours — a
+     direct cross-fade. OKLCH (cylindrical) was wrong here: it interpolates hue as
+     an angle, so e.g. green→tomato swept the whole wheel through vivid yellow and
+     orange. OKLab also avoids sRGB's dark/muddy midpoints. from/to/--zone-mix are
+     set inline; consumers just read var(--accent)/var(--accent-ink). Being
+     unregistered, these also re-resolve the Radix scale on a dark/light toggle. */
+  --accent: color-mix(in oklab, var(--accent-from, var(--tomato-9)), var(--accent-to, var(--tomato-9)) calc(var(--zone-mix, 1) * 100%));
+  --accent-ink: color-mix(in oklab, var(--accent-ink-from, var(--tomato-11)), var(--accent-ink-to, var(--tomato-11)) calc(var(--zone-mix, 1) * 100%));
   /* Derive the accent glow HERE (where --accent is the zone colour), not at
      :root — at :root var(--accent) is still the base tomato, which left the
      discipline dots glowing red on non-tomato zones. */
