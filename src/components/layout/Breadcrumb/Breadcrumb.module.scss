@@ -34,10 +34,22 @@
   padding-inline: var(--space-2);
 }
 
+/* underline marks the clickable crumbs (vs the plain current page). Applied to
+   the link itself (Home) and to the Rolling text span for the section link —
+   text-decoration on an ancestor isn't painted under Rolling's inline-flex clip,
+   so the rolling label carries its own underline. */
+%crumb-underline {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  text-decoration-color: color-mix(in srgb, currentColor 40%, transparent);
+}
+
 .link {
   color: var(--text-muted);
-  text-decoration: none;
-  transition: color var(--duration-fast) var(--ease-standard);
+  @extend %crumb-underline;
+  transition: color var(--duration-fast) var(--ease-standard),
+    text-decoration-color var(--duration-fast) var(--ease-standard);
 
   @include can-hover {
     &:hover { color: var(--text-soft); }
@@ -48,6 +60,9 @@
     border-radius: var(--radius-sm);
   }
 }
+
+/* the section label is a <Rolling> whose inner text span gets this class */
+.linkRoll { @extend %crumb-underline; }
 
 .current { color: var(--text-soft); }
 .meta { color: var(--text-muted); }

@@ -2,6 +2,7 @@
 import Link from 'next/link';
 import type { IconType } from 'react-icons';
 import { BiMoon, BiSun, BiMenu, BiCodeAlt, BiVideo, BiCamera, BiMusic, BiHeadphone, BiPencil, BiUser } from 'react-icons/bi';
+import { motion, useReducedMotion } from 'motion/react';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import { SITE, COPY } from '@/data';
 import { DISCIPLINES, isDiscipline } from '@/lib/disciplines';
@@ -28,6 +29,7 @@ const NAV_ICONS: Record<string, IconType> = {
 
 export function Nav({ active }: NavProps) {
   const { theme, toggle } = useTheme();
+  const reduce = useReducedMotion();
   const isActive = (label: string) => active != null && label.toLowerCase() === active.toLowerCase();
   // The dropdown portals to <body>, outside the Shell's --accent scope, so set
   // the zone accent + ink + on-accent inline on the Content (mirrors the Shell).
@@ -46,19 +48,32 @@ export function Nav({ active }: NavProps) {
             <span className={styles.name}>Tom Hinsley</span>
           </Link>
 
-          {/* Desktop: inline items */}
+          {/* Desktop: inline items. The active route's dark pill is a shared-layout
+              element (layoutId) so it SLIDES between items on navigation rather
+              than cross-fading. The label sits above the pill (z-index). */}
           <ul className={styles.items}>
-            {SITE.nav.map((item) => (
-              <li key={item.href}>
-                <Link
-                  href={item.href}
-                  className={isActive(item.label) ? `${styles.item} ${styles.active}` : styles.item}
-                  aria-current={isActive(item.label) ? 'page' : undefined}
-                >
-                  {item.label}
-                </Link>
-              </li>
-            ))}
+            {SITE.nav.map((item) => {
+              const activeItem = isActive(item.label);
+              return (
+                <li key={item.href}>
+                  <Link
+                    href={item.href}
+                    className={activeItem ? `${styles.item} ${styles.active}` : styles.item}
+                    aria-current={activeItem ? 'page' : undefined}
+                  >
+                    {activeItem && (
+                      <motion.span
+                        aria-hidden
+                        className={styles.pill}
+                        layoutId="navActivePill"
+                        transition={reduce ? { duration: 0 } : { type: 'spring', stiffness: 380, damping: 32 }}
+                      />
+                    )}
+                    <span className={styles.label}>{item.label}</span>
+                  </Link>
+                </li>
+              );
+            })}
           </ul>
 
           {/* Desktop: theme toggle + email CTA */}

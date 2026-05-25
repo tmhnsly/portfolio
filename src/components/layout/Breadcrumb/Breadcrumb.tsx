@@ -103,7 +103,7 @@ export function Breadcrumb({
                   <span className={styles.sep} aria-hidden>/</span>
                   {section.href ? (
                     <Link href={section.href} className={styles.link}>
-                      <Rolling value={section.label} />
+                      <Rolling value={section.label} className={styles.linkRoll} />
                     </Link>
                   ) : (
                     <span className={styles.current} aria-current={leaf ? undefined : 'page'}>
