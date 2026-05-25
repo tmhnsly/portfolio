@@ -1,6 +1,7 @@
 import { z } from 'zod';
 import { tomato, indigo, iris, brown, grass } from '@radix-ui/colors';
 import { timelineEntrySchema } from '@/lib/schemas';
+import { COMPANIES } from './companies';
 
 export const TIMELINE = z.array(timelineEntrySchema).parse([
   {
@@ -18,6 +19,7 @@ export const TIMELINE = z.array(timelineEntrySchema).parse([
     period: 'Jul 2023 — Aug 2024',
     role: 'Frontend Developer',
     place: 'Neverbland · London',
+    companyUrl: COMPANIES.neverbland.url,
     description:
       'Digital agency across hospitality, education and fintech. Led the frontend of a new booking flow for Clays, integrated with a custom orchestration API — it drove a 48% increase in spend per booking in week one. Built accessible component libraries (Tooled-Up Education), a Sanity-backed booking system and a Storybook design system (Earnt), and ran sprint planning.',
     tags: ['React', 'Next.js', 'Sanity', 'Storybook'],
@@ -28,6 +30,7 @@ export const TIMELINE = z.array(timelineEntrySchema).parse([
     period: 'Jul 2021 — May 2023',
     role: 'Full Stack Software Developer',
     place: 'Rocketmakers · Bath',
+    companyUrl: COMPANIES.rocketmakers.url,
     description:
       'Software consultancy building custom products across energy, health and tech. Shipped React frontends for clients including Pure Planet, Sero and Wavesix, getting interfaces right across breakpoints. Contributed to Armstrong, the company’s open-source React component library, and wrote and delivered an HTML & CSS course for work-experience students.',
     tags: ['React', 'TypeScript', 'Node.js', 'REST APIs'],
@@ -38,6 +41,7 @@ export const TIMELINE = z.array(timelineEntrySchema).parse([
     period: 'Sep — Dec 2020',
     role: 'Full Stack Software Engineering',
     place: 'iO Academy · Bath',
+    companyUrl: COMPANIES.ioAcademy.url,
     description:
       'Intensive four-month engineering bootcamp — finished top 10 globally and #2 in the UK. PHP, JavaScript, React, Node.js, MySQL, MongoDB, Git, OOP and Agile.',
     tags: ['JavaScript', 'React', 'Node.js', 'PHP'],
@@ -48,6 +52,7 @@ export const TIMELINE = z.array(timelineEntrySchema).parse([
     period: '2012 — 2015',
     role: 'BA Sound Design',
     place: 'Ravensbourne University · London',
+    companyUrl: COMPANIES.ravensbourne.url,
     description:
       'Audio-production degree covering TV, film, radio and games. The sound background still feeds the side projects — and the way I think about timing and feel.',
     tags: ['Sound design', 'Audio', 'Production'],

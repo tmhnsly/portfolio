@@ -135,6 +135,27 @@
   font-weight: 500;
 }
 
+/* company name links to its website (data/companies.ts) — underlined like the
+   breadcrumb links to mark it clickable, hover to the zone accent */
+.placeLink {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+  text-decoration-color: color-mix(in srgb, currentColor 35%, transparent);
+  transition: color var(--duration-fast) var(--ease-standard),
+    text-decoration-color var(--duration-fast) var(--ease-standard);
+
+  @include can-hover {
+    &:hover { color: var(--accent-ink); }
+  }
+  &:focus-visible {
+    outline: 2px solid var(--accent-ink);
+    outline-offset: 2px;
+    border-radius: var(--radius-sm);
+  }
+}
+
 .desc {
   margin: var(--space-4) 0;
   font-size: var(--fs-body-l);

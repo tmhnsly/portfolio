@@ -9,6 +9,9 @@ import styles from './Timeline.module.scss';
 
 function Item({ entry, index }: { entry: TimelineEntry; index: number }) {
   const reduce = useReducedMotion();
+  // place is "Company · Location" — link only the company when a URL is set
+  const [company, ...locParts] = entry.place.split(' · ');
+  const location = locParts.join(' · ');
   return (
     <motion.div
       className={styles.item}
@@ -35,7 +38,18 @@ function Item({ entry, index }: { entry: TimelineEntry; index: number }) {
       <div className={styles.content}>
         <span className={styles.yearMobile}>{entry.period}</span>
         <div className={styles.role}>
-          {entry.role} <span className={styles.place}>· {entry.place}</span>
+          {entry.role}{' '}
+          <span className={styles.place}>
+            ·{' '}
+            {entry.companyUrl ? (
+              <a className={styles.placeLink} href={entry.companyUrl} target="_blank" rel="noopener noreferrer">
+                {company}
+              </a>
+            ) : (
+              company
+            )}
+            {location && ` · ${location}`}
+          </span>
         </div>
         <p className={styles.desc}>{entry.description}</p>
         <div className={styles.chips}>
