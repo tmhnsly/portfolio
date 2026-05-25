@@ -1,6 +1,12 @@
 .pill { display: inline-flex; align-items: center; padding: var(--pad-pill); border-radius: var(--radius-full);
   font-family: var(--font-display); font-size: 12px; font-weight: 600; letter-spacing: -0.005em; }
-.discipline { background: var(--accent); color: var(--on-accent, var(--text-on-accent)); }
+/* a specific project's discipline colour (--pill-fill/--pill-ink, set inline);
+   falls back to the page zone accent when none is passed. UNregistered vars, so
+   they re-resolve the Radix light/dark scale on a theme toggle. */
+.discipline {
+  background: var(--pill-fill, var(--accent));
+  color: var(--pill-ink, var(--on-accent, var(--text-on-accent)));
+}
 /* frosted chip — sits on coloured gradient thumbs, so the blur reads */
 .solid {
   background: color-mix(in srgb, white 60%, transparent);
