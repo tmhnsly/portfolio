@@ -15,7 +15,7 @@ The resolved presentation facts for a Discipline — label, accent `color` (step
 _Avoid_: theme, config, palette.
 
 **Zone**:
-The active accent context for the current route — a Discipline, or the default (home / About → tomato brand). Drives the **Accent** tokens, the **Bloom** tint, and the **Nav** highlight. Derived from the pathname by `zoneFromPath` in the **Shell**.
+The active accent context for the current route — a Discipline, or the default (home / About → tomato brand). Drives the **Accent** tokens, the **Bloom** tint, and the **Nav** highlight. Derived from the pathname by `resolveZone` in `lib/zone.ts` (the **Shell** calls it once and passes the accent tokens down).
 _Avoid_: section, page, route, mode, theme.
 
 **Accent tokens**:
