@@ -5,6 +5,7 @@ import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import type { Project } from '@/types';
 import { DISCIPLINE_ORDER, DISCIPLINES } from '@/lib/disciplines';
 import { projectPresentation } from '@/lib/project-presentation';
+import { buildFacets, filterByFacet, splitFeatured } from '@/lib/facets';
 import { IMG_SIZES } from '@/lib/breakpoints';
 import { DURATION, EASING } from '@/lib/motion';
 import { COPY } from '@/data';
@@ -16,20 +17,18 @@ import { LinkArrow } from '@/components/ui/LinkArrow';
 import { CardArrow } from '@/components/ui/CardArrow';
 import styles from './RecentWork.module.scss';
 
+// stable (module-scope) facet accessor — a Project's Discipline label
+const disciplineLabel = (p: Project) => DISCIPLINES[p.discipline].label;
+const DISCIPLINE_LABELS = DISCIPLINE_ORDER.map((s) => DISCIPLINES[s].label);
+
 export function RecentWork({ projects }: { projects: Project[] }) {
   const [active, setActive] = useState(0);
   const reduce = useReducedMotion();
-  const filters = useMemo(() => {
-    const perDiscipline = DISCIPLINE_ORDER
-      .map((slug) => ({ label: DISCIPLINES[slug].label, count: projects.filter((p) => p.discipline === slug).length }))
-      .filter((f) => f.count > 0);
-    return [{ label: 'All', count: projects.length }, ...perDiscipline];
-  }, [projects]);
+  const filters = useMemo(() => buildFacets(projects, disciplineLabel, DISCIPLINE_LABELS), [projects]);
 
   const activeLabel = filters[active]?.label ?? 'All';
-  const filtered = active === 0 ? projects : projects.filter((p) => DISCIPLINES[p.discipline].label === activeLabel);
-  const featured = filtered.find((p) => p.featured) ?? filtered[0];
-  const thumbs = filtered.filter((p) => p !== featured).slice(0, 3);
+  const filtered = filterByFacet(projects, disciplineLabel, activeLabel);
+  const { featured, rest: thumbs } = splitFeatured(filtered, 3);
   if (!featured) return null;
   const fp = projectPresentation(featured);
 
