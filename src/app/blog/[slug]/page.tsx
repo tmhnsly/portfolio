@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { getAllPosts, getPost } from '@/lib/content';
 import { DISCIPLINES } from '@/lib/disciplines';
+import { IMG_SIZES } from '@/lib/breakpoints';
 import { SITE, COPY } from '@/data';
 import { Container, Stack } from '@/components/layout';
 import { Eyebrow } from '@/components/ui/Eyebrow';
@@ -40,7 +41,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
           src={post.cover?.src}
           alt={post.cover?.alt ?? post.title}
           ratio="16/7"
-          sizes="(min-width: 1200px) 60vw, 100vw"
+          sizes={IMG_SIZES.full}
         />
         <PostBody post={post} />
 
@@ -115,7 +116,7 @@ function RelatedCard({ post, grad }: { post: BlogPost; grad: string }) {
         src={post.cover?.src}
         alt={post.cover?.alt ?? post.title}
         ratio="16/9"
-        sizes="(min-width: 1200px) 30vw, (min-width: 768px) 45vw, 90vw"
+        sizes={IMG_SIZES.grid3}
         rounded
       />
       <div className={styles.relatedMeta}>

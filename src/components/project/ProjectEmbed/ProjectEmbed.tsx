@@ -1,5 +1,6 @@
 import type { Project } from '@/types';
 import { DISCIPLINES } from '@/lib/disciplines';
+import { IMG_SIZES } from '@/lib/breakpoints';
 import { Media } from '@/components/ui/Media';
 import { LinkArrow } from '@/components/ui/LinkArrow';
 import styles from './ProjectEmbed.module.scss';
@@ -66,7 +67,7 @@ export function ProjectEmbed({ project }: { project: Project }) {
         src={project.cover?.src}
         alt={project.cover?.alt ?? project.title}
         ratio="16/9"
-        sizes="(min-width: 1200px) 60vw, 100vw"
+        sizes={IMG_SIZES.full}
       />
     </div>
   );

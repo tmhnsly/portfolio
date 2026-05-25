@@ -1,7 +1,14 @@
-$bp-tablet: 768px;
-$bp-desktop: 1200px;
+// ── Breakpoints (device widths) — single source of truth for media queries ──
+// Always go through these variables / mixins; never hardcode a px width in a
+// @media. Mirrored for JS/responsive-image `sizes` in src/lib/breakpoints.ts —
+// keep the two in sync.
+$bp-tablet: 768px;   // ≥ tablet
+$bp-desktop: 1200px; // ≥ desktop (inline nav, multi-col layouts)
+$bp-wide: 1440px;    // ≥ wide (== container max-width; full-email CTA)
+
 @mixin tablet-up { @media (min-width: $bp-tablet) { @content; } }
 @mixin desktop-up { @media (min-width: $bp-desktop) { @content; } }
+@mixin wide-up { @media (min-width: $bp-wide) { @content; } }
 @mixin reduced-motion { @media (prefers-reduced-motion: reduce) { @content; } }
 // Hover effects only on devices with a real hovering pointer (mouse) — stops
 // touch taps/swipes from leaving cards stuck in their :hover state.

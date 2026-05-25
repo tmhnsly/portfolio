@@ -3,6 +3,7 @@ import { useMemo, useState } from 'react';
 import Link from 'next/link';
 import type { Project } from '@/types';
 import { DISCIPLINE_ORDER, DISCIPLINES } from '@/lib/disciplines';
+import { IMG_SIZES } from '@/lib/breakpoints';
 import { COPY } from '@/data';
 import { Eyebrow } from '@/components/ui/Eyebrow';
 import { FilterPills } from '@/components/ui/FilterPills';
@@ -39,7 +40,7 @@ export function RecentWork({ projects }: { projects: Project[] }) {
       <div className={styles.grid}>
         <Link href={`/${featured.discipline}/${featured.slug}`} className={styles.featured}>
           <Media grad={fd.gradient} src={featured.cover?.src} alt={featured.cover?.alt ?? featured.title}
-            ratio="16/10" sizes="(min-width: 1200px) 60vw, 100vw" className={styles.featuredMedia}>
+            ratio="16/10" sizes={IMG_SIZES.full} className={styles.featuredMedia}>
             <span className={styles.arrowTR}><LinkArrow className={styles.arrow} /></span>
           </Media>
           <div className={styles.featuredMeta}>
@@ -54,7 +55,7 @@ export function RecentWork({ projects }: { projects: Project[] }) {
             return (
               <Link key={p.slug} href={`/${p.discipline}/${p.slug}`} className={styles.thumb}>
                 <Media grad={d.gradient} src={p.cover?.src} alt={p.cover?.alt ?? p.title}
-                  ratio="4/3" sizes="(min-width: 768px) 200px, 40vw" className={styles.thumbMedia}>
+                  ratio="4/3" sizes={IMG_SIZES.thumb} className={styles.thumbMedia}>
                   <span className={styles.arrowTRSm}><LinkArrow className={styles.arrow} /></span>
                 </Media>
                 <div className={styles.thumbMeta}>

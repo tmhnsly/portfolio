@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import type { BlogPost } from '@/lib/schemas';
 import { DISCIPLINES } from '@/lib/disciplines';
+import { IMG_SIZES } from '@/lib/breakpoints';
 import { Eyebrow } from '@/components/ui/Eyebrow';
 import { Media } from '@/components/ui/Media';
 import { Pill } from '@/components/ui/Pill';
@@ -24,7 +25,7 @@ export function FeaturedPost({ post }: { post: BlogPost }) {
               src={post.cover?.src}
               alt={post.cover?.alt ?? post.title}
               ratio="16/11"
-              sizes="(min-width: 1200px) 45vw, 100vw"
+              sizes={IMG_SIZES.featured}
               className={styles.media}
             >
               <span className={styles.categoryPill}>
