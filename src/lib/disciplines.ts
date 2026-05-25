@@ -31,7 +31,10 @@ function meta(slug: Discipline): DisciplineMeta {
     label: LABEL[slug],
     color: `var(--${h}-9)`,
     ink: `var(--${h}-11)`,
-    onAccent: LIGHT_SOLID.has(h) ? 'var(--gray-12)' : 'var(--white-a12)',
+    // Radix: step-9 solids take white OR black text. Use FIXED black/white
+    // (alpha scales, theme-independent) — NOT --gray-12, which flips to light in
+    // dark mode and would break the text on a bright (yellow/orange) pill there.
+    onAccent: LIGHT_SOLID.has(h) ? 'var(--black-a12)' : 'var(--white-a12)',
     gradient: `linear-gradient(135deg, var(--${h}-8), var(--${h}-12))`,
     swatches: [`var(--${h}-6)`, `var(--${h}-9)`, `var(--${h}-12)`],
     route: `/${slug}`,
