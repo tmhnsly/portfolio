@@ -27,7 +27,7 @@
 }
 
 .period {
-  color: var(--accent-ink);
+  color: var(--accent-ink-to, var(--accent-ink));
 }
 
 .showing {
