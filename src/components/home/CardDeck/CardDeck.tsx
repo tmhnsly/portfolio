@@ -21,7 +21,7 @@ const SWIPE_DIST = 64;       // small pointer offset is enough — it's a flick,
 const SWIPE_VELOCITY = 300;  // a quick flick advances even without much travel
 
 // softer, near-critically-damped spring → a weighty, smooth glide (was 340/34/0.9,
-// which snapped/settled hard). The exit fly-off uses its own quick ease (below).
+// which snapped/settled hard). The exit recede uses its own ease (below).
 const stackSpring = { type: 'spring', stiffness: 240, damping: 30, mass: 1 } as const;
 
 const pad = (n: number) => String(n).padStart(2, '0');
@@ -98,14 +98,23 @@ export function CardDeck({ items }: { items: Project[] }) {
   const visible = order.slice(0, Math.min(VISIBLE, n));
   const activeIndex = order[0];
 
-  // enter/stack are position-driven (custom = pos); exit flies in the swap
-  // direction (closure `dir`), so the same card never mixes the two up.
+  // enter/stack are position-driven (custom = pos). It reads like a real deck shuffle:
+  // a JOINING card rises from one slot deeper in the stack to its slot (bring-to-front),
+  // and the LEAVING card recedes down into the back of the deck (put-to-back) with a
+  // small slide in the swap direction (closure `dir`) — never a viewport fly-off.
   const variants: Variants = {
-    enter: (pos: number) => ({ y: pos * PEEK_Y, scale: 1 - pos * PEEK_SCALE, opacity: 0, x: 0, rotate: 0 }),
+    enter: (pos: number) => ({ y: (pos + 1) * PEEK_Y, scale: 1 - (pos + 1) * PEEK_SCALE, opacity: 0, x: 0, rotate: 0 }),
     stack: (pos: number) => ({ y: pos * PEEK_Y, scale: 1 - pos * PEEK_SCALE, opacity: 1, x: 0, rotate: 0 }),
     exit: reduce
       ? { opacity: 0 }
-      : { x: dir * 480, rotate: dir * -6, opacity: 0, transition: { duration: 0.32, ease: EASING.standard } },
+      : {
+          x: dir * 36,
+          y: VISIBLE * PEEK_Y,
+          scale: 1 - (VISIBLE + 1) * PEEK_SCALE,
+          rotate: dir * 3,
+          opacity: 0,
+          transition: { duration: 0.34, ease: EASING.standard },
+        },
   };
 
   const onDragEnd = (_e: unknown, info: PanInfo) => {
@@ -115,18 +124,17 @@ export function CardDeck({ items }: { items: Project[] }) {
 
   return (
     <div className={styles.wrap} ref={wrapRef}>
+      {/* A labelled region for screen readers, but NOT a tab stop: making the whole
+          deck focusable drew a big focus ring around the stack and lost focus on each
+          advance (the focused card unmounts). Keyboard control lives on the prev/next
+          + tick buttons below, which persist across advances. */}
       <div
         className={styles.deck}
         role="group"
         aria-roledescription="carousel"
         aria-label="Featured work"
-        tabIndex={0}
         onPointerEnter={() => setHovered(true)}
         onPointerLeave={() => setHovered(false)}
-        onKeyDown={(e) => {
-          if (e.key === 'ArrowRight') advance(-1);
-          if (e.key === 'ArrowLeft') advance(1);
-        }}
       >
         <AnimatePresence initial={false} custom={dir}>
           {visible.map((itemIndex, pos) => {
