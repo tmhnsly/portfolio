@@ -151,3 +151,12 @@
 /* derive the hover from --accent (set inline on the portaled Content) so the
    menu CTA matches the zone, not the root accent-hover */
 .menuCta[data-highlighted] { background: color-mix(in srgb, var(--accent) 88%, black); }
+
+/* Radix moves focus onto an item on pointer-hover, and the global :focus-visible ring
+   (in _reset) misfires there — and it beats the plain `outline: none` above (equal
+   specificity, cascade order). Menu navigation (keyboard OR pointer) is shown by the
+   [data-highlighted] background, so suppress the ring with a :focus-visible selector
+   that outranks the global rule. */
+.menu:focus-visible,
+.menuItem:focus-visible,
+.menuCta:focus-visible { outline: none; }
