@@ -1,5 +1,6 @@
 import { SITE, COPY } from '@/data';
 import { DISCIPLINES } from '@/lib/disciplines';
+import { IMG_SIZES } from '@/lib/breakpoints';
 import { yearsSince } from '@/lib/format';
 import { Media } from '@/components/ui/Media';
 import { TechChip } from '@/components/ui/TechChip';
@@ -17,7 +18,7 @@ export function AboutHero() {
             grad={DISCIPLINES.code.gradient}
             alt="Tom Hinsley — portrait"
             ratio="4/5"
-            sizes="(min-width:768px) 360px, 90vw"
+            sizes={IMG_SIZES.portrait}
             rounded
           />
         </EntranceItem>

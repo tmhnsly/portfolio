@@ -1,4 +1,5 @@
 import type { Project } from '@/types';
+import { IMG_SIZES } from '@/lib/breakpoints';
 import { Eyebrow } from '@/components/ui/Eyebrow';
 import { Media } from '@/components/ui/Media';
 import styles from './Gallery.module.scss';
@@ -19,7 +20,7 @@ export function Gallery({ frames }: { frames: GalleryFrame[] }) {
               src={frame.src}
               alt={frame.alt ?? frame.caption}
               ratio="4/3"
-              sizes="(min-width: 1200px) 30vw, (min-width: 768px) 45vw, 90vw"
+              sizes={IMG_SIZES.grid3}
             >
               <span className={styles.figLabel} aria-hidden>
                 Fig. {String(i + 1).padStart(2, '0')}

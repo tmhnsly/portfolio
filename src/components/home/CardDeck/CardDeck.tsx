@@ -5,6 +5,7 @@ import { AnimatePresence, motion, useReducedMotion, type PanInfo, type Variants 
 import { BiChevronLeft, BiChevronRight } from 'react-icons/bi';
 import type { Project } from '@/types';
 import { EASING } from '@/lib/motion';
+import { IMG_SIZES } from '@/lib/breakpoints';
 import { DISCIPLINES } from '@/lib/disciplines';
 import { Media } from '@/components/ui/Media';
 import { Pill } from '@/components/ui/Pill';
@@ -35,7 +36,7 @@ function CardFace({ project }: { project: Project }) {
         src={project.cover?.src}
         alt={project.cover?.alt ?? project.title}
         ratio="5/4"
-        sizes="(min-width: 1200px) 30vw, (min-width: 768px) 40vw, 90vw"
+        sizes={IMG_SIZES.deck}
         className={styles.thumb}
       />
       <div className={styles.meta}>

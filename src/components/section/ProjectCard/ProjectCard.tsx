@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import type { Project } from '@/types';
 import { DISCIPLINES } from '@/lib/disciplines';
+import { IMG_SIZES } from '@/lib/breakpoints';
 import { Media } from '@/components/ui/Media';
 import { Pill } from '@/components/ui/Pill';
 import { TechChip } from '@/components/ui/TechChip';
@@ -12,7 +13,7 @@ export function ProjectCard({ project, index }: { project: Project; index?: numb
   return (
     <Link href={`/${project.discipline}/${project.slug}`} className={styles.card}>
       <Media grad={d.gradient} src={project.cover?.src} alt={project.cover?.alt ?? project.title}
-        ratio="4/3" sizes="(min-width: 1200px) 30vw, (min-width: 768px) 45vw, 90vw" className={styles.media}>
+        ratio="4/3" sizes={IMG_SIZES.grid3} className={styles.media}>
         <span className={styles.hatch} aria-hidden />
         {index != null && <span className={styles.number} aria-hidden>{String(index + 1).padStart(2, '0')}</span>}
         <span className={styles.pillTL}><Pill label={d.label} tone="solid" /></span>

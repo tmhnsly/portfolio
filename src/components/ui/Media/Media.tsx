@@ -1,8 +1,7 @@
 /*
- * Recommended `sizes` per usage:
- *   Full-bleed hero/cover/embed:  (min-width: 1200px) 60vw, 100vw
- *   3-up grid card / gallery:     (min-width: 1200px) 30vw, (min-width: 768px) 45vw, 90vw
- *   Recent thumb / small card:    (min-width: 768px) 200px, 40vw
+ * Pass a `sizes` recipe from IMG_SIZES (src/lib/breakpoints.ts) — e.g.
+ * IMG_SIZES.full (hero/cover/embed), IMG_SIZES.grid3 (3-up grid/gallery),
+ * IMG_SIZES.thumb (recent/small card) — so breakpoint widths stay centralised.
  */
 
 import Image from 'next/image';

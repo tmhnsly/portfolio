@@ -94,7 +94,7 @@
 /* CTA scales: "Say hi →" in the lower desktop range, full email from 1440 up */
 .ctaFull { display: none; }
 .ctaShort { display: inline; }
-@media (min-width: 1440px) {
+@include wide-up {
   .ctaFull { display: inline; }
   .ctaShort { display: none; }
 }
