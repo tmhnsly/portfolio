@@ -62,6 +62,13 @@
   text-align: right;
 }
 
+/* shown (greyed) when there's no older/newer post — matches project PrevNext */
+.navDisabled {
+  opacity: 0.4;
+  cursor: default;
+  pointer-events: none;
+}
+
 .navDir {
   font-family: var(--font-mono);
   font-size: var(--fs-caption);
@@ -109,7 +116,7 @@
 }
 
 .period {
-  color: var(--accent-ink);
+  color: var(--accent-ink-to, var(--accent-ink));
 }
 
 .allPostsLink {

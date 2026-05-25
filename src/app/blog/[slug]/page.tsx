@@ -70,7 +70,10 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
                 <span className={styles.navTitle}>{older.title}</span>
               </Link>
             ) : (
-              <div />
+              <div className={`${styles.navCard} ${styles.navDisabled}`}>
+                <span className={styles.navDir}><BiLeftArrowAlt className={styles.navArrow} aria-hidden /> {COPY.blog.olderPost}</span>
+                <span className={styles.navTitle}>—</span>
+              </div>
             )}
             {newer ? (
               <Link href={`/blog/${newer.slug}`} className={`${styles.navCard} ${styles.navCardRight}`}>
@@ -78,7 +81,10 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
                 <span className={styles.navTitle}>{newer.title}</span>
               </Link>
             ) : (
-              <div />
+              <div className={`${styles.navCard} ${styles.navCardRight} ${styles.navDisabled}`}>
+                <span className={styles.navDir}>{COPY.blog.newerPost} <BiRightArrowAlt className={styles.navArrow} aria-hidden /></span>
+                <span className={styles.navTitle}>—</span>
+              </div>
             )}
           </nav>
         )}
