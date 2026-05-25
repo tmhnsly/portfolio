@@ -42,7 +42,13 @@ export function Nav({ active, accent, accentInk, onAccent }: NavProps) {
   // set inline on the Content below.
 
   return (
-    <header className={styles.header}>
+    // `layoutRoot` is load-bearing: the active pill is a shared-layout element
+    // (layoutId, below) and this header is `position: sticky`. Without a root
+    // here the pill resolves against the document-flowing Shell motion.div, so a
+    // route change (which resets window scroll to top) feeds the projection a
+    // stale scroll delta and the pill flies up from where the page was scrolled.
+    // Marking the sticky header a layoutRoot pins the pill's frame to the header.
+    <motion.header className={styles.header} layoutRoot>
       <Container>
         <nav className={styles.bar} aria-label="Primary">
           {/* monogram + wordmark are two visual pieces but one "home" button */}
@@ -147,6 +153,6 @@ export function Nav({ active, accent, accentInk, onAccent }: NavProps) {
           </DropdownMenu.Root>
         </nav>
       </Container>
-    </header>
+    </motion.header>
   );
 }
