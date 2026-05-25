@@ -15,7 +15,10 @@ export function ProjectBody({ project }: { project: Project }) {
         </div>
       </div>
 
-      <aside className={styles.sidebar}>
+      {/* a plain div, not <aside>: it sits inside the page's <main> landmark, and a
+          complementary landmark must not nest inside another landmark. The tech/links
+          are integral project detail, not tangential content. */}
+      <div className={styles.sidebar}>
         {project.tech.length > 0 && (
           <div className={styles.sideSection}>
             <Eyebrow>Built with</Eyebrow>
@@ -34,7 +37,7 @@ export function ProjectBody({ project }: { project: Project }) {
             <ProjectLinks project={project} />
           </div>
         )}
-      </aside>
+      </div>
     </section>
   );
 }
