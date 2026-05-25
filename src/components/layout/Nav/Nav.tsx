@@ -5,7 +5,6 @@ import { BiMoon, BiSun, BiMenu, BiCodeAlt, BiVideo, BiCamera, BiMusic, BiHeadpho
 import { motion, useReducedMotion } from 'motion/react';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import { SITE, COPY } from '@/data';
-import { DISCIPLINES, isDiscipline } from '@/lib/disciplines';
 import { useTheme } from '@/lib/theme';
 import { LinkArrow } from '@/components/ui/LinkArrow';
 import { Container } from '../Container';
@@ -14,6 +13,11 @@ import styles from './Nav.module.scss';
 export interface NavProps {
   /** active discipline slug or 'about' */
   active?: string;
+  /** resolved zone accent tokens (from the Shell) — set inline on the portaled
+      dropdown, which renders outside the Shell's --accent scope */
+  accent: string;
+  accentInk: string;
+  onAccent: string;
 }
 
 /** A relevant boxicon per nav destination, shown in the mobile burger menu. */
@@ -27,16 +31,13 @@ const NAV_ICONS: Record<string, IconType> = {
   '/about': BiUser,
 };
 
-export function Nav({ active }: NavProps) {
+export function Nav({ active, accent, accentInk, onAccent }: NavProps) {
   const { theme, toggle } = useTheme();
   const reduce = useReducedMotion();
   const isActive = (label: string) => active != null && label.toLowerCase() === active.toLowerCase();
-  // The dropdown portals to <body>, outside the Shell's --accent scope, so set
-  // the zone accent + ink + on-accent inline on the Content (mirrors the Shell).
-  const zone = active && isDiscipline(active) ? DISCIPLINES[active] : null;
-  const accent = zone ? zone.color : 'var(--tomato-9)';
-  const accentInk = zone ? zone.ink : 'var(--tomato-11)';
-  const onAccent = zone ? zone.onAccent : 'var(--white-a12)';
+  // accent/accentInk/onAccent come resolved from the Shell (single Zone source);
+  // the dropdown portals to <body>, outside the Shell's --accent scope, so they're
+  // set inline on the Content below.
 
   return (
     <header className={styles.header}>

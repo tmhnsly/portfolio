@@ -3,7 +3,8 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import type { Discipline } from '@/types';
-import { DISCIPLINES, isDiscipline } from '@/lib/disciplines';
+import { DISCIPLINES } from '@/lib/disciplines';
+import { disciplineFromPath } from '@/lib/zone';
 import { DURATION, EASING } from '@/lib/motion';
 import { DisciplineDot } from '@/components/ui/DisciplineDot';
 import { Rolling } from '@/components/motion/Roll';
@@ -35,17 +36,18 @@ function buildCrumbs(
   const first = segs[0];
   if (first === 'about') return [home, { slot: 'section', label: 'About' }];
 
-  if (isDiscipline(first)) {
-    const label = DISCIPLINES[first].label;
+  const discipline = disciplineFromPath(pathname);
+  if (discipline) {
+    const label = DISCIPLINES[discipline].label;
     if (segs.length === 1) {
-      const count = first === 'blog' ? postCount : projectCounts[first] ?? 0;
-      const noun = first === 'blog' ? 'post' : 'project';
+      const count = discipline === 'blog' ? postCount : projectCounts[discipline] ?? 0;
+      const noun = discipline === 'blog' ? 'post' : 'project';
       return [home, { slot: 'section', label, count, unit: `${noun}${count === 1 ? '' : 's'}` }];
     }
-    const path = `/${first}/${segs[1]}`;
+    const path = `/${discipline}/${segs[1]}`;
     return [
       home,
-      { slot: 'section', label, href: `/${first}` },
+      { slot: 'section', label, href: `/${discipline}` },
       { slot: 'leaf', label: titleMap[path] ?? humanize(segs[1]) },
     ];
   }
