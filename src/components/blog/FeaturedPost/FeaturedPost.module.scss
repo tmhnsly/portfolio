@@ -89,21 +89,12 @@
   gap: 6px;
 }
 
-/* link affordance: a frosted arrow chip in the media's top-right corner (mirrors
-   the top-left category pill), nudging + turning accent on whole-card hover */
-.arrowTR {
-  position: absolute;
-  right: 14px;
-  top: 14px;
-  z-index: var(--z-card-overlay);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 34px;
-  height: 34px;
-  border-radius: 50%;
-  @include glass;
-  box-shadow: var(--shadow-sm);
+/* head row: title (left) + the card-link arrow (top-right), nudging + accenting
+   on whole-card hover (CardArrow handles right-alignment) */
+.head {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-4);
 }
 .arrow {
   color: var(--text-soft);

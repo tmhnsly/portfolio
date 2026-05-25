@@ -6,7 +6,7 @@ import { Eyebrow } from '@/components/ui/Eyebrow';
 import { Media } from '@/components/ui/Media';
 import { Pill } from '@/components/ui/Pill';
 import { TechChip } from '@/components/ui/TechChip';
-import { LinkArrow } from '@/components/ui/LinkArrow';
+import { CardArrow } from '@/components/ui/CardArrow';
 import { formatMonthYear, readingLabel } from '@/lib/format';
 import styles from './FeaturedPost.module.scss';
 
@@ -31,11 +31,13 @@ export function FeaturedPost({ post }: { post: BlogPost }) {
               <span className={styles.categoryPill}>
                 <Pill label={post.category} tone="solid" />
               </span>
-              <span className={styles.arrowTR}><LinkArrow className={styles.arrow} /></span>
             </Media>
           </div>
           <div className={styles.content}>
-            <h2 className={styles.title}>{post.title}</h2>
+            <div className={styles.head}>
+              <h2 className={styles.title}>{post.title}</h2>
+              <CardArrow className={styles.arrow} />
+            </div>
             <p className={styles.excerpt}>{post.excerpt}</p>
             <div className={styles.chips}>
               {post.tags.map((tag) => (

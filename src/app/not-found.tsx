@@ -3,6 +3,7 @@ import { Container, Stack } from '@/components/layout';
 import { DISCIPLINE_ORDER, DISCIPLINES } from '@/lib/disciplines';
 import { Eyebrow } from '@/components/ui/Eyebrow';
 import { EmailLink } from '@/components/ui/EmailLink';
+import { LinkArrow } from '@/components/ui/LinkArrow';
 import { GlassCard } from '@/components/ui/GlassCard';
 import { COPY } from '@/data';
 import styles from './not-found.module.scss';
@@ -26,7 +27,7 @@ export default function NotFound() {
                   <GlassCard soft className={styles.card}>
                     <span className={styles.dot} style={{ background: d.color }} />
                     <span className={styles.slug}>{d.route}</span>
-                    <span className={styles.arrow} aria-hidden>→</span>
+                    <LinkArrow className={styles.arrow} />
                   </GlassCard>
                 </Link>
               );

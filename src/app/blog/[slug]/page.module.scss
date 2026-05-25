@@ -69,6 +69,12 @@
   letter-spacing: 0.1em;
   text-transform: uppercase;
 }
+/* brand directional arrow sized to the dir text (replaces the unicode ←/→) */
+.navArrow {
+  display: inline-block;
+  font-size: 1.2em;
+  vertical-align: -0.25em;
+}
 
 .navTitle {
   font-family: var(--font-display);
