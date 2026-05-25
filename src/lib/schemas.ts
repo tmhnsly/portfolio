@@ -61,7 +61,8 @@ export const skillGroupSchema = z.object({ discipline: disciplineSchema, tools: 
 export type SkillGroup = z.infer<typeof skillGroupSchema>;
 
 export const siteConfigSchema = z.object({
-  name: z.string(), role: z.string(), email: z.string(), location: z.string(),
+  // contact email is NOT in site config — it's encoded in src/lib/email.ts
+  name: z.string(), role: z.string(), location: z.string(),
   experienceSince: z.string(), // ISO month/date — "years of experience" is computed from this
   socials: z.array(z.object({ label: z.string(), href: z.string() })),
   nav: z.array(z.object({ label: z.string(), href: z.string() })),

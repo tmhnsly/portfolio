@@ -7,6 +7,7 @@ import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import { SITE, COPY } from '@/data';
 import { useTheme } from '@/lib/theme';
 import { LinkArrow } from '@/components/ui/LinkArrow';
+import { useEmail } from '@/components/ui/EmailLink';
 import { Container } from '../Container';
 import styles from './Nav.module.scss';
 
@@ -34,6 +35,7 @@ const NAV_ICONS: Record<string, IconType> = {
 export function Nav({ active, accent, accentInk, onAccent }: NavProps) {
   const { theme, toggle } = useTheme();
   const reduce = useReducedMotion();
+  const { email, mailto } = useEmail();
   const isActive = (label: string) => active != null && label.toLowerCase() === active.toLowerCase();
   // accent/accentInk/onAccent come resolved from the Shell (single Zone source);
   // the dropdown portals to <body>, outside the Shell's --accent scope, so they're
@@ -87,8 +89,8 @@ export function Nav({ active, accent, accentInk, onAccent }: NavProps) {
             >
               {theme === 'dark' ? <BiSun aria-hidden /> : <BiMoon aria-hidden />}
             </button>
-            <a className={styles.cta} href={`mailto:${SITE.email}`}>
-              <span className={styles.ctaFull}>{SITE.email} <LinkArrow /></span>
+            <a className={styles.cta} href={mailto()}>
+              <span className={styles.ctaFull}>{email ?? 'Email me'} <LinkArrow /></span>
               <span className={styles.ctaShort} aria-hidden="true">{COPY.nav.sayHi} <LinkArrow /></span>
             </a>
           </div>
@@ -125,7 +127,7 @@ export function Nav({ active, accent, accentInk, onAccent }: NavProps) {
                 })}
                 <DropdownMenu.Separator className={styles.menuSep} />
                 <DropdownMenu.Item asChild>
-                  <a href={`mailto:${SITE.email}`} className={styles.menuCta}>{SITE.email} <LinkArrow /></a>
+                  <a href={mailto()} className={styles.menuCta}>{email ?? 'Email me'} <LinkArrow /></a>
                 </DropdownMenu.Item>
                 <DropdownMenu.Item
                   className={styles.menuItem}

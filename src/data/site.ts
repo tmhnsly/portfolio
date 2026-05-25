@@ -3,7 +3,9 @@ import { siteConfigSchema } from '@/lib/schemas';
 export const SITE = siteConfigSchema.parse({
   name: 'Tom Hinsley',
   role: 'Frontend engineer',
-  email: 'hello@tomhinsley.com',
+  // NB: the contact email is intentionally NOT here — it lives base64-encoded in
+  // src/lib/email.ts (decoded client-side) so it's never in the HTML/bundle as
+  // plain text. Use <EmailLink/> / useEmail() to render it.
   location: 'London',
   // first professional dev role — "X+ years" copy is computed from this, so it
   // stays current on every build. Bump only if the story changes.

@@ -3,13 +3,13 @@ import Link from 'next/link';
 import { getAllPosts, getPost, postNeighbours, relatedPosts } from '@/lib/content';
 import { DISCIPLINES } from '@/lib/disciplines';
 import { IMG_SIZES } from '@/lib/breakpoints';
-import { SITE, COPY } from '@/data';
+import { COPY } from '@/data';
 import { Container, Stack } from '@/components/layout';
 import { Eyebrow } from '@/components/ui/Eyebrow';
 import { TechChip } from '@/components/ui/TechChip';
 import { Pill } from '@/components/ui/Pill';
 import { Media } from '@/components/ui/Media';
-import { Button } from '@/components/ui/Button';
+import { EmailLink } from '@/components/ui/EmailLink';
 import { formatMonthYear, readingLabel } from '@/lib/format';
 import { BlogPostHero } from '@/components/blog/BlogPostHero';
 import { PostBody } from '@/components/blog/PostBody';
@@ -51,9 +51,9 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
           </div>
           <div className={styles.endNote}>
             <span className={styles.endNoteLabel}>{COPY.blog.foundUseful}</span>
-            <Button variant="ghost" href={`mailto:${SITE.email}?subject=Re: ${encodeURIComponent(post.title)}`}>
+            <EmailLink variant="ghost" subject={`Re: ${post.title}`}>
               {COPY.blog.sendNote}
-            </Button>
+            </EmailLink>
           </div>
         </div>
 
