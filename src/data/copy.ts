@@ -63,6 +63,16 @@ export const COPY = {
     bodyPara1: 'I’ve been building for the web for {years}+ years — across agencies, a software consultancy and editorial publishers like the Financial Times. Strong React, Next.js and TypeScript foundations, with full-stack capability when a project calls for it.',
     bodyPara2: 'Most of what’s here is self-initiated — code that wanders into sound, image and writing, which is where the sound-design degree still leaks through. If it looks like the sort of thing you’d want to commission, send me a note.',
 
+    // "Off the clock" — current book / TV series / game (Currently component).
+    // PLACEHOLDERS: edit `title` to your actual picks; set `href` to link a card
+    // out (book/show/game page), or leave '' for a plain (non-linked) card.
+    offTheClockEyebrow: 'Off the clock',
+    offTheClock: [
+      { kind: 'book', label: 'Reading', title: 'The Three-Body Problem', href: '' },
+      { kind: 'tv', label: 'Watching', title: 'Severance', href: '' },
+      { kind: 'game', label: 'Playing', title: 'Outer Wilds', href: '' },
+    ],
+
     // Timeline section
     timelineEyebrow: 'Career timeline',
     // heading — accent period stays in JSX
