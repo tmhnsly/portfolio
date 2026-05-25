@@ -118,7 +118,7 @@ export function Breadcrumb({ data }: { data: BreadcrumbData }) {
 
             <AnimatePresence mode="popLayout" initial={false}>
               {leaf && (
-                <motion.li key="leaf" className={styles.crumb} {...motionProps}>
+                <motion.li key="leaf" className={`${styles.crumb} ${styles.leaf}`} {...motionProps}>
                   <span className={styles.sep} aria-hidden>/</span>
                   <span className={styles.current} aria-current="page">
                     <Rolling value={leaf.label} />

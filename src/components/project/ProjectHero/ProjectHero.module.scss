@@ -101,6 +101,7 @@
   justify-content: flex-end;
   gap: var(--space-5);
   padding-bottom: var(--space-3);
+  min-width: 0; /* let long values (e.g. a repo URL) wrap instead of forcing the column wide */
 }
 
 .metaRow {
@@ -111,6 +112,7 @@
   border-bottom: 1px solid var(--rule-soft);
   font-family: var(--font-mono);
   font-size: var(--fs-body);
+  min-width: 0;
 }
 
 .metaKey {
@@ -122,4 +124,6 @@
 
 .metaVal {
   color: var(--text);
+  min-width: 0;
+  overflow-wrap: anywhere; /* a long repo URL wraps rather than overflowing the page */
 }

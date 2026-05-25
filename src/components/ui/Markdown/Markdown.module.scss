@@ -1,6 +1,8 @@
 .prose {
   font-family: var(--font-display);
   color: var(--text);
+  min-width: 0;
+  overflow-wrap: anywhere; /* long URLs / unbroken strings in body wrap, never overflow */
 }
 
 .h2 {
