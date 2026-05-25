@@ -58,6 +58,17 @@ export function CardDeck({ items }: { items: Project[] }) {
   const reduce = useReducedMotion();
   // one advance per gesture — a fast mobile swipe was firing several at once
   const lockUntil = useRef(0);
+  // pause the auto-advance timer when the deck is scrolled off-screen (no
+  // timer-driven re-renders/springs when it's not visible) — mirrors Marquee
+  const wrapRef = useRef<HTMLDivElement>(null);
+  const [inView, setInView] = useState(false);
+  useEffect(() => {
+    const el = wrapRef.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(([e]) => setInView(e.isIntersecting), { threshold: 0 });
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
 
   const advance = useCallback((d: number) => {
     const now = Date.now();
@@ -77,10 +88,10 @@ export function CardDeck({ items }: { items: Project[] }) {
   }, []);
 
   useEffect(() => {
-    if (reduce || hovered || n <= 1) return;
+    if (reduce || hovered || n <= 1 || !inView) return;
     const id = setInterval(() => advance(-1), AUTO_MS);
     return () => clearInterval(id);
-  }, [reduce, hovered, n, advance]);
+  }, [reduce, hovered, n, inView, advance]);
 
   if (n === 0) return null;
 
@@ -103,7 +114,7 @@ export function CardDeck({ items }: { items: Project[] }) {
   };
 
   return (
-    <div className={styles.wrap}>
+    <div className={styles.wrap} ref={wrapRef}>
       <div
         className={styles.deck}
         role="group"
