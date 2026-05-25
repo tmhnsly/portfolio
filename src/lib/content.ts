@@ -118,3 +118,15 @@ export function titleMap(): Record<string, string> {
 export function postCount(): number {
   return getAllPosts().length;
 }
+
+/** Everything the persistent Breadcrumb needs, bundled. Built in the (server)
+    layout and threaded through the Shell to the (client) Breadcrumb — see
+    docs/adr/0001-breadcrumb-data-via-shell.md. */
+export interface BreadcrumbData {
+  projectCounts: Partial<Record<Discipline, number>>;
+  titleMap: Record<string, string>;
+  postCount: number;
+}
+export function breadcrumbData(): BreadcrumbData {
+  return { projectCounts: disciplineCounts(), titleMap: titleMap(), postCount: postCount() };
+}

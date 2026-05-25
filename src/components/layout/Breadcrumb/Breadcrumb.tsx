@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import type { Discipline } from '@/types';
+import type { BreadcrumbData } from '@/lib/content';
 import { DISCIPLINES } from '@/lib/disciplines';
 import { disciplineFromPath } from '@/lib/zone';
 import { DURATION, EASING } from '@/lib/motion';
@@ -60,15 +61,8 @@ function buildCrumbs(
  * changing segment + count slide via <Rolling>; appearing/disappearing crumbs
  * fade-slide. The leading dot reads --accent, so it matches the zone.
  */
-export function Breadcrumb({
-  projectCounts,
-  titleMap,
-  postCount,
-}: {
-  projectCounts: Partial<Record<Discipline, number>>;
-  titleMap: Record<string, string>;
-  postCount: number;
-}) {
+export function Breadcrumb({ data }: { data: BreadcrumbData }) {
+  const { projectCounts, titleMap, postCount } = data;
   const pathname = usePathname();
   const reduce = useReducedMotion();
   const crumbs = buildCrumbs(pathname, titleMap, projectCounts, postCount);

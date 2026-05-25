@@ -1,6 +1,6 @@
 'use client';
 import { usePathname } from 'next/navigation';
-import type { Discipline } from '@/types';
+import type { BreadcrumbData } from '@/lib/content';
 import { resolveZone } from '@/lib/zone';
 import { Nav } from '../Nav';
 import { Footer } from '../Footer';
@@ -16,14 +16,13 @@ import styles from './Shell.module.scss';
  */
 export function Shell({
   children,
-  projectCounts,
-  titleMap,
-  postCount,
+  breadcrumbData,
 }: {
   children: React.ReactNode;
-  projectCounts: Partial<Record<Discipline, number>>;
-  titleMap: Record<string, string>;
-  postCount: number;
+  /** Threaded straight to the Breadcrumb — the Shell doesn't read it. It's built
+      in the server layout (content.ts is server-only) and the Breadcrumb is a
+      client component; see docs/adr/0001-breadcrumb-data-via-shell.md. */
+  breadcrumbData: BreadcrumbData;
 }) {
   const pathname = usePathname();
   const { discipline, active, accent, accentInk, onAccent } = resolveZone(pathname);
@@ -42,7 +41,7 @@ export function Shell({
       <main className={styles.content}>
         {/* persistent breadcrumb — one consistent, clickable trail for every
             route, so its position never shifts and the changing segment rolls */}
-        <Breadcrumb projectCounts={projectCounts} titleMap={titleMap} postCount={postCount} />
+        <Breadcrumb data={breadcrumbData} />
         {children}
       </main>
       <Footer />
