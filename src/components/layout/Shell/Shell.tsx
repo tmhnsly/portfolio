@@ -1,20 +1,12 @@
 'use client';
 import { usePathname } from 'next/navigation';
 import type { Discipline } from '@/types';
-import { DISCIPLINES, isDiscipline } from '@/lib/disciplines';
+import { resolveZone } from '@/lib/zone';
 import { Nav } from '../Nav';
 import { Footer } from '../Footer';
 import { Bloom } from '../Bloom';
 import { Breadcrumb } from '../Breadcrumb';
 import styles from './Shell.module.scss';
-
-/** The current "zone" derived from the URL — drives accent, bloom and nav highlight. */
-function zoneFromPath(pathname: string): { discipline?: Discipline; active?: string } {
-  const seg = pathname.split('/')[1] ?? '';
-  if (!seg) return {}; // home → default accent, no nav highlight
-  const discipline = isDiscipline(seg) ? seg : undefined; // 'about' → undefined (tomato)
-  return { discipline, active: seg };
-}
 
 /**
  * Persistent app shell. Lives once in the root layout so the bloom and nav
@@ -34,12 +26,7 @@ export function Shell({
   postCount: number;
 }) {
   const pathname = usePathname();
-  const { discipline, active } = zoneFromPath(pathname);
-  const meta = discipline ? DISCIPLINES[discipline] : null;
-  // default zone (home/about) = tomato brand accent
-  const accent = meta ? meta.color : 'var(--tomato-9)';
-  const accentInk = meta ? meta.ink : 'var(--tomato-11)';
-  const onAccent = meta ? meta.onAccent : 'var(--white-a12)';
+  const { discipline, active, accent, accentInk, onAccent } = resolveZone(pathname);
 
   // The accent transition (Shell.module.scss) only fires on a *change* of
   // --accent/--accent-ink. On first load the values are already in the SSR'd
@@ -51,7 +38,7 @@ export function Shell({
       style={{ '--accent': accent, '--accent-ink': accentInk, '--on-accent': onAccent } as React.CSSProperties}
     >
       <Bloom zone={discipline ?? 'default'} tint={accent} />
-      <Nav active={active} />
+      <Nav active={active} accent={accent} accentInk={accentInk} onAccent={onAccent} />
       <main className={styles.content}>
         {/* persistent breadcrumb — one consistent, clickable trail for every
             route, so its position never shifts and the changing segment rolls */}
