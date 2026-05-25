@@ -4,7 +4,7 @@ import { useCallback, useEffect, useRef, useState, type KeyboardEvent } from 're
 import { AnimatePresence, motion, useReducedMotion, type PanInfo, type Variants } from 'motion/react';
 import { BiChevronLeft, BiChevronRight } from 'react-icons/bi';
 import type { Project } from '@/types';
-import { EASING } from '@/lib/motion';
+import { EASING, useInView } from '@/lib/motion';
 import { IMG_SIZES } from '@/lib/breakpoints';
 import { projectPresentation } from '@/lib/project-presentation';
 import { rotate, rotateTo, swipeDir } from '@/lib/deck';
@@ -60,16 +60,8 @@ export function CardDeck({ items }: { items: Project[] }) {
   // one advance per gesture — a fast mobile swipe was firing several at once
   const lockUntil = useRef(0);
   // pause the auto-advance timer when the deck is scrolled off-screen (no
-  // timer-driven re-renders/springs when it's not visible) — mirrors Marquee
-  const wrapRef = useRef<HTMLDivElement>(null);
-  const [inView, setInView] = useState(false);
-  useEffect(() => {
-    const el = wrapRef.current;
-    if (!el) return;
-    const obs = new IntersectionObserver(([e]) => setInView(e.isIntersecting), { threshold: 0 });
-    obs.observe(el);
-    return () => obs.disconnect();
-  }, []);
+  // timer-driven re-renders/springs when it's not visible)
+  const { ref: wrapRef, inView } = useInView();
 
   const advance = useCallback((d: number) => {
     const now = Date.now();
@@ -103,7 +95,7 @@ export function CardDeck({ items }: { items: Project[] }) {
       const label = e.key === 'ArrowRight' ? 'next' : 'previous';
       wrap?.querySelector<HTMLButtonElement>(`button[aria-label="${label}"]`)?.focus();
     }
-  }, [advance]);
+  }, [advance, wrapRef]); // wrapRef is the hook's stable ref — listed to satisfy exhaustive-deps
 
   useEffect(() => {
     if (reduce || hovered || n <= 1 || !inView) return;
