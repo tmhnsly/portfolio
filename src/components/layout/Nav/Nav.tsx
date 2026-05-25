@@ -1,4 +1,5 @@
 'use client';
+import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import type { IconType } from 'react-icons';
 import { BiMoon, BiSun, BiMenu, BiCodeAlt, BiVideo, BiCamera, BiMusic, BiHeadphone, BiPencil, BiUser } from 'react-icons/bi';
@@ -41,14 +42,32 @@ export function Nav({ active, accent, accentInk, onAccent }: NavProps) {
   // the dropdown portals to <body>, outside the Shell's --accent scope, so they're
   // set inline on the Content below.
 
+  // Active-route pill: a single element measured against the list and sprung to
+  // the active item. Deliberately NOT a layoutId shared-layout element — that
+  // baked the pre-navigation scroll offset into its from-box, so a route change
+  // (which resets scrollY to 0) made it fly up from where the page was scrolled.
+  // offsetLeft/Top are relative to the list, so this is scroll-independent.
+  const listRef = useRef<HTMLUListElement>(null);
+  const itemRefs = useRef(new Map<string, HTMLAnchorElement>());
+  const activeHref = SITE.nav.find((i) => isActive(i.label))?.href;
+  const [box, setBox] = useState<{ left: number; top: number; width: number; height: number } | null>(null);
+
+  useEffect(() => {
+    const measure = () => {
+      const el = activeHref ? itemRefs.current.get(activeHref) : undefined;
+      setBox(el ? { left: el.offsetLeft, top: el.offsetTop, width: el.offsetWidth, height: el.offsetHeight } : null);
+    };
+    measure();
+    const list = listRef.current;
+    const ro = list ? new ResizeObserver(measure) : null;
+    ro?.observe(list!);
+    // recompute once the display font swaps in (item widths shift)
+    document.fonts?.ready.then(measure).catch(() => {});
+    return () => ro?.disconnect();
+  }, [activeHref]);
+
   return (
-    // `layoutRoot` is load-bearing: the active pill is a shared-layout element
-    // (layoutId, below) and this header is `position: sticky`. Without a root
-    // here the pill resolves against the document-flowing Shell motion.div, so a
-    // route change (which resets window scroll to top) feeds the projection a
-    // stale scroll delta and the pill flies up from where the page was scrolled.
-    // Marking the sticky header a layoutRoot pins the pill's frame to the header.
-    <motion.header className={styles.header} layoutRoot>
+    <header className={styles.header}>
       <Container>
         <nav className={styles.bar} aria-label="Primary">
           {/* monogram + wordmark are two visual pieces but one "home" button */}
@@ -57,32 +76,39 @@ export function Nav({ active, accent, accentInk, onAccent }: NavProps) {
             <span className={styles.name}>Tom Hinsley</span>
           </Link>
 
-          {/* Desktop: inline items. The active route's dark pill is a shared-layout
-              element (layoutId) so it SLIDES between items on navigation rather
-              than cross-fading. The label sits above the pill (z-index). */}
-          <ul className={styles.items}>
+          {/* Desktop: inline items. The active route's dark pill SLIDES between
+              items on navigation (the motion.li below, sprung to the measured
+              active item). The label sits above the pill (z-index). Until JS
+              measures, `.active` carries a CSS background so first paint is
+              flash-free; `.hasPill` hands that role to the pill once measured. */}
+          <ul ref={listRef} className={box ? `${styles.items} ${styles.hasPill}` : styles.items}>
             {SITE.nav.map((item) => {
               const activeItem = isActive(item.label);
               return (
                 <li key={item.href}>
                   <Link
+                    ref={(el) => {
+                      if (el) itemRefs.current.set(item.href, el);
+                      else itemRefs.current.delete(item.href);
+                    }}
                     href={item.href}
                     className={activeItem ? `${styles.item} ${styles.active}` : styles.item}
                     aria-current={activeItem ? 'page' : undefined}
                   >
-                    {activeItem && (
-                      <motion.span
-                        aria-hidden
-                        className={styles.pill}
-                        layoutId="navActivePill"
-                        transition={reduce ? { duration: 0 } : { type: 'spring', stiffness: 380, damping: 32 }}
-                      />
-                    )}
                     <span className={styles.label}>{item.label}</span>
                   </Link>
                 </li>
               );
             })}
+            {box && (
+              <motion.li
+                aria-hidden
+                className={styles.pill}
+                initial={false}
+                animate={box}
+                transition={reduce ? { duration: 0 } : { type: 'spring', stiffness: 380, damping: 32 }}
+              />
+            )}
           </ul>
 
           {/* Desktop: theme toggle + email CTA */}
@@ -153,6 +179,6 @@ export function Nav({ active, accent, accentInk, onAccent }: NavProps) {
           </DropdownMenu.Root>
         </nav>
       </Container>
-    </motion.header>
+    </header>
   );
 }

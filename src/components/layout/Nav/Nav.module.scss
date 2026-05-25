@@ -45,6 +45,7 @@
    over (the full row of 7 items + CTA only fits comfortably at ≥1200) ── */
 .items {
   display: none;
+  position: relative; /* positioning context for the absolutely-placed pill */
 
   @include desktop-up {
     display: flex; align-items: center; gap: var(--nav-item-gap);
@@ -52,7 +53,7 @@
   }
 }
 .item {
-  position: relative; /* anchors the absolutely-positioned sliding pill */
+  position: relative; z-index: 1; /* keep items (and labels) above the pill */
   display: inline-block; padding: var(--nav-item-pad-wide); border-radius: var(--radius-lg);
   font-size: 14px; font-weight: 500; letter-spacing: -0.005em; color: var(--text);
   transition: background var(--duration-fast) var(--ease-standard), color var(--duration-fast) var(--ease-standard);
@@ -60,10 +61,14 @@
 }
 /* hover bg only on inactive items — the active item's pill already fills it */
 @include can-hover { .item:not(.active):hover { background: var(--surface-soft); } }
-.active { color: var(--bg); } /* the pill (below) provides the dark fill */
-/* the sliding active-route background — shared-layout element, sits behind the label */
+/* the active item carries a CSS fill so first paint (pre-JS-measure) is flash-free;
+   once the sprung pill is measured, .hasPill hands the fill over to it */
+.active { color: var(--bg); background: var(--text); }
+.hasPill .active { background: transparent; }
+/* the sliding active-route background — a single element sprung between items
+   (left/top/width/height set inline by motion), sits behind the labels */
 .pill {
-  position: absolute; inset: 0; z-index: 0;
+  position: absolute; top: 0; left: 0; z-index: 0; list-style: none;
   border-radius: var(--radius-lg); background: var(--text);
 }
 .label { position: relative; z-index: 1; }
