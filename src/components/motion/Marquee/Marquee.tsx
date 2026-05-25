@@ -24,7 +24,9 @@ export function Marquee({ children, faded }: { children: React.ReactNode; faded?
     <div ref={viewportRef} className={viewportClass}>
       <div className={trackClass}>
         <div className={styles.group}>{children}</div>
-        <div className={styles.group} aria-hidden>{children}</div>
+        {/* duplicate for the seamless loop — `inert` keeps its links out of the tab
+            order and the a11y tree (aria-hidden alone leaves them focusable). */}
+        <div className={styles.group} aria-hidden inert>{children}</div>
       </div>
     </div>
   );

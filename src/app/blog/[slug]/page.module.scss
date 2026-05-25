@@ -64,7 +64,8 @@
 
 /* shown (greyed) when there's no older/newer post — matches project PrevNext */
 .navDisabled {
-  opacity: 0.4;
+  /* matches PrevNext: muted-but-legible "no older/newer post" placeholder (was 0.4) */
+  opacity: 0.6;
   cursor: default;
   pointer-events: none;
 }

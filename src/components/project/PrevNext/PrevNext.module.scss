@@ -37,7 +37,9 @@
 }
 
 .disabled {
-  opacity: 0.4;
+  /* the "no previous/next" placeholder — clearly muted but legible (was 0.4, which
+     dropped the caption to ~2:1; inactive UI is WCAG-exempt but this reads far better) */
+  opacity: 0.6;
   cursor: default;
   pointer-events: none;
 }

@@ -90,8 +90,11 @@ export function Nav({ active, accent, accentInk, onAccent }: NavProps) {
               {theme === 'dark' ? <BiSun aria-hidden /> : <BiMoon aria-hidden />}
             </button>
             <a className={styles.cta} href={mailto()}>
+              {/* exactly one span is `display`-shown per breakpoint (the other is
+                  display:none, so excluded from the a11y name) — so neither needs
+                  aria-hidden; whichever is visible becomes the link's accessible name. */}
               <span className={styles.ctaFull}>{email ?? 'Email me'} <LinkArrow /></span>
-              <span className={styles.ctaShort} aria-hidden="true">{COPY.nav.sayHi} <LinkArrow /></span>
+              <span className={styles.ctaShort}>{COPY.nav.sayHi} <LinkArrow /></span>
             </a>
           </div>
 
