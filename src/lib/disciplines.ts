@@ -21,8 +21,11 @@ const LABEL: Record<Discipline, string> = {
   code: 'Code', music: 'Music', sound: 'Sound', photo: 'Photo', video: 'Video', blog: 'Blog',
 };
 
-/** Hues whose step-9 solid is light → need DARK text on the pill (else white). */
-const LIGHT_SOLID = new Set(['yellow', 'amber', 'orange', 'gold', 'lime', 'mint', 'sky']);
+/** Radix step-9 solids designed for DARK foreground text (all others take white).
+    Per the Radix docs this is EXACTLY: sky, mint, lime, yellow, amber. (orange-9
+    and gold-9 take WHITE text — they were wrongly included before, which gave the
+    video/orange pill dark text.) */
+const LIGHT_SOLID = new Set(['sky', 'mint', 'lime', 'yellow', 'amber']);
 
 function meta(slug: Discipline): DisciplineMeta {
   const h = HUE[slug];
