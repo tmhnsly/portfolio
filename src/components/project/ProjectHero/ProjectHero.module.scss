@@ -17,6 +17,7 @@
 .main {
   display: flex;
   flex-direction: column;
+  min-width: 0; /* grid item: let the live-URL ellipsis engage on long URLs */
 }
 
 .pillRow {
@@ -42,10 +43,32 @@
 }
 
 .liveUrl {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  max-width: 100%;
+  min-width: 0; /* allow the text to shrink + ellipsis when the row wraps */
   font-family: var(--font-mono);
   font-size: var(--fs-caption);
   color: var(--text-muted);
   letter-spacing: 0.06em;
+  text-decoration: none;
+  transition: color var(--duration-fast) var(--ease-standard);
+
+  @include can-hover {
+    &:hover { color: var(--text); }
+  }
+  &:focus-visible {
+    outline: 2px solid var(--accent-ink);
+    outline-offset: 3px;
+    border-radius: var(--radius-sm);
+  }
+}
+.liveUrlText {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-width: 0;
 }
 
 .title {
