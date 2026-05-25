@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import matter from 'gray-matter';
 import { projectFrontmatterSchema, postFrontmatterSchema } from './schemas';
-import type { Project, BlogPost, Author } from './schemas';
+import type { Project, BlogPost, Author, Discipline } from './schemas';
 
 const ROOT = path.join(process.cwd(), 'content');
 const AUTHOR: Author = {
@@ -21,26 +21,100 @@ function listMd(sub: string) {
   return fs.readdirSync(path.join(ROOT, sub)).filter((f) => f.endsWith('.md'));
 }
 
+/* ── Corpus: read + Zod-parse + date-desc sort ONCE, then memoise. Content is
+   static at build, so callers (and the queries below) share one parsed array
+   instead of re-reading the markdown on every call. Callers never mutate. ── */
+let _projects: Project[] | null = null;
+let _posts: BlogPost[] | null = null;
+
 export function getAllProjects(): Project[] {
-  return listMd('projects')
+  return (_projects ??= listMd('projects')
     .map((file) => {
       const { slug, data, content } = read('projects', file);
       return { ...projectFrontmatterSchema.parse(data), slug, body: content };
     })
-    .sort((a, b) => b.date.localeCompare(a.date));
-}
-export function getProject(slug: string): Project | undefined {
-  return getAllProjects().find((p) => p.slug === slug);
+    .sort((a, b) => b.date.localeCompare(a.date)));
 }
 export function getAllPosts(): BlogPost[] {
-  return listMd('blog')
+  return (_posts ??= listMd('blog')
     .map((file) => {
       const { slug, data, content } = read('blog', file);
       const fm = postFrontmatterSchema.parse(data);
       return { ...fm, slug, body: content, readingTime: fm.readingTime ?? estimateReading(content), author: AUTHOR };
     })
-    .sort((a, b) => b.date.localeCompare(a.date));
+    .sort((a, b) => b.date.localeCompare(a.date)));
+}
+export function getProject(slug: string): Project | undefined {
+  return getAllProjects().find((p) => p.slug === slug);
 }
 export function getPost(slug: string): BlogPost | undefined {
   return getAllPosts().find((p) => p.slug === slug);
+}
+
+/* ── Queries: the questions pages actually ask, answered here once (sort order,
+   neighbour and "related" rules live behind this seam, not in each page). ── */
+
+/** All projects in a discipline (date-desc, like the corpus). */
+export function projectsInDiscipline(discipline: Discipline): Project[] {
+  return getAllProjects().filter((p) => p.discipline === discipline);
+}
+
+/** The previous/next project within the same discipline (date-desc order). */
+export function projectNeighbours(slug: string): { prev?: Project; next?: Project } {
+  const project = getProject(slug);
+  if (!project) return {};
+  const list = projectsInDiscipline(project.discipline);
+  const i = list.findIndex((p) => p.slug === slug);
+  return {
+    prev: i > 0 ? list[i - 1] : undefined,
+    next: i >= 0 && i < list.length - 1 ? list[i + 1] : undefined,
+  };
+}
+
+/** Projects related to `slug`: same discipline first (excl. itself), then topped
+    up to `n` with the most-recent projects from other disciplines. */
+export function relatedProjects(slug: string, n = 3): Project[] {
+  const project = getProject(slug);
+  if (!project) return [];
+  const all = getAllProjects();
+  const sameDiscipline = all.filter((p) => p.slug !== slug && p.discipline === project.discipline);
+  if (sameDiscipline.length >= n) return sameDiscipline.slice(0, n);
+  const others = all.filter((p) => p.slug !== slug && p.discipline !== project.discipline);
+  return [...sameDiscipline, ...others].slice(0, n);
+}
+
+/** The newer/older post around `slug` (date-desc order → newer is earlier). */
+export function postNeighbours(slug: string): { newer?: BlogPost; older?: BlogPost } {
+  const all = getAllPosts();
+  const i = all.findIndex((p) => p.slug === slug);
+  if (i < 0) return {};
+  return {
+    newer: i > 0 ? all[i - 1] : undefined,
+    older: i < all.length - 1 ? all[i + 1] : undefined,
+  };
+}
+
+/** The most-recent posts excluding `slug`. */
+export function relatedPosts(slug: string, n = 3): BlogPost[] {
+  return getAllPosts().filter((p) => p.slug !== slug).slice(0, n);
+}
+
+/** Project count per discipline (for the breadcrumb section meta). */
+export function disciplineCounts(): Partial<Record<Discipline, number>> {
+  const counts: Partial<Record<Discipline, number>> = {};
+  for (const p of getAllProjects()) counts[p.discipline] = (counts[p.discipline] ?? 0) + 1;
+  return counts;
+}
+
+/** Path → title for every project/post leaf (for the breadcrumb leaf label). */
+export function titleMap(): Record<string, string> {
+  const map: Record<string, string> = {};
+  for (const p of getAllProjects()) map[`/${p.discipline}/${p.slug}`] = p.title;
+  for (const p of getAllPosts()) map[`/blog/${p.slug}`] = p.title;
+  return map;
+}
+
+/** Total number of blog posts. */
+export function postCount(): number {
+  return getAllPosts().length;
 }

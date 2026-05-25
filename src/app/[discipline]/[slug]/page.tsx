@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation';
-import { getAllProjects, getProject } from '@/lib/content';
+import { getAllProjects, getProject, projectNeighbours, relatedProjects } from '@/lib/content';
 import { Container, Stack } from '@/components/layout';
 import { ProjectHero } from '@/components/project/ProjectHero';
 import { ProjectEmbed } from '@/components/project/ProjectEmbed';
@@ -17,11 +17,8 @@ export default async function ProjectPage({ params }: { params: Promise<{ discip
   const project = getProject(slug);
   if (!project || project.discipline !== discipline) notFound();
 
-  const inDiscipline = getAllProjects().filter((p) => p.discipline === project.discipline);
-  const i = inDiscipline.findIndex((p) => p.slug === project.slug);
-  const prev = i > 0 ? inDiscipline[i - 1] : undefined;
-  const next = i >= 0 && i < inDiscipline.length - 1 ? inDiscipline[i + 1] : undefined;
-  const related = getAllProjects().filter((p) => p.slug !== project.slug).slice(0, 3);
+  const { prev, next } = projectNeighbours(slug);
+  const related = relatedProjects(slug);
 
   return (
     <Container>

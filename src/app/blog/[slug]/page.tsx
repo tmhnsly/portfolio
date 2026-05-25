@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import { getAllPosts, getPost } from '@/lib/content';
+import { getAllPosts, getPost, postNeighbours, relatedPosts } from '@/lib/content';
 import { DISCIPLINES } from '@/lib/disciplines';
 import { IMG_SIZES } from '@/lib/breakpoints';
 import { SITE, COPY } from '@/data';
@@ -25,11 +25,8 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const post = getPost(slug);
   if (!post) notFound();
-  const all = getAllPosts();
-  const i = all.findIndex((p) => p.slug === slug);
-  const newer = i > 0 ? all[i - 1] : undefined;       // newer = earlier in desc list
-  const older = i >= 0 && i < all.length - 1 ? all[i + 1] : undefined;
-  const related = all.filter((p) => p.slug !== slug).slice(0, 3);
+  const { newer, older } = postNeighbours(slug);
+  const related = relatedPosts(slug);
   const blogGrad = DISCIPLINES.blog.gradient;
 
   return (
