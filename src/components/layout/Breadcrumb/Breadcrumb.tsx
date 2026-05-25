@@ -2,70 +2,25 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
-import type { Discipline } from '@/types';
 import type { BreadcrumbData } from '@/lib/content';
-import { DISCIPLINES } from '@/lib/disciplines';
-import { disciplineFromPath } from '@/lib/zone';
+import { buildCrumbs } from '@/lib/breadcrumb';
 import { DURATION, EASING } from '@/lib/motion';
 import { DisciplineDot } from '@/components/ui/DisciplineDot';
 import { Rolling } from '@/components/motion/Roll';
 import { Container } from '../Container';
 import styles from './Breadcrumb.module.scss';
 
-interface Crumb {
-  slot: 'home' | 'section' | 'leaf';
-  label: string;
-  href?: string;
-  count?: number;
-  unit?: string;
-}
-
-const humanize = (slug: string) =>
-  slug.split('-').map((w) => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
-
-/** Build the crumb trail from the pathname: Home / Section (· N) / Leaf. */
-function buildCrumbs(
-  pathname: string,
-  titleMap: Record<string, string>,
-  projectCounts: Partial<Record<Discipline, number>>,
-  postCount: number,
-): Crumb[] {
-  const segs = pathname.split('/').filter(Boolean);
-  const home: Crumb = { slot: 'home', label: 'Home', href: segs.length ? '/' : undefined };
-  if (segs.length === 0) return [home];
-
-  const first = segs[0];
-  if (first === 'about') return [home, { slot: 'section', label: 'About' }];
-
-  const discipline = disciplineFromPath(pathname);
-  if (discipline) {
-    const label = DISCIPLINES[discipline].label;
-    if (segs.length === 1) {
-      const count = discipline === 'blog' ? postCount : projectCounts[discipline] ?? 0;
-      const noun = discipline === 'blog' ? 'post' : 'project';
-      return [home, { slot: 'section', label, count, unit: `${noun}${count === 1 ? '' : 's'}` }];
-    }
-    const path = `/${discipline}/${segs[1]}`;
-    return [
-      home,
-      { slot: 'section', label, href: `/${discipline}` },
-      { slot: 'leaf', label: titleMap[path] ?? humanize(segs[1]) },
-    ];
-  }
-  return [home, { slot: 'section', label: humanize(first) }];
-}
-
 /**
  * One persistent breadcrumb for every route (Home / Section / Leaf), living in
  * the Shell so its position never shifts and it carries across navigation. The
- * changing segment + count slide via <Rolling>; appearing/disappearing crumbs
- * fade-slide. The leading dot reads --accent, so it matches the zone.
+ * trail rules live in `lib/breadcrumb` (buildCrumbs); this is the render layer.
+ * The changing segment + count slide via <Rolling>; appearing/disappearing
+ * crumbs fade-slide. The leading dot reads --accent, so it matches the zone.
  */
 export function Breadcrumb({ data }: { data: BreadcrumbData }) {
-  const { projectCounts, titleMap, postCount } = data;
   const pathname = usePathname();
   const reduce = useReducedMotion();
-  const crumbs = buildCrumbs(pathname, titleMap, projectCounts, postCount);
+  const crumbs = buildCrumbs(pathname, data);
   const home = crumbs[0];
   const section = crumbs.find((c) => c.slot === 'section');
   const leaf = crumbs.find((c) => c.slot === 'leaf');
