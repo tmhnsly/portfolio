@@ -1,6 +1,7 @@
 import type { Project } from '@/types';
 import { DISCIPLINES } from '@/lib/disciplines';
 import { Media } from '@/components/ui/Media';
+import { LinkArrow } from '@/components/ui/LinkArrow';
 import styles from './ProjectEmbed.module.scss';
 
 const ACTIVE_PADS = new Set([0, 4, 6, 10, 11, 13]);
@@ -21,7 +22,7 @@ export function ProjectEmbed({ project }: { project: Project }) {
               <span>120 bpm</span>
               <span>4/4</span>
             </div>
-            <span>↗ open in new tab</span>
+            <span>open in new tab <LinkArrow inline /></span>
           </div>
 
           <div className={styles.stage}>

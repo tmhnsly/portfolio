@@ -6,6 +6,13 @@
   /* lets any parent card nudge + accent it on hover (see DisciplineCard) */
   transition: transform var(--duration-hover) var(--ease-standard), color var(--duration-hover) var(--ease-standard);
 }
+/* inline variant: match the surrounding text size (defined after .arrow so it
+   wins the equal-specificity font-size/vertical-align overrides) */
+.inline {
+  font-size: 1em;
+  vertical-align: -0.13em;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .arrow { transition: none; }
 }

@@ -1,4 +1,5 @@
 import type { Project } from '@/types';
+import { LinkArrow } from '@/components/ui/LinkArrow';
 import styles from './ProjectLinks.module.scss';
 
 /** Live site / repository links, shown as a row directly beneath the cover image. */
@@ -9,7 +10,10 @@ export function ProjectLinks({ project }: { project: Project }) {
       {project.liveUrl && (
         <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className={styles.linkRow}>
           <span className={styles.linkLabel}>Live site</span>
-          <span className={styles.linkUrl}>{project.liveUrl.replace('https://', '')} ↗</span>
+          <span className={styles.linkUrl}>
+            <span className={styles.linkUrlText}>{project.liveUrl.replace('https://', '')}</span>
+            <LinkArrow inline />
+          </span>
         </a>
       )}
       {project.repo && (
@@ -20,7 +24,10 @@ export function ProjectLinks({ project }: { project: Project }) {
           className={styles.linkRow}
         >
           <span className={styles.linkLabel}>Repository</span>
-          <span className={styles.linkUrl}>{project.repo} ↗</span>
+          <span className={styles.linkUrl}>
+            <span className={styles.linkUrlText}>{project.repo}</span>
+            <LinkArrow inline />
+          </span>
         </a>
       )}
     </div>

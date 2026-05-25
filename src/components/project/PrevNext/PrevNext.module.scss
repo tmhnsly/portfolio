@@ -50,6 +50,13 @@
   text-transform: uppercase;
 }
 
+/* brand directional arrow (replaces the unicode ←/→), sized to the dir text */
+.dirIcon {
+  display: inline-block; /* override the global svg{display:block} reset */
+  font-size: 1.2em;
+  vertical-align: -0.25em;
+}
+
 .projectTitle {
   font-family: var(--font-display);
   font-size: var(--fs-h3);

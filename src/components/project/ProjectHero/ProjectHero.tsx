@@ -1,6 +1,7 @@
 import type { Project } from '@/types';
 import { DISCIPLINES } from '@/lib/disciplines';
 import { Pill } from '@/components/ui/Pill';
+import { LinkArrow } from '@/components/ui/LinkArrow';
 import { Entrance, EntranceItem, EntranceTitle } from '@/components/motion/Entrance';
 import styles from './ProjectHero.module.scss';
 
@@ -23,7 +24,10 @@ export function ProjectHero({ project }: { project: Project }) {
               <span className={styles.statusPill}>{project.status}</span>
             )}
             {project.liveUrl && (
-              <span className={styles.liveUrl}>{project.liveUrl.replace('https://', '')} ↗</span>
+              <a className={styles.liveUrl} href={project.liveUrl} target="_blank" rel="noopener noreferrer">
+                <span className={styles.liveUrlText}>{project.liveUrl.replace('https://', '')}</span>
+                <LinkArrow inline />
+              </a>
             )}
           </EntranceItem>
 

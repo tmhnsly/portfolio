@@ -11,6 +11,7 @@
 .linkRow {
   @include glass;
   flex: 1 1 240px;
+  min-width: 0; /* flex item must shrink below content so the URL can ellipsis */
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -28,6 +29,7 @@
 }
 
 .linkLabel {
+  flex: none;
   font-family: var(--font-display);
   font-size: var(--fs-body);
   font-weight: 500;
@@ -35,8 +37,18 @@
 }
 
 .linkUrl {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  min-width: 0; /* allow the URL text to shrink + ellipsis on narrow rows */
   font-family: var(--font-mono);
   font-size: var(--fs-caption);
   color: var(--text-muted);
   letter-spacing: 0.04em;
+}
+.linkUrlText {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-width: 0;
 }
