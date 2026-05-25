@@ -1,10 +1,11 @@
 /* Zone-transition progress (0 = previous zone, 1 = current). Registered as a
    <number> so the Shell can animate it; --accent/--accent-ink are then a
-   color-mix(in oklch) of the from/to zone colours driven by this (Shell.module
+   color-mix(in oklab) of the from/to zone colours driven by this (Shell.module
    .scss). We DON'T register --accent itself as a <color>: a registered <color>
    interpolates in sRGB (muddy/grey midpoints) AND freezes var() substitution so
    it wouldn't re-resolve the Radix scale on a dark/light toggle. Plain (unregistered)
-   --accent = OKLCH interpolation + correct theme-swap. */
+   --accent = OKLab interpolation (direct cross-fade, no hue-wheel sweep) + correct
+   theme-swap. */
 @property --zone-mix {
   syntax: '<number>';
   inherits: true;
