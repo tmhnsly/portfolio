@@ -1,5 +1,6 @@
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
+import { BiLeftArrowAlt, BiRightArrowAlt } from 'react-icons/bi';
 import { getAllPosts, getPost, postNeighbours, relatedPosts } from '@/lib/content';
 import { DISCIPLINES } from '@/lib/disciplines';
 import { IMG_SIZES } from '@/lib/breakpoints';
@@ -10,6 +11,7 @@ import { TechChip } from '@/components/ui/TechChip';
 import { Pill } from '@/components/ui/Pill';
 import { Media } from '@/components/ui/Media';
 import { EmailLink } from '@/components/ui/EmailLink';
+import { LinkArrow } from '@/components/ui/LinkArrow';
 import { formatMonthYear, readingLabel } from '@/lib/format';
 import { BlogPostHero } from '@/components/blog/BlogPostHero';
 import { PostBody } from '@/components/blog/PostBody';
@@ -51,7 +53,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
           </div>
           <div className={styles.endNote}>
             <span className={styles.endNoteLabel}>{COPY.blog.foundUseful}</span>
-            <EmailLink variant="ghost" subject={`Re: ${post.title}`}>
+            <EmailLink variant="ghost" subject={`Re: ${post.title}`} showArrow inline>
               {COPY.blog.sendNote}
             </EmailLink>
           </div>
@@ -64,7 +66,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
           <nav className={styles.prevNext} aria-label="Post navigation">
             {older ? (
               <Link href={`/blog/${older.slug}`} className={styles.navCard}>
-                <span className={styles.navDir}>{COPY.blog.olderPost}</span>
+                <span className={styles.navDir}><BiLeftArrowAlt className={styles.navArrow} aria-hidden /> {COPY.blog.olderPost}</span>
                 <span className={styles.navTitle}>{older.title}</span>
               </Link>
             ) : (
@@ -72,7 +74,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
             )}
             {newer ? (
               <Link href={`/blog/${newer.slug}`} className={`${styles.navCard} ${styles.navCardRight}`}>
-                <span className={styles.navDir}>{COPY.blog.newerPost}</span>
+                <span className={styles.navDir}>{COPY.blog.newerPost} <BiRightArrowAlt className={styles.navArrow} aria-hidden /></span>
                 <span className={styles.navTitle}>{newer.title}</span>
               </Link>
             ) : (
@@ -91,7 +93,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
                   {COPY.blog.relatedHeading}<span className={styles.period}>.</span>
                 </h2>
               </div>
-              <Link href="/blog" className={styles.allPostsLink}>{COPY.blog.allPosts}</Link>
+              <Link href="/blog" className={styles.allPostsLink}>{COPY.blog.allPosts} <LinkArrow inline /></Link>
             </div>
             <div className={styles.relatedGrid}>
               {related.map((p) => (
@@ -122,7 +124,7 @@ function RelatedCard({ post, grad }: { post: BlogPost; grad: string }) {
       <div className={styles.relatedTitle}>{post.title}</div>
       <div className={styles.relatedFoot}>
         <span>{formatMonthYear(post.date)}</span>
-        <span>{readingLabel(post.readingTime)} →</span>
+        <span>{readingLabel(post.readingTime)} <LinkArrow inline /></span>
       </div>
     </Link>
   );

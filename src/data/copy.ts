@@ -24,7 +24,7 @@ export const COPY = {
     // RecentWork h2 — accent period stays in JSX
     recent: 'Recent',
     // RecentWork "see all" link
-    everything: 'Everything →',
+    everything: 'Everything',
     // DisciplineScroller eyebrow + aria-label
     exploreByDiscipline: 'Explore by discipline',
   },
@@ -99,16 +99,16 @@ export const COPY = {
 
     // blog/[slug]/page.tsx
     foundUseful: 'Found this useful?',
-    sendNote: 'Send a note ↗',
-    olderPost: '← Older post',
-    newerPost: 'Newer post →',
+    sendNote: 'Send a note',
+    olderPost: 'Older post',
+    newerPost: 'Newer post',
     relatedEyebrow: 'Related posts',
     // heading — accent period stays in JSX
     relatedHeading: 'More from the blog',
-    allPosts: '↗ All posts',
+    allPosts: 'All posts',
 
     // AuthorCard CTA
-    aboutArrow: 'About →',
+    aboutArrow: 'About',
   },
 
   project: {
@@ -120,7 +120,7 @@ export const COPY = {
 
   nav: {
     // Short CTA in Nav actions (aria-hidden sibling of full email)
-    sayHi: 'Say hi →',
+    sayHi: 'Say hi',
     // Monogram link aria-label
     homeAria: 'Tom Hinsley — home',
   },
