@@ -1,19 +1,14 @@
-/* Register --accent as a typed custom property so it can be *transitioned*
-   (CSS only animates registered custom properties). The persistent Shell sets
-   --accent per zone and transitions it → nav accent, bloom and accent text all
-   crossfade together on route change. */
-@property --accent {
-  syntax: '<color>';
+/* Zone-transition progress (0 = previous zone, 1 = current). Registered as a
+   <number> so the Shell can animate it; --accent/--accent-ink are then a
+   color-mix(in oklch) of the from/to zone colours driven by this (Shell.module
+   .scss). We DON'T register --accent itself as a <color>: a registered <color>
+   interpolates in sRGB (muddy/grey midpoints) AND freezes var() substitution so
+   it wouldn't re-resolve the Radix scale on a dark/light toggle. Plain (unregistered)
+   --accent = OKLCH interpolation + correct theme-swap. */
+@property --zone-mix {
+  syntax: '<number>';
   inherits: true;
-  initial-value: #e54d2e; /* tomato-9 */
-}
-/* --accent-ink = the legible coloured-TEXT version (Radix step-11). Registered
-   so it crossfades with --accent on zone change. Used for periods, links, focus
-   rings — anything where the accent is foreground text on the page. */
-@property --accent-ink {
-  syntax: '<color>';
-  inherits: true;
-  initial-value: #ca3214; /* tomato-11 */
+  initial-value: 1;
 }
 
 :root {
