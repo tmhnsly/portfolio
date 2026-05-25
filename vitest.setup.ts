@@ -12,3 +12,8 @@ if (!('IntersectionObserver' in window)) {
   // @ts-expect-error test stub
   window.IntersectionObserver = IO;
 }
+if (!('ResizeObserver' in window)) {
+  class RO { observe(){} unobserve(){} disconnect(){} }
+  // @ts-expect-error test stub
+  window.ResizeObserver = RO;
+}
