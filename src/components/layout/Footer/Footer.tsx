@@ -1,17 +1,19 @@
 import Link from 'next/link';
 import { SITE, COPY } from '@/data';
 import { Marquee } from '@/components/motion/Marquee';
+import { EmailLink } from '@/components/ui/EmailLink';
 import { Container } from '../Container';
 import { FullBleed } from '../FullBleed';
 import { FooterFact } from './FooterFact';
 import styles from './Footer.module.scss';
 
 export function Footer() {
-  const mailto = `mailto:${SITE.email}`;
-  const marqueeItems: { text: string; href?: string }[] = [
+  // `email` items render via <EmailLink> (address revealed client-side); `label`
+  // set = a worded link (e.g. "Get in touch"), omitted = show the address.
+  const marqueeItems: { text?: string; email?: boolean; label?: string }[] = [
     { text: SITE.name },
-    { text: SITE.email, href: mailto },
-    ...COPY.footer.marqueeExtra.map((text) => ({ text, href: /touch/i.test(text) ? mailto : undefined })),
+    { email: true },
+    ...COPY.footer.marqueeExtra.map((text) => (/touch/i.test(text) ? { email: true, label: text } : { text })),
   ];
 
   return (
@@ -22,8 +24,8 @@ export function Footer() {
             <span className={styles.row}>
               {marqueeItems.map((item, i) => (
                 <span key={i} className={styles.item}>
-                  {item.href ? (
-                    <a href={item.href} className={styles.marqueeLink}>{item.text}</a>
+                  {item.email ? (
+                    <EmailLink className={styles.marqueeLink}>{item.label}</EmailLink>
                   ) : (
                     item.text
                   )}

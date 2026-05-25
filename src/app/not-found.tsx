@@ -2,9 +2,9 @@ import Link from 'next/link';
 import { Container, Stack } from '@/components/layout';
 import { DISCIPLINE_ORDER, DISCIPLINES } from '@/lib/disciplines';
 import { Eyebrow } from '@/components/ui/Eyebrow';
-import { Button } from '@/components/ui/Button';
+import { EmailLink } from '@/components/ui/EmailLink';
 import { GlassCard } from '@/components/ui/GlassCard';
-import { SITE, COPY } from '@/data';
+import { COPY } from '@/data';
 import styles from './not-found.module.scss';
 
 export default function NotFound() {
@@ -34,7 +34,7 @@ export default function NotFound() {
           </div>
           <div className={styles.cta}>
             <span className={styles.ctaText}>{COPY.notFound.cta}</span>
-            <Button variant="primary" href={`mailto:${SITE.email}`}>{SITE.email} →</Button>
+            <EmailLink variant="primary" showArrow inline />
           </div>
         </section>
       </Stack>
