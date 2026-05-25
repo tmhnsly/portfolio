@@ -1,14 +1,13 @@
 'use client';
-import { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
-import { motion, useMotionValue, animate, useReducedMotion } from 'motion/react';
+import { motion, useReducedMotion } from 'motion/react';
 import type { BreadcrumbData } from '@/lib/content';
 import { resolveZone } from '@/lib/zone';
-import { DURATION, EASING } from '@/lib/motion';
 import { Nav } from '../Nav';
 import { Footer } from '../Footer';
 import { Bloom } from '../Bloom';
 import { Breadcrumb } from '../Breadcrumb';
+import { useZoneMorph } from './useZoneMorph';
 import styles from './Shell.module.scss';
 
 /**
@@ -17,10 +16,9 @@ import styles from './Shell.module.scss';
  * remounting per route. `usePathname()` resolves during SSR, so the accent is
  * correct on first paint (no flash).
  *
- * Zone colour transition: rather than transition --accent as a colour (sRGB →
- * muddy midpoints, and a registered <color> wouldn't theme-swap), we keep the
- * previous (`from`) and current (`to`) zone colours and animate --zone-mix 0→1;
- * --accent/--accent-ink are a color-mix(in oklch) of from→to (Shell.module.scss).
+ * Its job is orchestration: resolve the Zone, then thread the resolved Accent
+ * tokens to Bloom/Nav/Breadcrumb. The Zone colour morph (the from/to/mix dance
+ * consumed by Shell.module.scss) lives in `useZoneMorph`.
  */
 export function Shell({
   children,
@@ -35,29 +33,8 @@ export function Shell({
   const pathname = usePathname();
   const reduce = useReducedMotion();
   const { discipline, active, accent, accentInk, onAccent } = resolveZone(pathname);
-
-  const mix = useMotionValue(1);
-  const [to, setTo] = useState({ accent, accentInk });
-  const [from, setFrom] = useState({ accent, accentInk });
-
-  // Derive-state-during-render (no effect, no flash): a zone change makes the
-  // current `to` the new `from`, sets the new `to`, and resets progress to 0 so
-  // the very next paint still shows the old colour before the morph runs.
-  if (to.accent !== accent || to.accentInk !== accentInk) {
-    setFrom(to);
-    setTo({ accent, accentInk });
-    mix.set(reduce ? 1 : 0);
-  }
-
-  // Drive the morph after a zone change (skipped under reduced motion).
-  useEffect(() => {
-    if (reduce) {
-      mix.set(1);
-      return;
-    }
-    const controls = animate(mix, 1, { duration: DURATION.zone, ease: EASING.smooth });
-    return () => controls.stop();
-  }, [to, reduce, mix]);
+  // the subtle, no-flash Zone colour morph lives in its own tested hook
+  const { from, to, mix } = useZoneMorph({ accent, accentInk }, reduce);
 
   return (
     <motion.div
