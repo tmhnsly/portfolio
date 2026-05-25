@@ -1,6 +1,6 @@
 'use client';
 import Link from 'next/link';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState, type KeyboardEvent } from 'react';
 import { AnimatePresence, motion, useReducedMotion, type PanInfo, type Variants } from 'motion/react';
 import { BiChevronLeft, BiChevronRight } from 'react-icons/bi';
 import type { Project } from '@/types';
@@ -87,6 +87,24 @@ export function CardDeck({ items }: { items: Project[] }) {
     });
   }, []);
 
+  // ←/→ flip the deck from anywhere inside it: keydown bubbles up to the wrap, so it
+  // fires whether the front card OR a control (prev/next/tick) is focused — no
+  // focusable container, no giant ring. If the front CARD is the focused element it
+  // unmounts on advance, so move focus to the matching prev/next button (stable, stays
+  // in the deck) — keyboard focus is never dropped to <body>.
+  const onArrowKey = useCallback((e: KeyboardEvent<HTMLDivElement>) => {
+    if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+    e.preventDefault();
+    const wrap = wrapRef.current;
+    const deck = wrap?.querySelector('[aria-roledescription="carousel"]');
+    const cardFocused = !!deck && deck.contains(document.activeElement);
+    advance(e.key === 'ArrowRight' ? -1 : 1);
+    if (cardFocused) {
+      const label = e.key === 'ArrowRight' ? 'next' : 'previous';
+      wrap?.querySelector<HTMLButtonElement>(`button[aria-label="${label}"]`)?.focus();
+    }
+  }, [advance]);
+
   useEffect(() => {
     if (reduce || hovered || n <= 1 || !inView) return;
     const id = setInterval(() => advance(-1), AUTO_MS);
@@ -123,11 +141,11 @@ export function CardDeck({ items }: { items: Project[] }) {
   };
 
   return (
-    <div className={styles.wrap} ref={wrapRef}>
+    <div className={styles.wrap} ref={wrapRef} onKeyDown={onArrowKey}>
       {/* A labelled region for screen readers, but NOT a tab stop: making the whole
-          deck focusable drew a big focus ring around the stack and lost focus on each
-          advance (the focused card unmounts). Keyboard control lives on the prev/next
-          + tick buttons below, which persist across advances. */}
+          deck focusable drew a big focus ring around the stack. Keyboard control is the
+          prev/next + tick buttons below (they persist across advances) plus ←/→ arrows,
+          handled on the wrap (onArrowKey) so they work from the card or the controls. */}
       <div
         className={styles.deck}
         role="group"
