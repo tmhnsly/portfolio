@@ -13,11 +13,12 @@
 .trail {
   display: flex;
   align-items: center;
-  flex-wrap: wrap;
+  flex-wrap: nowrap; /* stay on ONE line; the leaf truncates rather than wrapping */
   list-style: none;
   margin: 0;
   padding: 0;
   min-width: 0;
+  overflow: hidden;
   @include eyebrow; /* font-mono · fs-mono-s · ls-eyebrow · uppercase · text-muted */
 }
 
@@ -26,6 +27,18 @@
   align-items: center;
   white-space: nowrap;
   min-width: 0;
+}
+
+/* the leaf (project/post title) is the flexible crumb — on narrow screens it
+   truncates with an ellipsis so the breadcrumb never wraps to a second line */
+.leaf {
+  overflow: hidden;
+}
+.leaf .current {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .sep {
