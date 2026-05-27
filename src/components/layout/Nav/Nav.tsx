@@ -58,12 +58,11 @@ export function Nav({ active, accent, accentInk, onAccent }: NavProps) {
       setBox(el ? { left: el.offsetLeft, top: el.offsetTop, width: el.offsetWidth, height: el.offsetHeight } : null);
     };
     measure();
-    const list = listRef.current;
-    const ro = list ? new ResizeObserver(measure) : null;
-    ro?.observe(list!);
-    // recompute once the display font swaps in (item widths shift)
+    // recompute on container resize + once the display font swaps in (item widths shift)
+    const ro = new ResizeObserver(measure);
+    if (listRef.current) ro.observe(listRef.current);
     document.fonts?.ready.then(measure).catch(() => {});
-    return () => ro?.disconnect();
+    return () => ro.disconnect();
   }, [activeHref]);
 
   return (

@@ -4,8 +4,8 @@
    .scss). We DON'T register --accent itself as a <color>: a registered <color>
    interpolates in sRGB (muddy/grey midpoints) AND freezes var() substitution so
    it wouldn't re-resolve the Radix scale on a dark/light toggle. Plain (unregistered)
-   --accent = OKLab interpolation (direct cross-fade, no hue-wheel sweep) + correct
-   theme-swap. */
+   --accent = OKLab interpolation (perceptually even — far less hue-sweep than
+   OKLCH, none of sRGB's muddiness) + correct theme-swap. */
 @property --zone-mix {
   syntax: '<number>';
   inherits: true;

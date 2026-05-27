@@ -13,7 +13,7 @@ export interface ZoneAccent {
  * as a colour (sRGB → muddy midpoints, and a registered <color> wouldn't
  * theme-swap), it keeps the previous (`from`) and current (`to`) accents and a
  * `mix` 0→1 MotionValue; Shell.module.scss does the
- * `color-mix(in oklch, from, to, mix)`.
+ * `color-mix(in oklab, from, to, mix)`.
  *
  * On a Zone change it makes the old `to` the new `from`, sets the new `to`, and
  * resets `mix` to 0 — all *during render*, no effect, no flash: the very next
