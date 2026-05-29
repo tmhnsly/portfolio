@@ -13,11 +13,11 @@ export function Hero({ featured }: { featured: Project[] }) {
           {COPY.hero.titleLead}<br />
           <span className={styles.muted}>{COPY.hero.titleMuted}</span><span className={styles.period}>.</span>
         </EntranceTitle>
-        <EntranceItem>
+        <EntranceItem i={0}>
           <p className={styles.sub}>{COPY.hero.sub}</p>
         </EntranceItem>
       </div>
-      <EntranceItem className={styles.deckCol}>
+      <EntranceItem i={1} className={styles.deckCol}>
         <Eyebrow>Featured deck</Eyebrow>
         <CardDeck items={featured} />
       </EntranceItem>
