@@ -1,53 +1,51 @@
 'use client';
 import React, { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
-import { motion, useReducedMotion } from 'motion/react';
-import { entranceStagger, entranceItem } from '@/lib/motion';
+import { useReducedMotion } from 'motion/react';
 import styles from './Entrance.module.scss';
 
 /**
- * Shared page-entrance system (one config in lib/motion → tweak everywhere).
+ * Shared page-entrance system. CSS-driven so it runs on first paint with NO
+ * JS-hydration wait — the previous motion-driven version SSR'd items in their
+ * `hidden` state, leaving them invisible until motion hydrated (the visible
+ * "hang then snap" on a cold load, most obvious on the home hero's deck).
  *
- * <Entrance>/<EntranceItem> play the staggered reveal once, on the first load of
- * the session — subsequent navigations render the supporting items (lead, cards,
- * meta) visible immediately, so the whole hero never flashes out and back in.
- * <EntranceTitle> reveals the heading word-by-word (ported from Chork's
- * RevealText) and replays on EVERY route (keyed on the pathname). The
- * module-scoped flag resets on a full page reload.
- * All respect prefers-reduced-motion (render plain, no transform).
+ * <Entrance>/<EntranceItem>: stagger-fade once on the first session load. The
+ * outer Entrance adds an `.animate` class on first paint (the module flag is
+ * fresh per server request — so SSR always emits it — and is set client-side
+ * after mount so subsequent client navigations skip the entrance). CSS handles
+ * the keyframe + delay; pass an `i` prop on each EntranceItem for stagger order.
+ *
+ * <EntranceTitle>: word-by-word heading reveal (CSS keyframes, ported from
+ * Chork). Replays on every route via a pathname key.
+ *
+ * Reduced motion is handled by @media in the SCSS — no JS branching needed for
+ * the fade items; EntranceTitle still short-circuits in JS to skip the per-word
+ * wrapping entirely.
  */
 let hasEntered = false;
 
 export function Entrance({ children, className }: { children: React.ReactNode; className?: string }) {
-  const reduce = useReducedMotion();
-  // Decide once, at mount: animate only if the entrance hasn't played yet this
-  // session. Reading the module flag here (not in render-after-mount) keeps the
-  // server + first-client render in agreement (both see `false`).
+  // Decide once at mount: SSR (per-request) always sees hasEntered=false → adds
+  // `.animate`, the CSS runs at first paint. The effect flips the flag client-side
+  // so subsequent client navigations render the items plainly (no replay).
   const [animate] = useState(() => !hasEntered);
-  useEffect(() => {
-    hasEntered = true;
-  }, []);
-
-  if (reduce) return <div className={className}>{children}</div>;
+  useEffect(() => { hasEntered = true; }, []);
   return (
-    <motion.div
-      className={className}
-      variants={entranceStagger}
-      initial={animate ? 'hidden' : 'visible'}
-      animate="visible"
-    >
+    <div className={`${className ?? ''} ${animate ? styles.animate : ''}`.trim()}>
       {children}
-    </motion.div>
+    </div>
   );
 }
 
-export function EntranceItem({ children, className }: { children: React.ReactNode; className?: string }) {
-  const reduce = useReducedMotion();
-  if (reduce) return <div className={className}>{children}</div>;
+export function EntranceItem({ children, className, i = 0 }: { children: React.ReactNode; className?: string; i?: number }) {
   return (
-    <motion.div className={className} variants={entranceItem}>
+    <div
+      className={`${className ?? ''} ${styles.entranceItem}`.trim()}
+      style={{ '--ei-i': i } as React.CSSProperties}
+    >
       {children}
-    </motion.div>
+    </div>
   );
 }
 

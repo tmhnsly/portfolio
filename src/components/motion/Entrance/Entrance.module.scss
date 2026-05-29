@@ -46,3 +46,21 @@
     will-change: auto;
   }
 }
+
+/* CSS-driven fade for <EntranceItem>: runs immediately on first paint (the
+   `.animate` class is added by <Entrance> on the first session load) — no JS
+   hydration wait, so the deck/desc/etc. don't sit invisible while motion catches
+   up. animation-fill-mode `both` holds the `from` state during the delay so the
+   item is hidden until its turn, then settles at the `to` state. */
+.entranceItem { /* default: visible, no animation (client navs after first load) */ }
+.animate .entranceItem {
+  animation: entranceItemIn 0.5s var(--ease-standard) both;
+  animation-delay: calc(0.12s + var(--ei-i, 0) * 0.09s);
+}
+@keyframes entranceItemIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .animate .entranceItem { animation: none; }
+}
