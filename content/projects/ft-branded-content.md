@@ -3,7 +3,7 @@ title: FT Branded Content
 desc: Interactive branded-content pages for Financial Times clients
 discipline: code
 date: "2025-03-01"
-tech: ["Next.js", "TypeScript", "SCSS", "Figma"]
+tags: ["Next.js", "TypeScript", "SCSS", "Figma"]
 role: Freelance frontend
 year: 2025
 status: "Shipped for the FT"

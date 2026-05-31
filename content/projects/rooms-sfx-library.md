@@ -3,7 +3,7 @@ title: "Rooms — SFX library"
 desc: A small library of room tone and foley recordings
 discipline: sound
 date: "2025-11-01"
-tech: ["Pro Tools", "Reaper"]
+tags: ["Pro Tools", "Reaper"]
 ---
 
 A small library of room tone recordings made in various domestic spaces over the course of a year. Kitchens, stairwells, a bathroom, the inside of a wardrobe. Each recording is between thirty seconds and three minutes.

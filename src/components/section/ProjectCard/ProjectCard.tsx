@@ -24,7 +24,7 @@ export function ProjectCard({ project, index }: { project: Project; index?: numb
           <span className={styles.date}>{formatMonthYear(project.date)}</span>
         </div>
         {project.desc && <div className={styles.desc}>{project.desc}</div>}
-        <div className={styles.chips}>{project.tech.map((t) => <TechChip key={t} label={t} />)}</div>
+        <div className={styles.chips}>{project.tags.map((t) => <TechChip key={t} label={t} />)}</div>
       </div>
     </Link>
   );

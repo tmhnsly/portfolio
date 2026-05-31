@@ -4,7 +4,7 @@ desc: A full-stack PWA for running and tracking competitions
 discipline: code
 date: "2026-02-01"
 featured: true
-tech: ["Next.js", "TypeScript", "Vercel", "PWA"]
+tags: ["Next.js", "TypeScript", "Vercel", "PWA"]
 role: Design + engineering
 year: 2026
 status: "In development"

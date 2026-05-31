@@ -3,7 +3,7 @@ title: Mandy Dennis Art
 desc: Portfolio and commission site for a UK artist
 discipline: code
 date: "2024-11-01"
-tech: ["React", "Tailwind", "Vercel"]
+tags: ["React", "Tailwind", "Vercel"]
 role: Design + build
 year: 2024
 status: "Live"

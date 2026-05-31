@@ -3,7 +3,7 @@ title: Wake
 desc: Original music for a wakeboarding documentary
 discipline: music
 date: "2015-02-01"
-tech: ["Logic Pro X", "Guitar", "Bass"]
+tags: ["Logic Pro X", "Guitar", "Bass"]
 role: Composer
 year: 2015
 ---

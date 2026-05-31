@@ -21,7 +21,7 @@ export const projectFrontmatterSchema = z.object({
   desc: z.string().optional(),
   discipline: disciplineSchema,
   date: z.string(),               // ISO yyyy-mm-dd
-  tech: z.array(z.string()).default([]),
+  tags: z.array(z.string()).default([]),
   featured: z.boolean().default(false),
   role: z.string().optional(),
   year: z.number().optional(),
@@ -30,7 +30,6 @@ export const projectFrontmatterSchema = z.object({
   liveUrl: z.string().optional(),
   cover: imageRef.optional(),
   gallery: z.array(galleryFrame).default([]),
-  tags: z.array(z.string()).optional(),
 });
 export type ProjectFrontmatter = z.infer<typeof projectFrontmatterSchema>;
 export type Project = ProjectFrontmatter & { slug: string; body: string }; // body = markdown

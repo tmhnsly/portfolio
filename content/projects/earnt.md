@@ -3,7 +3,7 @@ title: Earnt
 desc: Frontend for a Sanity-backed booking system + a Storybook design system
 discipline: code
 date: "2023-10-01"
-tech: ["React", "Sanity", "Storybook"]
+tags: ["React", "Sanity", "Storybook"]
 role: Frontend developer
 year: 2023
 status: "Shipped at Neverbland"
