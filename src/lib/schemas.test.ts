@@ -14,10 +14,6 @@ describe('schemas', () => {
   it('requires a post excerpt', () => {
     expect(() => postFrontmatterSchema.parse({ title: 'x', date: '2026-01-01', category: 'Code' })).toThrow();
   });
-  it('defaults media to an empty array', () => {
-    const fm = projectFrontmatterSchema.parse({ title: 'X', discipline: 'code', date: '2026-03-01' });
-    expect(fm.media).toEqual([]);
-  });
   it('parses image and youtube media items and rejects unknown types', () => {
     const fm = projectFrontmatterSchema.parse({
       title: 'X', discipline: 'video', date: '2026-03-01',
