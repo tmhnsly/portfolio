@@ -1,0 +1,57 @@
+.backdrop {
+  position: fixed; inset: 0; z-index: var(--z-overlay, 1000);
+  display: flex; flex-direction: column;
+  background: rgba(0, 0, 0, calc(0.9 * var(--dismiss, 1)));
+  backdrop-filter: blur(8px);
+  outline: none;
+}
+
+.track {
+  flex: 1; min-height: 0;
+  display: flex; overflow-x: auto; overflow-y: hidden;
+  scroll-snap-type: x mandatory; scroll-behavior: smooth;
+  scrollbar-width: none;
+}
+.track::-webkit-scrollbar { display: none; }
+
+.slide {
+  flex: 0 0 100%; min-width: 0;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: var(--space-3, 0.75rem);
+  scroll-snap-align: start;
+  padding: clamp(0.75rem, 3vw, 2rem);
+  padding-bottom: 4.5rem;
+}
+.stage { width: 100%; max-width: min(1100px, 92vw); }
+.media { width: 100%; }
+
+.caption {
+  margin: 0; color: rgba(255, 255, 255, 0.7);
+  font-size: 0.8rem; letter-spacing: 0.02em; text-align: center;
+}
+
+.top { position: absolute; top: 0; right: 0; padding: var(--space-3, 0.75rem); z-index: 2; }
+.bottom {
+  position: absolute; bottom: 0; left: 0; right: 0; z-index: 2;
+  display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+  padding: var(--space-4, 1rem);
+}
+
+.btn {
+  width: 44px; height: 44px; display: grid; place-items: center;
+  border-radius: 999px; cursor: pointer;
+  color: rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(12px);
+  font-size: 1.1rem;
+  transition: background 0.15s ease;
+}
+.btn:hover { background: rgba(255, 255, 255, 0.2); }
+
+.counter {
+  min-width: 4rem; text-align: center;
+  padding: 0.4rem 0.75rem; border-radius: 999px;
+  color: rgba(255, 255, 255, 0.7); font-size: 0.8rem; font-variant-numeric: tabular-nums;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+}
