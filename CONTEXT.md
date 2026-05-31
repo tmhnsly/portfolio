@@ -43,6 +43,10 @@ _Avoid_: client, employer, org.
 **Skill group**:
 A **Discipline** paired with its tool list (the About "what I work with" cards).
 
+**Media item**:
+One entry in a **Project**'s ordered `media` list: an image or an externally-hosted YouTube video, each with an optional title. `media[0]` is the project's cover poster and card thumbnail. Modelled as a Zod discriminated union (`MediaItem`); built to extend to Vimeo / self-hosted / audio later.
+_Avoid_: cover, gallery, asset, attachment.
+
 ### Shell & chrome
 
 **Shell**:
@@ -60,7 +64,19 @@ _Avoid_: nav, eyebrow.
 ### Building blocks
 
 **Media**:
-The image wrapper (`next/image`) that renders a cover, or — absent a `src` — falls back to the **Discipline** gradient. Takes a `sizes` recipe from `IMG_SIZES`.
+The image wrapper (`next/image`) that renders a still (a **Project**'s cover poster, resolved from `media[0]` by `coverImage`, or a **Post** cover); absent a `src` it falls back to the **Discipline** gradient. Takes a `sizes` recipe from `IMG_SIZES`.
+
+**Media hero**:
+The project page's top "pride of place" poster (`media[0]`); clicking it opens the **Media carousel**. Replaced the former cover embed.
+_Avoid_: embed, banner.
+
+**Media carousel**:
+The fullscreen glass lightbox over a **Project**'s `media`: scroll-snap slides (photos via **Media**, videos via the **YouTube facade**), arrow/Esc keys, a counter, and swipe-down-to-dismiss.
+_Avoid_: gallery, slider, modal.
+
+**YouTube facade**:
+A click-to-load video: a poster (custom, or YouTube's hosted still) that swaps in the player `<iframe>` only on click, so no YouTube script loads until play.
+_Avoid_: embed, player.
 
 **Pill**:
 A small label chip; when given a `color`/`onColor` it is tinted by a specific **Discipline** rather than the **Zone**.
@@ -78,7 +94,8 @@ Motion primitives — `Entrance`/`EntranceTitle` play a first-load / per-route r
 - A **Zone** is a **Discipline** or the default; it resolves the **Accent tokens**, the **Bloom** tint, and the **Nav** highlight.
 - The **Shell** renders the **Nav**, **Bloom**, **Breadcrumb**, and **Footer** once, and owns the current **Zone**.
 - A **Timeline entry** may reference a **Company**; a **Post** has one **Author**.
-- **Media** renders a **Project**/**Post** cover, or the **Discipline** gradient when none exists.
+- A **Project** has an ordered list of **Media items** (images and YouTube videos); the first is its cover/hero poster, and the set opens in the **Media carousel**.
+- **Media** (the wrapper) renders a **Project**'s poster (from `media[0]`) or a **Post** cover, or the **Discipline** gradient when none exists.
 - A **Project**/**Post** card's **Pill** is coloured by its own **Discipline**, never by the current **Zone** (only the Shell chrome follows the Zone).
 
 ## Example dialogue
