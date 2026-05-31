@@ -1,5 +1,6 @@
 import type { Project } from '@/types';
 import { DISCIPLINES } from './disciplines';
+import { youTubeThumbnail } from './youtube';
 
 /**
  * The presentation facts a Project card needs — resolved from the Project's own
@@ -24,4 +25,15 @@ export function projectPresentation(project: Project): ProjectPresentation {
     color: d.color,
     onColor: d.onAccent,
   };
+}
+
+/** The still used for a project's card thumbnail and hero poster: the first
+    media item's image, or a youtube item's poster (falling back to YouTube's
+    hosted still). `src` is undefined when there's no usable image, so callers
+    render the discipline gradient via <Media grad>. */
+export function coverImage(project: Project): { src?: string; alt: string } {
+  const first = project.media[0];
+  if (!first) return { src: undefined, alt: project.title };
+  if (first.type === 'image') return { src: first.src, alt: first.alt ?? project.title };
+  return { src: first.poster ?? youTubeThumbnail(first.id), alt: first.alt ?? first.title ?? project.title };
 }
