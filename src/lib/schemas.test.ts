@@ -4,9 +4,9 @@ import { projectFrontmatterSchema, postFrontmatterSchema, disciplineSchema } fro
 describe('schemas', () => {
   it('accepts valid project frontmatter and applies defaults', () => {
     const fm = projectFrontmatterSchema.parse({ title: 'Boucle', discipline: 'code', date: '2026-03-01' });
-    expect(fm.tags).toEqual([]);        // default (was tech)
+    expect(fm.tags).toEqual([]);        // default
     expect(fm.featured).toBe(false);    // default
-    expect(fm.gallery).toEqual([]);     // default
+    expect(fm.media).toEqual([]);       // default
   });
   it('rejects an unknown discipline', () => {
     expect(() => disciplineSchema.parse('cooking')).toThrow();

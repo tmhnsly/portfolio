@@ -14,7 +14,6 @@ export interface DisciplineMeta {
 }
 
 const imageRef = z.object({ src: z.string().optional(), grad: z.string().optional(), alt: z.string().optional() });
-const galleryFrame = imageRef.extend({ caption: z.string() });
 
 const mediaImage = z.object({
   type: z.literal('image'),
@@ -44,8 +43,6 @@ export const projectFrontmatterSchema = z.object({
   status: z.string().optional(),
   repo: z.string().optional(),
   liveUrl: z.string().optional(),
-  cover: imageRef.optional(),
-  gallery: z.array(galleryFrame).default([]),
   media: z.array(mediaItem).default([]),
 });
 export type ProjectFrontmatter = z.infer<typeof projectFrontmatterSchema>;
