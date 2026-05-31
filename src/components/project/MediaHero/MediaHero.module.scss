@@ -1,0 +1,179 @@
+@use '../../../styles/mixins/breakpoints' as *;
+@use '../../../styles/mixins/glass' as *;
+
+.embed {
+}
+
+/* ---- Boucle live-demo placeholder ---- */
+
+.boucle {
+  width: 100%;
+  border-radius: var(--radius-xl);
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow-xl);
+  min-height: var(--embed-min-h);
+
+  @include desktop-up {
+    min-height: var(--embed-min-h-wide);
+  }
+}
+
+.hatch {
+  position: absolute;
+  inset: 0;
+  background: var(--overlay-hatch);
+  pointer-events: none;
+}
+
+.chromaTop,
+.chromaBottom {
+  position: absolute;
+  left: 0;
+  right: 0;
+  padding: var(--embed-chrome-pad);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--white-a10);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.chromaTop {
+  top: 0;
+  height: 56px;
+  border-bottom: 1px solid var(--white-a4);
+}
+
+.chromaBottom {
+  bottom: 0;
+  height: 48px;
+  border-top: 1px solid var(--white-a4);
+  letter-spacing: 0.12em;
+}
+
+.chromaTitle {
+  color: var(--on-media);
+}
+
+.chromaRight {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-controls);
+}
+
+.chromaTime {
+  color: var(--on-media);
+}
+
+.stage {
+  position: absolute;
+  inset: 56px 0 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-7);
+}
+
+.padGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--embed-pad-gap);
+  width: 100%;
+  max-width: 520px;
+
+  @include desktop-up {
+    max-width: 560px;
+  }
+}
+
+.pad {
+  aspect-ratio: 1;
+  border-radius: 14px;
+  background: var(--white-a4);
+  border: 1px solid var(--white-a6);
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+  padding: var(--cta-pad);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--white-a9);
+  letter-spacing: 0.04em;
+}
+
+.padActive {
+  background: var(--on-media);
+  border: 1px solid var(--white-a6);
+  box-shadow: 0 0 24px var(--white-a8), inset 0 0 0 2px var(--white-a9);
+  color: var(--black-a12);
+}
+
+.dialLeft,
+.dialRight {
+  display: none;
+
+  @include desktop-up {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-3);
+    flex-shrink: 0;
+  }
+}
+
+.dial {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: var(--on-media);
+  box-shadow: inset 0 -6px 12px var(--black-a4), 0 8px 22px var(--black-a5);
+  position: relative;
+}
+
+.dialMark {
+  position: absolute;
+  left: 50%;
+  top: 8px;
+  width: 3px;
+  height: 24px;
+  background: var(--black-a12);
+  transform-origin: 50% 36px;
+  border-radius: 2px;
+}
+
+.dialLabel {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--white-a11);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+
+  strong {
+    color: var(--on-media);
+    font-weight: 600;
+  }
+}
+
+/* ---- Poster / carousel trigger ---- */
+
+.poster { display: block; width: 100%; padding: 0; border: 0; background: none; cursor: pointer; }
+
+.play {
+  position: absolute; inset: 0; margin: auto;
+  width: 72px; height: 72px; display: grid; place-items: center;
+  border-radius: 999px; color: #fff; font-size: 1.4rem; line-height: 1;
+  @include glass(rgba(0, 0, 0, 0.35), 8px);
+  transition: transform 0.15s ease;
+}
+.poster:hover .play { transform: scale(1.06); }
+
+.badge {
+  position: absolute; bottom: 0.75rem; right: 0.75rem;
+  padding: 0.3rem 0.6rem; border-radius: 999px;
+  color: #fff; font-size: 0.72rem; font-variant-numeric: tabular-nums;
+  @include glass(rgba(0, 0, 0, 0.35), 8px);
+}
