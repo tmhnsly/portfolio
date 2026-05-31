@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import type { Project } from '@/types';
 import { DISCIPLINE_ORDER, DISCIPLINES } from '@/lib/disciplines';
-import { projectPresentation } from '@/lib/project-presentation';
+import { projectPresentation, coverImage } from '@/lib/project-presentation';
 import { buildFacets, filterByFacet, splitFeatured } from '@/lib/facets';
 import { IMG_SIZES } from '@/lib/breakpoints';
 import { DURATION, EASING } from '@/lib/motion';
@@ -51,7 +51,7 @@ export function RecentWork({ projects }: { projects: Project[] }) {
           transition={{ duration: DURATION.fast, ease: EASING.standard }}
         >
           <Link href={fp.href} className={styles.featured}>
-            <Media grad={fp.gradient} src={featured.cover?.src} alt={featured.cover?.alt ?? featured.title}
+            <Media grad={fp.gradient} src={coverImage(featured).src} alt={coverImage(featured).alt}
               ratio="16/10" sizes={IMG_SIZES.full} className={styles.featuredMedia} />
             <div className={styles.featuredMeta}>
               <div className={styles.metaHead}>
@@ -67,7 +67,7 @@ export function RecentWork({ projects }: { projects: Project[] }) {
               const tp = projectPresentation(p);
               return (
                 <Link key={p.slug} href={tp.href} className={styles.thumb}>
-                  <Media grad={tp.gradient} src={p.cover?.src} alt={p.cover?.alt ?? p.title}
+                  <Media grad={tp.gradient} src={coverImage(p).src} alt={coverImage(p).alt}
                     ratio="4/3" sizes={IMG_SIZES.thumb} className={styles.thumbMedia} />
                   <div className={styles.thumbMeta}>
                     <div className={styles.metaHead}>

@@ -5,6 +5,7 @@ import { IMG_SIZES } from '@/lib/breakpoints';
 import { Media } from '@/components/ui/Media';
 import { Pill } from '@/components/ui/Pill';
 import { TechChip } from '@/components/ui/TechChip';
+import { coverImage } from '@/lib/project-presentation';
 import { formatMonthYear } from '@/lib/format';
 import styles from './ProjectCard.module.scss';
 
@@ -12,7 +13,7 @@ export function ProjectCard({ project, index }: { project: Project; index?: numb
   const d = DISCIPLINES[project.discipline];
   return (
     <Link href={`/${project.discipline}/${project.slug}`} className={styles.card}>
-      <Media grad={d.gradient} src={project.cover?.src} alt={project.cover?.alt ?? project.title}
+      <Media grad={d.gradient} src={coverImage(project).src} alt={coverImage(project).alt}
         ratio="4/3" sizes={IMG_SIZES.grid3} className={styles.media}>
         <span className={styles.hatch} aria-hidden />
         {index != null && <span className={styles.number} aria-hidden>{String(index + 1).padStart(2, '0')}</span>}
