@@ -165,3 +165,10 @@
 .menu:focus-visible,
 .menuItem:focus-visible,
 .menuCta:focus-visible { outline: none; }
+/* That same global rule also forces border-radius: var(--radius-xs). Because Radix
+   moves focus onto an item on pointer-hover, it squares the HOVERED item's corners
+   to xs while the selected item keeps its own lg — a visible radius mismatch.
+   Restore each element's own radius so hover matches selected. */
+.menu:focus-visible { border-radius: var(--radius-xl); }
+.menuItem:focus-visible,
+.menuCta:focus-visible { border-radius: var(--radius-lg); }
