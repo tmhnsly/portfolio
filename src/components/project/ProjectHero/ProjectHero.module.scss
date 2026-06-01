@@ -18,6 +18,11 @@
   display: flex;
   flex-direction: column;
   min-width: 0; /* grid item: let the live-URL ellipsis engage on long URLs */
+  /* Size the title to THIS column (cqw), not the viewport (vw). On the desktop
+     2-col layout the title shares width with the meta column, so a long title word
+     at 12vw renders wider than its 1.4fr track and overflows right — the trailing
+     period dot landing on the meta rows. cqw bounds it to the column. */
+  container-type: inline-size;
 }
 
 .pillRow {
@@ -74,7 +79,7 @@
 .title {
   margin: 0;
   font-family: var(--font-display);
-  font-size: clamp(var(--fs-display), 12vw, var(--fs-display-xxl));
+  font-size: clamp(var(--fs-display), 12cqw, var(--fs-display-xxl));
   line-height: 0.88;
   letter-spacing: -0.05em;
   font-weight: 600;
