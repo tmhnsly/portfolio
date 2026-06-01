@@ -28,12 +28,14 @@ export function SectionHero({
             <p className={styles.intro}>{intro}</p>
           </EntranceItem>
         </div>
-        <EntranceItem className={styles.right}>
-          <Eyebrow>Working with</Eyebrow>
-          <div className={styles.tools}>
-            {tools.map((t) => <TechChip key={t} label={t} />)}
-          </div>
-        </EntranceItem>
+        {tools.length > 0 && (
+          <EntranceItem className={styles.right}>
+            <Eyebrow>Working with</Eyebrow>
+            <div className={styles.tools}>
+              {tools.map((t) => <TechChip key={t} label={t} />)}
+            </div>
+          </EntranceItem>
+        )}
       </div>
     </Entrance>
   );

@@ -1,8 +1,12 @@
-import { z } from 'zod';
-import { skillGroupSchema } from '@/lib/schemas';
+import type { SkillGroup } from '@/lib/schemas';
 import { DISCIPLINE_ORDER } from '@/lib/disciplines';
-import { toolsByDiscipline } from './tools';
+import { topTagsByDiscipline } from '@/lib/content';
 
-export const SKILLS = z.array(skillGroupSchema).parse(
-  DISCIPLINE_ORDER.map((discipline) => ({ discipline, tools: toolsByDiscipline[discipline] }))
-);
+/** About "what I work with" — derived from real project/post tags, most-used first,
+    skipping disciplines with no content yet. Lazy (function, not a const) so the
+    filesystem read never runs in a client bundle that imports `@/data`. */
+export function getSkills(): SkillGroup[] {
+  return DISCIPLINE_ORDER
+    .map((discipline) => ({ discipline, tools: topTagsByDiscipline(discipline) }))
+    .filter((g) => g.tools.length > 0);
+}

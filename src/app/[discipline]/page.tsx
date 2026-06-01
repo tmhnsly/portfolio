@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation';
 import { isDiscipline, DISCIPLINE_ORDER } from '@/lib/disciplines';
-import { projectsInDiscipline } from '@/lib/content';
+import { projectsInDiscipline, topTagsByDiscipline } from '@/lib/content';
 import { SECTIONS } from '@/data';
 import { Container, Stack } from '@/components/layout';
 import { SectionHero } from '@/components/section/SectionHero';
@@ -20,7 +20,7 @@ export default async function SectionPage({ params }: { params: Promise<{ discip
   return (
     <Container>
       <Stack>
-        <SectionHero discipline={discipline} intro={section.intro} tools={section.tools} />
+        <SectionHero discipline={discipline} intro={section.intro} tools={topTagsByDiscipline(discipline)} />
         <ProjectGrid projects={projects} />
         <OtherDisciplines current={discipline} />
         <SectionCTA discipline={discipline} />

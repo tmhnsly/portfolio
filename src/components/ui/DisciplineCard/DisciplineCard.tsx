@@ -26,11 +26,13 @@ export function DisciplineCard({ discipline, tools, href, showArrow = false, max
         <span className={styles.label}>{d.route}</span>
         {showArrow && <LinkArrow className={styles.arrow} />}
       </div>
-      <div className={styles.tools}>
-        {shown.map((t) => (
-          <TechChip key={t} label={t} />
-        ))}
-      </div>
+      {shown.length > 0 && (
+        <div className={styles.tools}>
+          {shown.map((t) => (
+            <TechChip key={t} label={t} />
+          ))}
+        </div>
+      )}
     </>
   );
 

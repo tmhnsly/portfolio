@@ -13,6 +13,6 @@ media:
     title: "Party Lines"
 ---
 
-An animated satirical stand-up set, made entirely on iPads. I scripted it with ChatGPT, voiced it with ElevenLabs, and animated it in ToonSquid.
+An animated satirical stand-up set, made entirely on iPads. Scripted with ChatGPT, voiced with ElevenLabs, animated in ToonSquid.
 
-I made it with my friend Nathan Heape as Hyper Chums, our animation channel. Nathan led the art; I did the cutting and animation, and we co-directed and figured out the pipeline together.
+Made with my friend Nathan Heape as Hyper Chums, our animation channel. Nathan led the art; I handled the cutting and animation, and we co-directed and figured out the pipeline together.

@@ -1,5 +1,6 @@
 import { DISCIPLINE_ORDER, DISCIPLINES } from '@/lib/disciplines';
-import { toolsByDiscipline, COPY } from '@/data';
+import { COPY } from '@/data';
+import { topTagsByDiscipline } from '@/lib/content';
 import { Eyebrow } from '@/components/ui/Eyebrow';
 import { DisciplineCard } from '@/components/ui/DisciplineCard';
 import styles from './DisciplineScroller.module.scss';
@@ -15,7 +16,7 @@ export function DisciplineScroller() {
           <DisciplineCard
             key={slug}
             discipline={slug}
-            tools={toolsByDiscipline[slug]}
+            tools={topTagsByDiscipline(slug, 5)}
             href={DISCIPLINES[slug].route}
             showArrow
             maxTools={5}

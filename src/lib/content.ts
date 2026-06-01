@@ -119,6 +119,16 @@ export function postCount(): number {
   return getAllPosts().length;
 }
 
+/** The most-used tags within a discipline (its projects; posts for blog), most
+    frequent first. Powers the discipline cards + About "what I work with" so they
+    reflect the real work rather than a hand-maintained list. */
+export function topTagsByDiscipline(discipline: Discipline, limit = 8): string[] {
+  const items = discipline === 'blog' ? getAllPosts() : projectsInDiscipline(discipline);
+  const counts = new Map<string, number>();
+  for (const it of items) for (const t of it.tags) counts.set(t, (counts.get(t) ?? 0) + 1);
+  return [...counts.entries()].sort((a, b) => b[1] - a[1]).slice(0, limit).map(([t]) => t);
+}
+
 /** Everything the persistent Breadcrumb needs, bundled. Built in the (server)
     layout and threaded through the Shell to the (client) Breadcrumb — see
     docs/adr/0001-breadcrumb-data-via-shell.md. */

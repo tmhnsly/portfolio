@@ -5,7 +5,8 @@ import { Currently } from '@/components/about/Currently';
 import { Timeline } from '@/components/about/Timeline';
 import { Skills } from '@/components/about/Skills';
 import { ContactCTA } from '@/components/about/ContactCTA';
-import { TIMELINE, SKILLS } from '@/data';
+import { TIMELINE } from '@/data';
+import { getSkills } from '@/data/skills';
 
 export default function AboutPage() {
   return (
@@ -15,7 +16,7 @@ export default function AboutPage() {
         <Intro />
         <Currently />
         <Timeline entries={TIMELINE} />
-        <Skills skills={SKILLS} />
+        <Skills skills={getSkills()} />
         <ContactCTA />
       </Stack>
     </Container>
