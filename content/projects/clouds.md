@@ -13,6 +13,6 @@ media:
     title: "Clouds"
 ---
 
-A music video for Sandtimer, made with the band's Simon Thomas while sharing a property guardianship in New Malden. The idea was to picture the feeling of being stuck, immobile, waiting.
+Made this music video for Sandtimer with the band's Simon Thomas while sharing a property guardianship in New Malden. The idea was to picture the feeling of being stuck, immobile, waiting.
 
-The same shot was set up fresh at the same spot over a few months, to catch different weather and light. Aligning the layers so the cross-fades land took the most work.
+Set up the same shot fresh at the same spot over a few months, catching different weather and light. Aligning the layers so the cross-fades land took the most work.

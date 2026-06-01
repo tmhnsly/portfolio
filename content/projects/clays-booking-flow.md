@@ -9,6 +9,6 @@ year: 2024
 status: "Shipped at Neverbland"
 ---
 
-A new booking flow for Clays, built on a custom orchestration API that gave the business flexible control over packages, add-ons and group sizes. Spend per booking rose 48% in its first week.
+Led the frontend of a new booking flow for Clays, built on a custom orchestration API that gave the business flexible control over packages, add-ons and group sizes. Spend per booking rose 48% in its first week.
 
-The optionality had to feel like a few easy choices rather than a form to slog through, with availability and price kept legible at each step. The build also added persistent search to the global navigation.
+The optionality had to feel like a few easy choices rather than a form to slog through, with availability and price kept legible at each step. Also added persistent search to the global navigation.

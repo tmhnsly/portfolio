@@ -13,6 +13,6 @@ media:
     title: "No Horizons"
 ---
 
-A mixed-media piece for Hull's year as City of Culture, part of the Amy Johnson festival: a live performance taken to three libraries. The final show was filmed; the other two were streamed live from a GoPro to a projector, and the black-and-white passages in the film stand in for those streamed segments.
+A mixed-media piece for Hull's year as City of Culture, part of the Amy Johnson festival: a live performance taken to three libraries. Filmed the final show; the other two were streamed live from a GoPro to a projector, and the black-and-white passages stand in for those streamed segments.
 
-It was also a first run at manual keyframe tracking, done by hand across the whole edit.
+Also a first run at manual keyframe tracking, done by hand across the whole edit.

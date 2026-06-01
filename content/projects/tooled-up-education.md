@@ -9,6 +9,6 @@ year: 2024
 status: "Shipped at Neverbland"
 ---
 
-Accessible component libraries for the Tooled-Up Education marketing and members sites, including a custom audio player and Vercel-integrated search.
+Built accessible component libraries for the Tooled-Up Education marketing and members sites, including a custom audio player and Vercel-integrated search.
 
-The platform serves parents and schools, so accessibility was the spec, not a nice-to-have. The component library was keyboard- and screen-reader-friendly from the start, and the audio player and search were held to the same standard.
+The platform serves parents and schools, so accessibility was the spec, not a nice-to-have. Built the component library keyboard- and screen-reader-friendly from the start, and held the audio player and search to the same standard.

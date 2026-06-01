@@ -13,4 +13,4 @@ media:
     title: "Rocketmakers Office Launch"
 ---
 
-A short film of Rocketmakers' new-office launch day, cut for social, made while working there as a developer.
+Shot and cut a short film of Rocketmakers' new-office launch day for social, made while working there as a developer.

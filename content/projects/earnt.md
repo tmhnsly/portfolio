@@ -9,6 +9,6 @@ year: 2023
 status: "Shipped at Neverbland"
 ---
 
-Frontend for Earnt's Sanity-backed booking system, with a Storybook component library for the design system.
+Built the frontend for Earnt's Sanity-backed booking system, with a Storybook component library for the design system.
 
-Pairing the Sanity back end with a documented component library let the team compose and edit booking pages without a developer in the loop, while the UI stayed consistent.
+Pairing the Sanity back end with a documented component library meant the team could compose and edit booking pages without a developer in the loop, while the UI stayed consistent.

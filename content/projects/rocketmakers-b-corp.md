@@ -13,4 +13,4 @@ media:
     title: "Rocketmakers B Corp"
 ---
 
-A film announcing Rocketmakers' B Corp certification and explaining what it means. Written, presented, shot and edited end to end.
+A film announcing Rocketmakers' B Corp certification and explaining what it means. Wrote, presented, shot and edited it end to end.

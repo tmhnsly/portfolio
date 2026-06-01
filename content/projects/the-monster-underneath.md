@@ -13,4 +13,4 @@ media:
     title: "The Monster Underneath"
 ---
 
-An original score for a university short film, written and recorded with keyboard and guitar in Logic Pro X.
+Wrote and recorded an original score for a university short film, using keyboard and guitar in Logic Pro X.

@@ -13,4 +13,4 @@ media:
     title: "Mark & Faye"
 ---
 
-A wedding film for Mark and Faye Earnshaw.
+Shot and edited a wedding film for Mark and Faye Earnshaw.

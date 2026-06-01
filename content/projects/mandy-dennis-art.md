@@ -10,6 +10,6 @@ status: "Live"
 liveUrl: https://mandydennis.art
 ---
 
-A portfolio and commission site for a UK artist: a calm, responsive showcase for the work, with an enquiry flow built in for commissions.
+Designed and built a portfolio and commission site for a UK artist: a calm, responsive showcase for the work, with an enquiry flow built in for commissions.
 
-The brief was to let the paintings carry the page. Generous space, restrained type, and a layout that adapts cleanly from phone to desktop without competing with the art. A prospective buyer can go from a piece to an enquiry without leaving the site.
+The brief was to let the paintings carry the page. Generous space, restrained type, a layout that adapts cleanly from phone to desktop without competing with the art. A prospective buyer can go from a piece to an enquiry without leaving the site.
