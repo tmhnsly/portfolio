@@ -4,7 +4,7 @@ excerpt: I sold my digital camera last year and replaced it with a Leica M6. Som
 date: "2026-02-14"
 category: Photography
 readingTime: 8
-tags: ["Photography", "35mm", "Leica"]
+tags: ["Photography", "35mm", "Leica M6"]
 ---
 
 I sold my digital camera last year and replaced it with a Leica M6. Some thoughts after fifteen rolls.

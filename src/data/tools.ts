@@ -1,12 +1,13 @@
 import type { Discipline } from '@/types';
+import type { TagLabel } from '@/lib/tags';
 
-// Single source of truth for each discipline's tools.
-// Seeded from the richest existing list (previously in skills.ts).
-export const toolsByDiscipline: Record<Discipline, string[]> = {
+// Curated per-discipline tool list (discipline cards + About "what I work with").
+// Every entry is a registry tag (TagLabel), so TS catches typos.
+export const toolsByDiscipline: Record<Discipline, TagLabel[]> = {
   code:  ['React', 'TypeScript', 'Next.js', 'Node.js', 'SCSS', 'Tailwind', 'Sanity', 'Storybook', 'Vercel', 'Figma', 'REST APIs', 'PHP', 'MySQL', 'MongoDB'],
-  music: ['Logic Pro X', 'Ableton Live', 'Tape (TASCAM 388)', 'Modular synthesis', 'Field recording'],
+  music: ['Logic Pro X', 'Ableton Live', 'TASCAM 388', 'Modular synthesis', 'Field recording', 'Guitar', 'Bass Guitar'],
   sound: ['Pro Tools', 'Reaper', 'iZotope RX', 'Soundminer', 'Field recording'],
-  photo: ['35mm (Leica M6, Mamiya 7)', 'Digital (Fuji X-T5)', 'Lightroom', 'Negative Lab Pro', 'Portra 400', 'HP5+'],
-  video: ['Final Cut Pro X', 'DaVinci Resolve', 'Premiere', 'RED', 'BMPCC 6K'],
+  photo: ['35mm', 'Leica M6', 'Mamiya 7', 'Fuji X-T5', 'Lightroom', 'Negative Lab Pro', 'Portra 400', 'HP5+'],
+  video: ['Final Cut Pro X', 'RED', 'BMPCC 6K'],
   blog:  ['Long-form writing', 'Sanity', 'Markdown'],
 };

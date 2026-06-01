@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { TAGS } from './tags';
 
 export const disciplineSchema = z.enum(['code', 'music', 'sound', 'photo', 'video', 'blog']);
 export type Discipline = z.infer<typeof disciplineSchema>;
@@ -31,12 +32,19 @@ const mediaYouTube = z.object({
 const mediaItem = z.discriminatedUnion('type', [mediaImage, mediaYouTube]);
 export type MediaItem = z.infer<typeof mediaItem>;
 
+const TAG_SET = new Set<string>(TAGS);
+const tagSchema = z.string().superRefine((t, ctx) => {
+  if (!TAG_SET.has(t)) {
+    ctx.addIssue({ code: z.ZodIssueCode.custom, message: `"${t}" is not a registered tag — add it to src/lib/tags.ts` });
+  }
+});
+
 export const projectFrontmatterSchema = z.object({
   title: z.string(),
   desc: z.string().optional(),
   discipline: disciplineSchema,
   date: z.string(),               // ISO yyyy-mm-dd
-  tags: z.array(z.string()).default([]),
+  tags: z.array(tagSchema).default([]),
   featured: z.boolean().default(false),
   role: z.string().optional(),
   year: z.number().optional(),
@@ -57,7 +65,7 @@ export const postFrontmatterSchema = z.object({
   date: z.string(),
   category: z.string(),
   readingTime: z.number().optional(), // computed from word count if absent
-  tags: z.array(z.string()).default([]),
+  tags: z.array(tagSchema).default([]),
   cover: imageRef.optional(),
 });
 export type PostFrontmatter = z.infer<typeof postFrontmatterSchema>;
