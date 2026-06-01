@@ -4,7 +4,7 @@ import styles from './ProjectLinks.module.scss';
 
 /** Live site / repository links, shown as a row directly beneath the cover image. */
 export function ProjectLinks({ project }: { project: Project }) {
-  if (!project.liveUrl && !project.repo) return null;
+  if (!project.liveUrl && !project.repo && !project.links?.length) return null;
   return (
     <div className={styles.links}>
       {project.liveUrl && (
@@ -30,6 +30,15 @@ export function ProjectLinks({ project }: { project: Project }) {
           </span>
         </a>
       )}
+      {project.links?.map((l) => (
+        <a key={l.url} href={l.url} target="_blank" rel="noopener noreferrer" className={styles.linkRow}>
+          <span className={styles.linkLabel}>{l.label}</span>
+          <span className={styles.linkUrl}>
+            <span className={styles.linkUrlText}>{l.url.replace(/^https?:\/\/(www\.)?/, '').replace(/\?.*$/, '')}</span>
+            <LinkArrow inline />
+          </span>
+        </a>
+      ))}
     </div>
   );
 }

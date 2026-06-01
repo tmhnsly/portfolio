@@ -52,6 +52,7 @@ export const projectFrontmatterSchema = z.object({
   status: z.string().optional(),
   repo: z.string().optional(),
   liveUrl: z.string().optional(),
+  links: z.array(z.object({ label: z.string(), url: z.string() })).optional(),
   media: z.array(mediaItem).default([]),
 });
 export type ProjectFrontmatter = z.infer<typeof projectFrontmatterSchema>;
