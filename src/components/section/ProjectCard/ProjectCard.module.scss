@@ -17,8 +17,12 @@
 }
 @include reduced-motion {
   .media, .arrow, .title { transition: none; }
-  .card:hover .media { transform: none; }
-  .card:hover .arrow { transform: none; opacity: 1; }
+  /* keep the hover overrides hover-only: on touch + reduced-motion a tap must
+     not snap the arrow visible (it's a pointer affordance, not a tap target). */
+  @include can-hover {
+    .card:hover .media { transform: none; }
+    .card:hover .arrow { transform: none; opacity: 1; }
+  }
 }
 
 .hatch { position: absolute; inset: 0; background: var(--overlay-hatch); }

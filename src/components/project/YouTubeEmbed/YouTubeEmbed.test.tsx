@@ -21,6 +21,8 @@ describe('YouTubeEmbed', () => {
   });
   it('renders the iframe immediately when autoPlay is set', () => {
     render(<ThemeProvider><YouTubeEmbed id="abc123" title="Wake" autoPlay /></ThemeProvider>);
-    expect(document.querySelector('iframe')).not.toBeNull();
+    const iframe = document.querySelector('iframe');
+    expect(iframe).not.toBeNull();
+    expect(iframe!.getAttribute('src')).toContain('autoplay=1');
   });
 });
