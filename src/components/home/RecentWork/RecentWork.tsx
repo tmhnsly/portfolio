@@ -59,7 +59,7 @@ export function RecentWork({ projects }: { projects: Project[] }) {
                 <CardArrow className={styles.arrow} />
               </div>
               {featured.desc && <div className={styles.featuredDesc}>{featured.desc}</div>}
-              <span className={styles.pill}><Pill label={`${fp.label} — featured`} tone="discipline" color={fp.color} onColor={fp.onColor} /></span>
+              <span className={styles.pill}><Pill label={fp.label} tone="discipline" color={fp.color} onColor={fp.onColor} /></span>
             </div>
           </Link>
           <div className={styles.thumbs}>
