@@ -25,7 +25,7 @@
 .media { width: 100%; }
 
 .caption {
-  margin: 0; color: rgba(255, 255, 255, 0.7);
+  margin: 0; color: var(--white-a9);
   font-size: 0.8rem; letter-spacing: 0.02em; text-align: center;
 }
 
@@ -39,19 +39,19 @@
 .btn {
   width: 44px; height: 44px; display: grid; place-items: center;
   border-radius: 999px; cursor: pointer;
-  color: rgba(255, 255, 255, 0.85);
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: var(--white-a11);
+  background: var(--white-a2);
+  border: 1px solid var(--white-a3);
   backdrop-filter: blur(12px);
   font-size: 1.1rem;
   transition: background 0.15s ease;
 }
-.btn:hover { background: rgba(255, 255, 255, 0.2); }
+.btn:hover { background: var(--white-a4); }
 
 .counter {
   min-width: 4rem; text-align: center;
   padding: 0.4rem 0.75rem; border-radius: 999px;
-  color: rgba(255, 255, 255, 0.7); font-size: 0.8rem; font-variant-numeric: tabular-nums;
-  background: rgba(255, 255, 255, 0.08);
+  color: var(--white-a9); font-size: 0.8rem; font-variant-numeric: tabular-nums;
+  background: var(--white-a2);
   backdrop-filter: blur(12px);
 }

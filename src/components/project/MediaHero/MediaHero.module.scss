@@ -167,10 +167,10 @@
   width: 72px; height: 72px;
   display: grid; place-items: center;
   border-radius: 999px;
-  color: #fff; font-size: 1.7rem; line-height: 0;
-  background: rgba(0, 0, 0, 0.42);
+  color: var(--text); font-size: 1.7rem; line-height: 0;
+  background: var(--glass);
   backdrop-filter: blur(16px);
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.22), 0 6px 22px rgba(0, 0, 0, 0.28);
+  box-shadow: inset 0 0 0 1px var(--glass-sheen), 0 6px 22px var(--black-a5);
   transition: opacity var(--duration-hover) var(--ease-standard), transform var(--duration-hover) var(--ease-standard);
 }
 .play svg { transform: translateX(2px); }
@@ -182,6 +182,6 @@
 .badge {
   position: absolute; bottom: 0.75rem; right: 0.75rem;
   padding: 0.3rem 0.6rem; border-radius: 999px;
-  color: #fff; font-size: 0.72rem; font-variant-numeric: tabular-nums;
-  @include glass(rgba(0, 0, 0, 0.35), 8px);
+  color: var(--text); font-size: 0.72rem; font-variant-numeric: tabular-nums;
+  @include glass(var(--glass), 8px);
 }
