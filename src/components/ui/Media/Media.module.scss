@@ -1,3 +1,17 @@
 .frame { position: relative; width: 100%; overflow: hidden; }
 .rounded { border-radius: var(--radius-xl); }
-.img { object-fit: cover; }
+
+/* Reveal on load: the image starts hidden + slightly scaled over the discipline
+   `grad`, then fades and settles in once it decodes — so it reveals from the
+   section colour rather than popping in. */
+.img {
+  object-fit: cover;
+  opacity: 0;
+  transform: scale(1.04);
+  transition: opacity 0.7s var(--ease-standard), transform 0.9s var(--ease-standard);
+}
+.img.loaded { opacity: 1; transform: scale(1); }
+
+@media (prefers-reduced-motion: reduce) {
+  .img { opacity: 1; transform: none; transition: none; }
+}

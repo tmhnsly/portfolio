@@ -2,8 +2,13 @@
  * Pass a `sizes` recipe from IMG_SIZES (src/lib/breakpoints.ts) — e.g.
  * IMG_SIZES.full (hero/cover/embed), IMG_SIZES.grid3 (3-up grid/gallery),
  * IMG_SIZES.thumb (recent/small card) — so breakpoint widths stay centralised.
+ *
+ * Reveal on load: the image sits over the discipline `grad` and fades + settles in
+ * once it decodes, so images don't pop when a page loads. The reveal is tied to the
+ * section colour via `grad` (the gradient shows through until the image arrives).
  */
-
+'use client';
+import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import styles from './Media.module.scss';
 
@@ -20,10 +25,27 @@ export interface MediaProps {
 }
 
 export function Media({ src, grad, alt = '', ratio = '4/3', sizes = '100vw', priority, rounded = true, className, children }: MediaProps) {
+  const [loaded, setLoaded] = useState(false);
+  const ref = useRef<HTMLImageElement>(null);
+  // A cached image can finish before React attaches `onLoad`, so it would never
+  // fire — catch that case on mount via the element's `complete` flag.
+  useEffect(() => { if (ref.current?.complete) setLoaded(true); }, []);
+
   const cls = [styles.frame, rounded ? styles.rounded : '', className].filter(Boolean).join(' ');
   return (
-    <div className={cls} style={{ aspectRatio: ratio, ...(grad && !src ? { background: grad } : null) }}>
-      {src && <Image src={src} alt={alt} fill sizes={sizes} priority={priority} className={styles.img} />}
+    <div className={cls} style={{ aspectRatio: ratio, ...(grad ? { background: grad } : null) }}>
+      {src && (
+        <Image
+          ref={ref}
+          src={src}
+          alt={alt}
+          fill
+          sizes={sizes}
+          priority={priority}
+          className={`${styles.img} ${loaded ? styles.loaded : ''}`}
+          onLoad={() => setLoaded(true)}
+        />
+      )}
       {children}
     </div>
   );

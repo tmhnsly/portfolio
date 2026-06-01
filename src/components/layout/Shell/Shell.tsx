@@ -1,4 +1,5 @@
 'use client';
+import { useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import { motion, useReducedMotion } from 'motion/react';
 import type { BreadcrumbData } from '@/lib/content';
@@ -35,6 +36,10 @@ export function Shell({
   const { discipline, active, accent, accentInk, onAccent } = resolveZone(pathname);
   // the subtle, no-flash Zone colour morph lives in its own tested hook
   const { from, to, mix } = useZoneMorph({ accent, accentInk }, reduce);
+
+  // Reliably start each route at the top: the persistent Shell means the window
+  // scroll position can otherwise carry over from the previous route on navigation.
+  useEffect(() => { window.scrollTo(0, 0); }, [pathname]);
 
   return (
     <motion.div
