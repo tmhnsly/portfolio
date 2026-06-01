@@ -9,7 +9,9 @@
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "images:optimize": "node scripts/optimize-images.mjs",
+    "prepare": "git config core.hooksPath .githooks || true"
   },
   "dependencies": {
     "@radix-ui/colors": "^3.0.0",
@@ -36,6 +38,7 @@
     "eslint": "^9",
     "eslint-config-next": "16.2.6",
     "jsdom": "^29.1.1",
+    "sharp": "^0.34.5",
     "typescript": "^5",
     "vitest": "^4.1.7"
   }
