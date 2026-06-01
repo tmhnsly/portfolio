@@ -1,15 +1,26 @@
-@use '../../../styles/mixins/glass' as *;
+@use '../../../styles/mixins/breakpoints' as *;
 
 .facade { display: block; width: 100%; padding: 0; border: 0; background: none; cursor: pointer; }
 .poster { width: 100%; }
 .frame { position: relative; width: 100%; aspect-ratio: 16 / 9; border-radius: var(--radius-xl); overflow: hidden; }
 .iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
 
+/* Frosted glass play disc: backdrop-blur is the glass; the inset ring is an
+   anti-aliased edge (a real border aliased on the circle). Revealed on hover on
+   pointer devices; always visible on touch (no hover there to reveal it). */
 .play {
   position: absolute; inset: 0; margin: auto;
-  width: 64px; height: 64px; display: grid; place-items: center;
-  border-radius: 999px; color: #fff; font-size: 1.3rem; line-height: 1;
-  @include glass(rgba(0, 0, 0, 0.35), 8px, false);
-  transition: transform 0.15s ease;
+  width: 72px; height: 72px;
+  display: grid; place-items: center;
+  border-radius: 999px;
+  color: #fff; font-size: 1.7rem; line-height: 0;
+  background: rgba(0, 0, 0, 0.42);
+  backdrop-filter: blur(16px);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.22), 0 6px 22px rgba(0, 0, 0, 0.28);
+  transition: opacity var(--duration-hover) var(--ease-standard), transform var(--duration-hover) var(--ease-standard);
 }
-.facade:hover .play { transform: scale(1.06); }
+.play svg { transform: translateX(2px); } /* optical-centre the play triangle */
+@include can-hover {
+  .play { opacity: 0; }
+  .facade:hover .play { opacity: 1; transform: scale(1.04); }
+}

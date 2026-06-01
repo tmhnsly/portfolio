@@ -8,6 +8,7 @@ import { Media } from '@/components/ui/Media';
 import { coverImage } from '@/lib/project-presentation';
 import { MediaCarousel } from '@/components/project/MediaCarousel';
 import { YouTubeEmbed } from '@/components/project/YouTubeEmbed';
+import { BiPlay } from 'react-icons/bi';
 import styles from './MediaHero.module.scss';
 
 const ACTIVE_PADS = new Set([0, 4, 6, 10, 11, 13]);
@@ -92,7 +93,7 @@ export function MediaHero({ project }: { project: Project }) {
     <div className={styles.embed}>
       <button type="button" className={styles.poster} onClick={() => setOpen(true)} aria-label={isVideo ? 'Play video' : 'View media'}>
         <Media grad={d.gradient} src={cover.src} alt={cover.alt} ratio="16/9" sizes={IMG_SIZES.full} priority>
-          {isVideo && <span className={styles.play} aria-hidden>▶</span>}
+          {isVideo && <span className={styles.play} aria-hidden><BiPlay /></span>}
           {count > 1 && <span className={styles.badge} aria-hidden>1 / {count}</span>}
         </Media>
       </button>
