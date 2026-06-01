@@ -10,4 +10,10 @@ describe('ProjectCard', () => {
     expect(screen.getByRole('link')).toHaveAttribute('href', `/${p.discipline}/${p.slug}`);
     expect(screen.getByText(p.title)).toBeInTheDocument();
   });
+
+  it('renders a featured variant linking to the project', () => {
+    const p = getAllProjects()[0];
+    render(<ProjectCard project={p} featured />);
+    expect(screen.getByRole('link')).toHaveAttribute('href', `/${p.discipline}/${p.slug}`);
+  });
 });

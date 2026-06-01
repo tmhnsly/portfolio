@@ -15,6 +15,7 @@ import { Media } from '@/components/ui/Media';
 import { Pill } from '@/components/ui/Pill';
 import { LinkArrow } from '@/components/ui/LinkArrow';
 import { CardArrow } from '@/components/ui/CardArrow';
+import { ProjectCard } from '@/components/section/ProjectCard';
 import styles from './RecentWork.module.scss';
 
 // stable (module-scope) facet accessor — a Project's Discipline label
@@ -30,7 +31,6 @@ export function RecentWork({ projects }: { projects: Project[] }) {
   const filtered = filterByFacet(projects, disciplineLabel, activeLabel);
   const { featured, rest: thumbs } = splitFeatured(filtered, 3);
   if (!featured) return null;
-  const fp = projectPresentation(featured);
 
   return (
     <section className={styles.section}>
@@ -50,18 +50,7 @@ export function RecentWork({ projects }: { projects: Project[] }) {
           exit={reduce ? undefined : { opacity: 0, y: -8 }}
           transition={{ duration: DURATION.fast, ease: EASING.standard }}
         >
-          <Link href={fp.href} className={styles.featured}>
-            <Media grad={fp.gradient} src={coverImage(featured).src} alt={coverImage(featured).alt}
-              ratio="16/10" sizes={IMG_SIZES.full} className={styles.featuredMedia} />
-            <div className={styles.featuredMeta}>
-              <div className={styles.metaHead}>
-                <div className={styles.featuredTitle}>{featured.title}</div>
-                <CardArrow className={styles.arrow} />
-              </div>
-              {featured.desc && <div className={styles.featuredDesc}>{featured.desc}</div>}
-              <span className={styles.pill}><Pill label={fp.label} tone="discipline" color={fp.color} onColor={fp.onColor} /></span>
-            </div>
-          </Link>
+          <ProjectCard project={featured} featured />
           <div className={styles.thumbs}>
             {thumbs.map((p) => {
               const tp = projectPresentation(p);

@@ -34,3 +34,11 @@
 .date { font-family: var(--font-mono); font-size: var(--fs-mono-xs); color: var(--text-muted); white-space: nowrap; }
 .desc { font-size: var(--fs-body-s); color: var(--text-soft); line-height: 1.4; }
 .chips { display: flex; gap: var(--space-1); flex-wrap: wrap; }
+
+/* Featured (home "Recent Work" hero) — same card, larger: 16:10 media, big
+   title, heavier shadow. Everything else (pill, hover arrow, date, chips) is
+   inherited from the base card for consistency. */
+.featured { gap: var(--space-5); }
+.featured .media { box-shadow: var(--shadow-lg); }
+.featured .title { font-size: var(--fs-h2); letter-spacing: -0.028em; line-height: 1.05; }
+.featured .desc { font-size: var(--fs-body); }
