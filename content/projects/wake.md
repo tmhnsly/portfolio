@@ -9,6 +9,7 @@ year: 2015
 media:
   - type: youtube
     id: "xHmZYM6n8G0"
+    poster: "/images/projects/thumbnails/music/wake.webp"
     title: "Full film"
 ---
 
