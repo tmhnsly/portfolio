@@ -3,7 +3,7 @@ title: My Buddy
 desc: A short film shot over two days in Barry Island
 discipline: video
 date: "2016-08-01"
-tags: ["Lumix G7"]
+tags: ["Lumix G7", "Final Cut Pro X"]
 role: Director, camera + edit
 year: 2016
 media:
