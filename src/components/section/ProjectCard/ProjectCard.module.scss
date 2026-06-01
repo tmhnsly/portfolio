@@ -1,20 +1,32 @@
 @use '../../../styles/mixins/breakpoints' as *;
-.card { display: flex; flex-direction: column; gap: var(--space-4);
-  transition: transform var(--duration-hover) var(--ease-standard);
-  @include reduced-motion { transition: none; } }
-@include can-hover { .card:hover { transform: translateY(-6px); } }
-@include reduced-motion { .card:hover { transform: none; } }
-/* Static, light shadow only. Was md→lg on a `transition: box-shadow`, which
-   repaints every frame and made the lift feel rough; the transform lift alone
-   is the hover feedback now. (`.media` is overflow:hidden so a child pseudo's
-   drop shadow would clip — the element's own box-shadow is fine.) */
-.media { box-shadow: var(--shadow-sm); }
+.card { display: flex; flex-direction: column; gap: var(--space-4); }
+
+/* Movement lives on the thumbnail only — the text block never moves (colour-only
+   hover). On hover the media lifts a touch and dims slightly, and the top-right
+   arrow slides in, echoing the DisciplineCard link affordance. */
+.media { position: relative; box-shadow: var(--shadow-sm);
+  transition: transform var(--duration-hover) var(--ease-standard), opacity var(--duration-hover) var(--ease-standard); }
+.arrow { position: absolute; top: 12px; right: 12px; z-index: var(--z-card-overlay);
+  color: var(--on-media); opacity: 0; transform: translate(-2px, 2px);
+  transition: opacity var(--duration-hover) var(--ease-standard), transform var(--duration-hover) var(--ease-standard);
+  filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.45)); }
+@include can-hover {
+  .card:hover .media { transform: translateY(-6px); opacity: 0.9; }
+  .card:hover .title { color: var(--accent-ink); }
+  .card:hover .arrow { opacity: 1; transform: translate(0, 0); }
+}
+@include reduced-motion {
+  .media, .arrow, .title { transition: none; }
+  .card:hover .media { transform: none; }
+  .card:hover .arrow { transform: none; opacity: 1; }
+}
+
 .hatch { position: absolute; inset: 0; background: var(--overlay-hatch); }
-.number { position: absolute; right: -8px; bottom: -22px; font-family: var(--font-display); font-size: 160px; font-weight: 600; letter-spacing: -0.06em; line-height: 0.9; color: var(--white-a5); z-index: 1; }
 .pillTL { position: absolute; left: 14px; top: 14px; z-index: var(--z-card-overlay); }
 .body { display: flex; flex-direction: column; gap: var(--space-2); }
 .titleRow { display: flex; align-items: baseline; justify-content: space-between; gap: var(--space-4); }
-.title { font-family: var(--font-display); font-size: var(--fs-h3); font-weight: 600; letter-spacing: -0.025em; line-height: 1.15; color: var(--text); }
+.title { font-family: var(--font-display); font-size: var(--fs-h3); font-weight: 600; letter-spacing: -0.025em; line-height: 1.15; color: var(--text);
+  transition: color var(--duration-hover) var(--ease-standard); }
 .date { font-family: var(--font-mono); font-size: var(--fs-mono-xs); color: var(--text-muted); white-space: nowrap; }
 .desc { font-size: var(--fs-body-s); color: var(--text-soft); line-height: 1.4; }
 .chips { display: flex; gap: var(--space-1); flex-wrap: wrap; }
