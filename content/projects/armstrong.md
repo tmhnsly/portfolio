@@ -10,8 +10,6 @@ status: "Open source · at Rocketmakers"
 repo: github.com/Rocketmakers/armstrong-edge
 ---
 
-Contributed to Armstrong, Rocketmakers' open-source React component library used across the consultancy's client projects.
+Contributions to Armstrong, Rocketmakers' open-source React component library, used across the consultancy's client projects.
 
-## Components other people build on
-
-Working on a shared library is a different discipline from building a one-off feature — APIs have to be predictable, accessible and flexible enough to survive contact with a dozen different client designs. Alongside this I shipped React frontends for clients including Pure Planet, Sero and Wavesix, and wrote and delivered an HTML & CSS course for work-experience students.
+A shared library is a different discipline from a one-off feature: the APIs have to be predictable, accessible and flexible enough to survive a dozen different client designs. Alongside it, React frontends for clients including Pure Planet, Sero and Wavesix, plus an HTML and CSS course written and delivered for work-experience students.

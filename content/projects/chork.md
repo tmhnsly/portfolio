@@ -11,12 +11,6 @@ status: "In development"
 liveUrl: https://chork.app
 ---
 
-Chork is a full-stack progressive web app for running and tracking competitions — designed, built and shipped independently as an ongoing product.
+Chork is a full-stack progressive web app for running and tracking competitions, designed, built and shipped independently as an ongoing product.
 
-## Built to run a competition end to end
-
-Real-time leaderboards, crew systems, achievement badges, and a beta-sharing mechanic with spoiler protection — the kind of features that only make sense once you've actually tried to run a competition and watched where it falls apart.
-
-It's a PWA, so it installs to the home screen and behaves like a native app without an app-store round trip. Built with Next.js and TypeScript, deployed on Vercel.
-
-This is the project I default to when I want to push something further than a client brief usually allows — owning the data model, the interface and the rollout, and iterating on it for real users.
+Real-time leaderboards, crew systems, achievement badges, and beta-sharing with spoiler protection. As a PWA it installs to the home screen and behaves like a native app with no app-store round trip. The data model, interface and rollout are owned end to end and iterated on with real users.

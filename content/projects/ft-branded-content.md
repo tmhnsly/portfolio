@@ -9,8 +9,6 @@ year: 2025
 status: "Shipped for the FT"
 ---
 
-Interactive branded-content pages for Financial Times clients, including Julius Baer and Equinor — taking Figma designs to production-ready, fully responsive code.
+Interactive branded-content pages for Financial Times clients, including Julius Baer and Equinor, built from Figma designs to production-ready, fully responsive code.
 
-## Editorial polish, on a deadline
-
-Branded content for a publisher like the FT has to meet the same bar as the editorial around it: fast, accessible, and pixel-faithful to the design across every breakpoint. I worked directly with designers and editorial stakeholders, managing each piece end to end — from the Figma handoff to the live, responsive page.
+Branded content for a publisher like the FT has to meet the same bar as the editorial around it: fast, accessible and pixel-faithful across every breakpoint. Each piece was taken end to end, from Figma handoff to the live page, working directly with designers and editorial stakeholders.
