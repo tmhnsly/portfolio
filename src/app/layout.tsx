@@ -30,7 +30,11 @@ import '@radix-ui/colors/white-alpha.css';
 import '@radix-ui/colors/black-alpha.css';
 import './globals.scss';
 
-const display = Space_Grotesk({ subsets: ['latin'], weight: ['400', '500', '600', '700'], variable: '--font-space-grotesk', display: 'swap' });
+// `optional` (not `swap`): the font is preloaded, so it's normally used on first
+// paint — but if it's slow on a cold load, the browser keeps the metric-matched
+// fallback for that session rather than swapping the font in mid-animation, which
+// reflowed the hero title's word-by-word reveal on iOS (the initial-load glitch).
+const display = Space_Grotesk({ subsets: ['latin'], weight: ['400', '500', '600', '700'], variable: '--font-space-grotesk', display: 'optional' });
 const mono = Space_Mono({ subsets: ['latin'], weight: ['400', '700'], variable: '--font-space-mono', display: 'swap' });
 
 export const metadata: Metadata = {
