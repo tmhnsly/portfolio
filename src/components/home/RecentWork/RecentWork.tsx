@@ -4,14 +4,14 @@ import Link from 'next/link';
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import type { Project } from '@/types';
 import { DISCIPLINE_ORDER, DISCIPLINES } from '@/lib/disciplines';
-import { projectPresentation, coverImage } from '@/lib/project-presentation';
+import { projectPresentation } from '@/lib/project-presentation';
 import { buildFacets, filterByFacet, splitFeatured } from '@/lib/facets';
 import { IMG_SIZES } from '@/lib/breakpoints';
 import { DURATION, EASING } from '@/lib/motion';
 import { COPY } from '@/data';
 import { Eyebrow } from '@/components/ui/Eyebrow';
 import { FilterPills } from '@/components/ui/FilterPills';
-import { Media } from '@/components/ui/Media';
+import { ProjectThumb } from '@/components/project-thumbs';
 import { Pill } from '@/components/ui/Pill';
 import { LinkArrow } from '@/components/ui/LinkArrow';
 import { CardArrow } from '@/components/ui/CardArrow';
@@ -56,7 +56,7 @@ export function RecentWork({ projects }: { projects: Project[] }) {
               const tp = projectPresentation(p);
               return (
                 <Link key={p.slug} href={tp.href} className={styles.thumb}>
-                  <Media grad={tp.gradient} src={coverImage(p).src} alt={coverImage(p).alt}
+                  <ProjectThumb project={p} grad={tp.gradient}
                     ratio="4/3" sizes={IMG_SIZES.thumb} className={styles.thumbMedia} />
                   <div className={styles.thumbMeta}>
                     <div className={styles.metaHead}>

@@ -1,0 +1,60 @@
+@use '../../styles/mixins/breakpoints' as *;
+
+/* Agile Energy Dashboard — a stylised half-hourly tariff chart. CSS + inline SVG
+   so it stays crisp at any card size and follows the theme (panel/text flip via
+   tokens; the chart blue is brand-fixed). Scales with the card via container-query
+   units. The price line draws on mount. Decorative — the card link carries the label. */
+
+.root {
+  position: absolute;
+  inset: 0;
+  --agile: #0090ff;   /* Agile brand blue */
+  --grid: color-mix(in oklab, var(--text) 12%, transparent);
+  container-type: size;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: radial-gradient(125% 95% at 80% 6%, color-mix(in oklab, var(--agile) 26%, transparent), transparent 58%);
+}
+
+.panel {
+  width: 82cqw;
+  max-width: 104cqh;
+  display: flex;
+  flex-direction: column;
+  gap: 4cqmin;
+  padding: 5cqmin 5.6cqmin;
+  background: var(--bg);
+  border: max(1px, 0.5cqmin) solid var(--rule);
+  border-radius: 4.5cqmin;
+  box-shadow: var(--shadow-md);
+}
+
+.head { display: flex; align-items: center; gap: 3cqmin; }
+.wordmark { height: 4cqmin; width: 28cqmin; border-radius: 999px; background: var(--text); opacity: 0.72; }
+.stat {
+  margin-left: auto;
+  font-size: 7cqmin; font-weight: 700; line-height: 1;
+  color: var(--agile); font-variant-numeric: tabular-nums;
+}
+
+.chart { width: 100%; aspect-ratio: 100 / 52; display: block; }
+.grid { stroke: var(--grid); stroke-width: 1; }
+.band { fill: var(--agile); opacity: 0.12; }
+.area { fill: var(--agile); opacity: 0.16; }
+.line { fill: none; stroke: var(--agile); stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+.dot { fill: var(--agile); transform-box: fill-box; transform-origin: center; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .panel { animation: agileRise 0.55s var(--ease-standard) both; }
+  .band { animation: agileFade 0.6s var(--ease-standard) 0.15s both; }
+  .area { animation: agileFade 0.7s var(--ease-standard) 0.25s both; }
+  .line { animation: agileDraw 0.95s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both; }
+  .dot { animation: agilePop 0.45s var(--ease-standard) 0.78s both; }
+  .stat { animation: agileFade 0.5s var(--ease-standard) 0.2s both; }
+}
+
+@keyframes agileDraw { from { stroke-dashoffset: 1; } }
+@keyframes agileRise { from { opacity: 0; transform: translateY(6cqmin) scale(0.98); } to { opacity: 1; transform: none; } }
+@keyframes agileFade { from { opacity: 0; } }
+@keyframes agilePop { 0% { transform: scale(0); } 60% { transform: scale(1.25); } 100% { transform: scale(1); } }

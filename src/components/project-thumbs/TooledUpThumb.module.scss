@@ -1,0 +1,69 @@
+@use '../../styles/mixins/breakpoints' as *;
+
+/* Tooled-Up Education — a searchable resource library: a search bar over mixed-media
+   resource rows (video / podcast / article). CSS only, theme-aware panel; the search
+   accent + media chips are fixed. Scales via container-query units. Decorative. */
+
+.root {
+  position: absolute;
+  inset: 0;
+  --tu: #0d9aa7;
+  container-type: size;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: radial-gradient(125% 95% at 80% 6%, color-mix(in oklab, var(--tu) 24%, transparent), transparent 58%);
+}
+
+.panel {
+  width: 82cqw;
+  max-width: 104cqh;
+  display: flex;
+  flex-direction: column;
+  gap: 3.4cqmin;
+  padding: 5cqmin 5.4cqmin;
+  background: var(--bg);
+  border: max(1px, 0.5cqmin) solid var(--rule);
+  border-radius: 4.5cqmin;
+  box-shadow: var(--shadow-md);
+}
+
+.search {
+  display: flex; align-items: center; gap: 3cqmin;
+  padding: 3cqmin 3.6cqmin;
+  border-radius: 2.6cqmin;
+  background: var(--surface);
+  border: max(1px, 0.4cqmin) solid var(--rule);
+}
+.magnifier {
+  width: 5cqmin; height: 5cqmin; border-radius: 50%; flex: none; position: relative;
+  border: max(1px, 0.7cqmin) solid var(--tu);
+}
+.magnifier::after {
+  content: ''; position: absolute; right: -1.2cqmin; bottom: -1.2cqmin;
+  width: 2.8cqmin; height: max(1px, 0.7cqmin); border-radius: 999px; background: var(--tu);
+  transform: rotate(45deg); transform-origin: left center;
+}
+.query { height: 3cqmin; width: 44cqmin; border-radius: 999px; background: var(--text); opacity: 0.32; }
+
+.list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 3cqmin; }
+.row { display: flex; align-items: center; gap: 3cqmin; }
+.chip {
+  flex: none; padding: 1.4cqmin 2.6cqmin; border-radius: 1.6cqmin;
+  font-size: 3cqmin; font-weight: 700; letter-spacing: 0.08em; color: #fff;
+}
+.video { background: #e0573c; }
+.podcast { background: var(--tu); }
+.article { background: #7c5cff; }
+.bar { flex: 1; height: 3.4cqmin; border-radius: 999px; background: var(--text); opacity: 0.18; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .panel { animation: tuRise 0.55s var(--ease-standard) both; }
+  .search { animation: tuFade 0.5s var(--ease-standard) 0.18s both; }
+  .row { animation: tuFade 0.5s var(--ease-standard) both; }
+  .row:nth-child(1) { animation-delay: 0.28s; }
+  .row:nth-child(2) { animation-delay: 0.36s; }
+  .row:nth-child(3) { animation-delay: 0.44s; }
+}
+@keyframes tuRise { from { opacity: 0; transform: translateY(6cqmin) scale(0.98); } to { opacity: 1; transform: none; } }
+@keyframes tuFade { from { opacity: 0; transform: translateX(-3cqmin); } to { opacity: 1; transform: none; } }

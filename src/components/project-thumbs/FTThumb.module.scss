@@ -1,0 +1,71 @@
+@use '../../styles/mixins/breakpoints' as *;
+
+/* FT branded-content article on the paper's salmon stock. The masthead is the FT's
+   alpha PNG used as a mask (mask-image) and filled with a token — so it recolours
+   via the colour system rather than being baked pixels. Paper + ink are brand-fixed
+   (the FT is the salmon paper); the field + chrome follow the theme. Scales with the
+   card via container-query units. Decorative — the card link carries the label. */
+
+.root {
+  position: absolute;
+  inset: 0;
+  --ft-paper: #fff1e5;   /* FT salmon newsprint */
+  --ft-ink: #33302d;     /* FT charcoal */
+  --ft-claret: #990f3d;  /* FT accent */
+  container-type: size;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: radial-gradient(125% 95% at 80% 6%, color-mix(in oklab, var(--ft-paper) 55%, transparent), transparent 60%);
+}
+
+.paper {
+  width: 80cqw;
+  max-width: 104cqh;
+  display: flex;
+  flex-direction: column;
+  gap: 3cqmin;
+  padding: 6cqmin 6cqmin 6.5cqmin;
+  background: var(--ft-paper);
+  border-radius: 3.5cqmin;
+  box-shadow: var(--shadow-md);
+}
+
+.masthead {
+  width: 100%;
+  aspect-ratio: 3840 / 314;
+  background-color: var(--ft-ink);
+  mask-image: url('/images/projects/code/financial-times.webp');
+  mask-repeat: no-repeat;
+  mask-position: left center;
+  mask-size: contain;
+}
+
+.rule { height: max(1px, 0.4cqmin); margin-top: 1cqmin; background: color-mix(in oklab, var(--ft-ink) 28%, transparent); }
+
+.tag {
+  align-self: flex-start;
+  margin-top: 1.5cqmin;
+  padding: 1.4cqmin 2.6cqmin;
+  border-radius: 999px;
+  background: color-mix(in oklab, var(--ft-claret) 14%, transparent);
+  color: var(--ft-claret);
+  font-size: 3.2cqmin; font-weight: 700; letter-spacing: 0.14em;
+}
+
+.headline { height: 6cqmin; width: 86%; border-radius: 1cqmin; background: var(--ft-ink); }
+.body { height: 3cqmin; border-radius: 999px; background: color-mix(in oklab, var(--ft-ink) 30%, transparent); }
+.b1 { width: 96%; }
+.b2 { width: 68%; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .paper { animation: ftRise 0.55s var(--ease-standard) both; }
+  .masthead { animation: ftFade 0.6s var(--ease-standard) 0.14s both; }
+  .tag { animation: ftFade 0.5s var(--ease-standard) 0.28s both; }
+  .headline { animation: ftFade 0.5s var(--ease-standard) 0.34s both; }
+  .b1 { animation: ftFade 0.5s var(--ease-standard) 0.40s both; }
+  .b2 { animation: ftFade 0.5s var(--ease-standard) 0.46s both; }
+}
+
+@keyframes ftRise { from { opacity: 0; transform: translateY(6cqmin) scale(0.98); } to { opacity: 1; transform: none; } }
+@keyframes ftFade { from { opacity: 0; } }

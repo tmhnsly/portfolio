@@ -1,0 +1,53 @@
+@use '../../styles/mixins/breakpoints' as *;
+
+/* Earnt — a Storybook-style component canvas (button, toggle, input, card) for the
+   design-system work. CSS only, theme-aware panel; the component accent is fixed.
+   Scales via container-query units. Decorative — the card link carries the label. */
+
+.root {
+  position: absolute;
+  inset: 0;
+  --earnt: #5b6ef5;
+  container-type: size;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: radial-gradient(125% 95% at 80% 6%, color-mix(in oklab, var(--earnt) 24%, transparent), transparent 58%);
+}
+
+.panel {
+  width: 82cqw;
+  max-width: 104cqh;
+  display: flex;
+  flex-direction: column;
+  gap: 3.6cqmin;
+  padding: 5cqmin 5.4cqmin;
+  background: var(--bg);
+  border: max(1px, 0.5cqmin) solid var(--rule);
+  border-radius: 4.5cqmin;
+  box-shadow: var(--shadow-md);
+}
+
+.head { display: flex; align-items: center; gap: 2cqmin; }
+.dot { width: 3cqmin; height: 3cqmin; border-radius: 50%; background: var(--rule-strong); flex: none; }
+.title { height: 3.4cqmin; width: 22cqmin; border-radius: 999px; background: var(--text); opacity: 0.6; margin-left: 1.6cqmin; }
+
+.grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3cqmin; }
+.btn { height: 9cqmin; border-radius: 2cqmin; background: var(--earnt); }
+.toggle {
+  height: 9cqmin; border-radius: 999px; background: color-mix(in oklab, var(--earnt) 24%, var(--surface));
+  display: flex; align-items: center; justify-content: flex-end; padding: 1.4cqmin;
+}
+.toggle i { width: 6.2cqmin; height: 6.2cqmin; border-radius: 50%; background: var(--earnt); }
+.input { height: 9cqmin; border-radius: 2cqmin; background: var(--surface); border: max(1px, 0.4cqmin) solid var(--rule); }
+.swatch { height: 9cqmin; border-radius: 2cqmin; background: var(--bg); border: max(1px, 0.4cqmin) solid var(--rule); box-shadow: var(--shadow-sm); }
+
+@media (prefers-reduced-motion: no-preference) {
+  .panel { animation: earntRise 0.55s var(--ease-standard) both; }
+  .btn { animation: earntPop 0.5s var(--ease-standard) 0.22s both; }
+  .toggle { animation: earntPop 0.5s var(--ease-standard) 0.29s both; }
+  .input { animation: earntPop 0.5s var(--ease-standard) 0.36s both; }
+  .swatch { animation: earntPop 0.5s var(--ease-standard) 0.43s both; }
+}
+@keyframes earntRise { from { opacity: 0; transform: translateY(6cqmin) scale(0.98); } to { opacity: 1; transform: none; } }
+@keyframes earntPop { from { opacity: 0; transform: translateY(2cqmin) scale(0.96); } to { opacity: 1; transform: none; } }

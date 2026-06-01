@@ -6,9 +6,9 @@ import { BiChevronLeft, BiChevronRight } from 'react-icons/bi';
 import type { Project } from '@/types';
 import { EASING, useInView } from '@/lib/motion';
 import { IMG_SIZES } from '@/lib/breakpoints';
-import { projectPresentation, coverImage } from '@/lib/project-presentation';
+import { projectPresentation } from '@/lib/project-presentation';
 import { rotate, rotateTo, swipeDir } from '@/lib/deck';
-import { Media } from '@/components/ui/Media';
+import { ProjectThumb } from '@/components/project-thumbs';
 import { Pill } from '@/components/ui/Pill';
 import { Button } from '@/components/ui/Button';
 import styles from './CardDeck.module.scss';
@@ -32,10 +32,9 @@ function CardFace({ project }: { project: Project }) {
     // The whole front card links to the project. A flick drags the card and Motion
     // suppresses the trailing click, so only a real (non-dragged) click navigates.
     <Link href={p.href} className={styles.face} draggable={false}>
-      <Media
+      <ProjectThumb
+        project={project}
         grad={p.gradient}
-        src={coverImage(project).src}
-        alt={coverImage(project).alt}
         ratio="5/4"
         sizes={IMG_SIZES.deck}
         className={styles.thumb}

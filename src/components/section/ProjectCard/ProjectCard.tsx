@@ -2,7 +2,7 @@ import Link from 'next/link';
 import type { Project } from '@/types';
 import { DISCIPLINES } from '@/lib/disciplines';
 import { IMG_SIZES } from '@/lib/breakpoints';
-import { Media } from '@/components/ui/Media';
+import { ProjectThumb, hasProjectThumb } from '@/components/project-thumbs';
 import { Pill } from '@/components/ui/Pill';
 import { TechChip } from '@/components/ui/TechChip';
 import { LinkArrow } from '@/components/ui/LinkArrow';
@@ -15,12 +15,12 @@ export function ProjectCard({ project, hideDiscipline = false, featured = false 
   const cover = coverImage(project);
   return (
     <Link href={`/${project.discipline}/${project.slug}`} className={[styles.card, featured && styles.featured].filter(Boolean).join(' ')}>
-      <Media grad={d.gradient} src={cover.src} alt={cover.alt}
+      <ProjectThumb project={project} grad={d.gradient}
         ratio={featured ? '16/10' : '4/3'} sizes={featured ? IMG_SIZES.full : IMG_SIZES.grid3} className={styles.media}>
-        {!cover.src && <span className={styles.hatch} aria-hidden />}
+        {!cover.src && !hasProjectThumb(project.slug) && <span className={styles.hatch} aria-hidden />}
         {!hideDiscipline && <span className={styles.pillTL}><Pill label={d.label} tone="solid" /></span>}
         <LinkArrow className={styles.arrow} />
-      </Media>
+      </ProjectThumb>
       <div className={styles.body}>
         <div className={styles.titleRow}>
           <span className={styles.title}>{project.title}</span>

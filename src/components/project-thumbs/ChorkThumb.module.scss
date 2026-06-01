@@ -1,0 +1,89 @@
+@use '../../styles/mixins/breakpoints' as *;
+
+/* Chork's "rings card" — Apple-fitness-style activity rings (sends / flashes /
+   zones) beside the matching counts and points. Built from CSS + inline SVG so it
+   stays crisp at any card size and follows the theme: the panel/text flip
+   light↔dark via tokens, while the climbing colours are brand-fixed. Everything
+   scales with the card via container-query units (the frame is the query
+   container). Decorative — the card link carries the label. */
+
+.root {
+  position: absolute;
+  inset: 0;
+  --sends: #bdee63;   /* brand lime  */
+  --flash: #ffc53d;   /* amber       */
+  --zone:  #12a594;   /* teal        */
+  --track: color-mix(in oklab, var(--text) 14%, transparent);
+  container-type: size;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  /* a lime glow over the section gradient, so the panel reads as a product
+     screen floating on the discipline colour */
+  background: radial-gradient(125% 95% at 80% 6%, color-mix(in oklab, var(--sends) 30%, transparent), transparent 58%);
+}
+
+/* the floating app screen */
+.panel {
+  width: 82cqw;
+  max-width: 104cqh;
+  display: flex;
+  flex-direction: column;
+  gap: 4cqmin;
+  padding: 5cqmin 5.6cqmin;
+  background: var(--bg);
+  border: max(1px, 0.5cqmin) solid var(--rule);
+  border-radius: 4.5cqmin;
+  box-shadow: var(--shadow-md);
+}
+
+.head { display: flex; align-items: center; gap: 3cqmin; }
+.mark { width: 10cqmin; height: 10cqmin; flex: none; }
+.arc { stroke: var(--text); }
+.dot { fill: var(--sends); transform-box: fill-box; transform-origin: center; }
+.wordmark { height: 3.6cqmin; width: 24cqmin; border-radius: 999px; background: var(--text); opacity: 0.72; }
+.pts {
+  margin-left: auto;
+  display: flex;
+  align-items: baseline;
+  gap: 1.4cqmin;
+  font-size: 7.6cqmin;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+}
+.pts small { font-size: 3.2cqmin; font-weight: 600; letter-spacing: 0.06em; color: var(--text-muted); }
+
+.body { display: flex; align-items: center; gap: 5cqmin; }
+.rings { width: 34cqmin; height: 34cqmin; flex: none; }
+
+.stats { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2.8cqmin; margin: 0; padding: 0; list-style: none; }
+.stat { display: flex; align-items: center; gap: 2.6cqmin; }
+.swatch { width: 4cqmin; height: 4cqmin; border-radius: 50%; flex: none; }
+.sends { background: var(--sends); }
+.flash { background: var(--flash); }
+.zone  { background: var(--zone); }
+.label { font-size: 4.2cqmin; font-weight: 600; letter-spacing: 0.08em; color: var(--text-muted); }
+.num { margin-left: auto; font-size: 6cqmin; font-weight: 700; line-height: 1; color: var(--text); font-variant-numeric: tabular-nums; }
+
+/* Entrance: panel rises, the rings sweep in (staggered), the stats settle. Hidden
+   state lives only here, so reduced-motion users get it composed and static. */
+@media (prefers-reduced-motion: no-preference) {
+  .panel { animation: chorkRise 0.55s var(--ease-standard) both; }
+  .ring { animation: ringDraw 0.9s cubic-bezier(0.16, 1, 0.3, 1) both; animation-delay: var(--ring-delay, 0ms); }
+  .pts { animation: chorkFade 0.5s var(--ease-standard) 0.2s both; }
+  .stat { animation: chorkFade 0.5s var(--ease-standard) both; }
+  .stat:nth-child(1) { animation-delay: 0.26s; }
+  .stat:nth-child(2) { animation-delay: 0.34s; }
+  .stat:nth-child(3) { animation-delay: 0.42s; }
+
+  @include can-hover {
+    .root:hover .dot { animation: chorkPulse 1.2s var(--ease-standard) infinite; }
+  }
+}
+
+@keyframes ringDraw { from { stroke-dashoffset: 1; } }
+@keyframes chorkRise { from { opacity: 0; transform: translateY(6cqmin) scale(0.98); } to { opacity: 1; transform: none; } }
+@keyframes chorkFade { from { opacity: 0; transform: translateY(2cqmin); } to { opacity: 1; transform: none; } }
+@keyframes chorkPulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.14); } }

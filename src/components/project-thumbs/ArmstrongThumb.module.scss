@@ -1,0 +1,40 @@
+@use '../../styles/mixins/breakpoints' as *;
+
+/* Armstrong — a fanned stack of component cards with a code bracket, for the shared
+   React component library. CSS only, theme-aware cards; the accent is fixed. Scales
+   via container-query units. Decorative — the card link carries the label. */
+
+.root {
+  position: absolute;
+  inset: 0;
+  --arm: #18a558;
+  container-type: size;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: radial-gradient(125% 95% at 80% 6%, color-mix(in oklab, var(--arm) 24%, transparent), transparent 58%);
+}
+
+.stack { position: relative; width: 52cqmin; height: 42cqmin; }
+
+.card {
+  position: absolute; inset: 0;
+  border-radius: 3cqmin;
+  background: var(--bg);
+  border: max(1px, 0.5cqmin) solid var(--rule);
+  box-shadow: var(--shadow-md);
+}
+.c3 { transform: translate(9cqmin, 7cqmin) rotate(7deg); opacity: 0.45; }
+.c2 { transform: translate(4.5cqmin, 3.5cqmin) rotate(3.5deg); opacity: 0.75; }
+.c1 { position: relative; display: flex; flex-direction: column; justify-content: center; gap: 3.4cqmin; padding: 5cqmin; }
+
+.bracket { position: absolute; top: 3cqmin; right: 3.8cqmin; font-family: var(--font-mono); font-size: 4.8cqmin; font-weight: 700; line-height: 1; color: var(--arm); }
+.bar { height: 3.2cqmin; width: 62%; border-radius: 999px; background: var(--text); opacity: 0.5; }
+.btn { height: 7cqmin; width: 48%; border-radius: 2cqmin; background: var(--arm); }
+
+@media (prefers-reduced-motion: no-preference) {
+  .c3 { animation: armIn 0.55s var(--ease-standard) 0.05s both; }
+  .c2 { animation: armIn 0.55s var(--ease-standard) 0.13s both; }
+  .c1 { animation: armIn 0.55s var(--ease-standard) 0.21s both; }
+}
+@keyframes armIn { from { opacity: 0; transform: translate(0, 7cqmin) scale(0.95); } }

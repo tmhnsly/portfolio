@@ -1,6 +1,6 @@
 ---
 title: Chork
-desc: A full-stack PWA for running and tracking competitions
+desc: A rock climbing app for bouldering comps and games
 discipline: code
 date: "2026-02-01"
 featured: true
@@ -11,6 +11,6 @@ status: "In development"
 liveUrl: https://chork.app
 ---
 
-Chork is a full-stack PWA for running and tracking competitions. Designed, built and shipped independently as an ongoing product.
+Chork is a rock climbing app. Run a bouldering competition at your gym on a live leaderboard, or play head-to-head, solo and group games against friends. Designed, built and shipped independently as an ongoing product.
 
-Real-time leaderboards, crew systems, achievement badges, beta-sharing with spoiler protection. As a PWA it installs to the home screen and behaves like a native app, no app-store round trip. I own the data model, interface and rollout end to end, and iterate with real users.
+Climbs score points, with bonuses for flashing a problem or reaching its zone, and your stats build into activity rings. Crews, achievement badges and live leaderboards round it out. As a PWA it installs to the home screen and runs like a native app, no app store. I own the data model, interface and rollout end to end, and iterate with real climbers.
