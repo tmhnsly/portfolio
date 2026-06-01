@@ -166,7 +166,7 @@
   position: absolute; inset: 0; margin: auto;
   width: 72px; height: 72px; display: grid; place-items: center;
   border-radius: 999px; color: #fff; font-size: 1.4rem; line-height: 1;
-  @include glass(rgba(0, 0, 0, 0.35), 8px);
+  @include glass(rgba(0, 0, 0, 0.35), 8px, false);
   transition: transform 0.15s ease;
 }
 .poster:hover .play { transform: scale(1.06); }
