@@ -80,7 +80,7 @@ export function MediaHero({ project }: { project: Project }) {
     const v = project.media[0];
     return (
       <div className={styles.embed}>
-        <YouTubeEmbed id={v.id} poster={v.poster} title={v.title} grad={d.gradient} />
+        <YouTubeEmbed id={v.id} list={v.list} poster={v.poster} title={v.title} grad={d.gradient} />
       </div>
     );
   }

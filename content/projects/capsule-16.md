@@ -7,9 +7,11 @@ tags: ["iPhone 6S", "Lumix G7", "Final Cut Pro X", "Filmic Pro"]
 role: Director, camera + edit
 year: 2016
 media:
-  - type: image
-    src: "/images/projects/thumbnails/video/capsule_16.webp"
-    alt: "Capsule 16"
+  - type: youtube
+    id: "aczbUlJXRo0"
+    list: "PL1UtQjgCwfLsIGWC5BgFNvTeCX1gTqMQN"
+    poster: "/images/projects/thumbnails/video/capsule_16.webp"
+    title: "Capsule 16"
 ---
 
 A year-long learning exercise with one rule: release a film every month. After a Sound Design degree and a house full of filmmakers, this was where the filmmaking started.

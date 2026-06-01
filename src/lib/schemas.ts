@@ -25,6 +25,7 @@ const mediaImage = z.object({
 const mediaYouTube = z.object({
   type: z.literal('youtube'),
   id: z.string(),
+  list: z.string().optional(), // optional playlist id — embeds the whole series, starting at `id`
   poster: z.string().optional(),
   alt: z.string().optional(),
   title: z.string().optional(),

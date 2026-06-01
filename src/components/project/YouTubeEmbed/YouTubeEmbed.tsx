@@ -6,7 +6,7 @@ import { youTubeEmbedUrl, youTubeThumbnail } from '@/lib/youtube';
 import { BiPlay } from 'react-icons/bi';
 import styles from './YouTubeEmbed.module.scss';
 
-export function YouTubeEmbed({ id, poster, title, grad, autoPlay = false }: { id: string; poster?: string; title?: string; grad?: string; autoPlay?: boolean }) {
+export function YouTubeEmbed({ id, list, poster, title, grad, autoPlay = false }: { id: string; list?: string; poster?: string; title?: string; grad?: string; autoPlay?: boolean }) {
   const [playing, setPlaying] = useState(autoPlay);
 
   if (playing) {
@@ -14,7 +14,7 @@ export function YouTubeEmbed({ id, poster, title, grad, autoPlay = false }: { id
       <div className={styles.frame}>
         <iframe
           className={styles.iframe}
-          src={youTubeEmbedUrl(id, { autoplay: true })}
+          src={youTubeEmbedUrl(id, { autoplay: true, list })}
           title={title ?? 'YouTube video'}
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           allowFullScreen
