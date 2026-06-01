@@ -13,4 +13,4 @@ media:
     title: "Rocketmakers 15th Birthday"
 ---
 
-A series of staff interviews marking Rocketmakers' 15th birthday. Handled concept, questions, interviews, camera, edit and sound, start to finish.
+A series of staff interviews marking Rocketmakers' 15th birthday. Handled concept, questions, interviews, camera, edit and sound, start to finish. Built it around the people, letting staff tell the company's story across fifteen years in their own words.
