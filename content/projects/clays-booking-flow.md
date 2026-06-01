@@ -3,7 +3,7 @@ title: Clays Booking Flow
 desc: A booking flow that lifted spend per booking by 48% in week one
 discipline: code
 date: "2024-05-01"
-tech: ["React", "Next.js", "Orchestration API"]
+tags: ["React", "Next.js", "Orchestration API"]
 role: Frontend lead
 year: 2024
 status: "Shipped at Neverbland"

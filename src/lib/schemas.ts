@@ -14,23 +14,36 @@ export interface DisciplineMeta {
 }
 
 const imageRef = z.object({ src: z.string().optional(), grad: z.string().optional(), alt: z.string().optional() });
-const galleryFrame = imageRef.extend({ caption: z.string() });
+
+const mediaImage = z.object({
+  type: z.literal('image'),
+  src: z.string(),
+  alt: z.string().optional(),
+  title: z.string().optional(),
+});
+const mediaYouTube = z.object({
+  type: z.literal('youtube'),
+  id: z.string(),
+  poster: z.string().optional(),
+  alt: z.string().optional(),
+  title: z.string().optional(),
+});
+const mediaItem = z.discriminatedUnion('type', [mediaImage, mediaYouTube]);
+export type MediaItem = z.infer<typeof mediaItem>;
 
 export const projectFrontmatterSchema = z.object({
   title: z.string(),
   desc: z.string().optional(),
   discipline: disciplineSchema,
   date: z.string(),               // ISO yyyy-mm-dd
-  tech: z.array(z.string()).default([]),
+  tags: z.array(z.string()).default([]),
   featured: z.boolean().default(false),
   role: z.string().optional(),
   year: z.number().optional(),
   status: z.string().optional(),
   repo: z.string().optional(),
   liveUrl: z.string().optional(),
-  cover: imageRef.optional(),
-  gallery: z.array(galleryFrame).default([]),
-  tags: z.array(z.string()).optional(),
+  media: z.array(mediaItem).default([]),
 });
 export type ProjectFrontmatter = z.infer<typeof projectFrontmatterSchema>;
 export type Project = ProjectFrontmatter & { slug: string; body: string }; // body = markdown

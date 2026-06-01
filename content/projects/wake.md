@@ -3,9 +3,13 @@ title: Wake
 desc: Original music for a wakeboarding documentary
 discipline: music
 date: "2015-02-01"
-tech: ["Logic Pro X", "Guitar", "Bass"]
+tags: ["Logic Pro X", "Guitar", "Bass"]
 role: Composer
 year: 2015
+media:
+  - type: youtube
+    id: "xHmZYM6n8G0"
+    title: "Full film"
 ---
 
 Wake is a 14-minute documentary about wakeboarding, made at university with my housemate Max Wilman. He shot and cut the film. I wrote most of the music.

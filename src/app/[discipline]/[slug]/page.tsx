@@ -2,9 +2,8 @@ import { notFound } from 'next/navigation';
 import { getAllProjects, getProject, projectNeighbours, relatedProjects } from '@/lib/content';
 import { Container, Stack } from '@/components/layout';
 import { ProjectHero } from '@/components/project/ProjectHero';
-import { ProjectEmbed } from '@/components/project/ProjectEmbed';
+import { MediaHero } from '@/components/project/MediaHero';
 import { ProjectBody } from '@/components/project/ProjectBody';
-import { Gallery } from '@/components/project/Gallery';
 import { PrevNext } from '@/components/project/PrevNext';
 import { RelatedWork } from '@/components/project/RelatedWork';
 
@@ -24,9 +23,8 @@ export default async function ProjectPage({ params }: { params: Promise<{ discip
     <Container>
       <Stack>
         <ProjectHero project={project} />
-        <ProjectEmbed project={project} />
+        <MediaHero project={project} />
         <ProjectBody project={project} />
-        <Gallery frames={project.gallery} />
         <PrevNext discipline={project.discipline} prev={prev} next={next} />
         <RelatedWork projects={related} />
       </Stack>

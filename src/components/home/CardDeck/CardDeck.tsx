@@ -6,7 +6,7 @@ import { BiChevronLeft, BiChevronRight } from 'react-icons/bi';
 import type { Project } from '@/types';
 import { EASING, useInView } from '@/lib/motion';
 import { IMG_SIZES } from '@/lib/breakpoints';
-import { projectPresentation } from '@/lib/project-presentation';
+import { projectPresentation, coverImage } from '@/lib/project-presentation';
 import { rotate, rotateTo, swipeDir } from '@/lib/deck';
 import { Media } from '@/components/ui/Media';
 import { Pill } from '@/components/ui/Pill';
@@ -34,8 +34,8 @@ function CardFace({ project }: { project: Project }) {
     <Link href={p.href} className={styles.face} draggable={false}>
       <Media
         grad={p.gradient}
-        src={project.cover?.src}
-        alt={project.cover?.alt ?? project.title}
+        src={coverImage(project).src}
+        alt={coverImage(project).alt}
         ratio="5/4"
         sizes={IMG_SIZES.deck}
         className={styles.thumb}

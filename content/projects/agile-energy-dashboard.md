@@ -3,7 +3,7 @@ title: Agile Energy Dashboard
 desc: Real-time energy tariff dashboard with load-shifting simulation
 discipline: code
 date: "2025-06-01"
-tech: ["React", "TypeScript", "Storybook", "Charts"]
+tags: ["React", "TypeScript", "Storybook", "Charts"]
 role: Design + engineering
 year: 2025
 status: "Live"

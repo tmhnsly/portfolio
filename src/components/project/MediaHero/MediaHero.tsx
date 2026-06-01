@@ -1,14 +1,21 @@
+'use client';
+import { useState } from 'react';
 import type { Project } from '@/types';
 import { DISCIPLINES } from '@/lib/disciplines';
 import { IMG_SIZES } from '@/lib/breakpoints';
-import { Media } from '@/components/ui/Media';
 import { LinkArrow } from '@/components/ui/LinkArrow';
-import styles from './ProjectEmbed.module.scss';
+import { Media } from '@/components/ui/Media';
+import { coverImage } from '@/lib/project-presentation';
+import { MediaCarousel } from '@/components/project/MediaCarousel';
+import { YouTubeEmbed } from '@/components/project/YouTubeEmbed';
+import { BiPlay } from 'react-icons/bi';
+import styles from './MediaHero.module.scss';
 
 const ACTIVE_PADS = new Set([0, 4, 6, 10, 11, 13]);
 
-export function ProjectEmbed({ project }: { project: Project }) {
+export function MediaHero({ project }: { project: Project }) {
   const d = DISCIPLINES[project.discipline];
+  const [open, setOpen] = useState(false);
 
   if (project.slug === 'boucle') {
     return (
@@ -60,15 +67,37 @@ export function ProjectEmbed({ project }: { project: Project }) {
     );
   }
 
+  if (project.media.length === 0) {
+    return (
+      <div className={styles.embed}>
+        <Media grad={d.gradient} alt={project.title} ratio="16/9" sizes={IMG_SIZES.full} />
+      </div>
+    );
+  }
+
+  // A lone video plays inline in the hero (scroll-and-watch); no pop-out carousel.
+  if (project.media.length === 1 && project.media[0].type === 'youtube') {
+    const v = project.media[0];
+    return (
+      <div className={styles.embed}>
+        <YouTubeEmbed id={v.id} poster={v.poster} title={v.title} grad={d.gradient} />
+      </div>
+    );
+  }
+
+  const cover = coverImage(project);
+  const isVideo = project.media[0].type === 'youtube';
+  const count = project.media.length;
+
   return (
     <div className={styles.embed}>
-      <Media
-        grad={d.gradient}
-        src={project.cover?.src}
-        alt={project.cover?.alt ?? project.title}
-        ratio="16/9"
-        sizes={IMG_SIZES.full}
-      />
+      <button type="button" className={styles.poster} onClick={() => setOpen(true)} aria-label={isVideo ? 'Play video' : 'View media'}>
+        <Media grad={d.gradient} src={cover.src} alt={cover.alt} ratio="16/9" sizes={IMG_SIZES.full} priority>
+          {isVideo && <span className={styles.play} aria-hidden><BiPlay /></span>}
+          {count > 1 && <span className={styles.badge} aria-hidden>1 / {count}</span>}
+        </Media>
+      </button>
+      {open && <MediaCarousel items={project.media} startIndex={0} gradient={d.gradient} onClose={() => setOpen(false)} />}
     </div>
   );
 }

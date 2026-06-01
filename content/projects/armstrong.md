@@ -3,7 +3,7 @@ title: Armstrong
 desc: Contributions to an open-source React component library
 discipline: code
 date: "2022-08-01"
-tech: ["React", "TypeScript", "Open source"]
+tags: ["React", "TypeScript", "Open source"]
 role: Full-stack developer
 year: 2022
 status: "Open source · at Rocketmakers"

@@ -8,7 +8,7 @@ export function ProjectGrid({ projects }: { projects: Project[] }) {
     <div className={styles.grid}>
       {projects.map((project, i) => (
         <Reveal key={project.slug} delay={(i % 3) * 0.06}>
-          <ProjectCard project={project} index={i} />
+          <ProjectCard project={project} hideDiscipline />
         </Reveal>
       ))}
     </div>

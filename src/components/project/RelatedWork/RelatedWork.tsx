@@ -14,8 +14,8 @@ export function RelatedWork({ projects }: { projects: Project[] }) {
         <h2 className={styles.heading}>{COPY.project.relatedHeading}</h2>
       </div>
       <div className={styles.grid}>
-        {projects.map((project, i) => (
-          <ProjectCard key={project.slug} project={project} index={i} />
+        {projects.map((project) => (
+          <ProjectCard key={project.slug} project={project} />
         ))}
       </div>
     </section>

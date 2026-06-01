@@ -19,11 +19,11 @@ export function ProjectBody({ project }: { project: Project }) {
           complementary landmark must not nest inside another landmark. The tech/links
           are integral project detail, not tangential content. */}
       <div className={styles.sidebar}>
-        {project.tech.length > 0 && (
+        {project.tags.length > 0 && (
           <div className={styles.sideSection}>
-            <Eyebrow>Built with</Eyebrow>
+            <Eyebrow>Tags</Eyebrow>
             <ul className={styles.techList}>
-              {project.tech.map((t) => (
+              {project.tags.map((t) => (
                 <li key={t} className={styles.techRow}>
                   <TechChip label={t} />
                 </li>

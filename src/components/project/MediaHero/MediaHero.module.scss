@@ -1,4 +1,5 @@
 @use '../../../styles/mixins/breakpoints' as *;
+@use '../../../styles/mixins/glass' as *;
 
 .embed {
 }
@@ -155,4 +156,32 @@
     color: var(--on-media);
     font-weight: 600;
   }
+}
+
+/* ---- Poster / carousel trigger ---- */
+
+.poster { display: block; width: 100%; padding: 0; border: 0; background: none; cursor: pointer; }
+
+.play {
+  position: absolute; inset: 0; margin: auto;
+  width: 72px; height: 72px;
+  display: grid; place-items: center;
+  border-radius: 999px;
+  color: #fff; font-size: 1.7rem; line-height: 0;
+  background: rgba(0, 0, 0, 0.42);
+  backdrop-filter: blur(16px);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.22), 0 6px 22px rgba(0, 0, 0, 0.28);
+  transition: opacity var(--duration-hover) var(--ease-standard), transform var(--duration-hover) var(--ease-standard);
+}
+.play svg { transform: translateX(2px); }
+@include can-hover {
+  .play { opacity: 0; }
+  .poster:hover .play { opacity: 1; transform: scale(1.04); }
+}
+
+.badge {
+  position: absolute; bottom: 0.75rem; right: 0.75rem;
+  padding: 0.3rem 0.6rem; border-radius: 999px;
+  color: #fff; font-size: 0.72rem; font-variant-numeric: tabular-nums;
+  @include glass(rgba(0, 0, 0, 0.35), 8px);
 }
