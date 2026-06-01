@@ -57,6 +57,20 @@
   display: inline-block; /* override the global svg{display:block} reset */
   font-size: 1.2em;
   vertical-align: -0.25em;
+  /* shared card affordance: on hover the arrow slides in its direction and the dir
+     label takes the zone accent — matches ProjectCard / RecentWork / DisciplineCard */
+  transition: transform var(--duration-hover) var(--ease-standard), color var(--duration-hover) var(--ease-standard);
+}
+
+@include can-hover {
+  .link:hover .dir { color: var(--accent-ink); }
+  .link:hover .dirIcon { transform: translateX(-3px); }  /* Previous: arrow leads left */
+  .right:hover .dirIcon { transform: translateX(3px); }  /* Next: arrow leads right */
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dirIcon { transition: none; }
+  .link:hover .dirIcon { transform: none; }
 }
 
 .projectTitle {
