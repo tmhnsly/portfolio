@@ -6,3 +6,4 @@
   @include tablet-up { grid-template-columns: repeat(2, 1fr); }
   @include desktop-up { grid-template-columns: repeat(3, 1fr); }
 }
+.empty { color: var(--text-muted); font-family: var(--font-mono); font-size: var(--fs-mono-s); letter-spacing: var(--ls-mono); padding: var(--space-7) 0; }
