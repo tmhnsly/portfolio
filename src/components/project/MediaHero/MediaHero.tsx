@@ -7,6 +7,7 @@ import { LinkArrow } from '@/components/ui/LinkArrow';
 import { Media } from '@/components/ui/Media';
 import { coverImage } from '@/lib/project-presentation';
 import { MediaCarousel } from '@/components/project/MediaCarousel';
+import { YouTubeEmbed } from '@/components/project/YouTubeEmbed';
 import styles from './MediaHero.module.scss';
 
 const ACTIVE_PADS = new Set([0, 4, 6, 10, 11, 13]);
@@ -69,6 +70,16 @@ export function MediaHero({ project }: { project: Project }) {
     return (
       <div className={styles.embed}>
         <Media grad={d.gradient} alt={project.title} ratio="16/9" sizes={IMG_SIZES.full} />
+      </div>
+    );
+  }
+
+  // A lone video plays inline in the hero (scroll-and-watch); no pop-out carousel.
+  if (project.media.length === 1 && project.media[0].type === 'youtube') {
+    const v = project.media[0];
+    return (
+      <div className={styles.embed}>
+        <YouTubeEmbed id={v.id} poster={v.poster} title={v.title} grad={d.gradient} />
       </div>
     );
   }

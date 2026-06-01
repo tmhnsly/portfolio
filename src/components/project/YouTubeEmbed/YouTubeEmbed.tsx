@@ -5,8 +5,8 @@ import { IMG_SIZES } from '@/lib/breakpoints';
 import { youTubeEmbedUrl, youTubeThumbnail } from '@/lib/youtube';
 import styles from './YouTubeEmbed.module.scss';
 
-export function YouTubeEmbed({ id, poster, title, grad }: { id: string; poster?: string; title?: string; grad?: string }) {
-  const [playing, setPlaying] = useState(false);
+export function YouTubeEmbed({ id, poster, title, grad, autoPlay = false }: { id: string; poster?: string; title?: string; grad?: string; autoPlay?: boolean }) {
+  const [playing, setPlaying] = useState(autoPlay);
 
   if (playing) {
     return (

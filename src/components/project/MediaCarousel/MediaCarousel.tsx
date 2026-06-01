@@ -125,7 +125,7 @@ export function MediaCarousel({ items, startIndex = 0, gradient, onClose }: {
             <div className={styles.stage}>
               {item.type === 'image'
                 ? <Media src={item.src} alt={item.alt ?? item.title ?? ''} grad={gradient} ratio="16/9" sizes={IMG_SIZES.full} className={styles.media} />
-                : <YouTubeEmbed id={item.id} poster={item.poster} title={item.title} grad={gradient} />}
+                : <YouTubeEmbed id={item.id} poster={item.poster} title={item.title} grad={gradient} autoPlay={i === startIndex} />}
             </div>
             {item.title && <p className={styles.caption}>{item.title}</p>}
           </div>
