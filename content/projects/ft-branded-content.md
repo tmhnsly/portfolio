@@ -7,6 +7,11 @@ tags: ["Next.js", "TypeScript", "SCSS", "Figma"]
 role: Freelance frontend
 year: 2025
 status: "Shipped for the FT"
+links:
+  - label: Julius Baer · Beyond Bordeaux
+    url: "https://www.ft.com/partnercontent/julius-baer/beyond-bordeaux.html"
+  - label: Equinor · Charting a New Energy Future
+    url: "https://equinor.ft.com/infographics/charting-a-new-energy-future"
 ---
 
 Built interactive branded-content pages for Financial Times clients, including Julius Baer and Equinor, from Figma designs to production-ready, fully responsive code.
