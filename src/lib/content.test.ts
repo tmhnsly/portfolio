@@ -67,10 +67,16 @@ describe('content queries', () => {
 
   it('postNeighbours / relatedPosts exclude self', () => {
     const posts = getAllPosts();
-    const { newer, older } = postNeighbours(posts[1].slug);
-    expect(newer?.slug).toBe(posts[0].slug);
-    expect(older?.slug).toBe(posts[2]?.slug);
+    // relatedPosts never includes the post itself, whatever the corpus size
     expect(relatedPosts(posts[0].slug).every((p) => p.slug !== posts[0].slug)).toBe(true);
+    // posts are newest-first, so the first has no newer neighbour
+    expect(postNeighbours(posts[0].slug).newer).toBeUndefined();
+    // middle-post neighbour ordering only applies once there are 3+ posts
+    if (posts.length >= 3) {
+      const { newer, older } = postNeighbours(posts[1].slug);
+      expect(newer?.slug).toBe(posts[0].slug);
+      expect(older?.slug).toBe(posts[2].slug);
+    }
   });
 
   it('disciplineCounts + titleMap + postCount agree with the corpus', () => {
