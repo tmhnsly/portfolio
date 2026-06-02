@@ -1,9 +1,8 @@
 @use '../../styles/mixins/breakpoints' as *;
 
-/* Armstrong — Rocketmakers' open-source React component library: a terminal install
-   line plus the components you get. The code surface stays dark in both themes (the
-   site's --code-bg), with a cyan accent. Scales via container-query units; reveals on
-   scroll. Decorative — the card link carries the label. */
+/* Armstrong — a clean macOS terminal window with the install command. The window is
+   the site's code surface (dark in both themes); cyan accent. Window radius 8cqmin
+   (golden/Fibonacci). Reveals on scroll. Decorative. */
 
 .root {
   position: absolute;
@@ -16,44 +15,44 @@
   background: radial-gradient(125% 95% at 80% 8%, color-mix(in oklab, var(--arm) 22%, transparent), transparent 58%);
 }
 
-.term {
+.win {
   width: 84cqw;
-  max-width: 124cqh;
-  display: flex;
-  flex-direction: column;
-  gap: 4cqmin;
-  padding: 4.5cqmin;
+  max-width: 132cqh;
+  border-radius: 8cqmin;
+  overflow: hidden;
   background: var(--code-bg);
-  border: max(1px, 0.5cqmin) solid color-mix(in oklab, var(--arm) 22%, transparent);
-  border-radius: 4cqmin;
   box-shadow: var(--shadow-lg);
   font-family: var(--font-mono);
-  overflow: hidden;
 }
 
-.bar { display: flex; gap: 2cqmin; }
-.bar i { width: 3cqmin; height: 3cqmin; border-radius: 50%; background: color-mix(in oklab, var(--code-text) 28%, transparent); }
+.bar {
+  display: flex;
+  align-items: center;
+  gap: 2cqmin;
+  padding: 3cqmin 4cqmin;
+  background: color-mix(in oklab, var(--code-text) 8%, var(--code-bg));
+}
+.dot { width: 3cqmin; height: 3cqmin; border-radius: 50%; }
+.r { background: #ff5f57; }
+.y { background: #febc2e; }
+.g { background: #28c840; }
 
-.line { display: flex; align-items: center; gap: 1.2cqmin; font-size: 3.4cqmin; font-weight: 700; white-space: nowrap; }
+.body { padding: 5cqmin; display: flex; flex-direction: column; gap: 3cqmin; }
+.line { display: flex; align-items: center; gap: 1.4cqmin; font-size: 3.6cqmin; font-weight: 700; white-space: nowrap; }
 .prompt { color: var(--arm); }
 .cmd { color: color-mix(in oklab, var(--code-text) 70%, transparent); }
 .pkg { color: var(--arm); }
-.cursor { width: 1.6cqmin; height: 4.4cqmin; background: var(--arm); border-radius: 0.4cqmin; }
-
-.kit { display: flex; gap: 2.6cqmin; margin-top: 0.5cqmin; }
-.comp { height: 7cqmin; flex: 1; border-radius: 1.8cqmin; background: color-mix(in oklab, var(--code-text) 15%, transparent); }
-.solid { background: var(--arm); }
+.cursor { width: 1.6cqmin; height: 4.4cqmin; background: var(--arm); border-radius: 0.6cqmin; }
+.comment { font-size: 3cqmin; color: color-mix(in oklab, var(--code-text) 45%, transparent); }
 
 @media (prefers-reduced-motion: no-preference) {
   .root { --play: paused; }
   .inview { --play: running; }
   .root * { animation-play-state: var(--play); }
 
-  .term { animation: armRise 0.55s var(--ease-standard) both; }
-  .comp { animation: armPop 0.5s var(--ease-standard) both; }
-  .kit .comp:nth-child(1) { animation-delay: 0.34s; }
-  .kit .comp:nth-child(2) { animation-delay: 0.42s; }
-  .kit .comp:nth-child(3) { animation-delay: 0.5s; }
+  .win { animation: armRise 0.55s var(--ease-standard) both; }
+  .line { animation: armFade 0.5s var(--ease-standard) 0.22s both; }
+  .comment { animation: armFade 0.5s var(--ease-standard) 0.34s both; }
 }
 @keyframes armRise { from { opacity: 0; transform: translateY(6cqmin) scale(0.98); } to { opacity: 1; transform: none; } }
-@keyframes armPop { from { opacity: 0; transform: translateY(2cqmin) scale(0.96); } to { opacity: 1; transform: none; } }
+@keyframes armFade { from { opacity: 0; } }

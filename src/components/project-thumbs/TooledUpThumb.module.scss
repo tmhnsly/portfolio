@@ -1,8 +1,8 @@
 @use '../../styles/mixins/breakpoints' as *;
 
-/* Tooled-Up Education — its resource platform: triangle wordmark, a search field,
-   topic pills, resource cards. Theme-aware panel (flips); the blue accent is fixed.
-   Scales via container queries; reveals on scroll. Decorative. */
+/* Tooled-Up Education — a clean brand lockup: triangle mark, TOOLED UP wordmark, and
+   the "resource platform" line in its blue. Theme-aware panel (flips); blue fixed.
+   Panel radius 8cqmin (golden/Fibonacci). Reveals on scroll. */
 
 .root {
   position: absolute;
@@ -16,37 +16,23 @@
 }
 
 .panel {
-  width: 82cqw;
-  max-width: 108cqh;
+  width: 80cqw;
+  max-width: 118cqh;
   display: flex;
   flex-direction: column;
-  gap: 3.4cqmin;
-  padding: 5cqmin;
+  align-items: center;
+  gap: 3cqmin;
+  padding: 9cqmin 5cqmin;
   background: var(--bg);
   border: max(1px, 0.5cqmin) solid var(--rule);
-  border-radius: 4.5cqmin;
+  border-radius: 8cqmin;
   box-shadow: var(--shadow-md);
 }
 
-.brand { display: flex; align-items: center; gap: 2.2cqmin; }
-.mark { width: 7cqmin; height: 7cqmin; flex: none; }
-.mark path { fill: none; stroke: var(--text); stroke-width: 2; stroke-linejoin: round; }
-.word { font-size: 4cqmin; font-weight: 800; letter-spacing: 0.12em; color: var(--text); }
-
-.search {
-  display: flex; align-items: center; gap: 3cqmin;
-  padding: 3cqmin 3.6cqmin; border-radius: 999px;
-  background: var(--surface); border: max(1px, 0.4cqmin) solid var(--rule);
-}
-.mag { width: 4.6cqmin; height: 4.6cqmin; border-radius: 50%; flex: none; position: relative; border: max(1px, 0.7cqmin) solid var(--tu); }
-.mag::after { content: ''; position: absolute; right: -1.1cqmin; bottom: -1.1cqmin; width: 2.6cqmin; height: max(1px, 0.7cqmin); background: var(--tu); border-radius: 999px; transform: rotate(45deg); transform-origin: left center; }
-.q { height: 2.8cqmin; width: 42cqmin; border-radius: 999px; background: var(--text); opacity: 0.26; }
-
-.pills { display: flex; gap: 2.2cqmin; }
-.pill { flex: 1; height: 6cqmin; border-radius: 999px; border: max(1px, 0.4cqmin) solid var(--rule); }
-
-.cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.6cqmin; }
-.card { aspect-ratio: 4 / 3; border-radius: 2cqmin; background: linear-gradient(150deg, color-mix(in oklab, var(--tu) 32%, var(--surface)), var(--surface)); }
+.mark { width: 16cqmin; height: 13cqmin; }
+.mark path { fill: none; stroke: var(--text); stroke-width: 3; stroke-linejoin: round; }
+.word { font-size: 7cqmin; font-weight: 800; letter-spacing: 0.1em; color: var(--text); }
+.tag { font-size: 4cqmin; font-weight: 600; font-style: italic; color: var(--tu); }
 
 @media (prefers-reduced-motion: no-preference) {
   .root { --play: paused; }
@@ -54,10 +40,10 @@
   .root * { animation-play-state: var(--play); }
 
   .panel { animation: tuRise 0.55s var(--ease-standard) both; }
-  .brand { animation: tuFade 0.5s var(--ease-standard) 0.18s both; }
-  .search { animation: tuFade 0.5s var(--ease-standard) 0.26s both; }
-  .pills { animation: tuFade 0.5s var(--ease-standard) 0.34s both; }
-  .cards { animation: tuFade 0.5s var(--ease-standard) 0.42s both; }
+  .mark { animation: tuPop 0.6s var(--ease-standard) 0.16s both; }
+  .word { animation: tuUp 0.6s var(--ease-standard) 0.28s both; }
+  .tag { animation: tuUp 0.6s var(--ease-standard) 0.38s both; }
 }
 @keyframes tuRise { from { opacity: 0; transform: translateY(6cqmin) scale(0.98); } to { opacity: 1; transform: none; } }
-@keyframes tuFade { from { opacity: 0; transform: translateY(2cqmin); } to { opacity: 1; transform: none; } }
+@keyframes tuPop { from { opacity: 0; transform: translateY(4cqmin) scale(0.8); } to { opacity: 1; transform: none; } }
+@keyframes tuUp { from { opacity: 0; transform: translateY(3cqmin); } to { opacity: 1; transform: none; } }
