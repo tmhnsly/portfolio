@@ -6,7 +6,7 @@
 export const COPY = {
   meta: {
     title: 'Tom Hinsley, digital creative',
-    description: 'Frontend engineer based in London. Side practices in music, sound, photography and film.',
+    description: 'Frontend engineer based in London. Side practices in audio and film.',
   },
 
   hero: {
@@ -14,7 +14,7 @@ export const COPY = {
     titleLead: 'Tom Hinsley,',
     titleMuted: 'digital creative',
     // subtitle paragraph
-    sub: 'Frontend engineer based in London. Side practices in music, sound, photography and film.',
+    sub: 'Frontend engineer based in London. Side practices in audio and film.',
   },
 
   home: {
@@ -30,7 +30,7 @@ export const COPY = {
 
   footer: {
     // Bio paragraph in first column (name comes from SITE.name above it)
-    bio: 'A digital creative based in London. Frontend engineer with side practices in music, sound, photo, video & blog.',
+    bio: 'A digital creative based in London. Frontend engineer with side practices in audio, video & blog.',
     // Marquee items that are NOT SITE.name / SITE.email (those are composed in Footer.tsx)
     marqueeExtra: ['London 51.5°N', 'Get in touch'] as string[],
     // Column header labels
@@ -48,7 +48,7 @@ export const COPY = {
     // AboutHero intro paragraph. {years} is replaced at render time from SITE.experienceSince.
     intro: 'Frontend developer in London with {years}+ years building responsive, accessible interfaces for agencies, a software consultancy and editorial publishers. Sound-design background, still making things in the margins.',
     // AboutHero discipline chips
-    chips: ['Frontend', 'React', 'Next.js', 'TypeScript', 'Accessibility', 'Sound design', 'Photography', 'Writing'] as string[],
+    chips: ['Frontend', 'React', 'Next.js', 'TypeScript', 'Accessibility', 'Audio', 'Writing'] as string[],
 
     // Intro section
     currentlyEyebrow: 'Currently',
@@ -59,7 +59,7 @@ export const COPY = {
     currentlyNote: 'Contract frontend for digital publishers, including the Financial Times.\nBuilding Chork, a rock-climbing app, on the side.',
     // body paragraphs
     bodyPara1: 'I’ve been building for the web for {years}+ years, across agencies, a software consultancy and editorial publishers like the Financial Times. Strong React, Next.js and TypeScript foundations, with full-stack capability when a project calls for it.',
-    bodyPara2: 'Most of what’s here is self-initiated: code that wanders into sound, image and writing, which is where the sound-design degree still leaks through. If it looks like the sort of thing you’d want to commission, send me a note.',
+    bodyPara2: 'Most of what’s here is self-initiated: code that wanders into audio and writing, which is where the sound-design degree still leaks through. If it looks like the sort of thing you’d want to commission, send me a note.',
 
     // "Off the clock" — current book / TV series / game (Currently component).
     offTheClockEyebrow: 'Off the clock',
@@ -88,7 +88,7 @@ export const COPY = {
     // BlogHero eyebrow suffix
     heroSince: 'since 2024',
     // BlogHero intro paragraph
-    heroIntro: 'Notes, essays and dev logs. Mostly about whatever I’m currently chewing on, usually code, sometimes sound, occasionally a book.',
+    heroIntro: 'Notes, essays and dev logs. Mostly about whatever I’m currently chewing on, usually code, sometimes audio, occasionally a book.',
 
     // blog/[slug]/page.tsx
     foundUseful: 'Found this useful?',

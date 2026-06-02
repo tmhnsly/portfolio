@@ -7,19 +7,16 @@
 export const TAGS = [
   // code
   'React', 'TypeScript', 'Next.js', 'Node.js', 'SCSS', 'Tailwind', 'Sanity', 'Storybook', 'Vercel', 'Figma', 'REST APIs', 'PHP', 'MySQL', 'MongoDB',
-  // music
+  // audio (music + sound)
   'Logic Pro X', 'Ableton Live', 'TASCAM 388', 'Modular synthesis', 'Field recording', 'Guitar', 'Bass Guitar', 'Keyboard',
-  // sound
   'Pro Tools', 'Reaper', 'iZotope RX', 'Soundminer', 'Custom SFX',
-  // photo
-  '35mm', 'Leica M6', 'Mamiya 7', 'Fuji X-T5', 'Lightroom', 'Negative Lab Pro', 'Portra 400', 'HP5+',
   // video
   'Final Cut Pro X', 'Lumix G7', 'iPhone 16 Pro', 'iPhone 6S', 'Filmic Pro', 'ToonSquid', 'iPad Pro', 'GarageBand',
   // writing
   'Long-form writing', 'Markdown',
   // cross-cutting project + topic tags (not curated discipline tools)
   'Open source', 'PWA', 'Orchestration API', 'Accessibility', 'Charts',
-  'Process', 'Studio log', 'Reading', 'Books', 'Workflow', 'Tools', 'Code', 'Music', 'Sound', 'Photography', 'CMS', 'CSS',
+  'Process', 'Studio log', 'Reading', 'Books', 'Workflow', 'Tools', 'Code', 'Music', 'Sound', 'CMS', 'CSS',
 ] as const;
 
 export type TagLabel = (typeof TAGS)[number];

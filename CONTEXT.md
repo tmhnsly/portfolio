@@ -1,13 +1,13 @@
 # Portfolio
 
-Tom Hinsley's personal portfolio: six creative-practice hubs, project detail pages, an About page with an interactive CV timeline, and a blog. Content is Markdown + Zod; the visual identity recolours itself per route.
+Tom Hinsley's personal portfolio: four creative-practice hubs, project detail pages, an About page with an interactive CV timeline, and a blog. Content is Markdown + Zod; the visual identity recolours itself per route.
 
 ## Language
 
 ### Disciplines & accent
 
 **Discipline**:
-One of six creative practices the work is organised under — code, music, sound, photo, video, blog. Each maps to a Radix hue (`lib/disciplines.ts`).
+One of four creative practices the work is organised under — code, audio, video, blog. Each maps to a Radix hue (`lib/disciplines.ts`).
 _Avoid_: category, section, tag.
 
 **Discipline meta**:
@@ -100,7 +100,7 @@ Motion primitives — `Entrance`/`EntranceTitle` play a first-load / per-route r
 
 ## Example dialogue
 
-> **Dev:** "When I navigate from `/code` to `/music`, does the Shell remount?"
+> **Dev:** "When I navigate from `/code` to `/audio`, does the Shell remount?"
 > **Maintainer:** "No — the **Shell** persists; only the **Zone** changes, so the **Accent tokens** and the **Bloom** tint morph in place."
 > **Dev:** "And a **Project** card on the home page — is it tinted by the current **Zone**?"
 > **Maintainer:** "No. A card's **Pill** is coloured by the **Project**'s own **Discipline**. The **Zone** only drives the chrome — Nav highlight, Bloom, accented text."
