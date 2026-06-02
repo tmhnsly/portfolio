@@ -8,4 +8,4 @@ role: Sound design
 year: 2012
 ---
 
-A short ambient soundscape scoring a single image, made at university. Built the room and its atmosphere from found and self-recorded sound in Logic Pro X.
+One still image of an abandoned house, and a soundscape to put you inside it. A study in building a place out of ambience alone.

@@ -6,6 +6,10 @@ date: "2014-02-01"
 tags: ["Logic Pro X", "Custom SFX"]
 role: Sound design
 year: 2014
+media:
+  - type: image
+    src: /images/projects/thumbnails/sound/cat_ident_animation.webp
+    alt: Cat Animation Ident
 ---
 
-Sound for a short animated advert ident, a university project. Every effect found or recorded by hand, then built up in Logic Pro X.
+An ident has a few seconds to land. Built the sound for a short animated cat advert, every hit timed to the cut.

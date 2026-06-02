@@ -8,4 +8,4 @@ role: Sound design
 year: 2013
 ---
 
-A self-portrait with no picture, made at university and told entirely in sound. Pieced together from found and self-recorded effects in Logic Pro X.
+A student brief to describe myself with no words and no picture. A short piece told only in sound.
