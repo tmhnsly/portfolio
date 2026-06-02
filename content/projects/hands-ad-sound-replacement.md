@@ -1,14 +1,14 @@
 ---
 title: Hands Ad Sound Replacement
 desc: A full sound replacement for an advert
-discipline: sound
+discipline: audio
 date: "2013-03-01"
-tags: ["Logic Pro X", "Custom SFX"]
+tags: ["Sound", "Logic Pro X", "Custom SFX"]
 role: Sound design
 year: 2013
 media:
   - type: image
-    src: /images/projects/thumbnails/sound/hands_ad.webp
+    src: /images/projects/thumbnails/audio/hands_ad.webp
     alt: Hands Ad Sound Replacement
 ---
 

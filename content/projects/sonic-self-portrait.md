@@ -1,9 +1,9 @@
 ---
 title: Sonic Self Portrait
 desc: A self-portrait told in sound
-discipline: sound
+discipline: audio
 date: "2013-06-01"
-tags: ["Logic Pro X", "Custom SFX"]
+tags: ["Sound", "Logic Pro X", "Custom SFX"]
 role: Sound design
 year: 2013
 ---

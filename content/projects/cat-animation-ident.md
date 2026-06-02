@@ -1,14 +1,14 @@
 ---
 title: Cat Animation Ident
 desc: Sound for a short animated advert
-discipline: sound
+discipline: audio
 date: "2014-02-01"
-tags: ["Logic Pro X", "Custom SFX"]
+tags: ["Sound", "Logic Pro X", "Custom SFX"]
 role: Sound design
 year: 2014
 media:
   - type: image
-    src: /images/projects/thumbnails/sound/cat_ident_animation.webp
+    src: /images/projects/thumbnails/audio/cat_ident_animation.webp
     alt: Cat Animation Ident
 ---
 

@@ -1,14 +1,14 @@
 ---
 title: Pine in the Ash
 desc: Sound for a short animated film
-discipline: sound
+discipline: audio
 date: "2014-05-01"
-tags: ["Logic Pro X", "Custom SFX"]
+tags: ["Sound", "Logic Pro X", "Custom SFX"]
 role: Sound design
 year: 2014
 media:
   - type: image
-    src: /images/projects/thumbnails/sound/pine_in_the_ash.webp
+    src: /images/projects/thumbnails/audio/pine_in_the_ash.webp
     alt: Pine in the Ash
 ---
 

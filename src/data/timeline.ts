@@ -51,7 +51,8 @@ export const TIMELINE = z.array(timelineEntrySchema).parse([
     period: 'Sep — Dec 2020',
     role: 'Full Stack Software Engineering',
     place: 'iO Academy · Bath',
-    // iO Academy closed in March 2025 — no live site to link, so no companyUrl
+    // iO Academy closed in 2025; its own site is dead, so link the Course Report profile
+    companyUrl: 'https://www.coursereport.com/schools/io-academy',
     description:
       'Intensive four-month engineering bootcamp — finished top 10 globally and #2 in the UK. PHP, JavaScript, React, Node.js, MySQL, MongoDB, Git, OOP and Agile.',
     tags: ['JavaScript', 'React', 'Node.js', 'PHP'],
@@ -69,7 +70,7 @@ export const TIMELINE = z.array(timelineEntrySchema).parse([
     description:
       'Audio-production degree covering TV, film, radio and games. The sound background still feeds the side projects — and the way I think about timing and feel.',
     tags: ['Sound design', 'Audio', 'Production'],
-    discipline: 'sound',
+    discipline: 'audio',
     monogram: 'Rv',
     logo: '/images/about/logos/ravensbourne.webp',
   },

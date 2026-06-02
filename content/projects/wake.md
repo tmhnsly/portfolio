@@ -1,15 +1,15 @@
 ---
 title: Wake
 desc: Original music for a wakeboarding documentary
-discipline: music
+discipline: audio
 date: "2015-02-01"
-tags: ["Logic Pro X", "Guitar", "Bass Guitar"]
+tags: ["Music", "Logic Pro X", "Guitar", "Bass Guitar"]
 role: Composer
 year: 2015
 media:
   - type: youtube
     id: "xHmZYM6n8G0"
-    poster: "/images/projects/thumbnails/music/wake.webp"
+    poster: "/images/projects/thumbnails/audio/wake.webp"
     title: "Full film"
 ---
 

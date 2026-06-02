@@ -1,9 +1,9 @@
 ---
 title: Abandoned House Soundscape
 desc: An ambient soundscape for a single image
-discipline: sound
+discipline: audio
 date: "2012-11-01"
-tags: ["Logic Pro X", "Custom SFX"]
+tags: ["Sound", "Logic Pro X", "Custom SFX"]
 role: Sound design
 year: 2012
 ---
