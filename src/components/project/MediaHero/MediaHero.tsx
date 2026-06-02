@@ -5,6 +5,7 @@ import { DISCIPLINES } from '@/lib/disciplines';
 import { IMG_SIZES } from '@/lib/breakpoints';
 import { LinkArrow } from '@/components/ui/LinkArrow';
 import { Media } from '@/components/ui/Media';
+import { ProjectThumb } from '@/components/project-thumbs';
 import { coverImage } from '@/lib/project-presentation';
 import { MediaCarousel } from '@/components/project/MediaCarousel';
 import { YouTubeEmbed } from '@/components/project/YouTubeEmbed';
@@ -70,7 +71,7 @@ export function MediaHero({ project }: { project: Project }) {
   if (project.media.length === 0) {
     return (
       <div className={styles.embed}>
-        <Media grad={d.gradient} alt={project.title} ratio="16/9" sizes={IMG_SIZES.full} />
+        <ProjectThumb project={project} grad={d.gradient} ratio="16/9" sizes={IMG_SIZES.full} priority />
       </div>
     );
   }

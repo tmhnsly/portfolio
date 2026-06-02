@@ -1,34 +1,41 @@
+'use client';
+import { useReveal } from './useReveal';
 import styles from './AgileThumb.module.scss';
 
 /**
- * Bespoke card thumbnail for the Agile Energy Dashboard — a stylised version of its
- * time-series chart: a day of half-hourly tariff prices (cheap overnight, morning +
- * evening peaks) with the cheap "load-shift" window highlighted, in Agile's blue.
- * Pure SVG/CSS so it stays crisp + theme-aware (panel/text flip; the chart blue is
- * brand-fixed); the line draws on mount. Rendered inside the <Media> frame.
+ * Bespoke card thumbnail for the Agile Energy Dashboard — a stylised mini of its
+ * bento dashboard: a glass chart card (smooth half-hourly price curve with the cheap
+ * flex window highlighted) above two stat cards (price + savings). Pure SVG/CSS,
+ * theme-aware (cards/text flip; the chart blue + savings green are brand-fixed), with
+ * an aurora-blue wash echoing the dashboard's surface. The price line draws on mount.
  */
 
-// Half-hourly price curve in a 100×52 viewBox (y down → lower = cheaper).
-const LINE = 'M0,30 L8,40 L16,44 L24,38 L33,14 L42,23 L50,29 L58,24 L67,15 L75,10 L84,21 L92,33 L100,38';
-const AREA = `${LINE} L100,52 L0,52 Z`;
+// Smooth half-hourly price curve (cubic) in a 100×40 viewBox; cheap overnight trough
+// highlighted as a flex band.
+const LINE = 'M0,26 C6,30 10,36 16,37 C22,38 26,28 32,18 C37,9 43,15 50,22 C56,28 61,21 67,13 C73,7 79,16 85,24 C91,30 96,29 100,27';
+const AREA = `${LINE} L100,40 L0,40 Z`;
 
 export function AgileThumb() {
+  const { ref, revealed } = useReveal();
   return (
-    <div className={styles.root} aria-hidden>
+    <div ref={ref} className={revealed ? `${styles.root} ${styles.inview}` : styles.root} aria-hidden>
       <div className={styles.panel}>
-        <div className={styles.head}>
-          <span className={styles.wordmark} />
-          <span className={styles.stat}>&minus;42%</span>
+        <div className={styles.chartCard}>
+          <span className={styles.chartLabel} />
+          <svg viewBox="0 0 100 40" className={styles.chart} aria-hidden>
+            <rect x="10" y="0" width="18" height="40" className={styles.band} />
+            <path d={AREA} className={styles.area} />
+            <path d={LINE} className={styles.line} pathLength={1} strokeDasharray={1} />
+          </svg>
         </div>
-        <svg viewBox="0 0 100 52" className={styles.chart} aria-hidden>
-          <line x1="0" y1="18" x2="100" y2="18" className={styles.grid} />
-          <line x1="0" y1="35" x2="100" y2="35" className={styles.grid} />
-          {/* the cheap overnight window — where the dashboard suggests shifting load */}
-          <rect x="8" y="0" width="18" height="52" className={styles.band} />
-          <path d={AREA} className={styles.area} />
-          <path d={LINE} className={styles.line} pathLength={1} strokeDasharray={1} />
-          <circle cx="16" cy="44" r="2.6" className={styles.dot} />
-        </svg>
+        <div className={`${styles.stat} ${styles.accent}`}>
+          <span className={styles.statLabel} />
+          <span className={styles.statNum}>12p</span>
+        </div>
+        <div className={`${styles.stat} ${styles.positive}`}>
+          <span className={styles.statLabel} />
+          <span className={styles.statNum}>&minus;42%</span>
+        </div>
       </div>
     </div>
   );

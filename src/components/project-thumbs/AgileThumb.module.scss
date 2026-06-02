@@ -1,60 +1,81 @@
 @use '../../styles/mixins/breakpoints' as *;
 
-/* Agile Energy Dashboard — a stylised half-hourly tariff chart. CSS + inline SVG
-   so it stays crisp at any card size and follows the theme (panel/text flip via
-   tokens; the chart blue is brand-fixed). Scales with the card via container-query
-   units. The price line draws on mount. Decorative — the card link carries the label. */
+/* Agile Energy Dashboard — a stylised mini of its bento dashboard: a chart card over
+   two stat cards, on an aurora-blue wash. CSS + inline SVG so it stays crisp and
+   follows the theme (cards/text flip via tokens; the chart blue + savings green are
+   brand-fixed). Scales via container-query units. The price line draws on mount. */
 
 .root {
   position: absolute;
   inset: 0;
-  --agile: #0090ff;   /* Agile brand blue */
-  --grid: color-mix(in oklab, var(--text) 12%, transparent);
+  --agile: #0090ff;
+  --pos: #27b277;
   container-type: size;
   display: grid;
   place-items: center;
   overflow: hidden;
-  background: radial-gradient(125% 95% at 80% 6%, color-mix(in oklab, var(--agile) 26%, transparent), transparent 58%);
+  /* aurora pools, echoing the dashboard's page surface */
+  background:
+    radial-gradient(circle at 76% 10%, color-mix(in oklab, var(--agile) 26%, transparent), transparent 60%),
+    radial-gradient(circle at 20% 84%, color-mix(in oklab, var(--agile) 14%, transparent), transparent 62%);
 }
 
 .panel {
-  width: 82cqw;
-  max-width: 104cqh;
-  display: flex;
-  flex-direction: column;
-  gap: 4cqmin;
-  padding: 5cqmin 5.6cqmin;
+  width: 84cqw;
+  max-width: 112cqh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3cqmin;
+  padding: 4.5cqmin;
   background: var(--bg);
   border: max(1px, 0.5cqmin) solid var(--rule);
   border-radius: 4.5cqmin;
   box-shadow: var(--shadow-md);
 }
 
-.head { display: flex; align-items: center; gap: 3cqmin; }
-.wordmark { height: 4cqmin; width: 28cqmin; border-radius: 999px; background: var(--text); opacity: 0.72; }
-.stat {
-  margin-left: auto;
-  font-size: 7cqmin; font-weight: 700; line-height: 1;
-  color: var(--agile); font-variant-numeric: tabular-nums;
+.chartCard {
+  grid-column: 1 / -1;
+  display: flex; flex-direction: column; gap: 2.4cqmin;
+  padding: 3cqmin;
+  background: var(--surface);
+  border: max(1px, 0.4cqmin) solid var(--rule);
+  border-radius: 3cqmin;
 }
-
-.chart { width: 100%; aspect-ratio: 100 / 52; display: block; }
-.grid { stroke: var(--grid); stroke-width: 1; }
+.chartLabel { width: 34%; height: 2.6cqmin; border-radius: 999px; background: var(--text); opacity: 0.4; }
+.chart { width: 100%; aspect-ratio: 100 / 36; display: block; }
 .band { fill: var(--agile); opacity: 0.12; }
 .area { fill: var(--agile); opacity: 0.16; }
-.line { fill: none; stroke: var(--agile); stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
-.dot { fill: var(--agile); transform-box: fill-box; transform-origin: center; }
+.line { fill: none; stroke: var(--agile); stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+
+.stat {
+  display: flex; flex-direction: column; gap: 1.8cqmin;
+  padding: 3cqmin;
+  border-radius: 3cqmin;
+  border: max(1px, 0.4cqmin) solid var(--rule);
+  background: var(--surface);
+}
+.statLabel { width: 58%; height: 2.4cqmin; border-radius: 999px; background: var(--text); opacity: 0.4; }
+.statNum { font-size: 6.4cqmin; font-weight: 700; line-height: 1; font-variant-numeric: tabular-nums; }
+.accent { background: color-mix(in oklab, var(--agile) 12%, var(--surface)); border-color: color-mix(in oklab, var(--agile) 28%, transparent); }
+.accent .statNum { color: var(--agile); }
+.positive { background: color-mix(in oklab, var(--pos) 12%, var(--surface)); border-color: color-mix(in oklab, var(--pos) 28%, transparent); }
+.positive .statNum { color: var(--pos); }
 
 @media (prefers-reduced-motion: no-preference) {
-  .panel { animation: agileRise 0.55s var(--ease-standard) both; }
-  .band { animation: agileFade 0.6s var(--ease-standard) 0.15s both; }
-  .area { animation: agileFade 0.7s var(--ease-standard) 0.25s both; }
-  .line { animation: agileDraw 0.95s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both; }
-  .dot { animation: agilePop 0.45s var(--ease-standard) 0.78s both; }
-  .stat { animation: agileFade 0.5s var(--ease-standard) 0.2s both; }
-}
+  /* entrance plays only once the thumbnail is scrolled into view (.inview) */
+  .root { --play: paused; }
+  .inview { --play: running; }
+  .root * { animation-play-state: var(--play); }
 
+  .panel { animation: agileRise 0.55s var(--ease-standard) both; }
+  .band { animation: agileFade 0.6s var(--ease-standard) 0.2s both; }
+  .area { animation: agileFade 0.7s var(--ease-standard) 0.3s both; }
+  .line { animation: agileDraw 1s cubic-bezier(0.16, 1, 0.3, 1) 0.15s both; }
+  .stat { animation: agilePop 0.5s var(--ease-standard) both; }
+  .accent { animation-delay: 0.34s; }
+  .positive { animation-delay: 0.42s; }
+}
 @keyframes agileDraw { from { stroke-dashoffset: 1; } }
 @keyframes agileRise { from { opacity: 0; transform: translateY(6cqmin) scale(0.98); } to { opacity: 1; transform: none; } }
 @keyframes agileFade { from { opacity: 0; } }
-@keyframes agilePop { 0% { transform: scale(0); } 60% { transform: scale(1.25); } 100% { transform: scale(1); } }
+@keyframes agilePop { from { opacity: 0; transform: translateY(2cqmin) scale(0.97); } to { opacity: 1; transform: none; } }

@@ -1,8 +1,9 @@
 @use '../../styles/mixins/breakpoints' as *;
 
-/* Mandy Dennis — a framed canvas on a wall with a gallery label. Pure CSS, theme-
-   aware (wall/frame/plate flip via tokens); the canvas is an abstract painterly
-   wash standing in for the work. Scales via container-query units. Decorative. */
+/* Mandy Dennis — an abstract gallery: overlapping painterly colour-field canvases
+   with the artist's name in the display face. CSS only, theme-aware (name = --text);
+   the canvases are abstract washes. Scales via container-query units; reveals on
+   scroll. Decorative — the card link carries the label. */
 
 .root {
   position: absolute;
@@ -11,35 +12,38 @@
   display: grid;
   place-items: center;
   overflow: hidden;
-  background: radial-gradient(120% 95% at 50% 16%, color-mix(in oklab, var(--text) 7%, transparent), transparent 62%);
+  background: radial-gradient(120% 95% at 50% 14%, color-mix(in oklab, var(--text) 6%, transparent), transparent 62%);
 }
 
-.wall { display: flex; flex-direction: column; align-items: center; gap: 4cqmin; }
+.gallery { position: relative; width: 66cqmin; height: 56cqmin; }
+.canvas { position: absolute; border-radius: 1.4cqmin; box-shadow: var(--shadow-lg); }
+.k1 { --rot: -4deg; left: 0; top: 6cqmin; width: 30cqmin; height: 38cqmin; transform: rotate(var(--rot)); background: linear-gradient(150deg, #e8c9a0, #c98a6a 55%, #6c7b8a); }
+.k2 { --rot: 3deg; left: 22cqmin; top: 0; width: 28cqmin; height: 34cqmin; transform: rotate(var(--rot)); background: linear-gradient(160deg, #cdb4d8, #8e7cc3 52%, #46506f); z-index: 2; }
+.k3 { --rot: -2deg; left: 40cqmin; top: 15cqmin; width: 24cqmin; height: 28cqmin; transform: rotate(var(--rot)); background: linear-gradient(150deg, #a7d8c8, #4ca58c 55%, #2a5e54); z-index: 3; }
 
-.frame {
-  width: 44cqmin;
-  padding: 3.4cqmin;
-  background: var(--bg);
-  border: max(2px, 1.4cqmin) solid var(--text);
-  border-radius: 1cqmin;
-  box-shadow: var(--shadow-lg);
+.name {
+  position: absolute;
+  left: 1cqmin;
+  bottom: 0;
+  font-family: var(--font-display);
+  font-size: 6.4cqmin;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--text);
 }
-.canvas {
-  width: 100%;
-  aspect-ratio: 4 / 5;
-  border-radius: 0.4cqmin;
-  background: linear-gradient(150deg, #e8c9a0, #c98a6a 45%, #6c7b8a 100%);
-}
-
-.plate { display: flex; flex-direction: column; align-items: center; gap: 1.6cqmin; }
-.name { width: 30cqmin; height: 3cqmin; border-radius: 999px; background: var(--text); opacity: 0.82; }
-.sub { width: 18cqmin; height: 2.2cqmin; border-radius: 999px; background: var(--text); opacity: 0.4; }
 
 @media (prefers-reduced-motion: no-preference) {
-  .frame { animation: mandyRise 0.6s var(--ease-standard) both; }
-  .canvas { animation: mandyFade 0.7s var(--ease-standard) 0.18s both; }
-  .name { animation: mandyFade 0.5s var(--ease-standard) 0.3s both; }
-  .sub { animation: mandyFade 0.5s var(--ease-standard) 0.36s both; }
+  .root { --play: paused; }
+  .inview { --play: running; }
+  .root * { animation-play-state: var(--play); }
+
+  .k1 { animation: mandyIn 0.6s var(--ease-standard) 0.06s both; }
+  .k2 { animation: mandyIn 0.6s var(--ease-standard) 0.16s both; }
+  .k3 { animation: mandyIn 0.6s var(--ease-standard) 0.26s both; }
+  .name { animation: mandyFade 0.5s var(--ease-standard) 0.4s both; }
 }
-@keyframes mandyRise { from { opacity: 0; transform: translateY(6cqmin) scale(0.97); } to { opacity: 1; transform: none; } }
+@keyframes mandyIn {
+  from { opacity: 0; transform: translateY(7cqmin) rotate(var(--rot)); }
+  to { opacity: 1; transform: translateY(0) rotate(var(--rot)); }
+}
 @keyframes mandyFade { from { opacity: 0; } }

@@ -1,3 +1,5 @@
+'use client';
+import { useReveal } from './useReveal';
 import styles from './FTThumb.module.scss';
 
 /**
@@ -9,8 +11,9 @@ import styles from './FTThumb.module.scss';
  * behind and the card chrome follow the theme. Rendered inside the <Media> frame.
  */
 export function FTThumb() {
+  const { ref, revealed } = useReveal();
   return (
-    <div className={styles.root} aria-hidden>
+    <div ref={ref} className={revealed ? `${styles.root} ${styles.inview}` : styles.root} aria-hidden>
       <div className={styles.paper}>
         <span className={styles.masthead} />
         <span className={styles.rule} />

@@ -59,6 +59,11 @@
 .b2 { width: 68%; }
 
 @media (prefers-reduced-motion: no-preference) {
+  /* entrance plays only once the thumbnail is scrolled into view (.inview) */
+  .root { --play: paused; }
+  .inview { --play: running; }
+  .root * { animation-play-state: var(--play); }
+
   .paper { animation: ftRise 0.55s var(--ease-standard) both; }
   .masthead { animation: ftFade 0.6s var(--ease-standard) 0.14s both; }
   .tag { animation: ftFade 0.5s var(--ease-standard) 0.28s both; }

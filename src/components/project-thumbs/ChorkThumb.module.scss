@@ -70,6 +70,11 @@
 /* Entrance: panel rises, the rings sweep in (staggered), the stats settle. Hidden
    state lives only here, so reduced-motion users get it composed and static. */
 @media (prefers-reduced-motion: no-preference) {
+  /* entrance plays only once the thumbnail is scrolled into view (.inview) */
+  .root { --play: paused; }
+  .inview { --play: running; }
+  .root * { animation-play-state: var(--play); }
+
   .panel { animation: chorkRise 0.55s var(--ease-standard) both; }
   .ring { animation: ringDraw 0.9s cubic-bezier(0.16, 1, 0.3, 1) both; animation-delay: var(--ring-delay, 0ms); }
   .pts { animation: chorkFade 0.5s var(--ease-standard) 0.2s both; }

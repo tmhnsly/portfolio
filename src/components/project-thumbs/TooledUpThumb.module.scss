@@ -1,8 +1,8 @@
 @use '../../styles/mixins/breakpoints' as *;
 
-/* Tooled-Up Education — a searchable resource library: a search bar over mixed-media
-   resource rows (video / podcast / article). CSS only, theme-aware panel; the search
-   accent + media chips are fixed. Scales via container-query units. Decorative. */
+/* Tooled-Up Education — a featured resource card (a webinar) from its library. CSS
+   only, theme-aware card; the media tile + teal accent are fixed (it's the resource
+   thumbnail). Scales via container-query units; reveals on scroll. Decorative. */
 
 .root {
   position: absolute;
@@ -12,58 +12,57 @@
   display: grid;
   place-items: center;
   overflow: hidden;
-  background: radial-gradient(125% 95% at 80% 6%, color-mix(in oklab, var(--tu) 24%, transparent), transparent 58%);
+  background: radial-gradient(125% 95% at 80% 8%, color-mix(in oklab, var(--tu) 24%, transparent), transparent 58%);
 }
 
-.panel {
-  width: 82cqw;
+.card {
+  width: 80cqw;
   max-width: 104cqh;
   display: flex;
   flex-direction: column;
-  gap: 3.4cqmin;
-  padding: 5cqmin 5.4cqmin;
+  gap: 3.2cqmin;
+  padding: 4.5cqmin;
   background: var(--bg);
   border: max(1px, 0.5cqmin) solid var(--rule);
   border-radius: 4.5cqmin;
   box-shadow: var(--shadow-md);
 }
 
-.search {
-  display: flex; align-items: center; gap: 3cqmin;
-  padding: 3cqmin 3.6cqmin;
-  border-radius: 2.6cqmin;
-  background: var(--surface);
-  border: max(1px, 0.4cqmin) solid var(--rule);
+.media {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  border-radius: 3cqmin;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, color-mix(in oklab, var(--tu) 75%, #1b6f78), color-mix(in oklab, var(--tu) 25%, #0a3a40));
 }
-.magnifier {
-  width: 5cqmin; height: 5cqmin; border-radius: 50%; flex: none; position: relative;
-  border: max(1px, 0.7cqmin) solid var(--tu);
-}
-.magnifier::after {
-  content: ''; position: absolute; right: -1.2cqmin; bottom: -1.2cqmin;
-  width: 2.8cqmin; height: max(1px, 0.7cqmin); border-radius: 999px; background: var(--tu);
-  transform: rotate(45deg); transform-origin: left center;
-}
-.query { height: 3cqmin; width: 44cqmin; border-radius: 999px; background: var(--text); opacity: 0.32; }
-
-.list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 3cqmin; }
-.row { display: flex; align-items: center; gap: 3cqmin; }
 .chip {
-  flex: none; padding: 1.4cqmin 2.6cqmin; border-radius: 1.6cqmin;
-  font-size: 3cqmin; font-weight: 700; letter-spacing: 0.08em; color: #fff;
+  position: absolute; top: 3cqmin; left: 3cqmin;
+  padding: 1.2cqmin 2.4cqmin; border-radius: 1.4cqmin;
+  background: rgba(255, 255, 255, 0.92); color: #0a3a40;
+  font-size: 2.8cqmin; font-weight: 700; letter-spacing: 0.1em;
 }
-.video { background: #e0573c; }
-.podcast { background: var(--tu); }
-.article { background: #7c5cff; }
-.bar { flex: 1; height: 3.4cqmin; border-radius: 999px; background: var(--text); opacity: 0.18; }
+.play {
+  width: 15cqmin; height: 15cqmin; border-radius: 50%;
+  display: grid; place-items: center;
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: 0 1cqmin 4cqmin rgba(0, 0, 0, 0.2);
+}
+.playIcon { width: 7cqmin; height: 7cqmin; fill: #0a3a40; transform: translateX(0.6cqmin); }
+.title { height: 4.4cqmin; width: 84%; border-radius: 1cqmin; background: var(--text); opacity: 0.82; }
+.byline { height: 3cqmin; width: 50%; border-radius: 999px; background: var(--text); opacity: 0.4; }
 
 @media (prefers-reduced-motion: no-preference) {
-  .panel { animation: tuRise 0.55s var(--ease-standard) both; }
-  .search { animation: tuFade 0.5s var(--ease-standard) 0.18s both; }
-  .row { animation: tuFade 0.5s var(--ease-standard) both; }
-  .row:nth-child(1) { animation-delay: 0.28s; }
-  .row:nth-child(2) { animation-delay: 0.36s; }
-  .row:nth-child(3) { animation-delay: 0.44s; }
+  .root { --play: paused; }
+  .inview { --play: running; }
+  .root * { animation-play-state: var(--play); }
+
+  .card { animation: tuRise 0.55s var(--ease-standard) both; }
+  .play { animation: tuPop 0.5s var(--ease-standard) 0.28s both; }
+  .chip { animation: tuFade 0.5s var(--ease-standard) 0.34s both; }
+  .title { animation: tuFade 0.5s var(--ease-standard) 0.4s both; }
+  .byline { animation: tuFade 0.5s var(--ease-standard) 0.46s both; }
 }
 @keyframes tuRise { from { opacity: 0; transform: translateY(6cqmin) scale(0.98); } to { opacity: 1; transform: none; } }
-@keyframes tuFade { from { opacity: 0; transform: translateX(-3cqmin); } to { opacity: 1; transform: none; } }
+@keyframes tuPop { from { opacity: 0; transform: scale(0.4); } to { opacity: 1; transform: scale(1); } }
+@keyframes tuFade { from { opacity: 0; } }

@@ -1,25 +1,20 @@
+'use client';
+import { useReveal } from './useReveal';
 import styles from './EarntThumb.module.scss';
 
 /**
- * Bespoke card thumbnail for Earnt: a Storybook-style component canvas — a window of
- * UI swatches (button, toggle, input, card) standing for the design-system component
- * library that was the heart of the work. Pure CSS, theme-aware panel; the component
- * accent is fixed. Scales via container queries. Decorative.
+ * Bespoke card thumbnail for Earnt — a community platform where you earn limited drops
+ * by volunteering. Its brand is the uppercase EARNT wordmark (white-on-dark, premium)
+ * with green category badges; recreated here as the wordmark + a "Limited Drop" badge.
+ * Theme-aware (wordmark = --text); the green is brand-fixed. Reveals on scroll.
  */
 export function EarntThumb() {
+  const { ref, revealed } = useReveal();
   return (
-    <div className={styles.root} aria-hidden>
+    <div ref={ref} className={revealed ? `${styles.root} ${styles.inview}` : styles.root} aria-hidden>
       <div className={styles.panel}>
-        <div className={styles.head}>
-          <span className={styles.dot} /><span className={styles.dot} /><span className={styles.dot} />
-          <span className={styles.title} />
-        </div>
-        <div className={styles.grid}>
-          <span className={styles.btn} />
-          <span className={styles.toggle}><i /></span>
-          <span className={styles.input} />
-          <span className={styles.swatch} />
-        </div>
+        <span className={styles.badge}><span className={styles.dot} />LIMITED DROP</span>
+        <span className={styles.wordmark}>EARNT</span>
       </div>
     </div>
   );

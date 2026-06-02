@@ -1,34 +1,25 @@
+'use client';
+import { useReveal } from './useReveal';
 import styles from './TooledUpThumb.module.scss';
 
 /**
- * Bespoke card thumbnail for Tooled-Up Education — a searchable library of evidence-
- * based resources for parents and schools. A search bar over mixed-media resource
- * rows (video / podcast / article), reflecting both the platform and the search +
- * component work. Pure CSS, theme-aware panel; the media-type chips are fixed. Scales
- * via container queries. Decorative.
+ * Bespoke card thumbnail for Tooled-Up Education — a featured resource card (a
+ * webinar) from its evidence-based library for parents and schools. Theme-aware card;
+ * teal education accent. Reveals on scroll. Rendered inside the <Media> frame.
  */
-const RES = [
-  { kind: 'VIDEO', cls: 'video' },
-  { kind: 'PODCAST', cls: 'podcast' },
-  { kind: 'ARTICLE', cls: 'article' },
-] as const;
-
 export function TooledUpThumb() {
+  const { ref, revealed } = useReveal();
   return (
-    <div className={styles.root} aria-hidden>
-      <div className={styles.panel}>
-        <div className={styles.search}>
-          <span className={styles.magnifier} />
-          <span className={styles.query} />
+    <div ref={ref} className={revealed ? `${styles.root} ${styles.inview}` : styles.root} aria-hidden>
+      <div className={styles.card}>
+        <div className={styles.media}>
+          <span className={styles.chip}>WEBINAR</span>
+          <span className={styles.play}>
+            <svg viewBox="0 0 24 24" className={styles.playIcon} aria-hidden><path d="M8 5v14l11-7z" /></svg>
+          </span>
         </div>
-        <ul className={styles.list}>
-          {RES.map((r) => (
-            <li key={r.kind} className={styles.row}>
-              <span className={`${styles.chip} ${styles[r.cls]}`}>{r.kind}</span>
-              <span className={styles.bar} />
-            </li>
-          ))}
-        </ul>
+        <span className={styles.title} />
+        <span className={styles.byline} />
       </div>
     </div>
   );
