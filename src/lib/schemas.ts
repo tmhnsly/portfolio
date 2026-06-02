@@ -75,8 +75,11 @@ export type BlogPost = PostFrontmatter & { slug: string; body: string; readingTi
 
 export const timelineEntrySchema = z.object({
   id: z.string(), period: z.string(), role: z.string(), place: z.string(),
-  description: z.string(), tags: z.array(z.string()), accent: z.string(),
-  companyUrl: z.string().optional(), // links the company name in `place` (see data/companies.ts)
+  description: z.string(), tags: z.array(z.string()),
+  discipline: disciplineSchema,      // drives the dot + card accent (theme-aware Radix hue)
+  companyUrl: z.string().optional(), // when set, the whole card becomes a link to the company
+  monogram: z.string().optional(),   // logo-tile initials, shown when there's no `logo` image
+  logo: z.string().optional(),       // /images/about/logos/<file> — a real logo drops in here later
 });
 export type TimelineEntry = z.infer<typeof timelineEntrySchema>;
 
