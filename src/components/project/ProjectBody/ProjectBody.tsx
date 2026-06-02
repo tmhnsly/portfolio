@@ -31,7 +31,7 @@ export function ProjectBody({ project }: { project: Project }) {
             </ul>
           </div>
         )}
-        {(project.liveUrl || project.repo) && (
+        {(project.liveUrl || project.repo || project.links?.length) && (
           <div className={styles.sideSection}>
             <Eyebrow>Links</Eyebrow>
             <ProjectLinks project={project} />

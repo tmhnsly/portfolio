@@ -21,7 +21,7 @@ export function ProjectHero({ project }: { project: Project }) {
   if (project.role)   metaRows.push(['Role',   project.role]);
   if (project.year)   metaRows.push(['Year',   String(project.year)]);
   if (project.status) metaRows.push(['Status', project.status]);
-  if (project.repo)   metaRows.push(['Repo',   project.repo]);
+  // repo isn't a meta fact — it lives in the Links section (ProjectLinks) only
 
   return (
     <Entrance className={styles.hero}>
