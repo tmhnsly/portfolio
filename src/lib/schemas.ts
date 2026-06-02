@@ -1,7 +1,7 @@
 import { z } from 'zod';
 import { TAGS } from './tags';
 
-export const disciplineSchema = z.enum(['code', 'music', 'sound', 'photo', 'video', 'blog']);
+export const disciplineSchema = z.enum(['code', 'audio', 'video', 'blog']);
 export type Discipline = z.infer<typeof disciplineSchema>;
 
 // Static map shape (not parsed from content — implemented by a later disciplines map).

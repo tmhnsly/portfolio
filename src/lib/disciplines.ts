@@ -10,22 +10,20 @@ import type { Discipline, DisciplineMeta } from '@/types';
  */
 const HUE: Record<Discipline, string> = {
   code: 'tomato',
-  music: 'teal',
-  sound: 'blue',
-  photo: 'yellow',
+  audio: 'blue',
   video: 'green',
   blog: 'orange',
 };
 
 const LABEL: Record<Discipline, string> = {
-  code: 'Code', music: 'Music', sound: 'Sound', photo: 'Photo', video: 'Video', blog: 'Blog',
+  code: 'Code', audio: 'Audio', video: 'Video', blog: 'Blog',
 };
 
 /** Radix step-9 solids designed for DARK foreground text (all others take white).
     Per the Radix docs this is EXACTLY: sky, mint, lime, yellow, amber. (orange-9
     and gold-9 take WHITE text — they were wrongly included before, which gave the
     video/orange pill dark text.) */
-const LIGHT_SOLID = new Set(['sky', 'mint', 'lime', 'yellow', 'amber']);
+const LIGHT_SOLID = new Set(['sky', 'mint', 'lime', 'amber']);
 
 function meta(slug: Discipline): DisciplineMeta {
   const h = HUE[slug];
@@ -44,7 +42,7 @@ function meta(slug: Discipline): DisciplineMeta {
   };
 }
 
-export const DISCIPLINE_ORDER: Discipline[] = ['code', 'video', 'photo', 'music', 'sound', 'blog'];
+export const DISCIPLINE_ORDER: Discipline[] = ['code', 'video', 'audio', 'blog'];
 
 export const DISCIPLINES = Object.fromEntries(
   (Object.keys(HUE) as Discipline[]).map((d) => [d, meta(d)]),
