@@ -33,13 +33,13 @@ describe('zone', () => {
   });
 
   it('disciplineFromPath narrows only real disciplines', () => {
-    expect(disciplineFromPath('/photo/lisbon')).toBe('photo');
+    expect(disciplineFromPath('/audio/wake')).toBe('audio');
     expect(disciplineFromPath('/about')).toBeUndefined();
     expect(disciplineFromPath('/')).toBeUndefined();
   });
 
   it('zoneAccent defaults to tomato when no discipline', () => {
     expect(zoneAccent(undefined).accent).toBe('var(--tomato-9)');
-    expect(zoneAccent('music').accent).toBe(DISCIPLINES.music.color);
+    expect(zoneAccent('audio').accent).toBe(DISCIPLINES.audio.color);
   });
 });

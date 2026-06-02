@@ -2,8 +2,8 @@ import { describe, it, expect } from 'vitest';
 import { DISCIPLINES, DISCIPLINE_ORDER, isDiscipline } from './disciplines';
 
 describe('disciplines', () => {
-  it('has all six in order', () => {
-    expect(DISCIPLINE_ORDER).toEqual(['code','video','photo','music','sound','blog']);
+  it('has all four in order', () => {
+    expect(DISCIPLINE_ORDER).toEqual(['code','video','audio','blog']);
   });
   it('every entry is self-consistent', () => {
     for (const slug of DISCIPLINE_ORDER) {

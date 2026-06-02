@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { buildCrumbs, humanize } from './breadcrumb';
 
 const data = {
-  projectCounts: { code: 8, photo: 1 },
+  projectCounts: { code: 8, audio: 1 },
   titleMap: { '/code/chork': 'Chork' },
   postCount: 9,
 };
@@ -34,7 +34,7 @@ describe('buildCrumbs', () => {
   });
 
   it('singular unit when count is 1', () => {
-    expect(buildCrumbs('/photo', data)[1].unit).toBe('project');
+    expect(buildCrumbs('/audio', data)[1].unit).toBe('project');
   });
 
   it('blog landing uses postCount + post(s)', () => {

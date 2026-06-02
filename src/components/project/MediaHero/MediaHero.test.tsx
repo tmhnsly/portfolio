@@ -8,7 +8,7 @@ import { MediaHero } from './MediaHero';
 beforeAll(() => { Element.prototype.scrollIntoView = vi.fn(); });
 
 function project(media: MediaItem[], slug = 'wake'): Project {
-  return { ...projectFrontmatterSchema.parse({ title: 'Wake', discipline: 'music', date: '2015-02-01', media }), slug, body: '' };
+  return { ...projectFrontmatterSchema.parse({ title: 'Wake', discipline: 'audio', date: '2015-02-01', media }), slug, body: '' };
 }
 
 describe('MediaHero', () => {
