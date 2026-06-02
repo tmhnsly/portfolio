@@ -1,56 +1,54 @@
 @use '../../styles/mixins/breakpoints' as *;
 
-/* Earnt — its uppercase EARNT wordmark with a green "Limited Drop" badge. CSS only,
-   theme-aware (wordmark = --text, flips); the green is brand-fixed. Scales via
-   container-query units; reveals on scroll. Decorative — the card link carries the label. */
+/* Earnt — its always-on drops: the wheel + EARNT mark, a heavy VIP-status title, a
+   green "N left" ticket and the "revolution in consumption" marquee. Cream panel +
+   forest green are brand-fixed; the field/chrome follow the theme. Scales via
+   container queries; reveals on scroll. Decorative. */
 
 .root {
   position: absolute;
   inset: 0;
-  --earnt: #22c55e;
+  --green: #1f5135;
+  --cream: #faf8f2;
+  --ink: #1a1a1a;
   container-type: size;
   display: grid;
   place-items: center;
   overflow: hidden;
-  background: radial-gradient(125% 95% at 80% 10%, color-mix(in oklab, var(--earnt) 22%, transparent), transparent 60%);
+  background: radial-gradient(125% 95% at 80% 8%, color-mix(in oklab, var(--green) 24%, transparent), transparent 60%);
 }
 
 .panel {
   width: 82cqw;
   max-width: 112cqh;
-  aspect-ratio: 5 / 4;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 5cqmin;
-  background: var(--bg);
-  border: max(1px, 0.5cqmin) solid var(--rule);
+  gap: 4cqmin;
+  padding: 5cqmin;
+  background: var(--cream);
   border-radius: 4.5cqmin;
   box-shadow: var(--shadow-md);
+  overflow: hidden;
 }
 
-.badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 1.8cqmin;
-  padding: 1.6cqmin 3cqmin;
-  border-radius: 999px;
-  border: max(1px, 0.4cqmin) solid color-mix(in oklab, var(--earnt) 50%, transparent);
-  color: color-mix(in oklab, var(--earnt) 65%, var(--text));
-  font-size: 3cqmin;
-  font-weight: 700;
-  letter-spacing: 0.16em;
-}
-.dot { width: 2.6cqmin; height: 2.6cqmin; border-radius: 50%; background: var(--earnt); }
+.head { display: flex; align-items: center; gap: 3cqmin; }
+.logo { display: inline-flex; align-items: center; gap: 2cqmin; font-size: 4.6cqmin; font-weight: 800; letter-spacing: 0.04em; color: var(--green); }
+.mark { width: 7cqmin; height: 7cqmin; flex: none; }
+.mark circle, .mark path { fill: none; stroke: var(--green); stroke-width: 1.6; }
+.ticket { margin-left: auto; padding: 1.6cqmin 3cqmin; border-radius: 1.4cqmin; background: var(--green); color: var(--cream); font-size: 3.2cqmin; font-weight: 700; font-style: italic; }
 
-.wordmark {
-  font-family: var(--font-display);
-  font-size: 19cqmin;
+.vip { font-family: var(--font-display); font-size: 13cqmin; font-weight: 700; line-height: 0.86; letter-spacing: -0.02em; color: var(--ink); }
+
+.marquee {
+  margin: 1cqmin -5cqmin -5cqmin;
+  padding: 2.2cqmin 5cqmin;
+  background: var(--ink);
+  color: var(--cream);
+  font-size: 2.6cqmin;
   font-weight: 700;
-  letter-spacing: 0.04em;
-  line-height: 0.9;
-  color: var(--text);
+  letter-spacing: 0.12em;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -59,9 +57,11 @@
   .root * { animation-play-state: var(--play); }
 
   .panel { animation: earntRise 0.55s var(--ease-standard) both; }
-  .badge { animation: earntFade 0.5s var(--ease-standard) 0.24s both; }
-  .wordmark { animation: earntUp 0.6s var(--ease-standard) 0.3s both; }
+  .logo { animation: earntFade 0.5s var(--ease-standard) 0.2s both; }
+  .ticket { animation: earntPop 0.5s var(--ease-standard) 0.3s both; }
+  .vip { animation: earntFade 0.6s var(--ease-standard) 0.34s both; }
+  .marquee { animation: earntFade 0.5s var(--ease-standard) 0.44s both; }
 }
 @keyframes earntRise { from { opacity: 0; transform: translateY(6cqmin) scale(0.98); } to { opacity: 1; transform: none; } }
 @keyframes earntFade { from { opacity: 0; } }
-@keyframes earntUp { from { opacity: 0; transform: translateY(3cqmin); } to { opacity: 1; transform: none; } }
+@keyframes earntPop { from { opacity: 0; transform: scale(0.4); } to { opacity: 1; transform: scale(1); } }

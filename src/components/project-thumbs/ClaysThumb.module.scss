@@ -1,46 +1,48 @@
 @use '../../styles/mixins/breakpoints' as *;
 
-/* Clays — digital clay shooting: an orange clay locked in a targeting reticle, with
-   a HIT call. CSS + inline SVG, theme-aware (reticle = --text; clay orange fixed).
-   Scales via container-query units; reveals on scroll (.inview). Decorative. */
+/* Clays — a stylised "make a booking" modal (the flow I led): CLAYS ring monogram, a
+   mini calendar with a selected date, a coral Search button. Clays' mint panel +
+   forest-green + coral are brand-fixed; the field/chrome follow the theme. Scales via
+   container queries; reveals on scroll. */
 
 .root {
   position: absolute;
   inset: 0;
-  --clay: #f5732e;
+  --green: #2d4a40;
+  --coral: #e5887b;
+  --mint: #e7f0eb;
   container-type: size;
   display: grid;
   place-items: center;
   overflow: hidden;
-  background: radial-gradient(125% 95% at 78% 12%, color-mix(in oklab, var(--clay) 26%, transparent), transparent 58%);
+  background: radial-gradient(125% 95% at 80% 8%, color-mix(in oklab, var(--green) 22%, transparent), transparent 60%);
 }
 
 .panel {
-  position: relative;
-  width: 84cqw;
-  max-width: 112cqh;
-  aspect-ratio: 5 / 4;
-  display: grid;
-  place-items: center;
-  background: var(--bg);
-  border: max(1px, 0.5cqmin) solid var(--rule);
+  width: 82cqw;
+  max-width: 108cqh;
+  display: flex;
+  flex-direction: column;
+  gap: 3.4cqmin;
+  padding: 5cqmin;
+  background: var(--mint);
   border-radius: 4.5cqmin;
   box-shadow: var(--shadow-md);
-  overflow: hidden;
 }
 
-.scene { width: 80%; height: auto; transform-origin: center; }
-.streak { stroke: var(--clay); stroke-width: 3; stroke-linecap: round; opacity: 0.4; }
-.clay { fill: var(--clay); }
-.ring { fill: none; stroke: var(--text); stroke-width: 2; opacity: 0.85; }
-.ticks { stroke: var(--text); stroke-width: 2; stroke-linecap: round; opacity: 0.85; }
-.center { fill: var(--text); }
-.hit {
-  position: absolute; top: 5cqmin; right: 5cqmin;
-  padding: 1.4cqmin 3cqmin; border-radius: 999px;
-  background: var(--clay); color: #fff;
-  font-size: 3.4cqmin; font-weight: 800; letter-spacing: 0.16em;
-}
+.head { display: flex; align-items: center; gap: 3cqmin; }
+.logo { display: inline-flex; align-items: center; gap: 1.8cqmin; font-size: 4cqmin; font-weight: 700; letter-spacing: 0.18em; color: var(--green); }
+.ring { width: 7cqmin; height: 7cqmin; flex: none; }
+.ring circle { fill: none; stroke: var(--green); stroke-width: 2; }
+.title { margin-left: auto; height: 3cqmin; width: 22cqmin; border-radius: 999px; background: color-mix(in oklab, var(--green) 30%, transparent); }
+
+.cal { background: #fff; border-radius: 3cqmin; padding: 3.4cqmin; display: flex; flex-direction: column; gap: 2.8cqmin; }
+.month { height: 2.8cqmin; width: 34cqmin; margin: 0 auto; border-radius: 999px; background: color-mix(in oklab, var(--green) 32%, transparent); }
+.days { display: grid; grid-template-columns: repeat(7, 1fr); gap: 1.8cqmin; }
+.day { aspect-ratio: 1; border-radius: 50%; background: color-mix(in oklab, var(--green) 12%, transparent); }
+.sel { background: transparent; box-shadow: inset 0 0 0 max(1.5px, 0.7cqmin) var(--green); }
+
+.cta { align-self: flex-end; padding: 2.2cqmin 5.5cqmin; border-radius: 999px; background: var(--coral); color: #fff; font-size: 3.6cqmin; font-weight: 700; }
 
 @media (prefers-reduced-motion: no-preference) {
   .root { --play: paused; }
@@ -48,9 +50,10 @@
   .root * { animation-play-state: var(--play); }
 
   .panel { animation: claysRise 0.55s var(--ease-standard) both; }
-  .scene { animation: claysLock 0.6s var(--ease-standard) 0.12s both; }
-  .hit { animation: claysPop 0.45s var(--ease-standard) 0.46s both; }
+  .cal { animation: claysFade 0.6s var(--ease-standard) 0.2s both; }
+  .sel { animation: claysPop 0.5s var(--ease-standard) 0.42s both; }
+  .cta { animation: claysFade 0.5s var(--ease-standard) 0.48s both; }
 }
 @keyframes claysRise { from { opacity: 0; transform: translateY(6cqmin) scale(0.98); } to { opacity: 1; transform: none; } }
-@keyframes claysLock { from { opacity: 0; transform: scale(1.22); } to { opacity: 1; transform: scale(1); } }
-@keyframes claysPop { from { opacity: 0; transform: scale(0.4); } to { opacity: 1; transform: scale(1); } }
+@keyframes claysFade { from { opacity: 0; } }
+@keyframes claysPop { from { opacity: 0; transform: scale(0.3); } to { opacity: 1; transform: scale(1); } }

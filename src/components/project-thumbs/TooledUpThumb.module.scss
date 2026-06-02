@@ -1,68 +1,63 @@
 @use '../../styles/mixins/breakpoints' as *;
 
-/* Tooled-Up Education — a featured resource card (a webinar) from its library. CSS
-   only, theme-aware card; the media tile + teal accent are fixed (it's the resource
-   thumbnail). Scales via container-query units; reveals on scroll. Decorative. */
+/* Tooled-Up Education — its resource platform: triangle wordmark, a search field,
+   topic pills, resource cards. Theme-aware panel (flips); the blue accent is fixed.
+   Scales via container queries; reveals on scroll. Decorative. */
 
 .root {
   position: absolute;
   inset: 0;
-  --tu: #0d9aa7;
+  --tu: #4a90c2;
   container-type: size;
   display: grid;
   place-items: center;
   overflow: hidden;
-  background: radial-gradient(125% 95% at 80% 8%, color-mix(in oklab, var(--tu) 24%, transparent), transparent 58%);
+  background: radial-gradient(125% 95% at 80% 8%, color-mix(in oklab, var(--tu) 22%, transparent), transparent 60%);
 }
 
-.card {
-  width: 80cqw;
-  max-width: 104cqh;
+.panel {
+  width: 82cqw;
+  max-width: 108cqh;
   display: flex;
   flex-direction: column;
-  gap: 3.2cqmin;
-  padding: 4.5cqmin;
+  gap: 3.4cqmin;
+  padding: 5cqmin;
   background: var(--bg);
   border: max(1px, 0.5cqmin) solid var(--rule);
   border-radius: 4.5cqmin;
   box-shadow: var(--shadow-md);
 }
 
-.media {
-  position: relative;
-  aspect-ratio: 16 / 9;
-  border-radius: 3cqmin;
-  display: grid;
-  place-items: center;
-  background: linear-gradient(135deg, color-mix(in oklab, var(--tu) 75%, #1b6f78), color-mix(in oklab, var(--tu) 25%, #0a3a40));
+.brand { display: flex; align-items: center; gap: 2.2cqmin; }
+.mark { width: 7cqmin; height: 7cqmin; flex: none; }
+.mark path { fill: none; stroke: var(--text); stroke-width: 2; stroke-linejoin: round; }
+.word { font-size: 4cqmin; font-weight: 800; letter-spacing: 0.12em; color: var(--text); }
+
+.search {
+  display: flex; align-items: center; gap: 3cqmin;
+  padding: 3cqmin 3.6cqmin; border-radius: 999px;
+  background: var(--surface); border: max(1px, 0.4cqmin) solid var(--rule);
 }
-.chip {
-  position: absolute; top: 3cqmin; left: 3cqmin;
-  padding: 1.2cqmin 2.4cqmin; border-radius: 1.4cqmin;
-  background: rgba(255, 255, 255, 0.92); color: #0a3a40;
-  font-size: 2.8cqmin; font-weight: 700; letter-spacing: 0.1em;
-}
-.play {
-  width: 15cqmin; height: 15cqmin; border-radius: 50%;
-  display: grid; place-items: center;
-  background: rgba(255, 255, 255, 0.94);
-  box-shadow: 0 1cqmin 4cqmin rgba(0, 0, 0, 0.2);
-}
-.playIcon { width: 7cqmin; height: 7cqmin; fill: #0a3a40; transform: translateX(0.6cqmin); }
-.title { height: 4.4cqmin; width: 84%; border-radius: 1cqmin; background: var(--text); opacity: 0.82; }
-.byline { height: 3cqmin; width: 50%; border-radius: 999px; background: var(--text); opacity: 0.4; }
+.mag { width: 4.6cqmin; height: 4.6cqmin; border-radius: 50%; flex: none; position: relative; border: max(1px, 0.7cqmin) solid var(--tu); }
+.mag::after { content: ''; position: absolute; right: -1.1cqmin; bottom: -1.1cqmin; width: 2.6cqmin; height: max(1px, 0.7cqmin); background: var(--tu); border-radius: 999px; transform: rotate(45deg); transform-origin: left center; }
+.q { height: 2.8cqmin; width: 42cqmin; border-radius: 999px; background: var(--text); opacity: 0.26; }
+
+.pills { display: flex; gap: 2.2cqmin; }
+.pill { flex: 1; height: 6cqmin; border-radius: 999px; border: max(1px, 0.4cqmin) solid var(--rule); }
+
+.cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.6cqmin; }
+.card { aspect-ratio: 4 / 3; border-radius: 2cqmin; background: linear-gradient(150deg, color-mix(in oklab, var(--tu) 32%, var(--surface)), var(--surface)); }
 
 @media (prefers-reduced-motion: no-preference) {
   .root { --play: paused; }
   .inview { --play: running; }
   .root * { animation-play-state: var(--play); }
 
-  .card { animation: tuRise 0.55s var(--ease-standard) both; }
-  .play { animation: tuPop 0.5s var(--ease-standard) 0.28s both; }
-  .chip { animation: tuFade 0.5s var(--ease-standard) 0.34s both; }
-  .title { animation: tuFade 0.5s var(--ease-standard) 0.4s both; }
-  .byline { animation: tuFade 0.5s var(--ease-standard) 0.46s both; }
+  .panel { animation: tuRise 0.55s var(--ease-standard) both; }
+  .brand { animation: tuFade 0.5s var(--ease-standard) 0.18s both; }
+  .search { animation: tuFade 0.5s var(--ease-standard) 0.26s both; }
+  .pills { animation: tuFade 0.5s var(--ease-standard) 0.34s both; }
+  .cards { animation: tuFade 0.5s var(--ease-standard) 0.42s both; }
 }
 @keyframes tuRise { from { opacity: 0; transform: translateY(6cqmin) scale(0.98); } to { opacity: 1; transform: none; } }
-@keyframes tuPop { from { opacity: 0; transform: scale(0.4); } to { opacity: 1; transform: scale(1); } }
-@keyframes tuFade { from { opacity: 0; } }
+@keyframes tuFade { from { opacity: 0; transform: translateY(2cqmin); } to { opacity: 1; transform: none; } }
