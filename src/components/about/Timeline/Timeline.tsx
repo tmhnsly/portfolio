@@ -105,7 +105,6 @@ function Item({ entry, index }: { entry: TimelineEntry; index: number }) {
 }
 
 export function Timeline({ entries }: { entries: TimelineEntry[] }) {
-  const reduce = useReducedMotion();
   return (
     <section className={styles.section}>
       <div className={styles.head}>
@@ -115,15 +114,6 @@ export function Timeline({ entries }: { entries: TimelineEntry[] }) {
         </h2>
       </div>
       <div className={styles.timeline}>
-        <div className={styles.spineTrack} aria-hidden>
-          <motion.div
-            className={styles.spine}
-            initial={reduce ? false : { scaleY: 0 }}
-            whileInView={{ scaleY: 1 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: DURATION.reveal, ease: EASING.standard }}
-          />
-        </div>
         {entries.map((e, i) => (
           <Item key={e.id} entry={e} index={i} />
         ))}
