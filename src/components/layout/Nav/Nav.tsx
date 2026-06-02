@@ -2,7 +2,7 @@
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import type { IconType } from 'react-icons';
-import { BiMoon, BiSun, BiMenu, BiCodeAlt, BiVideo, BiCamera, BiMusic, BiHeadphone, BiPencil, BiUser } from 'react-icons/bi';
+import { BiMoon, BiSun, BiMenu, BiCodeAlt, BiVideo, BiHeadphone, BiPencil, BiUser } from 'react-icons/bi';
 import { motion, useReducedMotion } from 'motion/react';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import { SITE, COPY } from '@/data';
@@ -26,9 +26,7 @@ export interface NavProps {
 const NAV_ICONS: Record<string, IconType> = {
   '/code': BiCodeAlt,
   '/video': BiVideo,
-  '/photo': BiCamera,
-  '/music': BiMusic,
-  '/sound': BiHeadphone,
+  '/audio': BiHeadphone,
   '/blog': BiPencil,
   '/about': BiUser,
 };

@@ -13,9 +13,7 @@ export const SITE = siteConfigSchema.parse({
   nav: [
     { label: 'Code',  href: '/code'  },
     { label: 'Video', href: '/video' },
-    { label: 'Photo', href: '/photo' },
-    { label: 'Music', href: '/music' },
-    { label: 'Sound', href: '/sound' },
+    { label: 'Audio', href: '/audio' },
     { label: 'Blog',  href: '/blog'  },
     { label: 'About', href: '/about' },
   ],
@@ -23,5 +21,6 @@ export const SITE = siteConfigSchema.parse({
   // Set href to your real URL. Remove this entry or add more as needed.
   socials: [
     { label: 'GitHub', href: '#' },
+    { label: 'Instagram', href: 'https://instagram.com/tomhinsley' },
   ],
 });
