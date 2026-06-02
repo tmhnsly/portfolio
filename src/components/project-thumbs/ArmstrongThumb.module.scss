@@ -18,7 +18,7 @@
 .win {
   width: 84cqw;
   max-width: 132cqh;
-  border-radius: 8cqmin;
+  border-radius: 7cqmin;
   overflow: hidden;
   background: var(--code-bg);
   box-shadow: var(--shadow-lg);
@@ -37,7 +37,7 @@
 .y { background: #febc2e; }
 .g { background: #28c840; }
 
-.body { padding: 5cqmin; display: flex; flex-direction: column; gap: 3cqmin; }
+.body { padding: 6.5cqmin 5cqmin; display: flex; flex-direction: column; gap: 3.5cqmin; }
 .line { display: flex; align-items: center; gap: 1.4cqmin; font-size: 3.6cqmin; font-weight: 700; white-space: nowrap; }
 .prompt { color: var(--arm); }
 .cmd { color: color-mix(in oklab, var(--code-text) 70%, transparent); }

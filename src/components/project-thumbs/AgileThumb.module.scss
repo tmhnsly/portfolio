@@ -26,10 +26,10 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 3cqmin;
-  padding: 4.5cqmin;
+  padding: 5cqmin;
   background: var(--bg);
   border: max(1px, 0.5cqmin) solid var(--rule);
-  border-radius: 8cqmin;
+  border-radius: 7cqmin;
   box-shadow: var(--shadow-md);
 }
 
@@ -39,7 +39,7 @@
   padding: 3cqmin;
   background: var(--surface);
   border: max(1px, 0.4cqmin) solid var(--rule);
-  border-radius: 3cqmin;
+  border-radius: 2cqmin;
 }
 .chartLabel { width: 34%; height: 2.6cqmin; border-radius: 999px; background: var(--text); opacity: 0.4; }
 .chart { width: 100%; aspect-ratio: 100 / 36; display: block; }
@@ -50,7 +50,7 @@
 .stat {
   display: flex; flex-direction: column; gap: 1.8cqmin;
   padding: 3cqmin;
-  border-radius: 3cqmin;
+  border-radius: 2cqmin;
   border: max(1px, 0.4cqmin) solid var(--rule);
   background: var(--surface);
 }

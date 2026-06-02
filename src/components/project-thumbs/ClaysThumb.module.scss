@@ -1,8 +1,8 @@
 @use '../../styles/mixins/breakpoints' as *;
 
-/* Clays — its real ring logo (SVG used as a mask, filled forest-green), a coral
-   "Book now" button and the result. Clays' mint + forest-green + coral are brand-
-   fixed; the field/chrome follow the theme. Panel radius 8cqmin. Reveals on scroll. */
+/* Clays — the booking flow: real ring logo (SVG mask, forest-green), a mini calendar
+   with a selected date, and a coral Book-now. Clays' mint + forest-green + coral are
+   brand-fixed. Concentric radii: panel 7 / padding 5 / inner 2. Reveals on scroll. */
 
 .root {
   position: absolute;
@@ -23,15 +23,15 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4cqmin;
-  padding: 7cqmin 5cqmin;
+  gap: 3.4cqmin;
+  padding: 5cqmin;
   background: var(--mint);
-  border-radius: 8cqmin;
+  border-radius: 7cqmin;
   box-shadow: var(--shadow-md);
 }
 
 .logo {
-  width: 30cqmin;
+  width: 20cqmin;
   aspect-ratio: 1;
   background: var(--green);
   mask-image: url('/images/projects/code/clays-logo.svg');
@@ -40,15 +40,21 @@
   mask-size: contain;
 }
 
-.cta {
-  padding: 2.4cqmin 6cqmin;
-  border-radius: 999px;
-  background: var(--coral);
-  color: #fff;
-  font-size: 3.8cqmin;
-  font-weight: 700;
+.cal {
+  align-self: stretch;
+  background: #fff;
+  border-radius: 2cqmin;
+  padding: 3cqmin;
+  display: flex;
+  flex-direction: column;
+  gap: 2.4cqmin;
 }
-.note { font-size: 3.2cqmin; font-weight: 600; color: color-mix(in oklab, var(--green) 75%, transparent); }
+.month { height: 2.6cqmin; width: 36cqmin; margin: 0 auto; border-radius: 999px; background: color-mix(in oklab, var(--green) 30%, transparent); }
+.days { display: grid; grid-template-columns: repeat(7, 1fr); gap: 1.6cqmin; }
+.day { aspect-ratio: 1; border-radius: 50%; background: color-mix(in oklab, var(--green) 12%, transparent); }
+.sel { background: var(--coral); }
+
+.cta { padding: 2.2cqmin 6cqmin; border-radius: 999px; background: var(--coral); color: #fff; font-size: 3.6cqmin; font-weight: 700; }
 
 @media (prefers-reduced-motion: no-preference) {
   .root { --play: paused; }
@@ -57,9 +63,10 @@
 
   .panel { animation: claysRise 0.55s var(--ease-standard) both; }
   .logo { animation: claysPop 0.6s var(--ease-standard) 0.16s both; }
-  .cta { animation: claysFade 0.5s var(--ease-standard) 0.32s both; }
-  .note { animation: claysFade 0.5s var(--ease-standard) 0.42s both; }
+  .cal { animation: claysFade 0.6s var(--ease-standard) 0.28s both; }
+  .sel { animation: claysPop 0.5s var(--ease-standard) 0.52s both; }
+  .cta { animation: claysFade 0.5s var(--ease-standard) 0.42s both; }
 }
 @keyframes claysRise { from { opacity: 0; transform: translateY(6cqmin) scale(0.98); } to { opacity: 1; transform: none; } }
-@keyframes claysPop { from { opacity: 0; transform: scale(0.8); } to { opacity: 1; transform: scale(1); } }
+@keyframes claysPop { from { opacity: 0; transform: scale(0.6); } to { opacity: 1; transform: scale(1); } }
 @keyframes claysFade { from { opacity: 0; } }
