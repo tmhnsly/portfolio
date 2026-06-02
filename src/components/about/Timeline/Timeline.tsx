@@ -22,7 +22,11 @@ function LogoChip({ entry, company }: { entry: TimelineEntry; company: string })
     <span className={styles.logoChip}>
       {entry.logo ? (
         // eslint-disable-next-line @next/next/no-img-element -- small brand mark, not a content image
-        <img src={entry.logo} alt={`${company} logo`} className={styles.logoImg} />
+        <img
+          src={entry.logo}
+          alt={`${company} logo`}
+          className={`${styles.logoImg}${entry.logoFilled ? ` ${styles.logoImgFilled}` : ''}`}
+        />
       ) : (
         <span className={styles.logoMono} aria-hidden>
           {entry.monogram ?? company.charAt(0).toUpperCase()}

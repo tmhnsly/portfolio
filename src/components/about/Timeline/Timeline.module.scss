@@ -161,7 +161,12 @@
   max-width: 100%;
   object-fit: contain;
   display: block;
-  border-radius: var(--radius-sm); /* softens full-bleed square avatars (e.g. iO); no-op on transparent marks */
+}
+
+/* Only full-bleed square avatars (e.g. iO) get rounded — rounding the
+   transparent wordmarks would clip their edge letterforms. */
+.logoImgFilled {
+  border-radius: var(--radius-md);
 }
 
 /* Monogram fallback (no logo) — discipline-ink initials on the same white chip */

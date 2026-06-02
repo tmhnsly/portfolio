@@ -58,6 +58,7 @@ export const TIMELINE = z.array(timelineEntrySchema).parse([
     discipline: 'code',
     monogram: 'iO',
     logo: '/images/about/logos/io-academy.webp',
+    logoFilled: true,
   },
   {
     id: 'ravensbourne-2012',

@@ -80,6 +80,7 @@ export const timelineEntrySchema = z.object({
   companyUrl: z.string().optional(), // when set, the whole card becomes a link to the company
   monogram: z.string().optional(),   // logo-tile initials, shown when there's no `logo` image
   logo: z.string().optional(),       // /images/about/logos/<file> — a real logo drops in here later
+  logoFilled: z.boolean().optional(),// logo is a full-bleed square avatar — round its corners (don't clip wordmarks)
 });
 export type TimelineEntry = z.infer<typeof timelineEntrySchema>;
 
