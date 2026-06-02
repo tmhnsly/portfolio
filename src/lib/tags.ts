@@ -10,7 +10,7 @@ export const TAGS = [
   // music
   'Logic Pro X', 'Ableton Live', 'TASCAM 388', 'Modular synthesis', 'Field recording', 'Guitar', 'Bass Guitar', 'Keyboard',
   // sound
-  'Pro Tools', 'Reaper', 'iZotope RX', 'Soundminer',
+  'Pro Tools', 'Reaper', 'iZotope RX', 'Soundminer', 'Custom SFX',
   // photo
   '35mm', 'Leica M6', 'Mamiya 7', 'Fuji X-T5', 'Lightroom', 'Negative Lab Pro', 'Portra 400', 'HP5+',
   // video
