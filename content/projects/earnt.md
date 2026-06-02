@@ -8,8 +8,8 @@ role: Frontend developer
 year: 2023
 status: "Shipped at Neverbland"
 links:
-  - label: See a live drop
-    url: "https://events.earnt.co.uk/shop/fowlescombe-vip-status"
+  - label: Always-on drops
+    url: "https://earnt.co.uk/always-on"
 ---
 
 Built the front end of Earnt's always-on drops: the flow where members reserve limited experiences, like VIP status at Elmore Court and Fowlescombe, by volunteering rather than paying. Sanity-backed, on a Storybook design system.
