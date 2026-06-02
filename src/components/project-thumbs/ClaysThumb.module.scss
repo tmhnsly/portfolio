@@ -1,9 +1,8 @@
 @use '../../styles/mixins/breakpoints' as *;
 
-/* Clays — a stylised "make a booking" modal (the flow I led): CLAYS ring monogram, a
-   mini calendar with a selected date, a coral Search button. Clays' mint panel +
-   forest-green + coral are brand-fixed; the field/chrome follow the theme. Scales via
-   container queries; reveals on scroll. */
+/* Clays — its real ring logo (SVG used as a mask, filled forest-green), a coral
+   "Book now" button and the result. Clays' mint + forest-green + coral are brand-
+   fixed; the field/chrome follow the theme. Panel radius 8cqmin. Reveals on scroll. */
 
 .root {
   position: absolute;
@@ -19,30 +18,37 @@
 }
 
 .panel {
-  width: 82cqw;
-  max-width: 108cqh;
+  width: 80cqw;
+  max-width: 118cqh;
   display: flex;
   flex-direction: column;
-  gap: 3.4cqmin;
-  padding: 5cqmin;
+  align-items: center;
+  gap: 4cqmin;
+  padding: 7cqmin 5cqmin;
   background: var(--mint);
   border-radius: 8cqmin;
   box-shadow: var(--shadow-md);
 }
 
-.head { display: flex; align-items: center; gap: 3cqmin; }
-.logo { display: inline-flex; align-items: center; gap: 1.8cqmin; font-size: 4cqmin; font-weight: 700; letter-spacing: 0.18em; color: var(--green); }
-.ring { width: 7cqmin; height: 7cqmin; flex: none; }
-.ring circle { fill: none; stroke: var(--green); stroke-width: 2; }
-.title { margin-left: auto; height: 3cqmin; width: 22cqmin; border-radius: 999px; background: color-mix(in oklab, var(--green) 30%, transparent); }
+.logo {
+  width: 30cqmin;
+  aspect-ratio: 1;
+  background: var(--green);
+  mask-image: url('/images/projects/code/clays-logo.svg');
+  mask-repeat: no-repeat;
+  mask-position: center;
+  mask-size: contain;
+}
 
-.cal { background: #fff; border-radius: 3cqmin; padding: 3.4cqmin; display: flex; flex-direction: column; gap: 2.8cqmin; }
-.month { height: 2.8cqmin; width: 34cqmin; margin: 0 auto; border-radius: 999px; background: color-mix(in oklab, var(--green) 32%, transparent); }
-.days { display: grid; grid-template-columns: repeat(7, 1fr); gap: 1.8cqmin; }
-.day { aspect-ratio: 1; border-radius: 50%; background: color-mix(in oklab, var(--green) 12%, transparent); }
-.sel { background: transparent; box-shadow: inset 0 0 0 max(1.5px, 0.7cqmin) var(--green); }
-
-.cta { align-self: flex-end; padding: 2.2cqmin 5.5cqmin; border-radius: 999px; background: var(--coral); color: #fff; font-size: 3.6cqmin; font-weight: 700; }
+.cta {
+  padding: 2.4cqmin 6cqmin;
+  border-radius: 999px;
+  background: var(--coral);
+  color: #fff;
+  font-size: 3.8cqmin;
+  font-weight: 700;
+}
+.note { font-size: 3.2cqmin; font-weight: 600; color: color-mix(in oklab, var(--green) 75%, transparent); }
 
 @media (prefers-reduced-motion: no-preference) {
   .root { --play: paused; }
@@ -50,10 +56,10 @@
   .root * { animation-play-state: var(--play); }
 
   .panel { animation: claysRise 0.55s var(--ease-standard) both; }
-  .cal { animation: claysFade 0.6s var(--ease-standard) 0.2s both; }
-  .sel { animation: claysPop 0.5s var(--ease-standard) 0.42s both; }
-  .cta { animation: claysFade 0.5s var(--ease-standard) 0.48s both; }
+  .logo { animation: claysPop 0.6s var(--ease-standard) 0.16s both; }
+  .cta { animation: claysFade 0.5s var(--ease-standard) 0.32s both; }
+  .note { animation: claysFade 0.5s var(--ease-standard) 0.42s both; }
 }
 @keyframes claysRise { from { opacity: 0; transform: translateY(6cqmin) scale(0.98); } to { opacity: 1; transform: none; } }
+@keyframes claysPop { from { opacity: 0; transform: scale(0.8); } to { opacity: 1; transform: scale(1); } }
 @keyframes claysFade { from { opacity: 0; } }
-@keyframes claysPop { from { opacity: 0; transform: scale(0.3); } to { opacity: 1; transform: scale(1); } }

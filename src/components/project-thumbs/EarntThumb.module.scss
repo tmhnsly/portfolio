@@ -1,15 +1,15 @@
 @use '../../styles/mixins/breakpoints' as *;
 
-/* Earnt — its real logo (alpha PNG used as a mask, filled green), a green "N left"
-   ticket and the "revolution in consumption" marquee, on the cream brand. Concentric
-   radii (panel 8 / padding 5 / inner 3, Fibonacci). Reveals on scroll. */
+/* Earnt — a VIP-status ticket (the always-on drop you earn): cream body with the real
+   EARNT logo + "VIP STATUS", a dashed perforation, and a green tear-off stub with "8
+   left". Cream + forest green brand-fixed; field/chrome follow the theme. Reveals on
+   scroll. */
 
 .root {
   position: absolute;
   inset: 0;
   --green: #1f5135;
   --cream: #faf8f2;
-  --ink: #1a1a1a;
   container-type: size;
   display: grid;
   place-items: center;
@@ -17,64 +17,55 @@
   background: radial-gradient(125% 95% at 80% 8%, color-mix(in oklab, var(--green) 24%, transparent), transparent 60%);
 }
 
-.panel {
-  width: 82cqw;
-  max-width: 118cqh;
+.ticket {
+  width: 84cqw;
+  max-width: 132cqh;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 4.5cqmin;
-  padding: 7cqmin 0 0;
+  align-items: stretch;
   background: var(--cream);
   border-radius: 8cqmin;
   box-shadow: var(--shadow-md);
   overflow: hidden;
 }
 
+.main { flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 3cqmin; padding: 6cqmin; }
 .logo {
-  width: 62%;
-  height: 13cqmin;
+  width: 56%;
+  height: 9cqmin;
   background: var(--green);
   mask-image: url('/images/projects/code/earnt-logo.webp');
   mask-repeat: no-repeat;
-  mask-position: center;
+  mask-position: left center;
   mask-size: contain;
 }
+.vip { font-family: var(--font-display); font-size: 9.5cqmin; font-weight: 700; line-height: 0.88; color: #1a1a1a; }
+.sub { font-size: 3cqmin; font-weight: 600; color: color-mix(in oklab, var(--green) 75%, transparent); }
 
-.ticket {
-  padding: 1.8cqmin 4cqmin;
-  border-radius: 3cqmin;
+.perf { flex: none; width: 0; margin: 4cqmin 0; border-left: max(1.5px, 0.6cqmin) dashed color-mix(in oklab, var(--green) 45%, transparent); }
+
+.stub {
+  flex: none;
+  width: 26%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5cqmin;
   background: var(--green);
   color: var(--cream);
-  font-size: 3.4cqmin;
-  font-weight: 700;
-  font-style: italic;
 }
-
-.marquee {
-  align-self: stretch;
-  margin-top: 0.5cqmin;
-  padding: 2.6cqmin 5cqmin;
-  background: var(--ink);
-  color: var(--cream);
-  font-size: 2.6cqmin;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-align: center;
-  white-space: nowrap;
-  overflow: hidden;
-}
+.num { font-family: var(--font-display); font-size: 13cqmin; font-weight: 700; line-height: 0.9; }
+.left { font-size: 3cqmin; font-weight: 700; letter-spacing: 0.24em; }
 
 @media (prefers-reduced-motion: no-preference) {
   .root { --play: paused; }
   .inview { --play: running; }
   .root * { animation-play-state: var(--play); }
 
-  .panel { animation: earntRise 0.55s var(--ease-standard) both; }
-  .logo { animation: earntFade 0.6s var(--ease-standard) 0.2s both; }
-  .ticket { animation: earntPop 0.5s var(--ease-standard) 0.34s both; }
-  .marquee { animation: earntFade 0.5s var(--ease-standard) 0.44s both; }
+  .ticket { animation: earntRise 0.55s var(--ease-standard) both; }
+  .logo { animation: earntFade 0.6s var(--ease-standard) 0.22s both; }
+  .vip { animation: earntFade 0.6s var(--ease-standard) 0.3s both; }
+  .stub { animation: earntFade 0.6s var(--ease-standard) 0.18s both; }
 }
 @keyframes earntRise { from { opacity: 0; transform: translateY(6cqmin) scale(0.98); } to { opacity: 1; transform: none; } }
 @keyframes earntFade { from { opacity: 0; } }
-@keyframes earntPop { from { opacity: 0; transform: scale(0.4); } to { opacity: 1; transform: scale(1); } }

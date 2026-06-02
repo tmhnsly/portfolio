@@ -1,8 +1,8 @@
 @use '../../styles/mixins/breakpoints' as *;
 
-/* Tooled-Up Education — a clean brand lockup: triangle mark, TOOLED UP wordmark, and
-   the "resource platform" line in its blue. Theme-aware panel (flips); blue fixed.
-   Panel radius 8cqmin (golden/Fibonacci). Reveals on scroll. */
+/* Tooled-Up Education — what it is: the TOOLED UP mark, a line stating it's evidence-
+   based resources for parents & schools, and real topic pills from the platform.
+   Theme-aware panel (flips); blue accent fixed. Panel radius 8cqmin. Reveals on scroll. */
 
 .root {
   position: absolute;
@@ -16,23 +16,36 @@
 }
 
 .panel {
-  width: 80cqw;
+  width: 82cqw;
   max-width: 118cqh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 3cqmin;
-  padding: 9cqmin 5cqmin;
+  gap: 4cqmin;
+  padding: 6.5cqmin 5cqmin;
   background: var(--bg);
   border: max(1px, 0.5cqmin) solid var(--rule);
   border-radius: 8cqmin;
   box-shadow: var(--shadow-md);
+  text-align: center;
 }
 
-.mark { width: 16cqmin; height: 13cqmin; }
+.brand { display: flex; align-items: center; gap: 2.4cqmin; }
+.mark { width: 9cqmin; height: 7.6cqmin; }
 .mark path { fill: none; stroke: var(--text); stroke-width: 3; stroke-linejoin: round; }
-.word { font-size: 7cqmin; font-weight: 800; letter-spacing: 0.1em; color: var(--text); }
-.tag { font-size: 4cqmin; font-weight: 600; font-style: italic; color: var(--tu); }
+.word { font-size: 6cqmin; font-weight: 800; letter-spacing: 0.1em; color: var(--text); }
+
+.tag { font-size: 4cqmin; font-weight: 500; line-height: 1.3; color: var(--text-soft); max-width: 64cqmin; }
+
+.topics { display: flex; flex-wrap: wrap; justify-content: center; gap: 2.2cqmin; }
+.pill {
+  padding: 1.6cqmin 3cqmin;
+  border-radius: 999px;
+  border: max(1px, 0.4cqmin) solid color-mix(in oklab, var(--tu) 55%, var(--rule));
+  color: var(--tu);
+  font-size: 3cqmin;
+  font-weight: 600;
+}
 
 @media (prefers-reduced-motion: no-preference) {
   .root { --play: paused; }
@@ -40,10 +53,9 @@
   .root * { animation-play-state: var(--play); }
 
   .panel { animation: tuRise 0.55s var(--ease-standard) both; }
-  .mark { animation: tuPop 0.6s var(--ease-standard) 0.16s both; }
-  .word { animation: tuUp 0.6s var(--ease-standard) 0.28s both; }
-  .tag { animation: tuUp 0.6s var(--ease-standard) 0.38s both; }
+  .brand { animation: tuFade 0.5s var(--ease-standard) 0.18s both; }
+  .tag { animation: tuFade 0.5s var(--ease-standard) 0.28s both; }
+  .topics { animation: tuFade 0.5s var(--ease-standard) 0.38s both; }
 }
 @keyframes tuRise { from { opacity: 0; transform: translateY(6cqmin) scale(0.98); } to { opacity: 1; transform: none; } }
-@keyframes tuPop { from { opacity: 0; transform: translateY(4cqmin) scale(0.8); } to { opacity: 1; transform: none; } }
-@keyframes tuUp { from { opacity: 0; transform: translateY(3cqmin); } to { opacity: 1; transform: none; } }
+@keyframes tuFade { from { opacity: 0; transform: translateY(2cqmin); } to { opacity: 1; transform: none; } }
