@@ -18,7 +18,7 @@
 .win {
   width: 84cqw;
   max-width: 132cqh;
-  border-radius: 7cqmin;
+  border-radius: clamp(10px, 5cqmin, 18px);
   overflow: hidden;
   background: var(--code-bg);
   box-shadow: var(--shadow-lg);
