@@ -1,8 +1,5 @@
 import { SITE, COPY } from '@/data';
-import { DISCIPLINES } from '@/lib/disciplines';
-import { IMG_SIZES } from '@/lib/breakpoints';
 import { yearsSince } from '@/lib/format';
-import { Media } from '@/components/ui/Media';
 import { TechChip } from '@/components/ui/TechChip';
 import { Entrance, EntranceItem, EntranceTitle } from '@/components/motion/Entrance';
 import styles from './AboutHero.module.scss';
@@ -12,15 +9,10 @@ export function AboutHero() {
   return (
     <Entrance className={styles.section}>
       <div className={styles.grid}>
+        {/* Placeholder until a real portrait is shot: a soft aurora panel in the
+            4:5 slot, ready to swap for a <Media> photo later. */}
         <EntranceItem className={styles.portrait}>
-          <Media
-            src="/images/about/portrait.jpg"
-            grad={DISCIPLINES.code.gradient}
-            alt="Tom Hinsley — portrait"
-            ratio="4/5"
-            sizes={IMG_SIZES.portrait}
-            rounded
-          />
+          <div className={styles.aurora} aria-hidden />
         </EntranceItem>
         <div className={styles.copy}>
           <EntranceTitle className={styles.name}>

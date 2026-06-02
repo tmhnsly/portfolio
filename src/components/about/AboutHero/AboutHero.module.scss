@@ -24,6 +24,18 @@
   }
 }
 
+/* Soft aurora placeholder (no photo yet): layered radial glows over the surface,
+   theme-aware via the Radix scales. Swap for a <Media> portrait later. */
+.aurora {
+  aspect-ratio: 4 / 5;
+  border-radius: var(--radius-xl);
+  background:
+    radial-gradient(120% 90% at 20% 12%, color-mix(in oklab, var(--tomato-9) 48%, transparent), transparent 56%),
+    radial-gradient(110% 100% at 85% 28%, color-mix(in oklab, var(--blue-9) 40%, transparent), transparent 56%),
+    radial-gradient(120% 110% at 72% 96%, color-mix(in oklab, var(--teal-9) 42%, transparent), transparent 60%),
+    var(--surface);
+}
+
 .copy {
   padding-bottom: var(--space-2);
 }
