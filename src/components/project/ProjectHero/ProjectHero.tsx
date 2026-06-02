@@ -5,8 +5,15 @@ import { LinkArrow } from '@/components/ui/LinkArrow';
 import { Entrance, EntranceItem, EntranceTitle } from '@/components/motion/Entrance';
 import styles from './ProjectHero.module.scss';
 
+// The hero surfaces ONE primary link at the top of the pill row: the live site,
+// or the first of `links` when there's no `liveUrl` (so link-only projects like
+// Clays/Earnt/FT show a top link too, matching the liveUrl projects). `repo`
+// stays in the Links section only — a source URL reads better there.
+const hostLabel = (url: string) => url.replace(/^https?:\/\//, '').replace(/^www\./, '').replace(/\/.*$/, '');
+
 export function ProjectHero({ project }: { project: Project }) {
   const d = DISCIPLINES[project.discipline];
+  const primaryLink = project.liveUrl ?? project.links?.[0]?.url;
 
   // Keep the trailing period glued to the final word: each word becomes its own
   // inline-block wordClip (in EntranceTitle), and a soft-wrap opportunity sits
@@ -32,9 +39,9 @@ export function ProjectHero({ project }: { project: Project }) {
             {project.status && (
               <span className={styles.statusPill}>{project.status}</span>
             )}
-            {project.liveUrl && (
-              <a className={styles.liveUrl} href={project.liveUrl} target="_blank" rel="noopener noreferrer">
-                <span className={styles.liveUrlText}>{project.liveUrl.replace('https://', '')}</span>
+            {primaryLink && (
+              <a className={styles.liveUrl} href={primaryLink} target="_blank" rel="noopener noreferrer">
+                <span className={styles.liveUrlText}>{hostLabel(primaryLink)}</span>
                 <LinkArrow inline />
               </a>
             )}
