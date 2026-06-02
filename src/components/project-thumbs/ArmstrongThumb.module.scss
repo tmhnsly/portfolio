@@ -50,12 +50,10 @@
   .root * { animation-play-state: var(--play); }
 
   .term { animation: armRise 0.55s var(--ease-standard) both; }
-  .cursor { animation: armBlink 1s steps(1) infinite; }
   .comp { animation: armPop 0.5s var(--ease-standard) both; }
   .kit .comp:nth-child(1) { animation-delay: 0.34s; }
   .kit .comp:nth-child(2) { animation-delay: 0.42s; }
   .kit .comp:nth-child(3) { animation-delay: 0.5s; }
 }
 @keyframes armRise { from { opacity: 0; transform: translateY(6cqmin) scale(0.98); } to { opacity: 1; transform: none; } }
-@keyframes armBlink { 0%, 50% { opacity: 1; } 50.01%, 100% { opacity: 0; } }
 @keyframes armPop { from { opacity: 0; transform: translateY(2cqmin) scale(0.96); } to { opacity: 1; transform: none; } }
