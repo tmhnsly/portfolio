@@ -7,6 +7,9 @@ tags: ["React", "Next.js", "Orchestration API"]
 role: Frontend lead
 year: 2024
 status: "Shipped at Neverbland"
+links:
+  - label: Clays
+    url: "https://clays.bar/"
 ---
 
 Led the frontend of a new booking flow for Clays, built on a custom orchestration API that gave the business flexible control over packages, add-ons and group sizes. Spend per booking rose 48% in its first week.
