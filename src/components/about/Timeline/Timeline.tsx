@@ -9,22 +9,25 @@ import { TechChip } from '@/components/ui/TechChip';
 import { CardArrow } from '@/components/ui/CardArrow';
 import styles from './Timeline.module.scss';
 
-// place is "Company · Location" — split so the logo tile + heading can use each part
+// place is "Company · Location" — split so the chip + heading can use each part
 function splitPlace(place: string) {
   const [company, ...rest] = place.split(' · ');
   return { company, location: rest.join(' · ') };
 }
 
-// Logo tile: a real logo image when one is set, otherwise a discipline-tinted
-// monogram (initials). Drop a file in public/images/about/logos/ + set `logo`.
-function LogoTile({ entry, company }: { entry: TimelineEntry; company: string }) {
-  if (entry.logo) {
-    // eslint-disable-next-line @next/next/no-img-element -- small brand mark, not a content image
-    return <span className={styles.logoTile}><img src={entry.logo} alt="" className={styles.logoImg} /></span>;
-  }
+// A white chip holding the company's real logo, or a discipline-ink monogram
+// when there's no logo (e.g. self-employed, or a company with no live site).
+function LogoChip({ entry, company }: { entry: TimelineEntry; company: string }) {
   return (
-    <span className={styles.logoTile} aria-hidden>
-      {entry.monogram ?? company.charAt(0).toUpperCase()}
+    <span className={styles.logoChip}>
+      {entry.logo ? (
+        // eslint-disable-next-line @next/next/no-img-element -- small brand mark, not a content image
+        <img src={entry.logo} alt={`${company} logo`} className={styles.logoImg} />
+      ) : (
+        <span className={styles.logoMono} aria-hidden>
+          {entry.monogram ?? company.charAt(0).toUpperCase()}
+        </span>
+      )}
     </span>
   );
 }
@@ -35,10 +38,9 @@ function Item({ entry, index }: { entry: TimelineEntry; index: number }) {
   const { company, location } = splitPlace(entry.place);
   const linked = Boolean(entry.companyUrl);
 
-  // discipline colour, exposed to the card + dot as theme-aware CSS vars
+  // discipline colour, exposed to the card + rail dot as theme-aware CSS vars
   const colourVars = {
     '--tl-fill': d.color,
-    '--tl-on': d.onAccent,
     '--tl-ink': d.ink,
     '--tl-glow': `color-mix(in srgb, ${d.color} 25%, transparent)`,
   } as React.CSSProperties;
@@ -46,24 +48,22 @@ function Item({ entry, index }: { entry: TimelineEntry; index: number }) {
   const cardInner = (
     <>
       <span className={styles.yearMobile}>{entry.period}</span>
-      <div className={styles.cardHead}>
-        <motion.span
-          className={styles.logoWrap}
-          initial={reduce ? false : { scale: 0.82, opacity: 0 }}
-          whileInView={{ scale: 1, opacity: 1 }}
-          viewport={{ once: true, amount: 0.6 }}
-          transition={{ duration: DURATION.base, ease: EASING.standard, delay: reduce ? 0 : index * STAGGER.entries + 0.08 }}
-        >
-          <LogoTile entry={entry} company={company} />
-        </motion.span>
-        <div className={styles.headText}>
-          <div className={styles.role}>{entry.role}</div>
-          <div className={styles.place}>
-            {company}
-            {location && <span className={styles.loc}> · {location}</span>}
-          </div>
+      <motion.span
+        className={styles.logoWrap}
+        initial={reduce ? false : { scale: 0.9, opacity: 0 }}
+        whileInView={{ scale: 1, opacity: 1 }}
+        viewport={{ once: true, amount: 0.6 }}
+        transition={{ duration: DURATION.base, ease: EASING.standard, delay: reduce ? 0 : index * STAGGER.entries + 0.08 }}
+      >
+        <LogoChip entry={entry} company={company} />
+      </motion.span>
+      {linked && <CardArrow className={styles.arrow} />}
+      <div className={styles.headText}>
+        <div className={styles.role}>{entry.role}</div>
+        <div className={styles.place}>
+          {company}
+          {location && <span className={styles.loc}> · {location}</span>}
         </div>
-        {linked && <CardArrow className={styles.arrow} />}
       </div>
       <p className={styles.desc}>{entry.description}</p>
       <div className={styles.chips}>

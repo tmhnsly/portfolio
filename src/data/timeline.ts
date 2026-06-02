@@ -3,10 +3,10 @@ import { timelineEntrySchema } from '@/lib/schemas';
 import { COMPANIES } from './companies';
 
 /**
- * Career timeline. `discipline` colours the rail dot + the card accent via the
- * shared discipline scale (theme-aware). `companyUrl` turns the whole entry into
- * a clickable card. `monogram` is the logo-tile fallback; drop a real logo into
- * `public/images/about/logos/` and set `logo` to use it instead.
+ * Career timeline. `discipline` colours the rail dot + accent via the shared
+ * discipline scale (theme-aware). `companyUrl` turns the whole entry into a
+ * clickable card. `logo` points at a full-colour mark in
+ * `public/images/about/logos/`; `monogram` is the fallback when there's no logo.
  */
 export const TIMELINE = z.array(timelineEntrySchema).parse([
   {
@@ -31,6 +31,7 @@ export const TIMELINE = z.array(timelineEntrySchema).parse([
     tags: ['React', 'Next.js', 'Sanity', 'Storybook'],
     discipline: 'code',
     monogram: 'Nb',
+    logo: '/images/about/logos/neverbland.svg',
   },
   {
     id: 'rocketmakers-2021',
@@ -43,13 +44,14 @@ export const TIMELINE = z.array(timelineEntrySchema).parse([
     tags: ['React', 'TypeScript', 'Node.js', 'REST APIs'],
     discipline: 'code',
     monogram: 'Rm',
+    logo: '/images/about/logos/rocketmakers.svg',
   },
   {
     id: 'io-academy-2020',
     period: 'Sep — Dec 2020',
     role: 'Full Stack Software Engineering',
     place: 'iO Academy · Bath',
-    companyUrl: COMPANIES.ioAcademy.url,
+    // iO Academy closed in March 2025 — no live site to link, so no companyUrl
     description:
       'Intensive four-month engineering bootcamp — finished top 10 globally and #2 in the UK. PHP, JavaScript, React, Node.js, MySQL, MongoDB, Git, OOP and Agile.',
     tags: ['JavaScript', 'React', 'Node.js', 'PHP'],
@@ -67,5 +69,6 @@ export const TIMELINE = z.array(timelineEntrySchema).parse([
     tags: ['Sound design', 'Audio', 'Production'],
     discipline: 'sound',
     monogram: 'Rv',
+    logo: '/images/about/logos/ravensbourne.webp',
   },
 ]);
