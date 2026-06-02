@@ -6,15 +6,15 @@ import type { Discipline, DisciplineMeta } from '@/types';
  * step 9 = solid fill (pills/nav/bloom), step 11 = legible coloured text
  * (periods/links), per the Radix scale. To recolour a discipline, change its
  * hue here AND import that hue's scale in `src/app/layout.tsx`.
- * blog uses `tomato` = the primary brand accent.
+ * code uses `tomato` = the primary brand accent.
  */
 const HUE: Record<Discipline, string> = {
-  code: 'green',
+  code: 'tomato',
   music: 'teal',
   sound: 'blue',
   photo: 'yellow',
-  video: 'orange',
-  blog: 'tomato',
+  video: 'green',
+  blog: 'orange',
 };
 
 const LABEL: Record<Discipline, string> = {
