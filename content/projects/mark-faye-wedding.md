@@ -13,4 +13,4 @@ media:
     title: "Mark & Faye"
 ---
 
-Shot and edited a wedding film for Mark and Faye Earnshaw.
+A wedding film for Mark and Faye Earnshaw, shot run-and-gun at my uncle's wedding. I filmed between catching up with family rather than directing the day, keeping it light. Just enough to remember it by.

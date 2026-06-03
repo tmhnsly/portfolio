@@ -13,4 +13,4 @@ media:
     title: "My Buddy"
 ---
 
-Shot over two days in Barry Island, Wales, set to "My Buddy" by the Alvino Rey Orchestra. Simon takes the lead on screen; everything else, from camera to edit, I did alone.
+Shot over two days in Barry Island, Wales, set to "My Buddy" by the Alvino Rey Orchestra. Simon Thomas takes the lead on screen; I directed, shot and cut it alone, working out shots on the fly and chasing a loose story to piece together in the edit.

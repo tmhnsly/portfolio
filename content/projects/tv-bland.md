@@ -1,14 +1,16 @@
 ---
-title: TV Bland
-desc: A TV listings site built with Next.js and a public TV API
+title: Dropoff TV
+desc: A TV compass for when a show drops off, and whether it's worth starting
 discipline: code
-date: "2023-06-23"
+date: "2026-06-01"
 tags: ["Next.js", "TypeScript", "Tailwind", "REST APIs"]
 role: Design + build
-year: 2023
-status: "Live"
+year: 2026
+status: "In development"
 liveUrl: https://tv-bland-seven.vercel.app
 repo: github.com/tmhnsly/tv-bland
 ---
 
-A TV listings site: search shows, see what's on, and open any title for its schedule and details. Built with Next.js and Tailwind on top of a public TV API, as a focused exercise in data fetching, routing and a clean, responsive grid.
+Dropoff TV is a compass for what to watch: it flags when a series drops off, the point where the quality dips, so you can judge whether it's worth starting.
+
+It began as a technical test for an old job, an exercise in data fetching, routing and a clean, responsive grid on top of a public TV API. I've revived it with a new purpose, and it's in active development.

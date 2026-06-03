@@ -13,4 +13,6 @@ media:
     title: "Rocketmakers B Corp"
 ---
 
-A film announcing Rocketmakers' B Corp certification and explaining what it means. Wrote, presented, shot and edited it end to end.
+A film announcing Rocketmakers' B Corp certification and explaining what it means.
+
+The brief was a single line, "we need a B Corp video", so the angle and the script were mine to work out, the harder part being to make a certification feel engaging. It was also my first proper go at presenting to camera, knowing it was going out on social.
