@@ -7,6 +7,7 @@ import { ClaysThumb } from './ClaysThumb';
 import { EarntThumb } from './EarntThumb';
 import { ArmstrongThumb } from './ArmstrongThumb';
 import { TooledUpThumb } from './TooledUpThumb';
+import { TVBlandThumb } from './TVBlandThumb';
 
 /**
  * Slug → bespoke card thumbnail. A project listed here renders its own vector
@@ -22,6 +23,7 @@ export const PROJECT_THUMBS: Record<string, ComponentType> = {
   earnt: EarntThumb,
   armstrong: ArmstrongThumb,
   'tooled-up-education': TooledUpThumb,
+  'tv-bland': TVBlandThumb,
 };
 
 export const hasProjectThumb = (slug: string): boolean => slug in PROJECT_THUMBS;
