@@ -19,12 +19,14 @@ export function ProjectCard({ project, hideDiscipline = false, featured = false 
         ratio={featured ? '16/10' : '4/3'} sizes={featured ? IMG_SIZES.full : IMG_SIZES.grid3} className={styles.media}>
         {!cover.src && !hasProjectThumb(project.slug) && <span className={styles.hatch} aria-hidden />}
         {!hideDiscipline && <span className={styles.pillTL}><Pill label={d.label} tone="solid" /></span>}
-        <LinkArrow className={styles.arrow} />
       </ProjectThumb>
       <div className={styles.body}>
         <div className={styles.titleRow}>
           <span className={styles.title}>{project.title}</span>
-          <span className={styles.date}>{formatMonthYear(project.date)}</span>
+          <span className={styles.titleMeta}>
+            <span className={styles.date}>{formatMonthYear(project.date)}</span>
+            <LinkArrow className={styles.arrow} />
+          </span>
         </div>
         {project.desc && <div className={styles.desc}>{project.desc}</div>}
         <div className={styles.chips}>{project.tags.map((t) => <TechChip key={t} label={t} />)}</div>

@@ -210,11 +210,9 @@
   position: absolute;
   top: var(--space-5);
   right: var(--space-5);
-  color: var(--tl-ink, var(--accent-ink));
-  opacity: 0;
-  transform: translate(-2px, 2px);
-  transition: opacity var(--duration-hover) var(--ease-standard),
-    transform var(--duration-hover) var(--ease-standard);
+  color: var(--text-soft); /* rests muted, accents on hover — shared card affordance */
+  transition: transform var(--duration-hover) var(--ease-standard),
+    color var(--duration-hover) var(--ease-standard);
 }
 
 .desc {
@@ -231,8 +229,9 @@
   flex-wrap: wrap;
 }
 
-/* Hover affordance — only the linked (anchor) cards lift + reveal the arrow,
-   echoing ProjectCard / DisciplineCard. Colour-only on the text. */
+/* Hover affordance — only the linked (anchor) cards lift; the role + top-right
+   arrow take the entry's discipline ink and the arrow nudges right (the shared
+   card link affordance, matching ProjectCard / DisciplineCard). */
 @include can-hover {
   a.card:hover {
     transform: translateY(-3px);
@@ -243,8 +242,8 @@
     color: var(--tl-ink);
   }
   a.card:hover .arrow {
-    opacity: 1;
-    transform: translate(0, 0);
+    color: var(--tl-ink);
+    transform: translateX(3px);
   }
   a.card:hover .logoChip {
     transform: scale(1.04);
@@ -264,7 +263,6 @@
     }
     a.card:hover .arrow {
       transform: none;
-      opacity: 1;
     }
     a.card:hover .logoChip {
       transform: none;
