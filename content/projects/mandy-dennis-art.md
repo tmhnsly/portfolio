@@ -8,6 +8,7 @@ role: Design + build
 year: 2024
 status: "Live"
 liveUrl: https://mandydennis.art
+repo: github.com/tmhnsly/mandydennis-art
 ---
 
 Designed and built a portfolio and commission site for a UK artist: a calm, responsive showcase for the work, with an enquiry flow built in for commissions.

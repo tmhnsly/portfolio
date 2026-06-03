@@ -9,6 +9,7 @@ role: Design + engineering
 year: 2026
 status: "In development"
 liveUrl: https://chork.app
+repo: github.com/tmhnsly/chork
 ---
 
 Chork is a rock climbing app. Run a bouldering competition at your gym on a live leaderboard, or play head-to-head, solo and group games against friends. Designed, built and shipped independently as an ongoing product.

@@ -20,7 +20,7 @@ export const SITE = siteConfigSchema.parse({
   // Your social links — add/remove freely; rendered in the footer "Elsewhere" column.
   // Set href to your real URL. Remove this entry or add more as needed.
   socials: [
-    { label: 'GitHub', href: '#' },
+    { label: 'GitHub', href: 'https://github.com/tmhnsly' },
     { label: 'Instagram', href: 'https://instagram.com/tomhinsley' },
   ],
 });

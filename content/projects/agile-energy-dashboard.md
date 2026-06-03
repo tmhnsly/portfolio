@@ -8,6 +8,7 @@ role: Design + engineering
 year: 2025
 status: "Live"
 liveUrl: https://agile-energy-dashboard.vercel.app
+repo: github.com/tmhnsly/agile-energy-dashboard
 ---
 
 Designed and built a real-time energy-tariff dashboard: consumption tracking, flexibility insights, and a load-shifting simulation that shows what moving usage to cheaper half-hours would save.
