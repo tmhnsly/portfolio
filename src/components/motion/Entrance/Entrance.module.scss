@@ -13,19 +13,20 @@
 }
 .word {
   display: inline-block;
-  opacity: 0;
   transform: translateY(0.42em);
-  /* opacity + transform only, so the reveal is GPU-composited. The per-word
-     animation-delay is set inline as a concrete value (see Entrance.tsx) rather
-     than calc(var(--i)*…): a custom property inside animation-delay is unreliable
-     on iOS Safari, which dropped the stagger so the title just flashed in. */
+  /* Slide-only reveal (NO opacity): the words stay visible and just slide up.
+     A fade started the text at opacity 0, and on a slow iOS Safari cold-load the
+     animation can be deferred until hydration finishes — so the title sat blank
+     for a few seconds, then everything appeared at once. Animating transform
+     only means the worst case is text that's a hair low, never invisible. Delay
+     is set inline (see Entrance.tsx); transform-only keeps it GPU-composited. */
   animation: titleWordUp 0.62s var(--ease-standard) both;
-  will-change: transform, opacity;
+  will-change: transform;
   backface-visibility: hidden;
 }
 @keyframes titleWordUp {
-  from { opacity: 0; transform: translateY(0.42em); }
-  to { opacity: 1; transform: none; }
+  from { transform: translateY(0.42em); }
+  to { transform: none; }
 }
 @media (prefers-reduced-motion: reduce) {
   .word {
@@ -36,19 +37,18 @@
   }
 }
 
-/* CSS-driven fade for <EntranceItem>: runs immediately on first paint (the
-   `.animate` class is added by <Entrance> on the first session load) — no JS
-   hydration wait, so the deck/desc/etc. don't sit invisible while motion catches
-   up. animation-fill-mode `both` holds the `from` state during the delay so the
-   item is hidden until its turn, then settles at the `to` state. */
-.entranceItem { /* default: visible, no animation (client navs after first load) */ }
+/* CSS-driven slide for <EntranceItem>: runs on first paint (the `.animate` class
+   is added by <Entrance> on the first session load). Slide-only (no opacity) for
+   the same reason as .word — a deferred animation on a slow iOS load must never
+   leave the deck/desc sitting invisible; worst case they're a touch low. */
+.entranceItem { /* default: in place, no animation (client navs after first load) */ }
 .animate .entranceItem {
   /* delay set inline as a concrete value (see .word for the iOS reasoning) */
   animation: entranceItemIn 0.5s var(--ease-standard) both;
 }
 @keyframes entranceItemIn {
-  from { opacity: 0; transform: translateY(12px); }
-  to   { opacity: 1; transform: none; }
+  from { transform: translateY(12px); }
+  to   { transform: none; }
 }
 @media (prefers-reduced-motion: reduce) {
   .animate .entranceItem { animation: none; }
