@@ -1,4 +1,4 @@
-export const DURATION = { fast: 0.16, base: 0.24, medium: 0.32, reveal: 0.42, bloom: 0.52, hover: 0.26, entrance: 0.5, title: 0.62, zone: 0.72 } as const;
+export const DURATION = { fast: 0.16, base: 0.24, medium: 0.32, reveal: 0.42, bloom: 0.52, hover: 0.26, entrance: 0.5, title: 0.62, zone: 0.34 } as const;
 // standard = a smooth ease-out (easeOutQuint): quick response, long soft landing.
 // Reads noticeably smoother than the old [0.2,0.7,0.3,1] for entrances/hovers.
 // smooth = easeInOutCubic: a gentle start AND end — for the zone/page transition
