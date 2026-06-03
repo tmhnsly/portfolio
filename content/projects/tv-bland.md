@@ -7,7 +7,7 @@ tags: ["Next.js", "TypeScript", "Tailwind", "REST APIs"]
 role: Design + build
 year: 2026
 status: "In development"
-liveUrl: https://tv-bland-seven.vercel.app
+liveUrl: https://dropoff-tv.vercel.app
 repo: github.com/tmhnsly/tv-bland
 ---
 
