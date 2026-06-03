@@ -1,9 +1,9 @@
 @use '../../styles/mixins/breakpoints' as *;
 
-/* Mandy Dennis — a bento gallery (the site uses a bento grid): a theme-stroked
-   line figure, a painterly wash, sketch marks, and the artist's palette. CSS +
-   inline SVG; theme-aware (tiles/lines flip via tokens; the wash + palette are
-   fixed paint colours). Scales via container units; the lines draw on reveal. */
+/* Mandy Dennis — a framed painting on a gallery wall under a soft picture-light,
+   with a label plate. Pure CSS, theme-aware (wall/frame/plate/light flip via
+   tokens); the painting is a stylised sunset landscape in fixed paint colours.
+   Scales via container-query units; reveals on scroll. */
 
 .root {
   position: absolute;
@@ -12,66 +12,79 @@
   display: grid;
   place-items: center;
   overflow: hidden;
-  background: radial-gradient(120% 95% at 50% 14%, color-mix(in oklab, var(--text) 6%, transparent), transparent 62%);
+  background: var(--surface-soft);
 }
 
-.panel {
-  width: 84cqw;
-  max-width: 116cqh;
-  display: grid;
-  grid-template-columns: 1.25fr 1fr;
-  grid-template-rows: 1fr 1fr auto;
-  gap: 3cqmin;
-  padding: 5cqmin;
+/* soft gallery picture-light from above */
+.light {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(64% 46% at 50% 0%, color-mix(in oklab, #fff 16%, transparent), transparent 58%);
+}
+
+.wall { position: relative; display: flex; flex-direction: column; align-items: center; gap: 4cqmin; }
+
+.frame {
+  width: 47cqmin;
+  padding: 3cqmin;
   background: var(--bg);
-  border: max(1px, 0.5cqmin) solid var(--rule);
-  border-radius: 7cqmin;
-  box-shadow: var(--shadow-md);
+  border: max(2px, 1.5cqmin) solid var(--text);
+  border-radius: 1cqmin;
+  box-shadow: var(--shadow-lg);
 }
 
-.tile {
-  display: grid;
-  place-items: center;
+/* the painting — a stylised sunset landscape */
+.canvas {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  border-radius: 0.4cqmin;
   overflow: hidden;
-  border-radius: 2.4cqmin;
-  background: var(--surface);
-  border: max(1px, 0.4cqmin) solid var(--rule);
+  background: linear-gradient(
+    180deg,
+    #f1dcb4 0%,
+    #efc193 28%,
+    #e3a47d 46%,
+    #c08a78 58%,
+    #847a83 74%,
+    #4c5263 100%
+  );
 }
-.feature { grid-column: 1; grid-row: 1 / 3; }
-.wash {
-  grid-column: 2;
-  grid-row: 1;
-  background: linear-gradient(150deg, #e8c9a0, #c98a6a 48%, #6c7b8a 100%);
-  border-color: transparent;
+.sun {
+  position: absolute;
+  top: 15%;
+  left: 58%;
+  width: 17%;
+  aspect-ratio: 1;
+  border-radius: 999px;
+  background: #fff2cf;
+  box-shadow: 0 0 7cqmin 1.5cqmin rgb(255 240 198 / 0.55);
 }
-.marks { grid-column: 2; grid-row: 2; }
-.palette {
-  grid-column: 1 / -1;
-  grid-row: 3;
-  display: flex;
-  align-items: center;
-  gap: 2.6cqmin;
-  padding: 2.8cqmin 3.2cqmin;
+.hill {
+  position: absolute;
+  left: -12%;
+  right: -12%;
+  bottom: -8%;
+  height: 40%;
+  border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+  background: #474c5b;
 }
-.palette span { width: 4cqmin; height: 4cqmin; border-radius: 999px; flex: none; }
 
-.art { width: 74%; height: 74%; display: block; }
-.line { fill: none; stroke: var(--text); stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
+.plate { display: flex; flex-direction: column; align-items: center; gap: 1.6cqmin; }
+.name { width: 30cqmin; height: 3cqmin; border-radius: 999px; background: var(--text); opacity: 0.82; }
+.sub { width: 18cqmin; height: 2.2cqmin; border-radius: 999px; background: var(--text); opacity: 0.4; }
 
 @media (prefers-reduced-motion: no-preference) {
   .root { --play: paused; }
   .inview { --play: running; }
   .root * { animation-play-state: var(--play); }
 
-  .panel { animation: mandyRise 0.55s var(--ease-standard) both; }
-  .wash { animation: mandyFade 0.7s var(--ease-standard) 0.2s both; }
-  .palette span { animation: mandyFade 0.5s var(--ease-standard) both; }
-  .palette span:nth-child(1) { animation-delay: 0.34s; }
-  .palette span:nth-child(2) { animation-delay: 0.4s; }
-  .palette span:nth-child(3) { animation-delay: 0.46s; }
-  .palette span:nth-child(4) { animation-delay: 0.52s; }
-  .line { animation: mandyDraw 1s cubic-bezier(0.16, 1, 0.3, 1) 0.25s both; }
+  .frame { animation: mandyRise 0.6s var(--ease-standard) both; }
+  .sun { animation: mandyFade 0.8s var(--ease-standard) 0.25s both; }
+  .hill { animation: mandyRiseSmall 0.6s var(--ease-standard) 0.2s both; }
+  .name { animation: mandyFade 0.5s var(--ease-standard) 0.34s both; }
+  .sub { animation: mandyFade 0.5s var(--ease-standard) 0.4s both; }
 }
-@keyframes mandyRise { from { opacity: 0; transform: translateY(6cqmin) scale(0.98); } to { opacity: 1; transform: none; } }
+@keyframes mandyRise { from { opacity: 0; transform: translateY(6cqmin) scale(0.97); } to { opacity: 1; transform: none; } }
+@keyframes mandyRiseSmall { from { opacity: 0; transform: translateY(3cqmin); } to { opacity: 1; transform: none; } }
 @keyframes mandyFade { from { opacity: 0; } }
-@keyframes mandyDraw { from { stroke-dashoffset: 1; } }
