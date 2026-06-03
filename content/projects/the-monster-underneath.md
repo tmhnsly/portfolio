@@ -13,4 +13,4 @@ media:
     title: "The Monster Underneath"
 ---
 
-Scored a university short film written and directed by my then housemate, Jake Bryson. Wrote and recorded the music on keyboard and guitar in Logic Pro X, following the mood of each scene and keeping the tone light. It mostly sits under the film, though a few tracks step forward on their own.
+A score for my then housemate Jake Bryson's university short film. I wrote and recorded it on keyboard and guitar in Logic Pro X, working scene by scene to follow the mood and keep things light. Most of it stays under the picture, though a few cues ended up standing on their own.
