@@ -3,10 +3,12 @@
 // @media. Mirrored for JS/responsive-image `sizes` in src/lib/breakpoints.ts —
 // keep the two in sync.
 $bp-tablet: 768px;   // ≥ tablet
+$bp-lg: 1024px;      // ≥ large tablet / small laptop (e.g. iPad landscape) — hero goes side-by-side here
 $bp-desktop: 1200px; // ≥ desktop (inline nav, multi-col layouts)
 $bp-wide: 1440px;    // ≥ wide (== container max-width; full-email CTA)
 
 @mixin tablet-up { @media (min-width: $bp-tablet) { @content; } }
+@mixin lg-up { @media (min-width: $bp-lg) { @content; } }
 @mixin desktop-up { @media (min-width: $bp-desktop) { @content; } }
 @mixin wide-up { @media (min-width: $bp-wide) { @content; } }
 @mixin reduced-motion { @media (prefers-reduced-motion: reduce) { @content; } }

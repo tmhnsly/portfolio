@@ -1,14 +1,15 @@
 @use '../../../styles/mixins/breakpoints' as *;
 .hero { display: grid; grid-template-columns: 1fr; gap: var(--space-8);
-  /* Two columns only from desktop. At tablet the deck would be squashed into a
-     narrow column with its eyebrow out of line with the other sections, so it
-     stacks full-width (like mobile) until there's room for a real side-by-side. */
-  @include desktop-up { grid-template-columns: 1.55fr 1fr; gap: var(--space-11); align-items: start; } }
+  /* Side-by-side from large tablets up (iPad landscape ≈ 1024+), where the deck
+     column has real room. Below that it stacks (deck under the title): a narrower
+     two-column squashed the deck, and a wide one-column left a big empty right. */
+  @include lg-up { grid-template-columns: 1.55fr 1fr; gap: var(--space-11); align-items: start; } }
 .lead { display: flex; flex-direction: column; min-width: 0; }
 .title { margin: var(--space-7) 0 0; font-family: var(--font-display); font-weight: 600;
   letter-spacing: var(--ls-display-xxl); line-height: var(--lh-display); color: var(--text);
   font-size: clamp(var(--fs-display), 13vw, var(--fs-display-l)); text-wrap: pretty;
   @include tablet-up { font-size: clamp(44px, 6.5vw, var(--fs-display-l)); }
+  @include lg-up { font-size: clamp(var(--fs-display-l), 6vw, var(--fs-display-xl)); }
   @include desktop-up { font-size: clamp(var(--fs-display-l), 7vw, var(--fs-display-xl)); } }
 .muted { color: var(--text-soft); font-weight: 500; }
 /* glue the final muted word + period so the period never orphans to its own line
@@ -21,11 +22,10 @@
    gutter, in line with the other section eyebrows; from desktop it becomes the
    right-hand hero column. */
 .deckCol { display: flex; flex-direction: column; gap: var(--space-4); width: 100%;
-  @include desktop-up { justify-self: end; } }
+  @include lg-up { justify-self: end; } }
 /* The deck sits left-aligned under its eyebrow at the gutter, so the whole
-   one-column hero (title, sub, eyebrow, deck) reads as one left column. On mobile
-   it's pulled in a touch so it doesn't dominate the first screen (full-bleed was a
-   bit big); from tablet it fills the column (capped). A centred deck floated away
-   from the gutter eyebrow, so it stays left-aligned. Desktop: the right column. */
-.deck { width: 90%; max-width: 440px;
-  @include tablet-up { width: 100%; } }
+   one-column hero (title, sub, eyebrow, deck) reads as one left column. It fills
+   the full column width on phones (capped at 440 from tablet up so it doesn't
+   become huge); a centred deck floated away from the gutter eyebrow, so it stays
+   left-aligned. Desktop: the right column. */
+.deck { width: 100%; max-width: 440px; }
