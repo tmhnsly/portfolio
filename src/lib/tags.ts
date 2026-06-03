@@ -11,7 +11,7 @@ export const TAGS = [
   'Logic Pro X', 'Ableton Live', 'TASCAM 388', 'Modular synthesis', 'Field recording', 'Guitar', 'Bass Guitar', 'Keyboard',
   'Pro Tools', 'Reaper', 'iZotope RX', 'Soundminer', 'Custom SFX',
   // video
-  'Final Cut Pro X', 'Lumix G7', 'iPhone 16 Pro', 'iPhone 6S', 'Filmic Pro', 'ToonSquid', 'iPad Pro', 'GarageBand',
+  'Final Cut Pro X', 'Lumix G7', 'iPhone 16 Pro', 'iPhone 6S', 'Filmic Pro', 'ToonSquid', 'LumaFusion', 'iPad Pro', 'GarageBand',
   // writing
   'Long-form writing', 'Markdown',
   // cross-cutting project + topic tags (not curated discipline tools)

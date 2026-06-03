@@ -14,3 +14,5 @@ media:
 ---
 
 A series of staff interviews marking Rocketmakers' 15th birthday. Handled concept, questions, interviews, camera, edit and sound, start to finish. Built it around the people, letting staff tell the company's story across fifteen years in their own words.
+
+The company had no audio kit, so I improvised one: a 3D-printed lavalier mount holding an old pair of wired Apple EarPods, recording into my phone. Cost nothing and sounds great.
