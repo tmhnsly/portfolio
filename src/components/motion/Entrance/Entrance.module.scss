@@ -15,12 +15,11 @@
   display: inline-block;
   opacity: 0;
   transform: translateY(0.42em);
-  /* opacity + transform only, so the reveal is GPU-composited and can't be
-     frozen by the home page's hydration on a slow load. The old version slid a
-     transform inside a clip-path mask, which de-opts it to the main thread — it
-     would stall mid-reveal during hydration, then snap all the words in at once. */
+  /* opacity + transform only, so the reveal is GPU-composited. The per-word
+     animation-delay is set inline as a concrete value (see Entrance.tsx) rather
+     than calc(var(--i)*…): a custom property inside animation-delay is unreliable
+     on iOS Safari, which dropped the stagger so the title just flashed in. */
   animation: titleWordUp 0.62s var(--ease-standard) both;
-  animation-delay: calc(var(--i, 0) * 0.045s);
   will-change: transform, opacity;
   backface-visibility: hidden;
 }
@@ -44,8 +43,8 @@
    item is hidden until its turn, then settles at the `to` state. */
 .entranceItem { /* default: visible, no animation (client navs after first load) */ }
 .animate .entranceItem {
+  /* delay set inline as a concrete value (see .word for the iOS reasoning) */
   animation: entranceItemIn 0.5s var(--ease-standard) both;
-  animation-delay: calc(0.12s + var(--ei-i, 0) * 0.09s);
 }
 @keyframes entranceItemIn {
   from { opacity: 0; transform: translateY(12px); }

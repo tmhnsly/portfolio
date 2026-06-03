@@ -42,7 +42,7 @@ export function EntranceItem({ children, className, i = 0 }: { children: React.R
   return (
     <div
       className={`${className ?? ''} ${styles.entranceItem}`.trim()}
-      style={{ '--ei-i': i } as React.CSSProperties}
+      style={{ animationDelay: `${(0.12 + i * 0.09).toFixed(3)}s` }}
     >
       {children}
     </div>
@@ -68,7 +68,7 @@ function revealWords(node: React.ReactNode, ctx: { i: number }): React.ReactNode
         const i = ctx.i++;
         return (
           <span key={`w${i}-${k}`} className={styles.wordClip}>
-            <span className={styles.word} style={{ '--i': i } as React.CSSProperties}>
+            <span className={styles.word} style={{ animationDelay: `${(i * 0.045).toFixed(3)}s` }}>
               {part}
             </span>
           </span>
