@@ -11,5 +11,8 @@
 .muted { color: var(--text-soft); font-weight: 500; }
 .period { color: var(--accent-ink-to, var(--accent-ink)); } /* static target — no colour morph on zone change */
 .sub { margin-top: var(--space-7); max-width: 580px; font-size: var(--fs-body-l); color: var(--text-soft); line-height: var(--lh-body); }
-.deckCol { display: flex; flex-direction: column; gap: var(--space-4); width: 100%; max-width: 440px;
-  @include tablet-up { justify-self: end; } }
+/* One column (<tablet): centre the deck + let it grow so it fills the width
+   rather than sitting left with dead space. Two columns (tablet-up): it returns
+   to 440px, right-aligned in its narrower column beside the text. */
+.deckCol { display: flex; flex-direction: column; gap: var(--space-4); width: 100%; max-width: 520px; margin-inline: auto;
+  @include tablet-up { max-width: 440px; margin-inline: 0; justify-self: end; } }
