@@ -1,9 +1,11 @@
 @use '../../styles/mixins/breakpoints' as *;
 
 /* Mandy Dennis — a framed painting on a gallery wall under a soft picture-light,
-   with a label plate. Pure CSS, theme-aware (wall/frame/plate/light flip via
-   tokens); the painting is a stylised sunset landscape in fixed paint colours.
-   Scales via container-query units; reveals on scroll. */
+   with a label plate. Pure CSS, theme-aware: the painting itself flips with the
+   theme — a warm sunset landscape by day, a moonlit night scene (cooler sky, a
+   pale moon, stars) in dark mode — driven by the --paint-* vars below. Frame,
+   wall and plate follow the tokens. Scales via container-query units; reveals
+   on scroll. */
 
 .root {
   position: absolute;
@@ -13,6 +15,27 @@
   place-items: center;
   overflow: hidden;
   background: var(--surface-soft);
+
+  /* day — sunset landscape */
+  --paint-sky: linear-gradient(180deg, #f1dcb4 0%, #efc193 28%, #e3a47d 46%, #c08a78 58%, #847a83 74%, #4c5263 100%);
+  --paint-orb: #fff2cf;
+  --paint-orb-glow: rgb(255 240 198 / 0.55);
+  --paint-hill: #474c5b;
+  --paint-stars: none;
+}
+/* night — moonlit scene */
+:global(.dark) .root {
+  --paint-sky: linear-gradient(180deg, #0b1126 0%, #141d3c 50%, #1f2b52 76%, #2b3358 100%);
+  --paint-orb: #e9edf8;
+  --paint-orb-glow: rgb(214 224 248 / 0.5);
+  --paint-hill: #070a14;
+  --paint-stars:
+    radial-gradient(1.4px 1.4px at 22% 24%, #fff, transparent),
+    radial-gradient(1.1px 1.1px at 63% 16%, #fff, transparent),
+    radial-gradient(1.5px 1.5px at 82% 30%, #fff, transparent),
+    radial-gradient(1px 1px at 38% 13%, rgb(255 255 255 / 0.8), transparent),
+    radial-gradient(1px 1px at 49% 33%, rgb(255 255 255 / 0.7), transparent),
+    radial-gradient(1.2px 1.2px at 12% 40%, rgb(255 255 255 / 0.75), transparent);
 }
 
 /* soft gallery picture-light from above */
@@ -33,22 +56,21 @@
   box-shadow: var(--shadow-lg);
 }
 
-/* the painting — a stylised sunset landscape */
+/* the painting — sunset by day, moonlit by night */
 .canvas {
   position: relative;
   width: 100%;
   aspect-ratio: 4 / 5;
   border-radius: 0.4cqmin;
   overflow: hidden;
-  background: linear-gradient(
-    180deg,
-    #f1dcb4 0%,
-    #efc193 28%,
-    #e3a47d 46%,
-    #c08a78 58%,
-    #847a83 74%,
-    #4c5263 100%
-  );
+  background: var(--paint-sky);
+}
+.canvas::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: var(--paint-stars);
+  background-repeat: no-repeat;
 }
 .sun {
   position: absolute;
@@ -57,8 +79,8 @@
   width: 17%;
   aspect-ratio: 1;
   border-radius: 999px;
-  background: #fff2cf;
-  box-shadow: 0 0 7cqmin 1.5cqmin rgb(255 240 198 / 0.55);
+  background: var(--paint-orb);
+  box-shadow: 0 0 7cqmin 1.5cqmin var(--paint-orb-glow);
 }
 .hill {
   position: absolute;
@@ -67,7 +89,7 @@
   bottom: -8%;
   height: 40%;
   border-radius: 50% 50% 0 0 / 100% 100% 0 0;
-  background: #474c5b;
+  background: var(--paint-hill);
 }
 
 .plate { display: flex; flex-direction: column; align-items: center; gap: 1.6cqmin; }
