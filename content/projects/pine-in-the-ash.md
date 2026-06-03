@@ -13,4 +13,4 @@ media:
     title: "The film"
 ---
 
-Sound for a short animated film at university, cut to picture in Logic Pro X. It had a Tom and Jerry feel, so I leaned into the musical foley of those early Tom and Jerry and Disney shorts: drum hits for the bonks, drum rolls and a crash for emphasis and crescendo. The animal sounds came from recordings of real bobcats.
+Sound for a short animated film at university, cut to picture in Logic Pro X. It had a Tom and Jerry feel, so I leaned into the musical foley of those old Disney and MGM shorts: drum hits for the bonks, drum rolls and a crash for emphasis and crescendo. The animal sounds came from recordings of real bobcats.

@@ -13,4 +13,4 @@ media:
     title: "The advert"
 ---
 
-Took an existing advert back to picture and rebuilt its soundtrack from scratch, a collaboration with musician Kieun Bae. I handled the sound, effects and tone matched to the cut, and Kieun wrote the music.
+Took an existing advert back to picture and rebuilt its soundtrack from scratch, a collaboration with musician Kieun Bae. I handled the sound and effects, matched to the cut, and Kieun wrote the music.
