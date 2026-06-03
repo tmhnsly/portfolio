@@ -1,5 +1,5 @@
 ---
-title: Hands Ad Sound Replacement
+title: The Phaeton
 desc: A full sound replacement for an advert
 discipline: audio
 date: "2013-03-01"
@@ -9,7 +9,7 @@ year: 2013
 media:
   - type: youtube
     id: "3HsOfIjHkEU"
-    poster: "/images/projects/thumbnails/audio/hands_ad.webp"
+    poster: "/images/projects/thumbnails/audio/the_phaeton.webp"
     title: "The advert"
 ---
 
