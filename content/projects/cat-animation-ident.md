@@ -1,10 +1,10 @@
 ---
 title: Cat Animation Ident
-desc: Sound and music for a short animated advert
+desc: Sound for a short animated advert
 discipline: audio
 date: "2014-02-01"
-tags: ["Sound", "Music", "Logic Pro X", "Custom SFX"]
-role: Sound design + music
+tags: ["Sound", "Logic Pro X", "Custom SFX"]
+role: Sound design
 year: 2014
 media:
   - type: youtube
@@ -13,4 +13,4 @@ media:
     title: "The ident"
 ---
 
-An ident has a few seconds to land. Built the sound and composed the music for a short animated cat advert, every hit timed to the cut, taking cues from old Cartoon Network and Nickelodeon idents. The fun was figuring out which abstract sounds evoke a sense of movement rather than the literal thing on screen.
+An ident has a few seconds to land. Built the sound for a short animated cat advert, every hit timed to the cut and taking cues from old Cartoon Network and Nickelodeon idents. The fun was figuring out which abstract sounds evoke a sense of movement rather than the literal thing on screen.
