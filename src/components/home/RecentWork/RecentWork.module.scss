@@ -8,21 +8,19 @@
 .grid { margin-top: var(--space-7); display: grid; grid-template-columns: 1fr; gap: var(--space-7);
   @include desktop-up { grid-template-columns: 1.55fr 1fr; } }
 .pill { display: inline-flex; margin-top: var(--space-1); }
-/* card-link arrow — top-right INSIDE the thumbnail (white on the media, revealed
-   on hover), matching the featured card so both read the same way */
-.thumbMedia { position: relative; }
-.arrow { position: absolute; top: 8px; right: 8px; z-index: var(--z-card-overlay);
-  color: var(--on-media); opacity: 0; transform: translate(-2px, 2px);
-  transition: opacity var(--duration-hover) var(--ease-standard), transform var(--duration-hover) var(--ease-standard);
-  filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.45)); }
+/* card-link arrow at the card's top-right corner — rests muted, accents + nudges
+   on hover, like the About cards (not over the thumbnail) */
+.arrow { position: absolute; top: var(--space-4); right: var(--space-4);
+  color: var(--text-soft);
+  transition: transform var(--duration-hover) var(--ease-standard), color var(--duration-hover) var(--ease-standard); }
 @include can-hover {
-  .thumb:hover .arrow { opacity: 1; transform: translate(0, 0); }
+  .thumb:hover .arrow { transform: translateX(3px); color: var(--accent-ink); }
 }
 .thumbs { display: flex; flex-direction: column; gap: var(--space-4); }
-.thumb { display: grid; grid-template-columns: 100px 1fr; gap: var(--space-4); align-items: center;
+.thumb { position: relative; display: grid; grid-template-columns: 100px 1fr; gap: var(--space-4); align-items: center;
   @include tablet-up { grid-template-columns: 140px 1fr; }
   padding: 10px; border-radius: var(--radius-xl); border: 1px solid var(--surface-edge); background: var(--surface-soft); }
-.thumbMeta { display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-2); }
+.thumbMeta { display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-2); padding-right: var(--space-6); }
 .thumbTitle { font-family: var(--font-display); font-size: var(--fs-h4); font-weight: 600; letter-spacing: -0.025em; color: var(--text); }
 .thumbDesc { font-size: var(--fs-caption); color: var(--text-soft); line-height: 1.4; }
 .foot { margin-top: var(--space-6); padding-top: var(--space-4); border-top: 1px solid var(--rule-soft);
