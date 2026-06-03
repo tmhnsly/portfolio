@@ -96,11 +96,14 @@ export function CardDeck({ items }: { items: Project[] }) {
     }
   }, [advance, wrapRef]); // wrapRef is the hook's stable ref — listed to satisfy exhaustive-deps
 
+  // `order` in the deps resets the timer on every advance (manual nav OR auto),
+  // so pressing prev/next/tick/arrow gives a full AUTO_MS to look at the new card
+  // instead of it auto-advancing again moments later.
   useEffect(() => {
     if (reduce || hovered || n <= 1 || !inView) return;
     const id = setInterval(() => advance(-1), AUTO_MS);
     return () => clearInterval(id);
-  }, [reduce, hovered, n, inView, advance]);
+  }, [reduce, hovered, n, inView, advance, order]);
 
   if (n === 0) return null;
 
