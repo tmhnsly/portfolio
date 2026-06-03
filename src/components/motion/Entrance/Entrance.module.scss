@@ -10,38 +10,28 @@
 .wordClip {
   display: inline-block;
   vertical-align: baseline;
-  /* room so glyphs aren't shaved at rest — extra below for descenders, a little
-     each side for AA/wide glyphs — then negate it for layout so word spacing +
-     line spacing are unchanged. clip-path (not overflow:hidden) avoids the
-     inline-block baseline shift overflow:hidden causes. */
-  padding: 0.08em 0.12em 0.22em;
-  margin: -0.08em -0.12em -0.22em;
-  clip-path: inset(0);
 }
 .word {
   display: inline-block;
-  transform: translateY(110%); /* start fully below the clip */
-  animation: titleWordUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-  animation-delay: calc(var(--i, 0) * 0.05s);
-  will-change: transform;
+  opacity: 0;
+  transform: translateY(0.42em);
+  /* opacity + transform only, so the reveal is GPU-composited and can't be
+     frozen by the home page's hydration on a slow load. The old version slid a
+     transform inside a clip-path mask, which de-opts it to the main thread — it
+     would stall mid-reveal during hydration, then snap all the words in at once. */
+  animation: titleWordUp 0.62s var(--ease-standard) both;
+  animation-delay: calc(var(--i, 0) * 0.045s);
+  will-change: transform, opacity;
   backface-visibility: hidden;
 }
 @keyframes titleWordUp {
-  from {
-    transform: translateY(110%);
-  }
-  to {
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(0.42em); }
+  to { opacity: 1; transform: none; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .wordClip {
-    clip-path: none;
-    padding: 0;
-    margin: 0;
-  }
   .word {
     animation: none;
+    opacity: 1;
     transform: none;
     will-change: auto;
   }
