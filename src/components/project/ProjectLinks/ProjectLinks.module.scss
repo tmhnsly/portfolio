@@ -1,16 +1,16 @@
 @use '../../../styles/mixins/glass' as *;
 @use '../../../styles/mixins/breakpoints' as *;
 
-/* a row of links under the cover image; wraps on narrow viewports */
+/* a stacked column of links in the sidebar — each spans the full width so the
+   URL has room to read (short-labelled pairs otherwise sat 2-up and truncated) */
 .links {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   gap: var(--space-3);
 }
 
 .linkRow {
   @include glass;
-  flex: 1 1 240px;
   min-width: 0; /* flex item must shrink below content so the URL can ellipsis */
   display: flex;
   align-items: center;
