@@ -22,8 +22,11 @@
 
   /* apple-style glass (nav): milky translucent fill from --bg so it frosts
      whatever scrolls behind it (incl. coloured hero cards) while keeping text
-     readable; auto-themes because --bg swaps. --glass-sheen = top rim light. */
-  --glass: color-mix(in srgb, var(--bg) 72%, transparent);
+     readable; auto-themes because --bg swaps. --glass-sheen = top rim light.
+     Fill kept fairly opaque on purpose: backdrop-filter can't blur a *playing*
+     cross-origin video (the YouTube iframe paints on its own layer), so the fill
+     alone has to keep the bar legible when a video scrolls behind it. */
+  --glass: color-mix(in srgb, var(--bg) 80%, transparent);
   --glass-sheen: var(--white-a8);
 
   /* text */
@@ -69,7 +72,7 @@
 .dark {
   /* dark glass: a touch more opaque (dark bg needs body to read as frosted),
      fainter sheen so the rim light stays subtle on a dark panel */
-  --glass: color-mix(in srgb, var(--bg) 64%, transparent);
+  --glass: color-mix(in srgb, var(--bg) 74%, transparent);
   --glass-sheen: var(--white-a4);
   --shadow-sm: 0 2px 8px var(--black-a5);
   --shadow-md: 0 6px 16px var(--black-a7);
