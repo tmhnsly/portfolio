@@ -1,10 +1,7 @@
 'use client';
-import { useEffect, useLayoutEffect, useRef } from 'react';
+import { useEffect } from 'react';
 import { usePathname } from 'next/navigation';
-import { motion, useReducedMotion } from 'motion/react';
-
-// useLayoutEffect on the client (runs before paint), useEffect on the server (no-op, no SSR warning)
-const useIsomorphicLayoutEffect = typeof window !== 'undefined' ? useLayoutEffect : useEffect;
+import { motion, useReducedMotion, useMotionTemplate, useTransform } from 'motion/react';
 import type { BreadcrumbData } from '@/lib/content';
 import { resolveZone } from '@/lib/zone';
 import { Nav } from '../Nav';
@@ -39,32 +36,29 @@ export function Shell({
   const { discipline, active, accent, accentInk, onAccent } = resolveZone(pathname);
   // the subtle, no-flash Zone colour morph lives in its own tested hook
   const { from, to, mix } = useZoneMorph({ accent, accentInk }, reduce);
-  const shellRef = useRef<HTMLDivElement>(null);
+  // Build --accent / --accent-ink as single motion-driven values: the OKLab
+  // from→to interpolation, updated atomically each frame. The previous version
+  // combined the React-committed from/to strings with a motion-driven --zone-mix
+  // in CSS, which raced — the new colour could paint for a frame before motion
+  // reset the mix (a visible jump). One motion template per var has no such split.
+  // (Unregistered string → still re-resolves the Radix scale on a theme toggle.)
+  const mixPct = useTransform(mix, (m) => `${m * 100}%`);
+  const accentVar = useMotionTemplate`color-mix(in oklab, ${from.accent}, ${to.accent} ${mixPct})`;
+  const accentInkVar = useMotionTemplate`color-mix(in oklab, ${from.accentInk}, ${to.accentInk} ${mixPct})`;
 
   // Reliably start each route at the top: the persistent Shell means the window
   // scroll position can otherwise carry over from the previous route on navigation.
   useEffect(() => { window.scrollTo(0, 0); }, [pathname]);
 
-  // On a zone change React commits the accent strings (--accent-to etc.)
-  // synchronously, but --zone-mix is a MotionValue motion writes on its own
-  // frame — so for one frame the new --accent-to would paint against a stale
-  // --zone-mix (=1), flashing straight to the target colour before the morph
-  // runs. Flush the reset mix to the DOM before paint to keep the morph clean.
-  useIsomorphicLayoutEffect(() => {
-    shellRef.current?.style.setProperty('--zone-mix', String(mix.get()));
-  }, [to, mix]);
-
   return (
     <motion.div
-      ref={shellRef}
       className={styles.shell}
       style={{
-        '--accent-from': from.accent,
-        '--accent-to': to.accent,
-        '--accent-ink-from': from.accentInk,
+        '--accent': accentVar,
+        '--accent-ink': accentInkVar,
+        // static target — the title period jumps straight to the new ink, no morph
         '--accent-ink-to': to.accentInk,
         '--on-accent': onAccent,
-        '--zone-mix': mix, // MotionValue → motion binds it; cast covers the custom props
       } as unknown as React.CSSProperties}
     >
       <Bloom zone={discipline ?? 'default'} tint={accent} />

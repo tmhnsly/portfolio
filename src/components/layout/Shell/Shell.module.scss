@@ -6,16 +6,14 @@
   overflow-x: clip; /* contain FullBleed breakouts; clip (not hidden) keeps sticky nav working */
   background: var(--bg);
   color: var(--text);
-  /* Morph the accent across the whole app on a zone change by interpolating
-     from→to in OKLab, driven by --zone-mix (0→1, animated by the Shell). OKLab
-     (Cartesian L/a/b) is the chosen balance: a perceptually-even path that avoids
-     OKLCH's vivid hue-wheel sweep AND sRGB's dark/muddy midpoints. It can't fully
-     avoid an intermediate hue — green↔tomato are both warm, so any path grazes
-     yellow/orange — but OKLab keeps it least obtrusive. from/to/--zone-mix are set
-     inline; consumers just read var(--accent)/var(--accent-ink). Being unregistered,
-     these also re-resolve the Radix scale on a dark/light toggle. */
-  --accent: color-mix(in oklab, var(--accent-from, var(--tomato-9)), var(--accent-to, var(--tomato-9)) calc(var(--zone-mix, 1) * 100%));
-  --accent-ink: color-mix(in oklab, var(--accent-ink-from, var(--tomato-11)), var(--accent-ink-to, var(--tomato-11)) calc(var(--zone-mix, 1) * 100%));
+  /* --accent / --accent-ink are set inline by the Shell as motion templates that
+     interpolate the zone from→to in OKLab each frame (see Shell.tsx) — one value
+     per var, so there's no CSS-side race between a synchronous colour and an
+     async mix. OKLab is the chosen path (even, avoids OKLCH's hue-wheel sweep and
+     sRGB's muddy midpoints). The statics below are a fallback if the inline value
+     is ever absent (e.g. pre-hydration). */
+  --accent: var(--tomato-9);
+  --accent-ink: var(--tomato-11);
   /* Derive the accent glow HERE (where --accent is the zone colour), not at
      :root — at :root var(--accent) is still the base tomato, which left the
      discipline dots glowing red on non-tomato zones. */
