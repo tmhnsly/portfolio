@@ -1,18 +1,23 @@
 @use '../../../styles/mixins/breakpoints' as *;
 .hero { display: grid; grid-template-columns: 1fr; gap: var(--space-8);
-  @include tablet-up { grid-template-columns: 1.25fr 0.85fr; gap: var(--space-8); align-items: start; }
-  @include desktop-up { grid-template-columns: 1.55fr 1fr; gap: var(--space-11); } }
+  /* Two columns only from desktop. At tablet the deck would be squashed into a
+     narrow column with its eyebrow out of line with the other sections, so it
+     stacks full-width (like mobile) until there's room for a real side-by-side. */
+  @include desktop-up { grid-template-columns: 1.55fr 1fr; gap: var(--space-11); align-items: start; } }
 .lead { display: flex; flex-direction: column; min-width: 0; }
 .title { margin: var(--space-7) 0 0; font-family: var(--font-display); font-weight: 600;
   letter-spacing: var(--ls-display-xxl); line-height: var(--lh-display); color: var(--text);
   font-size: clamp(var(--fs-display), 13vw, var(--fs-display-l)); text-wrap: pretty;
   @include tablet-up { font-size: clamp(44px, 6.5vw, var(--fs-display-l)); }
-  @include desktop-up { font-size: clamp(var(--fs-display-l), 9vw, var(--fs-display-xxl)); } }
+  @include desktop-up { font-size: clamp(var(--fs-display-l), 7vw, var(--fs-display-xl)); } }
 .muted { color: var(--text-soft); font-weight: 500; }
 .period { color: var(--accent-ink-to, var(--accent-ink)); } /* static target — no colour morph on zone change */
 .sub { margin-top: var(--space-7); max-width: 580px; font-size: var(--fs-body-l); color: var(--text-soft); line-height: var(--lh-body); }
-/* One column (<tablet): centre the deck + let it grow so it fills the width
-   rather than sitting left with dead space. Two columns (tablet-up): it returns
-   to 440px, right-aligned in its narrower column beside the text. */
-.deckCol { display: flex; flex-direction: column; gap: var(--space-4); width: 100%; max-width: 520px; margin-inline: auto;
-  @include tablet-up { max-width: 440px; margin-inline: 0; justify-self: end; } }
+/* deckCol spans the content width so its "Featured deck" eyebrow sits at the
+   gutter, in line with the other section eyebrows. The deck itself is centred +
+   capped within it (filling one-column views without a lonely left pin). From
+   desktop the column becomes the right-hand hero column. */
+.deckCol { display: flex; flex-direction: column; gap: var(--space-4); width: 100%;
+  @include desktop-up { justify-self: end; } }
+.deck { width: 100%; max-width: 520px; margin-inline: auto;
+  @include desktop-up { max-width: 440px; margin-inline: 0; } }

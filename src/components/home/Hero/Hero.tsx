@@ -19,7 +19,9 @@ export function Hero({ featured }: { featured: Project[] }) {
       </div>
       <EntranceItem i={1} className={styles.deckCol}>
         <Eyebrow>Featured deck</Eyebrow>
-        <CardDeck items={featured} />
+        <div className={styles.deck}>
+          <CardDeck items={featured} />
+        </div>
       </EntranceItem>
     </Entrance>
   );
