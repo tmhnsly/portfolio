@@ -33,7 +33,10 @@ export function Media({ src, grad, alt = '', ratio = '4/3', sizes = '100vw', pri
 
   const cls = [styles.frame, rounded ? styles.rounded : '', className].filter(Boolean).join(' ');
   return (
-    <div className={cls} style={{ aspectRatio: ratio, ...(grad ? { background: grad } : null) }}>
+    <div className={cls} style={{ aspectRatio: ratio }}>
+      {grad && (
+        <span aria-hidden className={`${styles.grad} ${loaded ? styles.gradHidden : ''}`} style={{ background: grad }} />
+      )}
       {src && (
         <Image
           ref={ref}

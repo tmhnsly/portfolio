@@ -1,19 +1,22 @@
 .frame { position: relative; width: 100%; overflow: hidden; }
 .rounded { border-radius: var(--radius-xl); }
 
-/* Reveal on load: the image starts hidden + slightly scaled over the discipline
-   `grad`, then fades and settles in once it decodes — so it reveals from the
-   section colour rather than popping in. */
+/* The discipline `grad` is its own layer behind the image (not the frame's
+   background) so it can FADE OUT once the image loads. Left in place, it bled a
+   1px hairline of the section colour wherever sub-pixel rounding left the fill
+   image a touch short of the rounded frame; once it's gone there's nothing to
+   bleed. For image-less thumbnails (no src) it never fades — it IS the artwork. */
+.grad {
+  position: absolute;
+  inset: 0;
+  transition: opacity 0.7s var(--ease-standard);
+}
+.gradHidden { opacity: 0; }
+
+/* Reveal on load: the image starts hidden + slightly scaled, then fades and
+   settles in once it decodes (over the grad, which fades out in step). */
 .img {
   object-fit: cover;
-  /* Overscan the fill box by 1px on every side so the rounded frame's `grad`
-     placeholder can't bleed a hairline at the edges: the image fills an
-     aspect-ratio box and sub-pixel rounding otherwise leaves it ~1px short,
-     exposing a line of the section colour along the bottom/side (most visible
-     after the hover lift). !important overrides next/image's inline fill inset. */
-  inset: -1px !important;
-  width: calc(100% + 2px) !important;
-  height: calc(100% + 2px) !important;
   opacity: 0;
   transform: scale(1.04);
   transition: opacity 0.7s var(--ease-standard), transform 0.9s var(--ease-standard);
