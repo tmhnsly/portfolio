@@ -8,11 +8,13 @@ import { Skills } from '@/components/about/Skills';
 import { ContactCTA } from '@/components/about/ContactCTA';
 import { TIMELINE } from '@/data';
 import { getSkills } from '@/data/skills';
+import { pageMeta } from '@/lib/metadata';
 
-export const metadata: Metadata = {
-  title: 'About · Tom Hinsley',
-  description: 'Frontend developer in London with a sound-design background. Code, with side practices in music, sound, photography and film.',
-};
+export const metadata: Metadata = pageMeta({
+  title: 'About',
+  description: 'Frontend developer in London with a sound-design background. Code, with side practices in audio and film.',
+  path: '/about',
+});
 
 export default function AboutPage() {
   return (

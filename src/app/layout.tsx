@@ -4,6 +4,7 @@ import { ThemeProvider, THEME_SCRIPT } from '@/lib/theme';
 import { Shell } from '@/components/layout/Shell';
 import { breadcrumbData } from '@/lib/content';
 import { COPY } from '@/data';
+import { SITE_URL } from '@/lib/site-url';
 import '@radix-ui/colors/sand.css';
 import '@radix-ui/colors/sand-dark.css';
 import '@radix-ui/colors/sand-alpha.css';
@@ -34,8 +35,19 @@ const display = Space_Grotesk({ subsets: ['latin'], weight: ['400', '500', '600'
 const mono = Space_Mono({ subsets: ['latin'], weight: ['400', '700'], variable: '--font-space-mono', display: 'swap' });
 
 export const metadata: Metadata = {
-  title: COPY.meta.title,
+  metadataBase: new URL(SITE_URL),
+  title: { default: COPY.meta.title, template: '%s · Tom Hinsley' },
   description: COPY.meta.description,
+  alternates: { canonical: '/' },
+  openGraph: {
+    type: 'website',
+    siteName: 'Tom Hinsley',
+    locale: 'en_GB',
+    url: '/',
+    title: COPY.meta.title,
+    description: COPY.meta.description,
+  },
+  twitter: { card: 'summary_large_image' },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

@@ -1,5 +1,7 @@
+import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
+import { pageMeta } from '@/lib/metadata';
 import { BiLeftArrowAlt, BiRightArrowAlt } from 'react-icons/bi';
 import { getAllPosts, getPost, postNeighbours, relatedPosts } from '@/lib/content';
 import { DISCIPLINES } from '@/lib/disciplines';
@@ -21,6 +23,13 @@ import styles from './page.module.scss';
 
 export function generateStaticParams() {
   return getAllPosts().map((p) => ({ slug: p.slug }));
+}
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params;
+  const post = getPost(slug);
+  if (!post) return {};
+  return pageMeta({ title: post.title, description: post.excerpt, path: `/blog/${slug}`, type: 'article', publishedTime: post.date });
 }
 
 export default async function PostPage({ params }: { params: Promise<{ slug: string }> }) {
