@@ -14,14 +14,14 @@
 .period { color: var(--accent-ink-to, var(--accent-ink)); } /* static target — no colour morph on zone change */
 .sub { margin-top: var(--space-7); max-width: 580px; font-size: var(--fs-body-l); color: var(--text-soft); line-height: var(--lh-body); }
 /* deckCol spans the content width so its "Featured deck" eyebrow sits at the
-   gutter, in line with the other section eyebrows. The deck fills the full column
-   width on one-column views (matching the Recent cards); from desktop it becomes
-   the right-hand hero column, capped. */
+   gutter, in line with the other section eyebrows; from desktop it becomes the
+   right-hand hero column. */
 .deckCol { display: flex; flex-direction: column; gap: var(--space-4); width: 100%;
   @include desktop-up { justify-self: end; } }
-/* full width on phones (like the Recent cards). Capped from tablet up — the deck
-   is near-square, so a full-width tablet deck would be enormous and shove the
-   page down; desktop gives it the right-hand column. */
-.deck { width: 100%;
-  @include tablet-up { max-width: 520px; margin-inline: auto; }
-  @include desktop-up { max-width: 440px; margin-inline: 0; } }
+/* The deck sits left-aligned under its eyebrow at the gutter, so the whole
+   one-column hero (title, sub, eyebrow, deck) reads as one left column. On mobile
+   it's pulled in a touch so it doesn't dominate the first screen (full-bleed was a
+   bit big); from tablet it fills the column (capped). A centred deck floated away
+   from the gutter eyebrow, so it stays left-aligned. Desktop: the right column. */
+.deck { width: 90%; max-width: 440px;
+  @include tablet-up { width: 100%; } }
