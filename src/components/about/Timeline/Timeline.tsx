@@ -52,15 +52,11 @@ function Item({ entry, index }: { entry: TimelineEntry; index: number }) {
   const cardInner = (
     <>
       <span className={styles.yearMobile}>{entry.period}</span>
-      <motion.span
-        className={styles.logoWrap}
-        initial={reduce ? false : { scale: 0.9, opacity: 0 }}
-        whileInView={{ scale: 1, opacity: 1 }}
-        viewport={{ once: true, amount: 0.6 }}
-        transition={{ duration: DURATION.base, ease: EASING.standard, delay: reduce ? 0 : index * STAGGER.entries + 0.08 }}
-      >
+      {/* the logo is static — only the card animates on reveal/hover (a separate
+          logo pop read as too much) */}
+      <span className={styles.logoWrap}>
         <LogoChip entry={entry} company={company} />
-      </motion.span>
+      </span>
       {linked && <CardArrow className={styles.arrow} />}
       <div className={styles.headText}>
         <div className={styles.role}>{entry.role}</div>

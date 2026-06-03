@@ -62,7 +62,9 @@
 }
 
 .item:last-child::before {
-  bottom: 50%; /* stop at the last dot */
+  /* keep the rail going past the last dot, then fade it out — an intentional
+     trail-off rather than an abrupt stop that doesn't quite meet the dot */
+  mask-image: linear-gradient(to bottom, #000 55%, transparent);
 }
 
 .year {
@@ -147,12 +149,13 @@
   height: 50px;
   max-width: 100%;
   padding: 0 var(--space-3);
-  background: #fff;
-  border: 1px solid color-mix(in srgb, #000 10%, transparent);
+  /* warm off-white plaque (not stark #fff) so it sits with the sand palette;
+     stays light in both themes so the colour/dark logos still read */
+  background: #f6f3ec;
+  border: 1px solid color-mix(in srgb, #000 8%, transparent);
   border-radius: var(--radius-lg);
-  box-shadow: 0 1px 2px rgb(0 0 0 / 0.06);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.6), 0 1px 2px rgb(0 0 0 / 0.05);
   overflow: hidden;
-  transition: transform var(--duration-hover) var(--ease-standard);
 }
 
 .logoImg {
@@ -245,16 +248,12 @@
     color: var(--tl-ink);
     transform: translateX(3px);
   }
-  a.card:hover .logoChip {
-    transform: scale(1.04);
-  }
 }
 
 @include reduced-motion {
   .card,
   .arrow,
-  .role,
-  .logoChip {
+  .role {
     transition: none;
   }
   @include can-hover {
@@ -262,9 +261,6 @@
       transform: none;
     }
     a.card:hover .arrow {
-      transform: none;
-    }
-    a.card:hover .logoChip {
       transform: none;
     }
   }
