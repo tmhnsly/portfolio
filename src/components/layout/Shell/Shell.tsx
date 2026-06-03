@@ -1,7 +1,10 @@
 'use client';
-import { useEffect } from 'react';
+import { useEffect, useLayoutEffect, useRef } from 'react';
 import { usePathname } from 'next/navigation';
 import { motion, useReducedMotion } from 'motion/react';
+
+// useLayoutEffect on the client (runs before paint), useEffect on the server (no-op, no SSR warning)
+const useIsomorphicLayoutEffect = typeof window !== 'undefined' ? useLayoutEffect : useEffect;
 import type { BreadcrumbData } from '@/lib/content';
 import { resolveZone } from '@/lib/zone';
 import { Nav } from '../Nav';
@@ -36,13 +39,24 @@ export function Shell({
   const { discipline, active, accent, accentInk, onAccent } = resolveZone(pathname);
   // the subtle, no-flash Zone colour morph lives in its own tested hook
   const { from, to, mix } = useZoneMorph({ accent, accentInk }, reduce);
+  const shellRef = useRef<HTMLDivElement>(null);
 
   // Reliably start each route at the top: the persistent Shell means the window
   // scroll position can otherwise carry over from the previous route on navigation.
   useEffect(() => { window.scrollTo(0, 0); }, [pathname]);
 
+  // On a zone change React commits the accent strings (--accent-to etc.)
+  // synchronously, but --zone-mix is a MotionValue motion writes on its own
+  // frame — so for one frame the new --accent-to would paint against a stale
+  // --zone-mix (=1), flashing straight to the target colour before the morph
+  // runs. Flush the reset mix to the DOM before paint to keep the morph clean.
+  useIsomorphicLayoutEffect(() => {
+    shellRef.current?.style.setProperty('--zone-mix', String(mix.get()));
+  }, [to, mix]);
+
   return (
     <motion.div
+      ref={shellRef}
       className={styles.shell}
       style={{
         '--accent-from': from.accent,
