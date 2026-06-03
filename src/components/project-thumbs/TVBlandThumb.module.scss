@@ -1,9 +1,9 @@
 @use '../../styles/mixins/breakpoints' as *;
 
-/* TV Bland — a stylised TV listings guide: a screen mark + title, then channel
-   rows of programme blocks with a "now" playhead. CSS only, theme-aware (panel/
-   blocks flip via tokens; the accent is brand-fixed tomato = code). Scales via
-   container-query units. Rows + playhead reveal on scroll-in. */
+/* TV Bland — a retro TV set showing a rainbow test-pattern screen with static +
+   scanlines. TV body dark in both themes; the bars are fixed colours (a test card
+   is inherently colourful). Scales via container-query units. On scroll-in the
+   screen does a CRT "switch on". */
 
 .root {
   position: absolute;
@@ -14,58 +14,79 @@
   place-items: center;
   overflow: hidden;
   background:
-    radial-gradient(circle at 80% 8%, color-mix(in oklab, var(--tv) 22%, transparent), transparent 60%),
-    radial-gradient(circle at 16% 90%, color-mix(in oklab, var(--tv) 12%, transparent), transparent 62%);
+    radial-gradient(circle at 50% 36%, color-mix(in oklab, var(--tv) 18%, transparent), transparent 64%),
+    var(--surface);
 }
 
-.panel {
-  width: 84cqw;
-  max-width: 116cqh;
-  display: flex;
-  flex-direction: column;
-  gap: 4cqmin;
-  padding: 5cqmin;
-  background: var(--bg);
-  border: max(1px, 0.5cqmin) solid var(--rule);
-  border-radius: 7cqmin;
-  box-shadow: var(--shadow-md);
+.tv {
+  width: 76cqw;
+  max-width: 104cqh;
+  padding: 4cqmin;
+  background: #16161a; /* TV body — dark in both themes */
+  border-radius: 6cqmin;
+  border: max(1px, 0.4cqmin) solid rgb(255 255 255 / 0.08);
+  box-shadow: var(--shadow-lg), inset 0 0 0 max(1px, 0.4cqmin) rgb(255 255 255 / 0.05);
 }
 
-.head { display: flex; align-items: center; gap: 3cqmin; }
 .screen {
-  width: 9cqmin; height: 9cqmin; flex: none;
-  display: grid; place-items: center;
-  border-radius: 2cqmin;
-  background: color-mix(in oklab, var(--tv) 16%, var(--surface));
-  border: max(1px, 0.4cqmin) solid color-mix(in oklab, var(--tv) 32%, transparent);
+  position: relative;
+  aspect-ratio: 4 / 3;
+  border-radius: 3cqmin;
+  overflow: hidden;
+  background: #000;
+  box-shadow: inset 0 0 5cqmin rgb(0 0 0 / 0.65); /* CRT vignette */
 }
-.play {
-  width: 0; height: 0;
-  border-style: solid;
-  border-width: 2.2cqmin 0 2.2cqmin 3.4cqmin;
-  border-color: transparent transparent transparent var(--tv);
-}
-.title { height: 3cqmin; width: 40%; border-radius: 999px; background: var(--text); opacity: 0.4; }
+.tube { position: absolute; inset: 0; transform-origin: center; }
 
-/* the guide grid + the absolutely-placed "now" playhead */
-.guide { position: relative; display: flex; flex-direction: column; gap: 3cqmin; }
-.row { display: flex; align-items: center; gap: 2.4cqmin; }
-.chan { width: 6cqmin; height: 6cqmin; flex: none; border-radius: 1.4cqmin; background: var(--surface); border: max(1px, 0.4cqmin) solid var(--rule); }
-.block { height: 6cqmin; border-radius: 1.6cqmin; background: var(--surface); border: max(1px, 0.4cqmin) solid var(--rule); }
-.live { background: color-mix(in oklab, var(--tv) 16%, var(--surface)); border-color: color-mix(in oklab, var(--tv) 34%, transparent); }
-
-.now {
+/* classic SMPTE-style colour bars */
+.bars {
   position: absolute;
-  top: -1cqmin; bottom: -1cqmin; left: 52%;
-  width: max(1px, 0.6cqmin);
-  background: var(--tv);
-  border-radius: 999px;
-  transform-origin: top;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    #c9c9c9 0 14.28%,
+    #cfc233 14.28% 28.57%,
+    #33c4cf 28.57% 42.85%,
+    #34b85a 42.85% 57.14%,
+    #c14fb6 57.14% 71.42%,
+    #cf3b3b 71.42% 85.71%,
+    #3a4fcf 85.71% 100%
+  );
 }
-.now::before {
-  content: '';
-  position: absolute; top: -1.4cqmin; left: 50%; transform: translateX(-50%);
-  width: 3cqmin; height: 3cqmin; border-radius: 999px; background: var(--tv);
+.static {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.5;
+  mix-blend-mode: overlay;
+}
+.scan {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(0deg, rgb(0 0 0 / 0.2) 0 1px, transparent 1px 3px);
+  mix-blend-mode: multiply;
+}
+
+.bezel {
+  display: flex;
+  align-items: center;
+  gap: 2cqmin;
+  padding: 2.6cqmin 1cqmin 0.5cqmin;
+}
+.led {
+  width: 1.8cqmin;
+  height: 1.8cqmin;
+  border-radius: 999px;
+  background: var(--tv);
+  box-shadow: 0 0 2cqmin var(--tv);
+}
+.grille {
+  height: 1.4cqmin;
+  width: 28%;
+  border-radius: 999px;
+  background: rgb(255 255 255 / 0.1);
+  margin-left: auto;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -74,15 +95,16 @@
   .inview { --play: running; }
   .root * { animation-play-state: var(--play); }
 
-  .panel { animation: tvRise 0.55s var(--ease-standard) both; }
-  .head { animation: tvPop 0.5s var(--ease-standard) 0.12s both; }
-  .row { animation: tvPop 0.5s var(--ease-standard) both; }
-  /* .now is .guide's first child, so the rows are nth-child 2–4 */
-  .row:nth-child(2) { animation-delay: 0.16s; }
-  .row:nth-child(3) { animation-delay: 0.26s; }
-  .row:nth-child(4) { animation-delay: 0.36s; }
-  .now { animation: tvSweep 0.6s var(--ease-standard) 0.46s both; }
+  .tv { animation: tvRise 0.55s var(--ease-standard) both; }
+  .tube { animation: tvOn 0.75s var(--ease-standard) 0.18s both; }
+  .static { animation: tvFlicker 0.16s steps(2) 0.18s 3; }
 }
 @keyframes tvRise { from { opacity: 0; transform: translateY(6cqmin) scale(0.98); } to { opacity: 1; transform: none; } }
-@keyframes tvPop { from { opacity: 0; transform: translateY(2cqmin); } to { opacity: 1; transform: none; } }
-@keyframes tvSweep { from { opacity: 0; transform: scaleY(0); } to { opacity: 1; transform: scaleY(1); } }
+/* CRT switch-on: a bright thin line snaps open to the full screen */
+@keyframes tvOn {
+  0% { transform: scaleY(0.012); opacity: 0.3; filter: brightness(3.2); }
+  34% { transform: scaleY(0.012); opacity: 1; filter: brightness(3.2); }
+  62% { transform: scaleY(1); filter: brightness(1.5); }
+  100% { transform: scaleY(1); filter: brightness(1); }
+}
+@keyframes tvFlicker { from { opacity: 0.72; } to { opacity: 0.32; } }
