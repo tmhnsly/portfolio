@@ -14,7 +14,6 @@ import { FilterPills } from '@/components/ui/FilterPills';
 import { ProjectThumb } from '@/components/project-thumbs';
 import { Pill } from '@/components/ui/Pill';
 import { LinkArrow } from '@/components/ui/LinkArrow';
-import { CardArrow } from '@/components/ui/CardArrow';
 import { ProjectCard } from '@/components/section/ProjectCard';
 import styles from './RecentWork.module.scss';
 
@@ -57,12 +56,11 @@ export function RecentWork({ projects }: { projects: Project[] }) {
               return (
                 <Link key={p.slug} href={tp.href} className={styles.thumb}>
                   <ProjectThumb project={p} grad={tp.gradient}
-                    ratio="4/3" sizes={IMG_SIZES.thumb} className={styles.thumbMedia} />
+                    ratio="4/3" sizes={IMG_SIZES.thumb} className={styles.thumbMedia}>
+                    <LinkArrow className={styles.arrow} />
+                  </ProjectThumb>
                   <div className={styles.thumbMeta}>
-                    <div className={styles.metaHead}>
-                      <div className={styles.thumbTitle}>{p.title}</div>
-                      <CardArrow className={styles.arrow} />
-                    </div>
+                    <div className={styles.thumbTitle}>{p.title}</div>
                     {p.desc && <div className={styles.thumbDesc}>{p.desc}</div>}
                     <span className={styles.pill}><Pill label={tp.label} tone="discipline" color={tp.color} onColor={tp.onColor} /></span>
                   </div>

@@ -7,14 +7,16 @@
 .period { color: var(--accent-ink-to, var(--accent-ink)); }
 .grid { margin-top: var(--space-7); display: grid; grid-template-columns: 1fr; gap: var(--space-7);
   @include desktop-up { grid-template-columns: 1.55fr 1fr; } }
-/* head row: title (left) + the card-link arrow (top-right) — matches DisciplineCard */
-.metaHead { display: flex; align-items: flex-start; gap: var(--space-3); align-self: stretch; }
-/* discipline-coloured pill, now in the meta (was a top-left media overlay) */
 .pill { display: inline-flex; margin-top: var(--space-1); }
-/* card-link arrow (top-right of the card content via CardArrow), nudges + accents on hover */
-.arrow { color: var(--text-soft); }
+/* card-link arrow — top-right INSIDE the thumbnail (white on the media, revealed
+   on hover), matching the featured card so both read the same way */
+.thumbMedia { position: relative; }
+.arrow { position: absolute; top: 8px; right: 8px; z-index: var(--z-card-overlay);
+  color: var(--on-media); opacity: 0; transform: translate(-2px, 2px);
+  transition: opacity var(--duration-hover) var(--ease-standard), transform var(--duration-hover) var(--ease-standard);
+  filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.45)); }
 @include can-hover {
-  .thumb:hover .arrow { transform: translateX(3px); color: var(--accent-ink); }
+  .thumb:hover .arrow { opacity: 1; transform: translate(0, 0); }
 }
 .thumbs { display: flex; flex-direction: column; gap: var(--space-4); }
 .thumb { display: grid; grid-template-columns: 100px 1fr; gap: var(--space-4); align-items: center;
