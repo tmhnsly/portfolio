@@ -5,33 +5,34 @@ import { useReducedMotion } from 'motion/react';
 import styles from './Entrance.module.scss';
 
 /**
- * Page-entrance reveals (CSS keyframes, GPU-composited fade + slide).
+ * Shared page-entrance system. CSS-driven so it runs on first paint with NO
+ * JS-hydration wait — the previous motion-driven version SSR'd items in their
+ * `hidden` state, leaving them invisible until motion hydrated (the visible
+ * "hang then snap" on a cold load, most obvious on the home hero's deck).
  *
- * The reveal is intentionally NOT played on the first cold load. On a slow Safari
- * load the page's first-load JS blocks the main thread long enough that the CSS
- * reveal gets DEFERRED — leaving the content hidden for a few seconds, then
- * snapping in ("Tom Hinsley, then a hold, then the rest"). Nothing about the
- * animation itself fixes that; it's a hydration-cost problem. So the first paint
- * just shows the content (no hide), and the staggered reveal plays on every
- * client navigation after that, where the page is already warm and it runs
- * smoothly. Reduced motion = no reveal anywhere (handled in the SCSS).
+ * <Entrance>/<EntranceItem>: stagger-fade once on the first session load. The
+ * outer Entrance adds an `.animate` class on first paint (the module flag is
+ * fresh per server request — so SSR always emits it — and is set client-side
+ * after mount so subsequent client navigations skip the entrance). CSS handles
+ * the keyframe + delay; pass an `i` prop on each EntranceItem for stagger order.
  *
- * <Entrance> adds `.playing` once the session has navigated; <EntranceItem> /
- * <EntranceTitle> reveals are gated on that class so the first load is exempt.
+ * <EntranceTitle>: word-by-word heading reveal (CSS keyframes, ported from
+ * Chork). Replays on every route via a pathname key.
+ *
+ * Reduced motion is handled by @media in the SCSS — no JS branching needed for
+ * the fade items; EntranceTitle still short-circuits in JS to skip the per-word
+ * wrapping entirely.
  */
 let hasEntered = false;
 
 export function Entrance({ children, className }: { children: React.ReactNode; className?: string }) {
-  const pathname = usePathname();
-  const [reveal, setReveal] = useState(false);
-  useEffect(() => {
-    // First mount of the session = the cold load → leave it visible, no reveal.
-    // Any navigation after that → play the reveal (the page is warm here).
-    if (hasEntered) setReveal(true);
-    hasEntered = true;
-  }, [pathname]);
+  // Decide once at mount: SSR (per-request) always sees hasEntered=false → adds
+  // `.animate`, the CSS runs at first paint. The effect flips the flag client-side
+  // so subsequent client navigations render the items plainly (no replay).
+  const [animate] = useState(() => !hasEntered);
+  useEffect(() => { hasEntered = true; }, []);
   return (
-    <div className={`${className ?? ''} ${reveal ? styles.playing : ''}`.trim()}>
+    <div className={`${className ?? ''} ${animate ? styles.animate : ''}`.trim()}>
       {children}
     </div>
   );
@@ -49,11 +50,11 @@ export function EntranceItem({ children, className, i = 0 }: { children: React.R
 }
 
 /**
- * Wrap each WORD of the heading in a slide-up span with an incrementing inline
- * animation-delay, so words cascade up in sequence. Whitespace is preserved
- * between words; <br/> passes through; element children (the muted span, the `.`
- * accent span) recurse — their words stagger too AND keep the element's class,
- * sharing the running index. The reveal is gated on `.playing` (see above).
+ * Wrap each WORD of the heading in a clip + slide-up span with an incrementing
+ * `--i`, so words cascade up in sequence. Whitespace is preserved between words;
+ * <br/> passes through; element children (the muted span, the `.` accent span)
+ * recurse — their words stagger too AND keep the element's class — sharing the
+ * same running index.
  */
 function revealWords(node: React.ReactNode, ctx: { i: number }): React.ReactNode {
   if (node == null || typeof node === 'boolean') return node;
@@ -90,7 +91,8 @@ function revealWords(node: React.ReactNode, ctx: { i: number }): React.ReactNode
 
 /**
  * Per-word title reveal. The inner wrapper is keyed on the pathname so the CSS
- * stagger re-fires on every navigation. Reduced motion = plain heading.
+ * stagger re-fires on every navigation (and on first load). Reduced motion =
+ * plain heading, no wrapping/animation.
  */
 export function EntranceTitle({ children, className }: { children: React.ReactNode; className?: string }) {
   const pathname = usePathname();

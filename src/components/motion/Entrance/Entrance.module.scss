@@ -1,7 +1,6 @@
-/* Per-word title reveal: each word fades + slides up, staggered by an inline
-   animation-delay. The reveal is gated behind `.playing` (added by <Entrance>
-   only after the first navigation — see Entrance.tsx), so the first cold load
-   just shows the content and never depends on the animation running. */
+/* Per-word title reveal (ported from Chork's RevealText): each word slides up
+   from behind its own clip, staggered by --i. The whole-title clip is gone —
+   each .wordClip masks its own word. */
 .clipTitle {
 }
 .inner {
@@ -12,15 +11,14 @@
   display: inline-block;
   vertical-align: baseline;
 }
-/* default (first load + reduced motion): words simply present, in place */
 .word {
   display: inline-block;
-}
-/* reveal — only when the session has navigated */
-.playing .word {
   opacity: 0;
   transform: translateY(0.42em);
-  /* opacity + transform only → GPU-composited; delay is set inline per word */
+  /* opacity + transform only, so the reveal is GPU-composited. The per-word
+     animation-delay is set inline as a concrete value (see Entrance.tsx) rather
+     than calc(var(--i)*…): a custom property inside animation-delay is unreliable
+     on iOS Safari, which dropped the stagger so the title just flashed in. */
   animation: titleWordUp 0.62s var(--ease-standard) both;
   will-change: transform, opacity;
   backface-visibility: hidden;
@@ -30,14 +28,22 @@
   to { opacity: 1; transform: none; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .playing .word { animation: none; opacity: 1; transform: none; will-change: auto; }
+  .word {
+    animation: none;
+    opacity: 1;
+    transform: none;
+    will-change: auto;
+  }
 }
 
-/* <EntranceItem> fade + slide, same gating as .word: in place on the first load,
-   reveals on navigation. */
-.entranceItem { /* default: in place, no animation */ }
-.playing .entranceItem {
-  /* delay set inline (see EntranceItem) */
+/* CSS-driven fade for <EntranceItem>: runs immediately on first paint (the
+   `.animate` class is added by <Entrance> on the first session load) — no JS
+   hydration wait, so the deck/desc/etc. don't sit invisible while motion catches
+   up. animation-fill-mode `both` holds the `from` state during the delay so the
+   item is hidden until its turn, then settles at the `to` state. */
+.entranceItem { /* default: visible, no animation (client navs after first load) */ }
+.animate .entranceItem {
+  /* delay set inline as a concrete value (see .word for the iOS reasoning) */
   animation: entranceItemIn 0.5s var(--ease-standard) both;
 }
 @keyframes entranceItemIn {
@@ -45,5 +51,5 @@
   to   { opacity: 1; transform: none; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .playing .entranceItem { animation: none; }
+  .animate .entranceItem { animation: none; }
 }
