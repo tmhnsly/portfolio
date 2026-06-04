@@ -92,6 +92,30 @@
 .node { fill: var(--surface); stroke: var(--rule); stroke-width: 2; transform-box: fill-box; transform-origin: center; }
 .node.accent { fill: var(--blog); stroke: color-mix(in oklab, var(--blog) 55%, var(--rule)); }
 
+/* ── datacenter: a server rack beside a water drop ── */
+.rackCard { flex-direction: row; align-items: center; gap: 5cqmin; }
+.rack { flex: 1; display: flex; flex-direction: column; gap: 2.6cqmin; }
+.unit {
+  height: 7.6cqmin;
+  display: flex;
+  align-items: center;
+  gap: 1.8cqmin;
+  padding-left: 3cqmin;
+  border-radius: 1.6cqmin;
+  background: var(--surface);
+  border: max(1px, 0.4cqmin) solid var(--rule);
+}
+.led { width: 2.4cqmin; height: 2.4cqmin; border-radius: 999px; background: var(--text); opacity: 0.26; }
+.unit.accent { background: color-mix(in oklab, var(--blog) 14%, var(--surface)); border-color: color-mix(in oklab, var(--blog) 32%, transparent); }
+.unit.accent .led:first-child { background: var(--blog); opacity: 0.95; }
+.drop { flex: none; width: 26cqmin; height: 32cqmin; }
+.drop path { fill: var(--blog); }
+
+/* ── motion: an easing curve with a leading dot + fading trail ── */
+.curve { width: 84cqmin; height: 50cqmin; display: block; }
+.path { fill: none; stroke: var(--blog); stroke-width: 3; stroke-linecap: round; opacity: 0.5; }
+.head { fill: var(--blog); opacity: var(--o, 1); transform-box: fill-box; transform-origin: center; }
+
 /* ── feed: the blog RSS mark (default) ── */
 .feedMark { width: 58cqmin; height: 58cqmin; display: block; }
 .feedDot { fill: var(--blog); transform-box: fill-box; transform-origin: center; }
@@ -128,6 +152,15 @@
 
   .feedDot { animation: bt-pop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) 0.18s both; }
   .arc { animation: bt-draw 0.7s cubic-bezier(0.16, 1, 0.3, 1) both; animation-delay: calc(var(--i) * 0.18s + 0.32s); }
+
+  .unit { transform-origin: left center; animation: bt-grow 0.5s var(--ease-standard) both; animation-delay: calc(var(--i) * 0.08s + 0.2s); }
+  .drop { animation: bt-drop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.4s both; }
+
+  .path { animation: bt-draw 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both; }
+  .head { animation: bt-popScale 0.42s cubic-bezier(0.34, 1.56, 0.64, 1) both; }
+  .head:nth-of-type(1) { animation-delay: 0.5s; }
+  .head:nth-of-type(2) { animation-delay: 0.6s; }
+  .head:nth-of-type(3) { animation-delay: 0.7s; }
 }
 
 @keyframes bt-rise { from { opacity: 0; transform: translateY(6cqmin) scale(0.98); } to { opacity: 1; transform: none; } }
@@ -135,4 +168,8 @@
 @keyframes bt-eq { from { transform: scaleY(0); } to { transform: none; } }
 @keyframes bt-draw { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
 @keyframes bt-pop { from { opacity: 0; transform: scale(0); } to { opacity: 1; transform: none; } }
+/* scale-only pop: keeps the element's resting opacity (the motion trail dots fade
+   to var(--o), so bt-pop's opacity:1 would wrongly force them fully opaque) */
+@keyframes bt-popScale { from { transform: scale(0); } to { transform: none; } }
+@keyframes bt-drop { from { opacity: 0; transform: translateY(-7cqmin) scale(0.7); } to { opacity: 1; transform: none; } }
 @keyframes bt-blink { 0%, 50% { opacity: 1; } 50.01%, 100% { opacity: 0; } }

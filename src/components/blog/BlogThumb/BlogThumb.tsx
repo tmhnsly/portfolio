@@ -112,6 +112,39 @@ function Process() {
   );
 }
 
+// datacenter: a small server rack beside a water drop (AI's energy/water cost)
+const RACK = [0, 1, 2, 3];
+function Datacenter() {
+  return (
+    <div className={`${styles.card} ${styles.rackCard}`}>
+      <div className={styles.rack}>
+        {RACK.map((i) => (
+          <span key={i} className={`${styles.unit} ${i === 1 ? styles.accent : ''}`} style={v({ '--i': i })}>
+            <span className={styles.led} /><span className={styles.led} /><span className={styles.led} />
+          </span>
+        ))}
+      </div>
+      <svg className={styles.drop} viewBox="0 0 24 30" aria-hidden>
+        <path d="M12 1.5 C12 1.5 21.5 13 21.5 20 A9.5 9.5 0 1 1 2.5 20 C2.5 13 12 1.5 12 1.5 Z" />
+      </svg>
+    </div>
+  );
+}
+
+// motion: an easing curve with a leading dot and a couple of fading trail dots
+function Motion() {
+  return (
+    <div className={styles.card}>
+      <svg viewBox="0 0 100 60" className={styles.curve} aria-hidden>
+        <path d="M6,52 C28,52 34,10 54,10 S84,50 94,14" className={styles.path} pathLength={1} strokeDasharray={1} />
+        <circle cx="79" cy="25" r="3" className={styles.head} style={v({ '--o': 0.2 })} />
+        <circle cx="87" cy="18.5" r="4" className={styles.head} style={v({ '--o': 0.42 })} />
+        <circle cx="94" cy="14" r="5.4" className={styles.head} />
+      </svg>
+    </div>
+  );
+}
+
 // default: the blog feed/RSS mark — a dot and two arcs, drawn in
 function Feed() {
   return (
@@ -130,6 +163,8 @@ const MOTIFS: Record<MotifKey, () => React.ReactNode> = {
   reading: Reading,
   process: Process,
   feed: Feed,
+  datacenter: Datacenter,
+  motion: Motion,
 };
 
 export function BlogThumb({ post }: { post: BlogPost }) {

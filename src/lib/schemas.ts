@@ -69,6 +69,7 @@ export const postFrontmatterSchema = z.object({
   readingTime: z.number().optional(), // computed from word count if absent
   tags: z.array(tagSchema).default([]),
   cover: imageRef.optional(),
+  thumb: z.string().optional(), // override the auto fallback-thumbnail motif (see BlogThumb/pickMotif)
 });
 export type PostFrontmatter = z.infer<typeof postFrontmatterSchema>;
 export type BlogPost = PostFrontmatter & { slug: string; body: string; readingTime: number; author: Author };

@@ -27,4 +27,13 @@ describe('pickMotif', () => {
   it('falls back to feed when nothing matches', () => {
     expect(pickMotif({ category: 'Announcements', tags: [] })).toBe('feed');
   });
+
+  it('lets an explicit thumb override win over the heuristic', () => {
+    expect(pickMotif({ category: 'Opinion', tags: ['CSS'], thumb: 'motion' })).toBe('motion');
+    expect(pickMotif({ category: 'Opinion', tags: ['AI'], thumb: 'datacenter' })).toBe('datacenter');
+  });
+
+  it('ignores an invalid thumb and falls back to the heuristic', () => {
+    expect(pickMotif({ category: 'Opinion', tags: ['CSS'], thumb: 'nope' })).toBe('code');
+  });
 });
