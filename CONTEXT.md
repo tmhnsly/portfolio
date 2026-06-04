@@ -66,6 +66,10 @@ _Avoid_: nav, eyebrow.
 **Media**:
 The image wrapper (`next/image`) that renders a still (a **Project**'s cover poster, resolved from `media[0]` by `coverImage`, or a **Post** cover); absent a `src` it falls back to the **Discipline** gradient. Takes a `sizes` recipe from `IMG_SIZES`.
 
+**Cover thumbnail**:
+A content item's card/hero cover, resolved once per type by parallel modules over **Media**: **ProjectThumb** renders a **Project**'s bespoke vector vignette (slug → a registry of hand-drawn thumbs) or its `media[0]` image; **PostThumb** renders a **Post**'s cover image or, absent one, a generated motif (**BlogThumb**, chosen from the Post's content). Both fall through to the **Discipline** gradient when there's nothing. The two differ on purpose — Projects curate by slug, Posts generate from metadata — but share this shape so a new content type follows it.
+_Avoid_: thumbnail, image, asset.
+
 **Media hero**:
 The project page's top "pride of place" poster (`media[0]`); clicking it opens the **Media carousel**. Replaced the former cover embed.
 _Avoid_: embed, banner.

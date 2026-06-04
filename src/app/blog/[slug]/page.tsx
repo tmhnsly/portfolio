@@ -4,19 +4,17 @@ import Link from 'next/link';
 import { pageMeta } from '@/lib/metadata';
 import { BiLeftArrowAlt, BiRightArrowAlt } from 'react-icons/bi';
 import { getAllPosts, getPost, postNeighbours, relatedPosts } from '@/lib/content';
-import { DISCIPLINES } from '@/lib/disciplines';
 import { IMG_SIZES } from '@/lib/breakpoints';
 import { COPY } from '@/data';
 import { Container, Stack } from '@/components/layout';
 import { Eyebrow } from '@/components/ui/Eyebrow';
 import { TechChip } from '@/components/ui/TechChip';
 import { Pill } from '@/components/ui/Pill';
-import { Media } from '@/components/ui/Media';
 import { EmailLink } from '@/components/ui/EmailLink';
 import { LinkArrow } from '@/components/ui/LinkArrow';
 import { formatMonthYear, readingLabel } from '@/lib/format';
 import { BlogPostHero } from '@/components/blog/BlogPostHero';
-import { BlogThumb } from '@/components/blog/BlogThumb';
+import { PostThumb } from '@/components/blog/PostThumb';
 import { PostBody } from '@/components/blog/PostBody';
 import { AuthorCard } from '@/components/blog/AuthorCard';
 import type { BlogPost } from '@/types';
@@ -39,21 +37,12 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
   if (!post) notFound();
   const { newer, older } = postNeighbours(slug);
   const related = relatedPosts(slug);
-  const blogGrad = DISCIPLINES.blog.gradient;
 
   return (
     <Container>
       <Stack>
           <BlogPostHero post={post} />
-        <Media
-          grad={blogGrad}
-          src={post.cover?.src}
-          alt={post.cover?.alt ?? post.title}
-          ratio="16/7"
-          sizes={IMG_SIZES.full}
-        >
-          {!post.cover?.src && <BlogThumb post={post} />}
-        </Media>
+        <PostThumb post={post} ratio="16/7" sizes={IMG_SIZES.full} />
         <PostBody post={post} />
 
         {/* End matter: tags + "Send a note" link */}
@@ -115,7 +104,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
             </div>
             <div className={styles.relatedGrid}>
               {related.map((p) => (
-                <RelatedCard key={p.slug} post={p} grad={blogGrad} />
+                <RelatedCard key={p.slug} post={p} />
               ))}
             </div>
           </section>
@@ -125,19 +114,10 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
   );
 }
 
-function RelatedCard({ post, grad }: { post: BlogPost; grad: string }) {
+function RelatedCard({ post }: { post: BlogPost }) {
   return (
     <Link href={`/blog/${post.slug}`} className={styles.relatedItem}>
-      <Media
-        grad={grad}
-        src={post.cover?.src}
-        alt={post.cover?.alt ?? post.title}
-        ratio="16/9"
-        sizes={IMG_SIZES.grid3}
-        rounded
-      >
-        {!post.cover?.src && <BlogThumb post={post} />}
-      </Media>
+      <PostThumb post={post} ratio="16/9" sizes={IMG_SIZES.grid3} rounded />
       <div className={styles.relatedMeta}>
         <Pill label={post.category} tone="discipline" />
       </div>

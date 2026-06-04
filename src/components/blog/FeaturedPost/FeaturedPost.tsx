@@ -1,10 +1,8 @@
 import Link from 'next/link';
 import type { BlogPost } from '@/lib/schemas';
-import { DISCIPLINES } from '@/lib/disciplines';
 import { IMG_SIZES } from '@/lib/breakpoints';
 import { Eyebrow } from '@/components/ui/Eyebrow';
-import { Media } from '@/components/ui/Media';
-import { BlogThumb } from '@/components/blog/BlogThumb';
+import { PostThumb } from '@/components/blog/PostThumb';
 import { Pill } from '@/components/ui/Pill';
 import { TechChip } from '@/components/ui/TechChip';
 import { CardArrow } from '@/components/ui/CardArrow';
@@ -12,7 +10,6 @@ import { formatMonthYear, readingLabel } from '@/lib/format';
 import styles from './FeaturedPost.module.scss';
 
 export function FeaturedPost({ post }: { post: BlogPost }) {
-  const blogMeta = DISCIPLINES.blog;
   return (
     <section className={styles.section}>
       <Eyebrow>
@@ -21,19 +18,11 @@ export function FeaturedPost({ post }: { post: BlogPost }) {
       <Link href={`/blog/${post.slug}`} className={styles.card}>
         <div className={styles.grid}>
           <div className={styles.mediaWrap}>
-            <Media
-              grad={blogMeta.gradient}
-              src={post.cover?.src}
-              alt={post.cover?.alt ?? post.title}
-              ratio="16/11"
-              sizes={IMG_SIZES.featured}
-              className={styles.media}
-            >
-              {!post.cover?.src && <BlogThumb post={post} />}
+            <PostThumb post={post} ratio="16/11" sizes={IMG_SIZES.featured} className={styles.media}>
               <span className={styles.categoryPill}>
                 <Pill label={post.category} tone="solid" />
               </span>
-            </Media>
+            </PostThumb>
           </div>
           <div className={styles.content}>
             <div className={styles.head}>
