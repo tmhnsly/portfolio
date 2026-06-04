@@ -1,16 +1,9 @@
-/* Zone-transition progress (0 = previous zone, 1 = current). Registered as a
-   <number> so the Shell can animate it; --accent/--accent-ink are then a
-   color-mix(in oklab) of the from/to zone colours driven by this (Shell.module
-   .scss). We DON'T register --accent itself as a <color>: a registered <color>
-   interpolates in sRGB (muddy/grey midpoints) AND freezes var() substitution so
-   it wouldn't re-resolve the Radix scale on a dark/light toggle. Plain (unregistered)
-   --accent = OKLab interpolation (perceptually even — far less hue-sweep than
-   OKLCH, none of sRGB's muddiness) + correct theme-swap. */
-@property --zone-mix {
-  syntax: '<number>';
-  inherits: true;
-  initial-value: 1;
-}
+/* --accent / --accent-ink are plain (unregistered) custom props set by the Shell
+   to the current zone's accent — they SNAP on a zone change, then the Nav
+   crossfades its accent chrome and the Bloom crossfades the tint by opacity (a
+   clean dissolve, no muddy in-between). They're left unregistered on purpose: a
+   registered <color> would freeze var() substitution and stop re-resolving the
+   Radix scale on a dark/light toggle. */
 
 :root {
   /* surfaces / backgrounds */

@@ -3,7 +3,8 @@ import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import type { IconType } from 'react-icons';
 import { BiMoon, BiSun, BiMenu, BiCodeAlt, BiVideo, BiHeadphone, BiPencil, BiUser } from 'react-icons/bi';
-import { motion, useReducedMotion } from 'motion/react';
+import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
+import { DURATION, EASING } from '@/lib/motion';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import { SITE, COPY } from '@/data';
 import { useTheme } from '@/lib/theme';
@@ -30,6 +31,31 @@ const NAV_ICONS: Record<string, IconType> = {
   '/blog': BiPencil,
   '/about': BiUser,
 };
+
+/**
+ * The accent fill behind the monogram / CTA. On a zone change it crossfades — the
+ * new colour fades in over the old, keyed on the accent — the same way the Bloom
+ * does, so the change is a clean dissolve rather than an OKLab interpolation
+ * through muddy midpoints. Sits behind the text via the parent's `isolation` +
+ * the fill's negative z-index.
+ */
+function AccentFill({ accent, reduce }: { accent: string; reduce: boolean | null }) {
+  if (reduce) return <span className={styles.fill} style={{ background: accent }} aria-hidden />;
+  return (
+    <AnimatePresence initial={false}>
+      <motion.span
+        key={accent}
+        className={styles.fill}
+        style={{ background: accent }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: DURATION.zone, ease: EASING.smooth }}
+        aria-hidden
+      />
+    </AnimatePresence>
+  );
+}
 
 export function Nav({ active, accent, accentInk, onAccent }: NavProps) {
   const { theme, toggle } = useTheme();
@@ -69,7 +95,7 @@ export function Nav({ active, accent, accentInk, onAccent }: NavProps) {
         <nav className={styles.bar} aria-label="Primary">
           {/* monogram + wordmark are two visual pieces but one "home" button */}
           <Link href="/" className={styles.brand} aria-label={COPY.nav.homeAria}>
-            <span className={styles.monogram}>TH</span>
+            <span className={styles.monogram}><AccentFill accent={accent} reduce={reduce} />TH</span>
             <span className={styles.name}>Tom Hinsley</span>
           </Link>
 
@@ -119,6 +145,7 @@ export function Nav({ active, accent, accentInk, onAccent }: NavProps) {
               {theme === 'dark' ? <BiSun aria-hidden /> : <BiMoon aria-hidden />}
             </button>
             <a className={styles.cta} href={mailto()}>
+              <AccentFill accent={accent} reduce={reduce} />
               {/* exactly one span is `display`-shown per breakpoint (the other is
                   display:none, so excluded from the a11y name) — so neither needs
                   aria-hidden; whichever is visible becomes the link's accessible name. */}

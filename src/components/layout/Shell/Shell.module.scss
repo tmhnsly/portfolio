@@ -6,12 +6,11 @@
   overflow-x: clip; /* contain FullBleed breakouts; clip (not hidden) keeps sticky nav working */
   background: var(--bg);
   color: var(--text);
-  /* --accent / --accent-ink are set inline by the Shell as motion templates that
-     interpolate the zone from→to in OKLab each frame (see Shell.tsx) — one value
-     per var, so there's no CSS-side race between a synchronous colour and an
-     async mix. OKLab is the chosen path (even, avoids OKLCH's hue-wheel sweep and
-     sRGB's muddy midpoints). The statics below are a fallback if the inline value
-     is ever absent (e.g. pre-hydration). */
+  /* --accent / --accent-ink are set inline by the Shell to the current zone's
+     accent — they SNAP on a zone change (see Shell.tsx). Interpolating the colour
+     ran through muddy OKLab midpoints between distant hues, so instead the Nav
+     crossfades its accent chrome and the Bloom crossfades the tint by opacity. The
+     statics below are a fallback if the inline value is ever absent (pre-hydration). */
   --accent: var(--tomato-9);
   --accent-ink: var(--tomato-11);
   /* Derive the accent glow HERE (where --accent is the zone colour), not at

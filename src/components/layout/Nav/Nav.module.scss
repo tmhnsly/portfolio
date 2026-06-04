@@ -28,13 +28,17 @@
 .brand:focus-visible { outline: 2px solid var(--accent-ink); outline-offset: 4px; }
 @include can-hover { .brand:hover .monogram { transform: scale(1.06); } }
 .monogram {
+  position: relative; isolation: isolate; /* contain the crossfade fill below "TH" */
   width: 30px; height: 30px; border-radius: var(--radius-md);
-  background: var(--accent); color: var(--on-accent, var(--text-on-accent));
+  color: var(--on-accent, var(--text-on-accent));
   display: inline-flex; align-items: center; justify-content: center;
   font-weight: 700; font-size: 14px; letter-spacing: -0.02em;
   flex-shrink: 0;
   transition: transform var(--duration-hover) var(--ease-standard);
 }
+/* accent fill that crossfades old→new on a zone change (see AccentFill, Nav.tsx);
+   negative z-index keeps it behind the in-flow text/label without a wrapper */
+.fill { position: absolute; inset: 0; border-radius: inherit; z-index: -1; }
 .name {
   /* brand watermark — stays on the bar at every width (incl. burger mode) */
   font-size: 16px; font-weight: 600; letter-spacing: -0.02em; color: var(--text);
@@ -90,8 +94,9 @@
 }
 @include can-hover { .toggle:hover { background: var(--surface-soft); color: var(--text); } }
 .cta {
+  position: relative; isolation: isolate; /* contain the crossfade fill below the label */
   padding: var(--cta-pad-wide); border-radius: var(--radius-lg);
-  background: var(--accent); color: var(--on-accent, var(--text-on-accent));
+  color: var(--on-accent, var(--text-on-accent));
   font-weight: 600; font-size: 14px; letter-spacing: -0.005em; white-space: nowrap;
   box-shadow: 0 6px 18px color-mix(in srgb, var(--accent) 27%, transparent);
   flex-shrink: 0;
