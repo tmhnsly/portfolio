@@ -1,43 +1,66 @@
 'use client';
-// <PixelMark> — morphing 16×16 pixel brand mark. Ported from the design handoff
-// (pixel-mark.jsx) into the project's stack; geometry, timings and the dissolve
-// are preserved exactly (see SPEC.md). Self-contained: React + inline styles +
-// one <svg>, no global CSS, no deps.
+// <PixelMark> — morphing 16×16 pixel brand mark. Bitmaps + geometry ported from
+// the design handoff exactly; the dissolve is reworked into ONE continuous
+// diagonal sweep (an e-ink / flip-clock style refresh) instead of the handoff's
+// two-phase clear-then-draw, which read as a jerky double-take.
 //
-// Two porting adaptations vs the reference (neither alters geometry/timing):
-//  • circle `fill` is set via CSS (style) not the SVG attribute, so a CSS-var
-//    accent (`var(--green-9)`) and `currentColor` resolve in Safari too;
-//  • prefers-reduced-motion is read in an effect, so it renders cleanly on SSR.
+// Performance: every dot is a fixed node (constant set — never mounts/unmounts),
+// each carries a STATIC per-cell delay (its position in the diagonal wave). A
+// route change only flips opacities; the browser runs plain CSS opacity
+// transitions (the animated area is ~30px, so paint cost is negligible). No JS
+// per-frame work, no global CSS, no deps.
+//
+// Two host adaptations: circle `fill` is set via CSS so a `var(--…)` accent +
+// `currentColor` resolve in Safari; prefers-reduced-motion is read in an effect
+// (SSR-safe) → instant swap, no animation.
 import { useEffect, useRef, useState } from 'react';
-import { ICONS, ORDERS, GRID, type IconKey } from './pixel-icons';
+import { ICONS, GRID, type IconKey } from './pixel-icons';
 
 const VBOX = 256;
 const CELL = VBOX / GRID; // 16
 const RAD = CELL * 0.46; // round dots with breathing room
-const EASE = 'cubic-bezier(0.2,0.7,0.3,1)';
-// dissolve timing (ms) at pace = 1; scaled by 1/pace below
-const T = { fade: 70, exitRange: 120, appearOffset: 150, appearRange: 300, accentExtra: 150 };
+const EASE = 'cubic-bezier(0.2, 0.7, 0.3, 1)';
+const FADE = 150; // ms — a single cell's flip (at pace 1)
+const SWEEP = 300; // ms — how long the diagonal wave takes to cross (at pace 1)
 
-// Fixed cell union across every icon → a constant node set, so cells never
-// mount/unmount — only their opacity (and the accent cells' fill) change.
-const UNION: { r: number; c: number }[] = (() => {
-  const used: Record<number, 1> = {};
-  Object.values(ICONS).forEach((ic) => {
-    for (let r = 0; r < GRID; r++) for (let c = 0; c < GRID; c++) if (ic.data[r][c]) used[r * GRID + c] = 1;
-  });
-  return Object.keys(used).map((k) => {
-    const n = +k;
-    return { r: Math.floor(n / GRID), c: n % GRID };
+// The fixed union of every cell used across all icons, each with its static delay
+// = its place in a top-left→bottom-right diagonal sweep (0..1 × SWEEP). Precomputed
+// once, so a render only sets opacities.
+const UNION: { r: number; c: number; d: number }[] = (() => {
+  const used = new Set<number>();
+  for (const ic of Object.values(ICONS)) {
+    for (let r = 0; r < GRID; r++) for (let c = 0; c < GRID; c++) if (ic.data[r][c]) used.add(r * GRID + c);
+  }
+  const span = (GRID - 1) * 2; // max r+c
+  return [...used].map((n) => {
+    const r = Math.floor(n / GRID);
+    const c = n % GRID;
+    return { r, c, d: ((r + c) / span) * SWEEP };
   });
 })();
 
-type OrderFn = (r: number, c: number) => number;
-
-function delayFor(prevV: number, tgtV: number, r: number, c: number, pOrd: OrderFn, tOrd: OrderFn): number {
-  if (prevV === tgtV) return -1; // unchanged → no transition
-  if (tgtV === 0) return (1 - pOrd(r, c)) * T.exitRange; // leaving → clear first
-  return T.appearOffset + tOrd(r, c) * T.appearRange + (tgtV === 2 ? T.accentExtra : 0);
-}
+// Crop the viewBox to the glyphs' shared bounding box (+ the dot radius and a
+// little breathing room) so the mark fills its box like a logo instead of
+// floating in the 16-grid's empty margin — keeps it optically aligned with, and
+// evenly spaced from, the wordmark beside it.
+const VIEW = (() => {
+  let minR = GRID, minC = GRID, maxR = 0, maxC = 0;
+  for (const { r, c } of UNION) {
+    if (r < minR) minR = r;
+    if (r > maxR) maxR = r;
+    if (c < minC) minC = c;
+    if (c > maxC) maxC = c;
+  }
+  const pad = RAD + CELL * 0.25;
+  const x0 = minC * CELL + CELL / 2 - pad;
+  const y0 = minR * CELL + CELL / 2 - pad;
+  const x1 = maxC * CELL + CELL / 2 + pad;
+  const y1 = maxR * CELL + CELL / 2 + pad;
+  const side = Math.max(x1 - x0, y1 - y0);
+  const cx = (x0 + x1) / 2;
+  const cy = (y0 + y1) / 2;
+  return { x: cx - side / 2, y: cy - side / 2, side };
+})();
 
 export interface PixelMarkProps {
   /** route key into ICONS; unknown/missing falls back to 'home' */
@@ -57,22 +80,17 @@ export function PixelMark({
   accent = '#e54d2e',
   size = 30,
   color = 'currentColor',
-  pace = 0.7,
+  pace = 1,
 }: PixelMarkProps) {
-  const cur = ICONS[icon] ?? ICONS.home;
-  const data = cur.data;
-  const order = cur.order;
-
-  const prevRef = useRef({ data, order });
+  const data = (ICONS[icon] ?? ICONS.home).data;
+  const prevRef = useRef(data);
   useEffect(() => {
-    prevRef.current = { data, order };
-  }, [data, order]);
+    prevRef.current = data;
+  }, [data]);
   const prev = prevRef.current;
-  const pOrd = ORDERS[prev.order] ?? ORDERS.topDown;
-  const tOrd = ORDERS[order] ?? ORDERS.topDown;
 
   // prefers-reduced-motion, read client-side so SSR renders cleanly; reduced ⇒
-  // instant swap (no transitions). First paint never animates anyway (prev === current).
+  // instant swap. First paint never animates anyway (prev === current).
   const [reduced, setReduced] = useState(false);
   useEffect(() => {
     const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -83,18 +101,17 @@ export function PixelMark({
   }, []);
 
   const f = 1 / Math.max(0.1, pace);
-  const trans = (d: number) => `opacity ${Math.round(T.fade * f)}ms ${EASE} ${Math.round(d * f)}ms`;
+  const fade = Math.round(FADE * f);
 
   const ink: React.ReactNode[] = [];
   const acc: React.ReactNode[] = [];
-  for (const { r, c } of UNION) {
-    const pv = prev.data[r][c];
+  for (const { r, c, d } of UNION) {
     const tv = data[r][c];
+    const changed = prev[r][c] !== tv;
     const isAcc = tv === 2;
-    const d = delayFor(pv, tv, r, c, pOrd, tOrd);
     const style: React.CSSProperties = {
       opacity: tv !== 0 ? 1 : 0,
-      transition: reduced || d < 0 ? 'none' : trans(d),
+      transition: reduced || !changed ? 'none' : `opacity ${fade}ms ${EASE} ${Math.round(d * f)}ms`,
       fill: isAcc ? accent : color,
     };
     (isAcc ? acc : ink).push(
@@ -104,7 +121,7 @@ export function PixelMark({
 
   return (
     <svg
-      viewBox={`0 0 ${VBOX} ${VBOX}`}
+      viewBox={`${VIEW.x} ${VIEW.y} ${VIEW.side} ${VIEW.side}`}
       width={size}
       height={size}
       shapeRendering="geometricPrecision"

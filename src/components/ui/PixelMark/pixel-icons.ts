@@ -1,8 +1,10 @@
-// Pixel brand-mark icon set — ported from the design handoff (pixel-icons.jsx);
-// bitmaps and reveal orders preserved exactly. Each icon is a 16×16 grid:
+// Pixel brand-mark icon set — bitmaps ported from the design handoff exactly.
+// Each icon is a 16×16 grid:
 //   '#' = ink pixel (currentColor)  '*' = accent pixel (per-route accent)  '.' = empty
-// To add/edit: copy a block, draw 16 rows of 16 chars, pick an `order`. The
-// component picks it up via the cell-union automatically — nothing else changes.
+// To add/edit: copy a block, draw 16 rows of 16 chars. The component picks it up
+// via the cell-union automatically — nothing else changes.
+// (The handoff's per-icon `order` field is dropped: PixelMark now uses one uniform
+//  diagonal sweep for every glyph — see PixelMark.tsx.)
 
 export const GRID = 16;
 
@@ -14,33 +16,16 @@ const Im = (...rows: string[]): number[][] => {
   });
 };
 
-export type IconOrder =
-  | 'topDown' | 'bottomUp' | 'leftRight' | 'rightLeft'
-  | 'outsideIn' | 'centerOut' | 'diagonal' | 'radialOut';
-
-// reveal-order functions — return 0..1 per cell to stagger the dissolve
-export const ORDERS: Record<IconOrder, (r: number, c: number) => number> = {
-  topDown: (r) => r / 15,
-  bottomUp: (r) => (15 - r) / 15,
-  leftRight: (_r, c) => c / 15,
-  rightLeft: (_r, c) => (15 - c) / 15,
-  outsideIn: (r, c) => 1 - Math.max(Math.abs(r - 7.5), Math.abs(c - 7.5)) / 7.5,
-  centerOut: (r, c) => Math.max(Math.abs(r - 7.5), Math.abs(c - 7.5)) / 7.5,
-  diagonal: (r, c) => (r + c) / 30,
-  radialOut: (r, c) => Math.hypot(r - 7.5, c - 7.5) / 10.6,
-};
-
 export const ICON_KEYS = ['home', 'code', 'audio', 'video', 'blog', 'about'] as const;
 export type IconKey = (typeof ICON_KEYS)[number];
 
 export interface PixelIcon {
   label: string;
-  order: IconOrder;
   data: number[][];
 }
 
 export const ICONS: Record<IconKey, PixelIcon> = {
-  home: { label: 'Home', order: 'topDown', data: Im(
+  home: { label: 'Home', data: Im(
     '................',
     '................',
     '..........##....',
@@ -58,7 +43,7 @@ export const ICONS: Record<IconKey, PixelIcon> = {
     '................',
     '................') },
 
-  code: { label: 'Code', order: 'leftRight', data: Im(
+  code: { label: 'Code', data: Im(
     '................',
     '................',
     '................',
@@ -76,7 +61,7 @@ export const ICONS: Record<IconKey, PixelIcon> = {
     '................',
     '................') },
 
-  audio: { label: 'Audio', order: 'leftRight', data: Im(
+  audio: { label: 'Audio', data: Im(
     '................',
     '................',
     '................',
@@ -94,7 +79,7 @@ export const ICONS: Record<IconKey, PixelIcon> = {
     '................',
     '................') },
 
-  video: { label: 'Video', order: 'outsideIn', data: Im(
+  video: { label: 'Video', data: Im(
     '................',
     '................',
     '..##.##.##.##...',
@@ -112,7 +97,7 @@ export const ICONS: Record<IconKey, PixelIcon> = {
     '................',
     '................') },
 
-  blog: { label: 'Blog', order: 'topDown', data: Im(
+  blog: { label: 'Blog', data: Im(
     '................',
     '................',
     '................',
@@ -130,7 +115,7 @@ export const ICONS: Record<IconKey, PixelIcon> = {
     '................',
     '................') },
 
-  about: { label: 'About', order: 'topDown', data: Im(
+  about: { label: 'About', data: Im(
     '................',
     '................',
     '.......##.......',
