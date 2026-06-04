@@ -1,125 +1,98 @@
-/* BlogThumb — animated fallback covers for image-less posts, in the blog accent
-   (orange). Same idiom as the bespoke project thumbnails: CSS + inline SVG, theme
-   tokens so it flips with light/dark, container-query units so it scales in any
-   frame (the big featured card or a small list thumb), entrance gated on `.inview`
-   so it plays once. Base CSS is the FINISHED frame — reduced motion just shows it. */
+/* BlogThumb — atmospheric cover art for image-less posts: a warm gradient field
+   with one luminous abstract form per topic. A fixed warm palette (bold on light
+   and dark pages alike, like the project deck cards), container-query sized so it
+   scales from the big featured card down to a list thumb. The entrance plays once
+   on reveal (.inview); reduced motion shows the finished frame (base CSS = final). */
 
 .root {
   position: absolute;
   inset: 0;
-  --blog: var(--orange-9);
-  --blog-ink: var(--orange-11);
   container-type: size;
+  overflow: hidden;
+}
+
+.art {
+  position: absolute;
+  inset: 0;
   display: grid;
   place-items: center;
   overflow: hidden;
+  isolation: isolate;
   background:
-    radial-gradient(circle at 78% 12%, color-mix(in oklab, var(--blog) 24%, transparent), transparent 60%),
-    radial-gradient(circle at 18% 86%, color-mix(in oklab, var(--blog) 13%, transparent), transparent 62%);
+    radial-gradient(72% 64% at 22% 14%, #ff9a52, transparent 58%),
+    radial-gradient(86% 86% at 92% 108%, #581d07, transparent 56%),
+    linear-gradient(150deg, #e6571f 4%, #2e1308 96%);
 }
 
-/* shared panel for the editor / waveform / sheet / flow motifs */
-.card {
-  position: relative;
-  width: 76cqw;
-  max-width: 120cqh;
-  display: flex;
-  flex-direction: column;
-  gap: 3cqmin;
-  padding: 5cqmin;
-  background: var(--bg);
-  border: max(1px, 0.5cqmin) solid var(--rule);
-  border-radius: 6cqmin;
-  box-shadow: var(--shadow-md);
-}
-
-/* ── code: a mini editor window ── */
-.bar { display: flex; gap: 2cqmin; }
-.bar span { width: 3.2cqmin; height: 3.2cqmin; border-radius: 999px; background: var(--text); opacity: 0.22; }
-.bar span:first-child { background: var(--blog); opacity: 0.85; }
-.codeLines { display: flex; flex-direction: column; gap: 2.6cqmin; }
-.ln { height: 2.8cqmin; width: var(--w); margin-left: var(--ml); border-radius: 999px; background: var(--text); opacity: 0.32; }
-.ln.accent { background: var(--blog); opacity: 0.82; }
-.caret { width: 1.6cqmin; height: 4cqmin; margin-left: 9%; border-radius: 1px; background: var(--blog); }
-
-/* ── audio: a waveform / equaliser ── */
-.eq { display: flex; align-items: flex-end; gap: 2.6cqmin; height: 46cqmin; }
-.bar2 {
-  width: 4.6cqmin;
-  height: var(--h);
-  border-radius: 999px 999px 2px 2px;
-  background: linear-gradient(var(--blog), color-mix(in oklab, var(--blog) 45%, transparent));
-}
-.baseline { width: 100%; height: max(1px, 0.5cqmin); border-radius: 999px; background: var(--rule); }
-
-/* ── writing: a page being written ── */
-.sheet { width: 54cqw; max-width: 86cqh; gap: 3.4cqmin; }
-.heading { width: 54%; height: 5cqmin; border-radius: 999px; background: var(--blog); opacity: 0.88; }
-.para { display: flex; flex-direction: column; gap: 2.8cqmin; }
-.row { height: 2.6cqmin; width: var(--w); border-radius: 999px; background: var(--text); opacity: 0.3; }
-.penCaret { height: 2.6cqmin; width: 22%; border-radius: 999px; background: var(--blog); opacity: 0.8; }
-
-/* ── reading: books standing on a shelf ── */
-.spines { display: flex; align-items: flex-end; justify-content: center; gap: 2.6cqmin; height: 50cqmin; }
-.spine {
-  position: relative;
-  width: var(--w);
-  height: var(--h);
-  border-radius: 1.4cqmin 1.4cqmin 0 0;
-  background: var(--surface);
-  border: max(1px, 0.4cqmin) solid var(--rule);
-  border-bottom: none;
-}
-.spine::before {
-  content: '';
+/* fine film grain for a printed, less-flat feel */
+.grain {
   position: absolute;
-  left: 50%;
-  top: 16%;
-  transform: translateX(-50%);
-  width: 58%;
-  height: 2.2cqmin;
-  border-radius: 999px;
-  background: var(--text);
-  opacity: 0.26;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  opacity: 0.06;
+  mix-blend-mode: overlay;
+  background-image: radial-gradient(#fff 0.5px, transparent 0.6px);
+  background-size: 3px 3px;
 }
-.spine.accent { background: color-mix(in oklab, var(--blog) 18%, var(--surface)); border-color: color-mix(in oklab, var(--blog) 38%, transparent); }
-.spine.accent::before { background: var(--blog); opacity: 0.92; }
-.shelfBar { width: 100%; height: 2.6cqmin; border-radius: 999px; background: var(--rule); }
 
-/* ── process: a small flow of connected nodes ── */
-.flow { width: 72cqmin; height: 72cqmin; display: block; }
-.wire { fill: none; stroke: var(--blog); stroke-width: 2.4; opacity: 0.5; stroke-linecap: round; stroke-linejoin: round; }
-.node { fill: var(--surface); stroke: var(--rule); stroke-width: 2; transform-box: fill-box; transform-origin: center; }
-.node.accent { fill: var(--blog); stroke: color-mix(in oklab, var(--blog) 55%, var(--rule)); }
-
-/* ── datacenter: a server rack beside a water drop ── */
-.rackCard { flex-direction: row; align-items: center; gap: 5cqmin; }
-.rack { flex: 1; display: flex; flex-direction: column; gap: 2.6cqmin; }
-.unit {
-  height: 7.6cqmin;
-  display: flex;
-  align-items: center;
-  gap: 1.8cqmin;
-  padding-left: 3cqmin;
-  border-radius: 1.6cqmin;
-  background: var(--surface);
-  border: max(1px, 0.4cqmin) solid var(--rule);
+/* ── code / structure: tilted pixel field fading into the light ── */
+.dotgrid {
+  position: absolute;
+  inset: -22%;
+  background-image: radial-gradient(circle, rgba(255, 241, 227, 0.92) 26%, transparent 30%);
+  background-size: 7cqmin 7cqmin;
+  transform: rotate(-12deg);
+  -webkit-mask-image: radial-gradient(58% 58% at 33% 36%, #000 4%, transparent 74%);
+  mask-image: radial-gradient(58% 58% at 33% 36%, #000 4%, transparent 74%);
 }
-.led { width: 2.4cqmin; height: 2.4cqmin; border-radius: 999px; background: var(--text); opacity: 0.26; }
-.unit.accent { background: color-mix(in oklab, var(--blog) 14%, var(--surface)); border-color: color-mix(in oklab, var(--blog) 32%, transparent); }
-.unit.accent .led:first-child { background: var(--blog); opacity: 0.95; }
-.drop { flex: none; width: 26cqmin; height: 32cqmin; }
-.drop path { fill: var(--blog); }
 
-/* ── motion: an easing curve with a leading dot + fading trail ── */
-.curve { width: 84cqmin; height: 50cqmin; display: block; }
-.path { fill: none; stroke: var(--blog); stroke-width: 3; stroke-linecap: round; opacity: 0.5; }
-.head { fill: var(--blog); opacity: var(--o, 1); transform-box: fill-box; transform-origin: center; }
+/* ── energy / water: glowing core + ripple rings ── */
+.coreGlow {
+  position: absolute;
+  width: 56cqmin;
+  height: 56cqmin;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 236, 214, 0.85), transparent 62%);
+  filter: blur(1.2cqmin);
+}
+.rings { width: 98cqmin; height: 98cqmin; overflow: visible; }
+.core { fill: #fff4e8; }
+.ring {
+  fill: none;
+  stroke: rgba(255, 240, 226, 0.5);
+  stroke-width: 1;
+  transform-box: fill-box;
+  transform-origin: center;
+}
 
-/* ── feed: the blog RSS mark (default) ── */
-.feedMark { width: 58cqmin; height: 58cqmin; display: block; }
-.feedDot { fill: var(--blog); transform-box: fill-box; transform-origin: center; }
-.arc { fill: none; stroke: var(--blog); stroke-width: 8; stroke-linecap: round; }
+/* ── motion: layered flowing waves ── */
+.waves { width: 122%; height: 80%; overflow: visible; }
+.wave {
+  fill: none;
+  stroke: rgba(255, 239, 224, 0.72);
+  stroke-width: 2;
+  stroke-linecap: round;
+  /* stacked vertically around centre; closer-to-front waves a touch brighter */
+  transform: translateY(calc((var(--i) - 1.5) * 8.5cqmin));
+  opacity: calc(0.9 - var(--i) * 0.16);
+}
+
+/* ── intro: rising orb + faint halos ── */
+.orb {
+  width: 30cqmin;
+  height: 30cqmin;
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 42%, #fff 4%, #ffcb98 34%, #ff6f2e 66%, transparent 73%);
+  filter: blur(0.3cqmin);
+}
+.halo {
+  position: absolute;
+  width: calc(28cqmin + var(--i) * 21cqmin);
+  height: calc(28cqmin + var(--i) * 21cqmin);
+  border-radius: 50%;
+  border: max(1px, 0.3cqmin) solid rgba(255, 236, 216, 0.34);
+}
 
 /* ── entrance: plays once on reveal; base CSS above is the finished frame ── */
 @media (prefers-reduced-motion: no-preference) {
@@ -127,49 +100,19 @@
   .inview { --play: running; }
   .root * { animation-play-state: var(--play); }
 
-  .card { animation: bt-rise 0.55s var(--ease-standard) both; }
-
-  .ln, .row, .penCaret {
-    transform-origin: left center;
-    animation: bt-grow 0.5s var(--ease-standard) both;
-    animation-delay: calc(var(--i) * 0.07s + 0.16s);
-  }
-  .heading { transform-origin: left center; animation: bt-grow 0.5s var(--ease-standard) 0.1s both; }
-  .caret { animation: bt-blink 1.05s steps(1) infinite; animation-delay: calc(var(--i) * 0.07s + 0.3s); }
-
-  .bar2 {
-    transform-origin: bottom;
-    animation: bt-eq 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
-    animation-delay: calc(var(--i) * 0.05s + 0.2s);
-  }
-  .baseline { transform-origin: left; animation: bt-grow 0.5s var(--ease-standard) 0.12s both; }
-
-  .spine { transform-origin: bottom; animation: bt-eq 0.55s cubic-bezier(0.16, 1, 0.3, 1) both; animation-delay: calc(var(--i) * 0.07s + 0.18s); }
-  .shelfBar { transform-origin: center; animation: bt-grow 0.5s var(--ease-standard) 0.1s both; }
-
-  .wire { animation: bt-draw 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both; }
-  .node { animation: bt-pop 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) both; animation-delay: calc(var(--i) * 0.12s + 0.42s); }
-
-  .feedDot { animation: bt-pop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) 0.18s both; }
-  .arc { animation: bt-draw 0.7s cubic-bezier(0.16, 1, 0.3, 1) both; animation-delay: calc(var(--i) * 0.18s + 0.32s); }
-
-  .unit { transform-origin: left center; animation: bt-grow 0.5s var(--ease-standard) both; animation-delay: calc(var(--i) * 0.08s + 0.2s); }
-  .drop { animation: bt-drop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.4s both; }
-
-  .path { animation: bt-draw 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both; }
-  .head { animation: bt-popScale 0.42s cubic-bezier(0.34, 1.56, 0.64, 1) both; }
-  .head:nth-of-type(1) { animation-delay: 0.5s; }
-  .head:nth-of-type(2) { animation-delay: 0.6s; }
-  .head:nth-of-type(3) { animation-delay: 0.7s; }
+  .dotgrid { animation: bt-dots 0.9s var(--ease-standard) both; }
+  .coreGlow { animation: bt-fade 0.8s var(--ease-standard) 0.1s both; }
+  .core { transform-box: fill-box; transform-origin: center; animation: bt-pop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 0.15s both; }
+  .ring { animation: bt-ripple 1s var(--ease-standard) both; animation-delay: calc(var(--i) * 0.12s + 0.2s); }
+  .wave { animation: bt-draw 1s cubic-bezier(0.16, 1, 0.3, 1) both; animation-delay: calc(var(--i) * 0.1s + 0.15s); }
+  .orb { animation: bt-rise 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both; }
+  .halo { animation: bt-halo 0.9s var(--ease-standard) both; animation-delay: calc(var(--i) * 0.12s); }
 }
 
-@keyframes bt-rise { from { opacity: 0; transform: translateY(6cqmin) scale(0.98); } to { opacity: 1; transform: none; } }
-@keyframes bt-grow { from { opacity: 0; transform: scaleX(0); } to { opacity: 1; transform: none; } }
-@keyframes bt-eq { from { transform: scaleY(0); } to { transform: none; } }
-@keyframes bt-draw { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+@keyframes bt-fade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes bt-dots { from { opacity: 0; transform: rotate(-12deg) scale(1.12); } to { opacity: 1; transform: rotate(-12deg); } }
 @keyframes bt-pop { from { opacity: 0; transform: scale(0); } to { opacity: 1; transform: none; } }
-/* scale-only pop: keeps the element's resting opacity (the motion trail dots fade
-   to var(--o), so bt-pop's opacity:1 would wrongly force them fully opaque) */
-@keyframes bt-popScale { from { transform: scale(0); } to { transform: none; } }
-@keyframes bt-drop { from { opacity: 0; transform: translateY(-7cqmin) scale(0.7); } to { opacity: 1; transform: none; } }
-@keyframes bt-blink { 0%, 50% { opacity: 1; } 50.01%, 100% { opacity: 0; } }
+@keyframes bt-ripple { from { opacity: 0; transform: scale(0.2); } to { opacity: 1; transform: none; } }
+@keyframes bt-draw { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+@keyframes bt-rise { from { opacity: 0; transform: translateY(10cqmin) scale(0.8); } to { opacity: 1; transform: none; } }
+@keyframes bt-halo { from { opacity: 0; transform: scale(0.4); } to { opacity: 1; transform: none; } }
