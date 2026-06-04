@@ -1,16 +1,53 @@
 ---
 title: "SCSS or Tailwind, now the AI writes most of it"
-excerpt: "The old styling argument was about who has to type the class names. An assistant types them now, so the question has quietly changed."
+excerpt: "The old styling argument was about who types the class names. An assistant types them now, so the real cost moved to who has to read them, the model included."
 date: "2026-06-04"
 category: Opinion
 tags: ["SCSS", "Tailwind", "CSS", "AI"]
 thumb: code
 ---
 
-The SCSS versus Tailwind argument used to be about typing. Tailwind saved you from naming things and hunting for the class that already existed. SCSS gave you readable markup and one place to change a colour. You picked your pain.
+The SCSS-versus-Tailwind argument used to be about typing. Tailwind saved you from naming things; SCSS saved you from repeating yourself. You picked your pain and moved on.
 
-An assistant does most of the typing now, so that part of the argument is over. And on the face of it, that hands it to Tailwind. Utility classes are the most AI-friendly CSS there is: they're local, they're predictable, and the model almost never has to invent a name or remember one it wrote three files ago. SCSS asks it to hold a mental model of the cascade, which it's worse at, and which drifts as the project grows.
+An assistant does most of the typing now, so that half of the argument is settled in Tailwind's favour. It generates utility classes fluently, never has to invent a name, and rarely reaches for a class it defined three files ago. If writing were the whole cost, this post would end here.
 
-But there's a flip side people skip. When the machine writes most of the code, you spend your time reading and reviewing, not writing. And a wall of forty utility classes is write-friendly and read-hostile. You can't scan it, diffs are noise, and a review turns into a word search. Semantic class names plus a stylesheet stay legible to the next person, who is usually you in six months, sometimes the assistant on its second pass.
+It isn't. When a model writes most of the code, the expensive part is reading: every prompt re-reads the files in context, and you re-read its output to review it. And a wall of utility classes is the most token-heavy, least scannable way to express a style.
 
-So the tedium SCSS used to cost, the naming and the boilerplate, is exactly the bit AI removes for free. What it can't remove is the reading. This site is hand-written SCSS modules for that reason. Tailwind's wins are real, no dead CSS, nothing to name, styles next to markup. I just think the thing you optimise for shifted from writing to reading, and SCSS reads better.
+## Tokens are the new line count
+
+Here's a single button, the kind every design system has, with hover, focus and dark variants. In Tailwind that's a string of fifteen-odd utilities on the element. In SCSS it's one class name plus a rule defined once, somewhere else.
+
+```chart
+{ "title": "Approx. tokens to express one styled button (the markup a model reads)", "unit": "tokens",
+  "note": "Rough counts via a GPT-style tokeniser. Tailwind utilities like focus-visible:ring-orange-500 tokenise into several pieces each; the SCSS rule is written once and amortised across every button.",
+  "data": [
+    { "label": "Tailwind utility classes", "value": 78, "hue": "blue", "display": "~78" },
+    { "label": "SCSS class name", "value": 6, "hue": "orange", "display": "~6" }
+  ] }
+```
+
+Six tokens versus seventy-eight isn't the interesting number. The interesting bit is that the seventy-eight repeat. Every button, every card, every variant carries its full styling inline, so the cost scales with how many elements are on the page. The SCSS rule is paid once and the markup stays flat. Across a single modest component file the gap looks like this:
+
+```chart
+{ "title": "Approx. styling tokens in one ~60-line component", "unit": "tokens",
+  "note": "A component with ~10 styled elements. Tailwind repeats the utilities at every element; SCSS names each once and keeps the rules in a separate file the model only loads when it's actually editing styles.",
+  "data": [
+    { "label": "Tailwind (inline)", "value": 720, "hue": "blue", "display": "~720" },
+    { "label": "SCSS (markup)", "value": 90, "hue": "orange", "display": "~90" },
+    { "label": "SCSS (the stylesheet)", "value": 140, "hue": "gray", "display": "~140, once" }
+  ] }
+```
+
+## What that actually costs
+
+In pounds, almost nothing. At roughly £2.50 per million input tokens, the difference above is a fraction of a penny per read. Nobody should pick a styling tool to save hundredths of a pence.
+
+The real cost is the context window, not the invoice. A model only has so much room to hold your code at once, and Tailwind-dense files fill it faster, so fewer files fit and the model "sees" less of the system while it works. The same tax hits a human reviewer: a diff that should read as "changed the padding" instead reads as a forty-token class string with one value different in the middle.
+
+## Readable markup makes the model better, not just cheaper
+
+This is the part I didn't expect. Semantic class names give the model something to reason about. `class="card"` next to a `.card` rule says *what the thing is*; a string of forty utilities says only *how it currently looks*, and the model has to infer the intent. Give an assistant `class="alert alert--error"` and ask it to add a warning variant and it does the obvious thing. Give it the utility soup and it tends to clone the whole string and tweak two values, because that's what the surrounding code taught it to do. Verbose context doesn't just cost more, it nudges the model toward copy-paste.
+
+None of this means Tailwind is wrong. Its wins are real: no naming, no dead CSS, styles colocated with markup, a design system enforced by constraints. If a project is write-heavy and short-lived, that's a great trade.
+
+But most of mine are read-heavy and long-lived, and in the AI era "read-heavy" got more true, not less, because the model reads constantly. So this site is hand-written SCSS modules, and the thing I'm optimising for is the same thing that helps the assistant: markup you can actually read.
