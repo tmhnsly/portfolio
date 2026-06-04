@@ -26,7 +26,7 @@ const stackSpring = { type: 'spring', stiffness: 240, damping: 30, mass: 1 } as 
 
 const pad = (n: number) => String(n).padStart(2, '0');
 
-function CardFace({ project }: { project: Project }) {
+function CardFace({ project, priority }: { project: Project; priority?: boolean }) {
   const p = projectPresentation(project);
   return (
     // The whole front card links to the project. A flick drags the card and Motion
@@ -37,6 +37,7 @@ function CardFace({ project }: { project: Project }) {
         grad={p.gradient}
         ratio="5/4"
         sizes={IMG_SIZES.deck}
+        priority={priority}
         className={styles.thumb}
       />
       <div className={styles.meta}>
@@ -175,7 +176,8 @@ export function CardDeck({ items }: { items: Project[] }) {
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.3, ease: EASING.standard }}
                   >
-                    <CardFace project={items[itemIndex]} />
+                    {/* front card is above the fold → eager-load its poster (the LCP) */}
+                    <CardFace project={items[itemIndex]} priority />
                   </motion.div>
                 ) : (
                   <div className={styles.face} aria-hidden />
