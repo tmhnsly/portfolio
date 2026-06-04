@@ -1,19 +1,13 @@
 'use client';
-import { useMemo, useState } from 'react';
 import type { BlogPost } from '@/lib/schemas';
-import { buildFacets, filterByFacet } from '@/lib/facets';
-import { FilterPills } from '@/components/ui/FilterPills';
+import { FilterPills, useFacets } from '@/components/ui/FilterPills';
 import { PostCard } from '../PostCard';
 import styles from './PostList.module.scss';
 
 const categoryOf = (p: BlogPost) => p.category;
 
 export function PostList({ posts }: { posts: BlogPost[] }) {
-  const [active, setActive] = useState(0);
-  const filters = useMemo(() => buildFacets(posts, categoryOf), [posts]);
-
-  const activeLabel = filters[active]?.label ?? 'All';
-  const filtered = filterByFacet(posts, categoryOf, activeLabel);
+  const { filters, active, setActive, filtered } = useFacets(posts, categoryOf);
 
   return (
     <section className={styles.section}>

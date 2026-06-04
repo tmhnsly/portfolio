@@ -1,16 +1,15 @@
 'use client';
-import { useMemo, useState } from 'react';
 import Link from 'next/link';
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import type { Project } from '@/types';
 import { DISCIPLINE_ORDER, DISCIPLINES } from '@/lib/disciplines';
 import { projectPresentation } from '@/lib/project-presentation';
-import { buildFacets, filterByFacet, splitFeatured } from '@/lib/facets';
+import { splitFeatured } from '@/lib/facets';
 import { IMG_SIZES } from '@/lib/breakpoints';
 import { DURATION, EASING } from '@/lib/motion';
 import { COPY } from '@/data';
 import { Eyebrow } from '@/components/ui/Eyebrow';
-import { FilterPills } from '@/components/ui/FilterPills';
+import { FilterPills, useFacets } from '@/components/ui/FilterPills';
 import { ProjectThumb } from '@/components/project-thumbs';
 import { Pill } from '@/components/ui/Pill';
 import { LinkArrow } from '@/components/ui/LinkArrow';
@@ -23,12 +22,8 @@ const disciplineLabel = (p: Project) => DISCIPLINES[p.discipline].label;
 const DISCIPLINE_LABELS = DISCIPLINE_ORDER.map((s) => DISCIPLINES[s].label);
 
 export function RecentWork({ projects }: { projects: Project[] }) {
-  const [active, setActive] = useState(0);
   const reduce = useReducedMotion();
-  const filters = useMemo(() => buildFacets(projects, disciplineLabel, DISCIPLINE_LABELS), [projects]);
-
-  const activeLabel = filters[active]?.label ?? 'All';
-  const filtered = filterByFacet(projects, disciplineLabel, activeLabel);
+  const { filters, active, setActive, activeLabel, filtered } = useFacets(projects, disciplineLabel, DISCIPLINE_LABELS);
   const { featured, rest: thumbs } = splitFeatured(filtered, 3);
   if (!featured) return null;
 
