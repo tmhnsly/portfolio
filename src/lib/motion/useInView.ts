@@ -20,7 +20,7 @@ export function useInView<T extends Element = HTMLDivElement>(): {
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-    const obs = new IntersectionObserver(([entry]) => setInView(entry.isIntersecting), { threshold: 0 });
+    const obs = new IntersectionObserver(([entry]) => setInView(entry?.isIntersecting ?? false), { threshold: 0 });
     obs.observe(el);
     return () => obs.disconnect();
   }, []);

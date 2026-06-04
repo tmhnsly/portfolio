@@ -36,17 +36,17 @@ export function MediaHero({ project }: { project: Project }) {
   }
 
   // A lone video plays inline in the hero (scroll-and-watch); no pop-out carousel.
-  if (project.media.length === 1 && project.media[0].type === 'youtube') {
-    const v = project.media[0];
+  const first = project.media[0];
+  if (project.media.length === 1 && first?.type === 'youtube') {
     return (
       <div className={styles.embed}>
-        <YouTubeEmbed id={v.id} list={v.list} poster={v.poster} title={v.title} grad={d.gradient} />
+        <YouTubeEmbed id={first.id} list={first.list} poster={first.poster} title={first.title} grad={d.gradient} />
       </div>
     );
   }
 
   const cover = coverImage(project);
-  const isVideo = project.media[0].type === 'youtube';
+  const isVideo = first?.type === 'youtube';
   const count = project.media.length;
 
   return (

@@ -24,7 +24,7 @@ export function Breadcrumb({ data, discipline }: { data: BreadcrumbData; discipl
   // discipline comes resolved from the Shell (the Zone owner); buildCrumbs derives
   // it from the pathname only as a fallback for callers that don't have it.
   const crumbs = buildCrumbs(pathname, data, discipline);
-  const home = crumbs[0];
+  const home = crumbs[0]!; // buildCrumbs always returns at least the home crumb
   const section = crumbs.find((c) => c.slot === 'section');
   const leaf = crumbs.find((c) => c.slot === 'leaf');
 

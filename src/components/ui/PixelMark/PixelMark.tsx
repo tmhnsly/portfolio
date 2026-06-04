@@ -30,7 +30,7 @@ const SWEEP = 300; // ms — how long the diagonal wave takes to cross (at pace 
 const UNION: { r: number; c: number; d: number }[] = (() => {
   const used = new Set<number>();
   for (const ic of Object.values(ICONS)) {
-    for (let r = 0; r < GRID; r++) for (let c = 0; c < GRID; c++) if (ic.data[r][c]) used.add(r * GRID + c);
+    for (let r = 0; r < GRID; r++) for (let c = 0; c < GRID; c++) if (ic.data[r]?.[c]) used.add(r * GRID + c);
   }
   const span = (GRID - 1) * 2; // max r+c
   return [...used].map((n) => {
@@ -114,7 +114,7 @@ export function PixelMark({
   const ink: React.ReactNode[] = [];
   const acc: React.ReactNode[] = [];
   for (const { r, c, d } of UNION) {
-    const tv = data[r][c];
+    const tv = data[r]?.[c] ?? 0;
     const isAcc = tv === 2;
     const style: React.CSSProperties = {
       opacity: revealed && tv !== 0 ? 1 : 0,

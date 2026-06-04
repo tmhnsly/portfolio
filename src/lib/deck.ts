@@ -6,9 +6,10 @@
 
 /** Rotate one step: dir < 0 advances (front → back); dir ≥ 0 reverses (back → front). */
 export function rotate(order: number[], dir: number): number[] {
+  if (order.length < 2) return order; // nothing to rotate
   return dir < 0
-    ? [...order.slice(1), order[0]]
-    : [order[order.length - 1], ...order.slice(0, -1)];
+    ? [...order.slice(1), order[0]!]
+    : [order[order.length - 1]!, ...order.slice(0, -1)];
 }
 
 /** Bring `itemIndex` to the front. Returns the SAME array (no-op) when it's

@@ -34,7 +34,7 @@ export function buildCrumbs(
   const home: Crumb = { slot: 'home', label: 'Home', href: segs.length ? '/' : undefined };
   if (segs.length === 0) return [home];
 
-  const first = segs[0];
+  const first = segs[0]!; // segs is non-empty here (guarded above)
   if (first === 'about') return [home, { slot: 'section', label: 'About' }];
 
   if (discipline) {
@@ -44,11 +44,12 @@ export function buildCrumbs(
       const noun = discipline === 'blog' ? 'post' : 'project';
       return [home, { slot: 'section', label, count, unit: `${noun}${count === 1 ? '' : 's'}` }];
     }
-    const path = `/${discipline}/${segs[1]}`;
+    const leafSeg = segs[1]!; // segs.length >= 2 here (length === 1 returned above)
+    const path = `/${discipline}/${leafSeg}`;
     return [
       home,
       { slot: 'section', label, href: `/${discipline}` },
-      { slot: 'leaf', label: titleMap[path] ?? humanize(segs[1]) },
+      { slot: 'leaf', label: titleMap[path] ?? humanize(leafSeg) },
     ];
   }
   return [home, { slot: 'section', label: humanize(first) }];

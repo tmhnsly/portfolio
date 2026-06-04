@@ -11,7 +11,7 @@ import styles from './Timeline.module.scss';
 
 // place is "Company · Location" — split so the chip + heading can use each part
 function splitPlace(place: string) {
-  const [company, ...rest] = place.split(' · ');
+  const [company = place, ...rest] = place.split(' · ');
   return { company, location: rest.join(' · ') };
 }
 

@@ -109,7 +109,7 @@ export function CardDeck({ items }: { items: Project[] }) {
   if (n === 0) return null;
 
   const visible = order.slice(0, Math.min(VISIBLE, n));
-  const activeIndex = order[0];
+  const activeIndex = order[0] ?? 0; // order is non-empty here (n === 0 returned above)
 
   // enter/stack are position-driven (custom = pos). It reads like a real deck shuffle:
   // a JOINING card rises from one slot deeper in the stack to its slot (bring-to-front),
@@ -177,7 +177,7 @@ export function CardDeck({ items }: { items: Project[] }) {
                     transition={{ duration: 0.3, ease: EASING.standard }}
                   >
                     {/* front card is above the fold → eager-load its poster (the LCP) */}
-                    <CardFace project={items[itemIndex]} priority />
+                    <CardFace project={items[itemIndex]!} priority />
                   </motion.div>
                 ) : (
                   <div className={styles.face} aria-hidden />

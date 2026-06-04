@@ -64,12 +64,17 @@ export function MediaCarousel({ items, startIndex = 0, gradient, onClose }: {
   }, [index, n]);
 
   // Swipe-down-to-dismiss (vertical lock; horizontal stays native scroll-snap).
-  const onTouchStart = (e: React.TouchEvent) => { drag.current = { x: e.touches[0].clientX, y: e.touches[0].clientY, locked: null, active: true }; };
+  const onTouchStart = (e: React.TouchEvent) => {
+    const t = e.touches[0];
+    if (!t) return;
+    drag.current = { x: t.clientX, y: t.clientY, locked: null, active: true };
+  };
   const onTouchMove = (e: React.TouchEvent) => {
     const d = drag.current;
-    if (!d.active) return;
-    const dx = e.touches[0].clientX - d.x;
-    const dy = e.touches[0].clientY - d.y;
+    const t = e.touches[0];
+    if (!d.active || !t) return;
+    const dx = t.clientX - d.x;
+    const dy = t.clientY - d.y;
     if (!d.locked) {
       if (Math.abs(dy) > 8 || Math.abs(dx) > 8) d.locked = Math.abs(dy) > Math.abs(dx) ? 'v' : 'h';
       else return;

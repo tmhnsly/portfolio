@@ -8,6 +8,6 @@ describe('Blog index', () => {
   it('features the latest post and lists older ones', () => {
     render(<ThemeProvider><Blog /></ThemeProvider>);
     expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(/Blog/);
-    expect(screen.getByText(getAllPosts()[0].title)).toBeInTheDocument();
+    expect(screen.getByText(getAllPosts()[0]!.title)).toBeInTheDocument();
   });
 });
