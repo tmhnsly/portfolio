@@ -71,7 +71,7 @@ A content item's card/hero cover, resolved once per type by parallel modules ove
 _Avoid_: thumbnail, image, asset.
 
 **Media hero**:
-The project page's top "pride of place" poster (`media[0]`); clicking it opens the **Media carousel**. Replaced the former cover embed.
+The project page's top "pride of place" poster (`media[0]`); clicking it opens the **Media carousel**. Replaced the former cover embed. A **Project** may register a bespoke hero (slug → component in `project/custom-heroes`, e.g. Boucle's sequencer view) that replaces the poster/carousel path entirely.
 _Avoid_: embed, banner.
 
 **Media carousel**:

@@ -3,67 +3,26 @@ import { useState } from 'react';
 import type { Project } from '@/types';
 import { DISCIPLINES } from '@/lib/disciplines';
 import { IMG_SIZES } from '@/lib/breakpoints';
-import { LinkArrow } from '@/components/ui/LinkArrow';
 import { Media } from '@/components/ui/Media';
 import { ProjectThumb } from '@/components/project-thumbs';
+import { customHero } from '@/components/project/custom-heroes';
 import { coverImage } from '@/lib/project-presentation';
 import { MediaCarousel } from '@/components/project/MediaCarousel';
 import { YouTubeEmbed } from '@/components/project/YouTubeEmbed';
 import { BiPlay } from 'react-icons/bi';
 import styles from './MediaHero.module.scss';
 
-const ACTIVE_PADS = new Set([0, 4, 6, 10, 11, 13]);
-
 export function MediaHero({ project }: { project: Project }) {
   const d = DISCIPLINES[project.discipline];
   const [open, setOpen] = useState(false);
 
-  if (project.slug === 'boucle') {
+  // A project may register a bespoke hero (e.g. Boucle's sequencer view) in place
+  // of the standard poster/carousel path — see project/custom-heroes.
+  const Custom = customHero(project.slug);
+  if (Custom) {
     return (
       <div className={styles.embed}>
-        <div className={styles.boucle} style={{ background: d.gradient }}>
-          <div className={styles.hatch} aria-hidden />
-
-          <div className={styles.chromaTop}>
-            <span className={styles.chromaTitle}>Boucle · v0.4</span>
-            <div className={styles.chromaRight}>
-              <span>● rec</span>
-              <span>120 bpm</span>
-              <span>4/4</span>
-            </div>
-            <span>open in new tab <LinkArrow inline /></span>
-          </div>
-
-          <div className={styles.stage}>
-            <div className={styles.dialLeft}>
-              <div className={styles.dial}>
-                <div className={styles.dialMark} style={{ transform: 'translateX(-50%) rotate(-45deg)' }} />
-              </div>
-              <span className={styles.dialLabel}>tempo · <strong>120</strong></span>
-            </div>
-
-            <div className={styles.padGrid}>
-              {Array.from({ length: 16 }, (_, i) => (
-                <div key={i} className={`${styles.pad} ${ACTIVE_PADS.has(i) ? styles.padActive : ''}`}>
-                  {String(i + 1).padStart(2, '0')}
-                </div>
-              ))}
-            </div>
-
-            <div className={styles.dialRight}>
-              <div className={styles.dial}>
-                <div className={styles.dialMark} style={{ transform: 'translateX(-50%) rotate(60deg)' }} />
-              </div>
-              <span className={styles.dialLabel}>character · <strong>68</strong></span>
-            </div>
-          </div>
-
-          <div className={styles.chromaBottom}>
-            <span>▶ play · ⏵ shuffle · ⏺ record</span>
-            <span className={styles.chromaTime}>00:00:14:02</span>
-            <span>shift + space</span>
-          </div>
-        </div>
+        <Custom project={project} />
       </div>
     );
   }
