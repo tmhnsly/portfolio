@@ -81,11 +81,27 @@ const MOTIFS: Record<MotifKey, () => React.ReactNode> = {
   feed: Orb,
 };
 
+// Each motif picks a Radix hue that fits its subject (orange = code/blog default,
+// blue = the water/energy piece, green = reading/process, tomato = motion).
+const MOTIF_HUE: Partial<Record<MotifKey, 'hueBlue' | 'hueGreen' | 'hueTomato'>> = {
+  datacenter: 'hueBlue',
+  audio: 'hueBlue',
+  reading: 'hueGreen',
+  process: 'hueGreen',
+  motion: 'hueTomato',
+};
+
 export function BlogThumb({ post }: { post: BlogPost }) {
-  const Motif = MOTIFS[pickMotif(post)];
+  const motif = pickMotif(post);
+  const Motif = MOTIFS[motif];
+  const hue = MOTIF_HUE[motif];
   const { ref, revealed } = useReveal();
   return (
-    <div ref={ref} className={`${styles.root} ${revealed ? styles.inview : ''}`} aria-hidden>
+    <div
+      ref={ref}
+      className={[styles.root, hue && styles[hue], revealed && styles.inview].filter(Boolean).join(' ')}
+      aria-hidden
+    >
       <Motif />
     </div>
   );

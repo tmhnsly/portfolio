@@ -1,15 +1,25 @@
-/* BlogThumb — atmospheric cover art for image-less posts: a warm gradient field
-   with one luminous abstract form per topic. A fixed warm palette (bold on light
-   and dark pages alike, like the project deck cards), container-query sized so it
-   scales from the big featured card down to a list thumb. The entrance plays once
-   on reveal (.inview); reduced motion shows the finished frame (base CSS = final). */
+/* BlogThumb — atmospheric cover art for image-less posts: a tinted gradient field
+   with one abstract form per topic. Coloured entirely from Radix hue vars (via the
+   --c-* set below), so it adapts to light + dark; each motif picks a hue that fits
+   its subject (orange for code, blue for the water/energy piece, etc.). Container-
+   query sized; the entrance plays once on reveal (.inview); reduced motion shows
+   the finished frame (base CSS = final). */
 
 .root {
   position: absolute;
   inset: 0;
   container-type: size;
   overflow: hidden;
+  /* default hue = orange (the blog accent). Hue classes below swap the scale. */
+  --c-hi: var(--orange-4);
+  --c-lo: var(--orange-7);
+  --c-glow: var(--orange-6);
+  --c-form: var(--orange-9);
+  --c-line: var(--orange-10);
 }
+.hueBlue { --c-hi: var(--blue-4); --c-lo: var(--blue-7); --c-glow: var(--blue-6); --c-form: var(--blue-9); --c-line: var(--blue-10); }
+.hueGreen { --c-hi: var(--green-4); --c-lo: var(--green-7); --c-glow: var(--green-6); --c-form: var(--green-9); --c-line: var(--green-10); }
+.hueTomato { --c-hi: var(--tomato-4); --c-lo: var(--tomato-7); --c-glow: var(--tomato-6); --c-form: var(--tomato-9); --c-line: var(--tomato-10); }
 
 .art {
   position: absolute;
@@ -19,9 +29,8 @@
   overflow: hidden;
   isolation: isolate;
   background:
-    radial-gradient(72% 64% at 22% 14%, #ff9a52, transparent 58%),
-    radial-gradient(86% 86% at 92% 108%, #581d07, transparent 56%),
-    linear-gradient(150deg, #e6571f 4%, #2e1308 96%);
+    radial-gradient(78% 68% at 24% 16%, var(--c-glow), transparent 60%),
+    linear-gradient(150deg, var(--c-hi), var(--c-lo));
 }
 
 /* fine film grain for a printed, less-flat feel */
@@ -40,7 +49,7 @@
 .dotgrid {
   position: absolute;
   inset: -22%;
-  background-image: radial-gradient(circle, rgba(255, 241, 227, 0.92) 26%, transparent 30%);
+  background-image: radial-gradient(circle, var(--c-form) 26%, transparent 30%);
   background-size: 7cqmin 7cqmin;
   transform: rotate(-12deg);
   -webkit-mask-image: radial-gradient(58% 58% at 33% 36%, #000 4%, transparent 74%);
@@ -53,14 +62,14 @@
   width: 56cqmin;
   height: 56cqmin;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(255, 236, 214, 0.85), transparent 62%);
+  background: radial-gradient(circle, var(--c-glow), transparent 62%);
   filter: blur(1.2cqmin);
 }
 .rings { width: 98cqmin; height: 98cqmin; overflow: visible; }
-.core { fill: #fff4e8; }
+.core { fill: var(--c-form); }
 .ring {
   fill: none;
-  stroke: rgba(255, 240, 226, 0.5);
+  stroke: color-mix(in oklab, var(--c-line) 50%, transparent);
   stroke-width: 1;
   transform-box: fill-box;
   transform-origin: center;
@@ -70,7 +79,7 @@
 .waves { width: 122%; height: 80%; overflow: visible; }
 .wave {
   fill: none;
-  stroke: rgba(255, 239, 224, 0.72);
+  stroke: color-mix(in oklab, var(--c-form) 70%, transparent);
   stroke-width: 2;
   stroke-linecap: round;
   /* stacked vertically around centre; closer-to-front waves a touch brighter */
@@ -83,15 +92,14 @@
   width: 30cqmin;
   height: 30cqmin;
   border-radius: 50%;
-  background: radial-gradient(circle at 50% 42%, #fff 4%, #ffcb98 34%, #ff6f2e 66%, transparent 73%);
-  filter: blur(0.3cqmin);
+  background: radial-gradient(circle at 50% 42%, var(--c-form), transparent 70%);
 }
 .halo {
   position: absolute;
   width: calc(28cqmin + var(--i) * 21cqmin);
   height: calc(28cqmin + var(--i) * 21cqmin);
   border-radius: 50%;
-  border: max(1px, 0.3cqmin) solid rgba(255, 236, 216, 0.34);
+  border: max(1px, 0.3cqmin) solid color-mix(in oklab, var(--c-form) 32%, transparent);
 }
 
 /* ── entrance: plays once on reveal; base CSS above is the finished frame ── */
