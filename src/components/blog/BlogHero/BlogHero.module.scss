@@ -42,6 +42,7 @@
   letter-spacing: var(--ls-display-xxl);
   line-height: var(--lh-display);
   color: var(--text);
+  white-space: nowrap; /* keep "Blog" + accent period together (see SectionHero) */
 }
 
 .period {

@@ -12,8 +12,11 @@
 .titleRow {
   display: flex;
   align-items: center;
-  gap: 0.32em;
-  font-size: clamp(var(--fs-display-l), 14vw, var(--fs-display-xxl));
+  gap: 0.3em;
+  /* the mark adds ~1.1em of width, so the ramp is gentler than a bare title's —
+     stops the mark+title overflowing the column at tablet widths (which pushed the
+     period onto its own line and dropped the mark low) */
+  font-size: clamp(var(--fs-display-l), 12vw, var(--fs-display-xxl));
 }
 /* lift the mark to sit on the cap line (the title's line-box centre reads low) */
 .titleMark {
@@ -22,12 +25,16 @@
 }
 .title {
   font-family: var(--font-display);
-  font-size: clamp(var(--fs-display-l), 14vw, var(--fs-display-xxl));
+  /* matches .titleRow so the em-sized mark stays in proportion with the text */
+  font-size: clamp(var(--fs-display-l), 12vw, var(--fs-display-xxl));
   font-weight: 600;
   line-height: var(--lh-display);
   letter-spacing: var(--ls-display-l);
   color: var(--text);
   margin: 0;
+  /* keep the label + accent period on one line (single-word titles): a wrap here
+     orphaned the period and threw the mark's vertical centring off */
+  white-space: nowrap;
 }
 .period { color: var(--accent-ink-to, var(--accent-ink)); }
 .intro {
