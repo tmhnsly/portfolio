@@ -23,26 +23,36 @@ function listMd(sub: string) {
 
 /* ── Corpus: read + Zod-parse + date-desc sort ONCE, then memoise. Content is
    static at build, so callers (and the queries below) share one parsed array
-   instead of re-reading the markdown on every call. Callers never mutate. ── */
+   instead of re-reading the markdown on every call. Callers never mutate.
+   In dev we re-read on every call instead: markdown files aren't part of the
+   module graph, so adding/editing one wouldn't show until a server restart. ── */
+const DEV = process.env.NODE_ENV !== 'production';
 let _projects: Project[] | null = null;
 let _posts: BlogPost[] | null = null;
 
-export function getAllProjects(): Project[] {
-  return (_projects ??= listMd('projects')
+function loadProjects(): Project[] {
+  return listMd('projects')
     .map((file) => {
       const { slug, data, content } = read('projects', file);
       return { ...projectFrontmatterSchema.parse(data), slug, body: content };
     })
-    .sort((a, b) => b.date.localeCompare(a.date)));
+    .sort((a, b) => b.date.localeCompare(a.date));
 }
-export function getAllPosts(): BlogPost[] {
-  return (_posts ??= listMd('blog')
+function loadPosts(): BlogPost[] {
+  return listMd('blog')
     .map((file) => {
       const { slug, data, content } = read('blog', file);
       const fm = postFrontmatterSchema.parse(data);
       return { ...fm, slug, body: content, readingTime: fm.readingTime ?? estimateReading(content), author: AUTHOR };
     })
-    .sort((a, b) => b.date.localeCompare(a.date)));
+    .sort((a, b) => b.date.localeCompare(a.date));
+}
+
+export function getAllProjects(): Project[] {
+  return DEV ? loadProjects() : (_projects ??= loadProjects());
+}
+export function getAllPosts(): BlogPost[] {
+  return DEV ? loadPosts() : (_posts ??= loadPosts());
 }
 export function getProject(slug: string): Project | undefined {
   return getAllProjects().find((p) => p.slug === slug);
