@@ -7,6 +7,19 @@
   gap: var(--space-8);
   @include tablet-up { grid-template-columns: 1.5fr 1fr; }
 }
+/* experiment: the discipline's pixel mark beside the title. The row carries the
+   title's font-size so the mark can be sized in em (scales with the clamp). */
+.titleRow {
+  display: flex;
+  align-items: center;
+  gap: 0.32em;
+  font-size: clamp(var(--fs-display-l), 14vw, var(--fs-display-xxl));
+}
+/* lift the mark to sit on the cap line (the title's line-box centre reads low) */
+.titleMark {
+  display: inline-flex;
+  transform: translateY(-0.08em);
+}
 .title {
   font-family: var(--font-display);
   font-size: clamp(var(--fs-display-l), 14vw, var(--fs-display-xxl));

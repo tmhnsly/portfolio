@@ -2,6 +2,7 @@ import type { Discipline } from '@/types';
 import { DISCIPLINES } from '@/lib/disciplines';
 import { Eyebrow } from '@/components/ui/Eyebrow';
 import { TechChip } from '@/components/ui/TechChip';
+import { PixelMark } from '@/components/ui/PixelMark';
 import { Entrance, EntranceItem, EntranceTitle } from '@/components/motion/Entrance';
 import styles from './SectionHero.module.scss';
 
@@ -21,9 +22,14 @@ export function SectionHero({
           app/[discipline]/layout.tsx so it persists + morphs across hubs */}
       <div className={styles.grid}>
         <div className={styles.left}>
-          <EntranceTitle className={styles.title}>
-            {d.label}<span className={styles.period}>.</span>
-          </EntranceTitle>
+          <div className={styles.titleRow}>
+            <span className={styles.titleMark} aria-hidden>
+              <PixelMark icon={discipline} accent="var(--accent)" size="0.92em" />
+            </span>
+            <EntranceTitle className={styles.title}>
+              {d.label}<span className={styles.period}>.</span>
+            </EntranceTitle>
+          </div>
           <EntranceItem>
             <p className={styles.intro}>{intro}</p>
           </EntranceItem>
