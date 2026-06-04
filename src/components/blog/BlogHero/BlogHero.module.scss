@@ -21,19 +21,6 @@
   flex-direction: column;
 }
 
-/* the discipline's pixel mark beside the title (matches SectionHero); the row
-   carries the title font-size so the mark sizes in em and scales with the clamp */
-.titleRow {
-  display: flex;
-  align-items: center;
-  gap: 0.32em;
-  font-size: clamp(var(--fs-display-l), 12vw, var(--fs-display-xxl));
-}
-.titleMark {
-  display: inline-flex;
-  transform: translateY(-0.08em);
-}
-
 .heading {
   margin: 0;
   font-family: var(--font-display);
@@ -42,7 +29,6 @@
   letter-spacing: var(--ls-display-xxl);
   line-height: var(--lh-display);
   color: var(--text);
-  white-space: nowrap; /* keep "Blog" + accent period together (see SectionHero) */
 }
 
 .intro {
