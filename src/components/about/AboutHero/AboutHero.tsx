@@ -11,10 +11,10 @@ export function AboutHero() {
     <Entrance className={styles.section}>
       <div className={styles.grid}>
         {/* Stand-in for a real portrait: the pixel-mark 'about' glyph (a pixel
-            person) centred on the soft aurora panel in the 4:5 slot. Swap the
-            PixelMark for a <Media> photo when one's shot. */}
+            person), no frame/background. Swap the PixelMark for a <Media> photo
+            when one's shot. */}
         <EntranceItem className={styles.portrait}>
-          <div className={styles.aurora} aria-hidden>
+          <div className={styles.markSlot} aria-hidden>
             <PixelMark icon="about" accent="var(--accent)" size="66%" />
           </div>
         </EntranceItem>

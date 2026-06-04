@@ -24,21 +24,13 @@
   }
 }
 
-/* Soft aurora placeholder (no photo yet): layered radial glows over the surface,
-   theme-aware via the Radix scales, with the pixel-mark person centred on top.
-   Swap for a <Media> portrait later. */
-.aurora {
+/* Pixel-mark stand-in portrait: no frame or background, just the mark centred in
+   the 4:5 portrait slot. Swap the PixelMark for a <Media> photo later. */
+.markSlot {
   aspect-ratio: 4 / 5;
-  border-radius: var(--radius-xl);
-  border: 1px solid var(--surface-edge); /* frame the slot so the mark reads as a portrait, not a floating icon */
   display: flex;
   align-items: center;
   justify-content: center;
-  background:
-    radial-gradient(120% 90% at 20% 12%, color-mix(in oklab, var(--tomato-9) 48%, transparent), transparent 56%),
-    radial-gradient(110% 100% at 85% 28%, color-mix(in oklab, var(--blue-9) 40%, transparent), transparent 56%),
-    radial-gradient(120% 110% at 72% 96%, color-mix(in oklab, var(--teal-9) 42%, transparent), transparent 60%),
-    var(--surface);
 }
 
 .copy {
