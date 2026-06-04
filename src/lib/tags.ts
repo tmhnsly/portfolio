@@ -17,6 +17,7 @@ export const TAGS = [
   // cross-cutting project + topic tags (not curated discipline tools)
   'Open source', 'PWA', 'Orchestration API', 'Accessibility', 'Charts',
   'Process', 'Studio log', 'Reading', 'Books', 'Workflow', 'Tools', 'Code', 'Music', 'Sound', 'CMS', 'CSS',
+  'AI', 'Performance', 'Sustainability',
 ] as const;
 
 export type TagLabel = (typeof TAGS)[number];

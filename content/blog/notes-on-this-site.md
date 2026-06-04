@@ -1,15 +1,15 @@
 ---
 title: "Why there's a blog here at all"
 excerpt: "A first post, mostly about what I'll put here and why I bothered building the place to put it."
-date: "2026-06-02"
+date: "2026-05-28"
 category: Studio log
-tags: ["Process", "Code", "Workflow"]
+tags: ["Process", "Workflow"]
 ---
 
-I've started and abandoned a blog about four times now. The pattern is always the same: I spend a fortnight on the build, write one earnest post about why I'm starting a blog, then never touch it again. So I'm aware of the irony of this being a post about starting a blog.
+I've started and quietly dropped a blog more than once. The pattern's always the same: a fortnight on the build, one earnest post about starting a blog, then silence. So I know the shape of the irony here.
 
-The difference this time is that I built it as part of the portfolio rather than off to the side. It's the same site, the same colours, the same bits of code. There's no separate thing to maintain and feel guilty about. If I'm already in here changing a project page, the blog is right there.
+The difference this time is that it isn't a separate thing. It's part of the portfolio, same site, same code, nothing extra to maintain and feel guilty about. If I'm already in here changing a project page, the writing is right there.
 
-What I want to use it for is the working-out. Most of what I make gets shown as a finished thing, a video or a shipped feature, with all the false starts edited out. The interesting part is usually the false starts. So this is where I'll write up the bits that don't fit on a project page: why I drew the card thumbnails by hand instead of screenshotting them, what I learned scoring a short film over a weekend, a tool I've changed my mind about.
+What I want it for is the opinions and the working-out, the stuff that doesn't fit on a project page. Whether SCSS still makes sense now that an assistant writes most of the markup. What an AI query actually costs once you stop quoting scary round numbers at it. Whether everything on a page should really animate. Things I've changed my mind about, mostly.
 
-It'll be irregular. I'd rather post something I actually thought about every few weeks than something dutiful every Monday. If any of it is useful to you, good. Mostly I'm writing it down so I stop forgetting how I solved things.
+It'll be irregular, and I'd rather post something I actually chewed on every few weeks than something dutiful every Monday. If any of it is useful to you, good. Mostly I'm writing it down so I stop forgetting how I got to a view.
