@@ -5,7 +5,6 @@ import { DISCIPLINES } from '@/lib/disciplines';
 import { IMG_SIZES } from '@/lib/breakpoints';
 import { Media } from '@/components/ui/Media';
 import { ProjectThumb } from '@/components/project-thumbs';
-import { CUSTOM_HEROES } from '@/components/project/custom-heroes';
 import { coverImage } from '@/lib/project-presentation';
 import { MediaCarousel } from '@/components/project/MediaCarousel';
 import { YouTubeEmbed } from '@/components/project/YouTubeEmbed';
@@ -15,17 +14,6 @@ import styles from './MediaHero.module.scss';
 export function MediaHero({ project }: { project: Project }) {
   const d = DISCIPLINES[project.discipline];
   const [open, setOpen] = useState(false);
-
-  // A project may register a bespoke hero (e.g. Boucle's sequencer view) in place
-  // of the standard poster/carousel path — see project/custom-heroes.
-  const Custom = CUSTOM_HEROES[project.slug];
-  if (Custom) {
-    return (
-      <div className={styles.embed}>
-        <Custom project={project} />
-      </div>
-    );
-  }
 
   if (project.media.length === 0) {
     return (
