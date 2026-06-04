@@ -98,7 +98,7 @@ export function Nav({ active, accent, accentInk, onAccent }: NavProps) {
         <nav className={styles.bar} aria-label="Primary">
           {/* monogram + wordmark are two visual pieces but one "home" button */}
           <Link href="/" className={styles.brand} aria-label={COPY.nav.homeAria}>
-            <span style={{ width: 24, height: 24, display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--text)' }}>
+            <span style={{ width: 24, height: 24, display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--text)', transform: 'translateY(-1px)' }}>
               <PixelMark icon={markIcon} accent={accent} size={24} />
             </span>
             <span className={styles.name}>Tom Hinsley</span>
