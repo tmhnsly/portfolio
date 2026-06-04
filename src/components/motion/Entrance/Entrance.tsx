@@ -99,8 +99,10 @@ function revealWords(node: React.ReactNode, ctx: { i: number }): React.ReactNode
  */
 export function EntranceTitle({ children, className }: { children: React.ReactNode; className?: string }) {
   const pathname = usePathname();
+  // `.clipTitle` is an empty rule (Sass drops it), so styles.clipTitle is
+  // undefined — filter it out rather than emit a literal "undefined" class.
   return (
-    <h1 className={`${styles.clipTitle} ${className ?? ''}`}>
+    <h1 className={[styles.clipTitle, className].filter(Boolean).join(' ')}>
       <span key={pathname} className={styles.inner}>
         {revealWords(children, { i: 0 })}
       </span>

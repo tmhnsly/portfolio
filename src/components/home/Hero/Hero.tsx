@@ -19,9 +19,16 @@ export function Hero({ featured }: { featured: Project[] }) {
       <div className={styles.lead}>
         <EntranceTitle className={styles.title}>
           {COPY.hero.titleLead}<br />
+          {/* Each nested span holds either a single string or only elements —
+              never a mixed [string, element] array. EntranceTitle's word-splitter
+              recurses through these (the title is authored in a Server Component),
+              and a mixed array hydrated to plain text on the client (the words
+              wrapped on the server but not the client → mismatch). */}
           <span className={styles.muted}>
-            {mutedLead && `${mutedLead} `}
-            <span className={styles.titleEnd}>{mutedLast}<span className={styles.period}>.</span></span>
+            {mutedLead ? <span>{`${mutedLead} `}</span> : null}
+            <span className={styles.titleEnd}>
+              <span>{mutedLast}</span><span className={styles.period}>.</span>
+            </span>
           </span>
         </EntranceTitle>
         <EntranceItem i={0}>
