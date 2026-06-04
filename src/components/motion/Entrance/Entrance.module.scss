@@ -11,6 +11,11 @@
   display: inline-block;
   vertical-align: baseline;
 }
+/* title tone + accent period + period-glue — owned here so every hero gets the
+   same behaviour (and the glue keeps the period off its own line) */
+.muted { color: var(--text-soft); font-weight: 500; }
+.period { color: var(--accent-ink-to, var(--accent-ink)); } /* static target — no colour morph on zone change */
+.titleEnd { white-space: nowrap; }
 .word {
   display: inline-block;
   opacity: 0;

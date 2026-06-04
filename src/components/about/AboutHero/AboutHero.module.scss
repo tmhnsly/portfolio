@@ -47,16 +47,6 @@
   color: var(--text);
 }
 
-/* keep the last name word + period together so the period never orphans on its
-   own line in a narrow column (it still wraps between "Tom" and "Hinsley.") */
-.nameEnd {
-  white-space: nowrap;
-}
-
-.dot {
-  color: var(--accent-ink-to, var(--accent-ink)); /* static target — no colour morph on zone change */
-}
-
 .intro {
   margin: var(--space-6) 0 0;
   max-width: 640px;

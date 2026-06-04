@@ -13,12 +13,6 @@
   @include tablet-up { font-size: clamp(44px, 6.5vw, var(--fs-display-l)); }
   @include lg-up { font-size: clamp(var(--fs-display-l), 6vw, var(--fs-display-xl)); }
   @include desktop-up { font-size: clamp(var(--fs-display-l), 7vw, var(--fs-display-xl)); } }
-.muted { color: var(--text-soft); font-weight: 500; }
-/* glue the final muted word + period so the period never orphans to its own line
-   (each word is an inline-block in EntranceTitle, which otherwise allows a wrap
-   between the last word and the separate accent period) */
-.titleEnd { white-space: nowrap; }
-.period { color: var(--accent-ink-to, var(--accent-ink)); } /* static target — no colour morph on zone change */
 .sub { margin-top: var(--space-7); max-width: 580px; font-size: var(--fs-body-l); color: var(--text-soft); line-height: var(--lh-body); }
 /* deckCol spans the content width so its "Featured deck" eyebrow sits at the
    gutter, in line with the other section eyebrows; from desktop it becomes the

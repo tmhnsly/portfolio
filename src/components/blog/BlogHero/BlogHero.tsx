@@ -12,9 +12,7 @@ export function BlogHero() {
             <span className={styles.titleMark} aria-hidden>
               <PixelMark icon="blog" accent="var(--accent)" size="0.92em" />
             </span>
-            <EntranceTitle className={styles.heading}>
-              Blog<span className={styles.period}>.</span>
-            </EntranceTitle>
+            <EntranceTitle className={styles.heading} title="Blog" period />
           </div>
           <EntranceItem>
             <p className={styles.intro}>{COPY.blog.heroIntro}</p>

@@ -26,9 +26,7 @@ export function SectionHero({
             <span className={styles.titleMark} aria-hidden>
               <PixelMark icon={discipline} accent="var(--accent)" size="0.92em" />
             </span>
-            <EntranceTitle className={styles.title}>
-              {d.label}<span className={styles.period}>.</span>
-            </EntranceTitle>
+            <EntranceTitle className={styles.title} title={d.label} period />
           </div>
           <EntranceItem>
             <p className={styles.intro}>{intro}</p>

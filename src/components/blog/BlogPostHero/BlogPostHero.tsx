@@ -15,9 +15,7 @@ export function BlogPostHero({ post }: { post: BlogPost }) {
         </span>
       </EntranceItem>
 
-      <EntranceTitle className={styles.title}>
-        {post.title}<span className={styles.period}>.</span>
-      </EntranceTitle>
+      <EntranceTitle className={styles.title} title={post.title} period />
 
       <EntranceItem className={styles.authorRow}>
         <div className={styles.authorLeft}>

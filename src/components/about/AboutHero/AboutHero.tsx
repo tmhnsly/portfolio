@@ -7,14 +7,6 @@ import styles from './AboutHero.module.scss';
 
 export function AboutHero() {
   const intro = COPY.about.intro.replace('{years}', String(yearsSince(SITE.experienceSince)));
-  // Glue the trailing period to the last name word so a narrow column wraps
-  // "Hinsley." together instead of orphaning the period on its own line. Each
-  // nested span holds a single string or only elements (never a mixed array) —
-  // EntranceTitle's word-splitter recurses through these and a mixed [string,
-  // element] child mismatches on hydration (see Hero).
-  const nameWords = SITE.name.trim().split(/\s+/);
-  const nameLast = nameWords.at(-1) ?? SITE.name;
-  const nameLead = nameWords.slice(0, -1).join(' ');
   return (
     <Entrance className={styles.section}>
       <div className={styles.grid}>
@@ -27,12 +19,7 @@ export function AboutHero() {
           </div>
         </EntranceItem>
         <div className={styles.copy}>
-          <EntranceTitle className={styles.name}>
-            {nameLead ? <span>{`${nameLead} `}</span> : null}
-            <span className={styles.nameEnd}>
-              <span>{nameLast}</span><span className={styles.dot}>.</span>
-            </span>
-          </EntranceTitle>
+          <EntranceTitle className={styles.name} title={SITE.name} period />
           <EntranceItem>
             <p className={styles.intro}>{intro}</p>
           </EntranceItem>

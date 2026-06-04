@@ -45,10 +45,6 @@
   white-space: nowrap; /* keep "Blog" + accent period together (see SectionHero) */
 }
 
-.period {
-  color: var(--accent-ink-to, var(--accent-ink));
-}
-
 .intro {
   margin: var(--space-6) 0 0;
   max-width: 580px;

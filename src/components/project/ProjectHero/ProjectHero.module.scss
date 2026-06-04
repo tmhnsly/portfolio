@@ -86,17 +86,6 @@
   color: var(--text);
 }
 
-/* glue the final word + period so the period never orphans to its own line
-   (each word is an inline-block wordClip in EntranceTitle, which otherwise allows
-   a wrap between the last word and the period) */
-.titleEnd {
-  white-space: nowrap;
-}
-
-.period {
-  color: var(--accent-ink-to, var(--accent-ink)); /* static target — no colour morph on zone change */
-}
-
 .lead {
   margin: var(--space-6) 0 0;
   max-width: 620px;

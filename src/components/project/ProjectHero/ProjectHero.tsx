@@ -15,15 +15,6 @@ export function ProjectHero({ project }: { project: Project }) {
   const d = DISCIPLINES[project.discipline];
   const primaryLink = project.liveUrl ?? project.links?.[0]?.url;
 
-  // Keep the trailing period glued to the final word: each word becomes its own
-  // inline-block wordClip (in EntranceTitle), and a soft-wrap opportunity sits
-  // between adjacent inline-blocks — so on a long title the period would drop to
-  // its own line. Wrapping the last word + period in a nowrap span removes that
-  // one break (the title still wraps at the earlier spaces).
-  const titleWords = project.title.trim().split(/\s+/);
-  const lastWord = titleWords.at(-1) ?? project.title;
-  const leadWords = titleWords.slice(0, -1).join(' ');
-
   const metaRows: [string, string][] = [];
   if (project.role)   metaRows.push(['Role',   project.role]);
   if (project.year)   metaRows.push(['Year',   String(project.year)]);
@@ -47,10 +38,7 @@ export function ProjectHero({ project }: { project: Project }) {
             )}
           </EntranceItem>
 
-          <EntranceTitle className={styles.title}>
-            {leadWords && `${leadWords} `}
-            <span className={styles.titleEnd}>{lastWord}<span className={styles.period}>.</span></span>
-          </EntranceTitle>
+          <EntranceTitle className={styles.title} title={project.title} period />
 
           {project.desc && (
             <EntranceItem>

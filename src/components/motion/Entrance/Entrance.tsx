@@ -48,63 +48,79 @@ export function EntranceItem({ children, className, i = 0 }: { children: React.R
   );
 }
 
-/**
- * Wrap each WORD of the heading in a clip + slide-up span with an incrementing
- * `--i`, so words cascade up in sequence. Whitespace is preserved between words;
- * <br/> passes through; element children (the muted span, the `.` accent span)
- * recurse — their words stagger too AND keep the element's class — sharing the
- * same running index.
- */
-function revealWords(node: React.ReactNode, ctx: { i: number }): React.ReactNode {
-  if (node == null || typeof node === 'boolean') return node;
-
-  if (typeof node === 'string' || typeof node === 'number') {
-    return String(node)
-      .split(/(\s+)/)
-      .map((part, k) => {
-        if (part === '') return null;
-        if (/^\s+$/.test(part)) return part; // keep the space between words
-        const i = ctx.i++;
-        return (
-          <span key={`w${i}-${k}`} className={styles.wordClip}>
-            <span className={styles.word} style={{ animationDelay: `${(i * 0.045).toFixed(3)}s` }}>
-              {part}
-            </span>
-          </span>
-        );
-      });
-  }
-
-  if (Array.isArray(node)) {
-    return node.map((n, k) => <React.Fragment key={k}>{revealWords(n, ctx)}</React.Fragment>);
-  }
-
-  if (React.isValidElement(node)) {
-    if (node.type === 'br') return node;
-    const props = node.props as { children?: React.ReactNode };
-    return React.cloneElement(node, undefined, revealWords(props.children, ctx));
-  }
-
-  return node;
-}
+/** One visual line of a title; `tone: 'muted'` greys it (the hero's second line). */
+export type TitleLine = { text: string; tone?: 'muted' };
 
 /**
- * Per-word title reveal. The inner wrapper is keyed on the pathname so the CSS
- * stagger re-fires on every navigation (and on first load). Reduced motion is
- * handled in CSS (the `.word` reduced-motion rule disables the animation) — the
- * markup is identical regardless, so SSR and the client agree. (Branching the
- * structure on `useReducedMotion()` caused a hydration mismatch: the server can't
- * read the media query, so it emitted the word-spans while a reduced-motion
- * client rendered plain text, regenerating the subtree on hydration.)
+ * Per-word title reveal. EntranceTitle builds the word spans itself from PLAIN
+ * TEXT (a string, or `TitleLine[]` for a two-line title) — it does NOT recurse
+ * through caller-supplied JSX. That matters: the title is authored in Server
+ * Components, so any nested JSX would cross the RSC seam, and recursing a span
+ * with mixed [string, element] children word-wrapped on the server but rendered
+ * plain text on the client (a hydration mismatch). Passing data, not elements,
+ * makes SSR and hydration build identical output by construction.
+ *
+ * `period` appends the accent full-stop glued to the final word (a nowrap group),
+ * so it never orphans onto its own line. The wrapping rule, the muted tone, and
+ * the glue all live here now instead of being rebuilt by hand in each hero.
+ *
+ * The inner wrapper is keyed on the pathname so the CSS stagger re-fires per
+ * navigation. Reduced motion is handled in CSS (the `.word` rule), so the markup
+ * is identical regardless and SSR/client agree.
  */
-export function EntranceTitle({ children, className }: { children: React.ReactNode; className?: string }) {
+export function EntranceTitle({
+  title,
+  period = false,
+  className,
+}: {
+  title: string | TitleLine[];
+  period?: boolean;
+  className?: string;
+}) {
   const pathname = usePathname();
+  const lines: TitleLine[] = typeof title === 'string' ? [{ text: title }] : title;
+
+  let wi = 0; // running word index → the per-word stagger delay
+  const word = (text: string) => {
+    const i = wi++;
+    return (
+      <span key={`w${i}`} className={styles.wordClip}>
+        <span className={styles.word} style={{ animationDelay: `${(i * 0.045).toFixed(3)}s` }}>{text}</span>
+      </span>
+    );
+  };
+
   // `.clipTitle` is an empty rule (Sass drops it), so styles.clipTitle is
   // undefined — filter it out rather than emit a literal "undefined" class.
   return (
     <h1 className={[styles.clipTitle, className].filter(Boolean).join(' ')}>
       <span key={pathname} className={styles.inner}>
-        {revealWords(children, { i: 0 })}
+        {lines.map((line, li) => {
+          const isLastLine = li === lines.length - 1;
+          const words = line.text.trim().split(/\s+/);
+          const parts: React.ReactNode[] = [];
+          words.forEach((w, k) => {
+            if (k > 0) parts.push(' '); // breakable space between words
+            const isFinalWord = isLastLine && k === words.length - 1;
+            parts.push(
+              isFinalWord && period ? (
+                // glue the final word + accent period so the period can't orphan
+                <span key="end" className={styles.titleEnd}>
+                  {word(w)}<span className={styles.period}>.</span>
+                </span>
+              ) : (
+                word(w)
+              ),
+            );
+          });
+          const body = line.tone === 'muted' ? <span className={styles.muted}>{parts}</span> : parts;
+          return (
+            <React.Fragment key={li}>
+              {li > 0 && <br />}
+              {body}
+            </React.Fragment>
+          );
+        })}
       </span>
     </h1>
   );
