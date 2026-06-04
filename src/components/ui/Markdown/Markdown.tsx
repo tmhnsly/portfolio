@@ -1,6 +1,7 @@
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { CodeBlock } from '../CodeBlock';
+import { Chart } from '../Chart';
 import styles from './Markdown.module.scss';
 
 export function Markdown({ children }: { children: string }) {
@@ -18,7 +19,10 @@ export function Markdown({ children }: { children: string }) {
           blockquote: ({ children }) => <blockquote className={styles.quote}>{children}</blockquote>,
           pre: ({ children }) => <>{children}</>,
           code: ({ className, children }) => {
-            const isBlock = /language-/.test(className ?? '');
+            const cls = className ?? '';
+            // ```chart blocks render a Radix-coloured bar chart (see Chart)
+            if (cls.includes('language-chart')) return <Chart json={String(children)} />;
+            const isBlock = /language-/.test(cls);
             return isBlock
               ? <CodeBlock>{String(children).replace(/\n$/, '')}</CodeBlock>
               : <code className={styles.inlineCode}>{children}</code>;
