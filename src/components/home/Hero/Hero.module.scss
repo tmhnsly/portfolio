@@ -1,9 +1,11 @@
 @use '../../../styles/mixins/breakpoints' as *;
 .hero { display: grid; grid-template-columns: 1fr; gap: var(--space-8);
-  /* Side-by-side from large tablets up (iPad landscape ≈ 1024+), where the deck
-     column has real room. Below that it stacks (deck under the title): a narrower
-     two-column squashed the deck, and a wide one-column left a big empty right. */
-  @include lg-up { grid-template-columns: 1.55fr 1fr; gap: var(--space-11); align-items: start; } }
+  /* Side-by-side from tablet up: the deck takes the right column and fills it
+     (it's capped below the column width here), so the wide one-column "deck
+     stranded bottom-left with an empty right half" is gone. The split widens and
+     the gap opens up at lg/desktop where there's more room. */
+  @include tablet-up { grid-template-columns: 1.4fr 1fr; gap: var(--space-8); align-items: start; }
+  @include lg-up { grid-template-columns: 1.55fr 1fr; gap: var(--space-11); } }
 .lead { display: flex; flex-direction: column; min-width: 0; }
 .title { margin: var(--space-7) 0 0; font-family: var(--font-display); font-weight: 600;
   letter-spacing: var(--ls-display-xxl); line-height: var(--lh-display); color: var(--text);
