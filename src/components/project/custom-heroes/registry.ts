@@ -7,7 +7,7 @@ import { BoucleHero } from './BoucleHero';
  * of the standard poster + Media carousel path (see MediaHero); anything not
  * listed takes the normal path. Mirrors the project-thumbs registry.
  */
-export const CUSTOM_HEROES: Record<string, ComponentType<{ project: Project }>> = {
+const CUSTOM_HEROES: Record<string, ComponentType<{ project: Project }>> = {
   boucle: BoucleHero,
 };
 

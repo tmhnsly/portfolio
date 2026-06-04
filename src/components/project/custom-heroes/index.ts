@@ -1,1 +1,1 @@
-export { customHero, CUSTOM_HEROES } from './registry';
+export { customHero } from './registry';
