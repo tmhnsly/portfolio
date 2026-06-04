@@ -92,6 +92,18 @@
   }
 }
 
+/* animated fallback cover for image-less posts — shown only where the row has a
+   dedicated right column (desktop), so smaller screens keep the compact text row */
+.thumb {
+  display: none;
+
+  @include desktop-up {
+    display: block;
+    width: 100%;
+    margin-bottom: var(--space-3);
+  }
+}
+
 .readTime {
   font-family: var(--font-mono);
   font-size: var(--fs-mono-s);

@@ -4,6 +4,7 @@ import { DISCIPLINES } from '@/lib/disciplines';
 import { IMG_SIZES } from '@/lib/breakpoints';
 import { Eyebrow } from '@/components/ui/Eyebrow';
 import { Media } from '@/components/ui/Media';
+import { BlogThumb } from '@/components/blog/BlogThumb';
 import { Pill } from '@/components/ui/Pill';
 import { TechChip } from '@/components/ui/TechChip';
 import { CardArrow } from '@/components/ui/CardArrow';
@@ -28,6 +29,7 @@ export function FeaturedPost({ post }: { post: BlogPost }) {
               sizes={IMG_SIZES.featured}
               className={styles.media}
             >
+              {!post.cover?.src && <BlogThumb post={post} />}
               <span className={styles.categoryPill}>
                 <Pill label={post.category} tone="solid" />
               </span>
