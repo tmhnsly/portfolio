@@ -68,8 +68,8 @@ export interface PixelMarkProps {
   icon?: IconKey;
   /** colour for accent ('*') pixels — pass the per-route accent */
   accent?: string;
-  /** px (square) */
-  size?: number;
+  /** square size — a number (px) or any CSS length (e.g. '60%') for a responsive mark */
+  size?: number | string;
   /** colour for ink ('#') pixels — defaults to currentColor (inherits nav text) */
   color?: string;
   /** speed multiplier; <1 = slower */

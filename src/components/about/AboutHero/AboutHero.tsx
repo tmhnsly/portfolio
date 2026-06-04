@@ -1,6 +1,7 @@
 import { SITE, COPY } from '@/data';
 import { yearsSince } from '@/lib/format';
 import { TechChip } from '@/components/ui/TechChip';
+import { PixelMark } from '@/components/ui/PixelMark';
 import { Entrance, EntranceItem, EntranceTitle } from '@/components/motion/Entrance';
 import styles from './AboutHero.module.scss';
 
@@ -9,10 +10,13 @@ export function AboutHero() {
   return (
     <Entrance className={styles.section}>
       <div className={styles.grid}>
-        {/* Placeholder until a real portrait is shot: a soft aurora panel in the
-            4:5 slot, ready to swap for a <Media> photo later. */}
+        {/* Stand-in for a real portrait: the pixel-mark 'about' glyph (a pixel
+            person) centred on the soft aurora panel in the 4:5 slot. Swap the
+            PixelMark for a <Media> photo when one's shot. */}
         <EntranceItem className={styles.portrait}>
-          <div className={styles.aurora} aria-hidden />
+          <div className={styles.aurora} aria-hidden>
+            <PixelMark icon="about" accent="var(--accent)" size="66%" />
+          </div>
         </EntranceItem>
         <div className={styles.copy}>
           <EntranceTitle className={styles.name}>
