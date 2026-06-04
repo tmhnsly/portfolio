@@ -2,6 +2,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
+import type { Discipline } from '@/types';
 import type { BreadcrumbData } from '@/lib/content';
 import { buildCrumbs } from '@/lib/breadcrumb';
 import { DURATION, EASING } from '@/lib/motion';
@@ -17,10 +18,12 @@ import styles from './Breadcrumb.module.scss';
  * The changing segment + count slide via <Rolling>; appearing/disappearing
  * crumbs fade-slide. The leading dot reads --accent, so it matches the zone.
  */
-export function Breadcrumb({ data }: { data: BreadcrumbData }) {
+export function Breadcrumb({ data, discipline }: { data: BreadcrumbData; discipline?: Discipline }) {
   const pathname = usePathname();
   const reduce = useReducedMotion();
-  const crumbs = buildCrumbs(pathname, data);
+  // discipline comes resolved from the Shell (the Zone owner); buildCrumbs derives
+  // it from the pathname only as a fallback for callers that don't have it.
+  const crumbs = buildCrumbs(pathname, data, discipline);
   const home = crumbs[0];
   const section = crumbs.find((c) => c.slot === 'section');
   const leaf = crumbs.find((c) => c.slot === 'leaf');

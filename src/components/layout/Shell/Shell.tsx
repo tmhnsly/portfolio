@@ -53,7 +53,7 @@ export function Shell({
       <main className={styles.content}>
         {/* persistent breadcrumb — one consistent, clickable trail for every
             route, so its position never shifts and the changing segment rolls */}
-        <Breadcrumb data={breadcrumbData} />
+        <Breadcrumb data={breadcrumbData} discipline={discipline} />
         {children}
       </main>
       <Footer />

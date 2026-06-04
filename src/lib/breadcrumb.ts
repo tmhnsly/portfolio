@@ -19,10 +19,16 @@ export const humanize = (slug: string) =>
  * Build the breadcrumb trail from a pathname: Home / Section (· N projects) / Leaf.
  * Pure — the single source of the trail rules (counts, plural noun, the title-map
  * fallback to a humanized slug, the about/blog special-cases).
+ *
+ * `discipline` defaults to deriving it from the pathname (so the function stays
+ * self-contained and testable with just a pathname), but the Shell — which owns
+ * the Zone and has already resolved the discipline — passes it in so the
+ * pathname→Discipline derivation happens once per route.
  */
 export function buildCrumbs(
   pathname: string,
   { titleMap, projectCounts, postCount }: BreadcrumbData,
+  discipline: Discipline | undefined = disciplineFromPath(pathname),
 ): Crumb[] {
   const segs = pathname.split('/').filter(Boolean);
   const home: Crumb = { slot: 'home', label: 'Home', href: segs.length ? '/' : undefined };
@@ -31,7 +37,6 @@ export function buildCrumbs(
   const first = segs[0];
   if (first === 'about') return [home, { slot: 'section', label: 'About' }];
 
-  const discipline: Discipline | undefined = disciplineFromPath(pathname);
   if (discipline) {
     const label = DISCIPLINES[discipline].label;
     if (segs.length === 1) {
