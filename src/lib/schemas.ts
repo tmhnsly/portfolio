@@ -68,6 +68,7 @@ export const postFrontmatterSchema = z.object({
   category: z.string(),
   readingTime: z.number().optional(), // computed from word count if absent
   tags: z.array(tagSchema).default([]),
+  featured: z.boolean().default(false), // lead the blog index (else most-recent leads) — parity with Project
   cover: imageRef.optional(),
   thumb: z.string().optional(), // override the auto fallback-thumbnail motif (see BlogThumb/pickMotif)
 });

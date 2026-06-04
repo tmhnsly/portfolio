@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest';
 import {
   getAllProjects, getProject, getAllPosts,
   projectsInDiscipline, projectNeighbours, relatedProjects,
-  postNeighbours, relatedPosts, disciplineCounts, titleMap, postCount,
+  postNeighbours, relatedPosts, disciplineCounts, titleMap, postCount, featuredPost,
 } from './content';
 
 describe('content loaders', () => {
@@ -77,6 +77,15 @@ describe('content queries', () => {
       expect(newer?.slug).toBe(posts[0].slug);
       expect(older?.slug).toBe(posts[2].slug);
     }
+  });
+
+  it('featuredPost leads with the flagged post (else most recent) and the rest is everything else', () => {
+    const posts = getAllPosts();
+    const { featured, rest } = featuredPost();
+    const expected = posts.find((p) => p.featured) ?? posts[0];
+    expect(featured?.slug).toBe(expected.slug);
+    expect(rest.some((p) => p.slug === featured?.slug)).toBe(false);
+    expect(rest.length).toBe(posts.length - 1); // uncapped — every other post
   });
 
   it('disciplineCounts + titleMap + postCount agree with the corpus', () => {

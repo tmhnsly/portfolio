@@ -3,6 +3,7 @@ import path from 'node:path';
 import matter from 'gray-matter';
 import { projectFrontmatterSchema, postFrontmatterSchema } from './schemas';
 import type { Project, BlogPost, Author, Discipline } from './schemas';
+import { splitFeatured } from './facets';
 
 const ROOT = path.join(process.cwd(), 'content');
 const AUTHOR: Author = {
@@ -61,14 +62,22 @@ export function getPost(slug: string): BlogPost | undefined {
   return getAllPosts().find((p) => p.slug === slug);
 }
 
-/** The home "featured deck": a curated lead order, then topped up with the most
-    recent projects. Edit DECK_LEAD to change which projects open the deck. */
+/** The home "featured deck": a curated, explicitly-ordered subset for the carousel
+    — distinct from the `featured`-flag selection below (this one is hand-ordered,
+    not flag-driven). Edit DECK_LEAD to change which projects open the deck. */
 const DECK_LEAD = ['chork', 'tv-bland'];
 export function featuredProjects(n = 4): Project[] {
   const all = getAllProjects();
   const lead = DECK_LEAD.map((slug) => all.find((p) => p.slug === slug)).filter((p): p is Project => !!p);
   const seen = new Set(lead.map((p) => p.slug));
   return [...lead, ...all.filter((p) => !seen.has(p.slug))].slice(0, n);
+}
+
+/** The blog index's lead Post + the remainder. The "which leads" rule is the one
+    shared `splitFeatured` seam (a `featured`-flagged Post, else the most recent),
+    so the page never hand-rolls the split and stays consistent with RecentWork. */
+export function featuredPost(): { featured?: BlogPost; rest: BlogPost[] } {
+  return splitFeatured(getAllPosts(), Number.POSITIVE_INFINITY);
 }
 
 /* ── Queries: the questions pages actually ask, answered here once (sort order,
