@@ -4,6 +4,7 @@ excerpt: "The water and energy figures for AI are alarming and slippery in equal
 date: "2026-06-02"
 category: Opinion
 tags: ["AI", "Sustainability", "Long-form writing"]
+thumb: datacenter
 ---
 
 You've seen the headline: a handful of chatbot questions costs a bottle of water. The figure comes from real research, but it's doing a lot of quiet work. It depends on which data centre, which season, how the local grid makes its power, and whether you count the training of the model or just the asking. The honest version is a range so wide it's nearly a shrug, and anyone quoting a single tidy number is selling you a feeling.

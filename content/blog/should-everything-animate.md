@@ -4,6 +4,7 @@ excerpt: "CSS animation is cheaper and greener than people think, and also easie
 date: "2026-05-31"
 category: Opinion
 tags: ["CSS", "Performance", "Accessibility"]
+thumb: motion
 ---
 
 This site animates a fair amount. Cards reveal as they scroll in, the little project thumbnails draw themselves, titles come up a word at a time. So I've had to think about when motion earns its place and when it's just noise.

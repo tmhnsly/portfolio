@@ -4,6 +4,7 @@ excerpt: "The old styling argument was about who has to type the class names. An
 date: "2026-06-04"
 category: Opinion
 tags: ["SCSS", "Tailwind", "CSS", "AI"]
+thumb: code
 ---
 
 The SCSS versus Tailwind argument used to be about typing. Tailwind saved you from naming things and hunting for the class that already existed. SCSS gave you readable markup and one place to change a colour. You picked your pain.

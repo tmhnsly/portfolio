@@ -4,6 +4,7 @@ excerpt: "A first post, mostly about what I'll put here and why I bothered build
 date: "2026-05-28"
 category: Studio log
 tags: ["Process", "Workflow"]
+thumb: feed
 ---
 
 I've started and quietly dropped a blog more than once. The pattern's always the same: a fortnight on the build, one earnest post about starting a blog, then silence. So I know the shape of the irony here.
