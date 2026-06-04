@@ -1,19 +1,15 @@
 ---
-title: "Notes on this site"
-excerpt: "How this portfolio is built, and a few of the smaller details, for anyone poking around."
+title: "Why there's a blog here at all"
+excerpt: "A first post, mostly about what I'll put here and why I bothered building the place to put it."
 date: "2026-06-02"
 category: Studio log
-tags: ["Process", "Code", "Next.js", "Workflow"]
+tags: ["Process", "Code", "Workflow"]
 ---
 
-This site is a bit of a calling card for how I work, so it seemed worth saying how it's put together.
+I've started and abandoned a blog about four times now. The pattern is always the same: I spend a fortnight on the build, write one earnest post about why I'm starting a blog, then never touch it again. So I'm aware of the irony of this being a post about starting a blog.
 
-It's a Next.js app in TypeScript, with hand-written SCSS rather than a utility framework. Every project carries its own media in a single model, whether that's an image or a video, so a piece and everything about it live together. Videos sit behind a lightweight YouTube facade, so nothing autoplays or phones home until you press play.
+The difference this time is that I built it as part of the portfolio rather than off to the side. It's the same site, the same colours, the same bits of code. There's no separate thing to maintain and feel guilty about. If I'm already in here changing a project page, the blog is right there.
 
-The code projects don't use screenshots. Each one has a small bespoke thumbnail drawn from the real product: Chork's activity rings, the Financial Times masthead, Agile's half-hourly price chart, Earnt's tear-off ticket. They're built from CSS and SVG, so they stay crisp at any size and flip with the light and dark themes.
+What I want to use it for is the working-out. Most of what I make gets shown as a finished thing, a video or a shipped feature, with all the false starts edited out. The interesting part is usually the false starts. So this is where I'll write up the bits that don't fit on a project page: why I drew the card thumbnails by hand instead of screenshotting them, what I learned scoring a short film over a weekend, a tool I've changed my mind about.
 
-Colour does the navigating. Each discipline maps to a Radix hue, and the interface re-tints as you move between sections: code, audio, video, writing. Cards reveal as they scroll into view, and everything respects a reduced-motion preference if you've set one.
-
-A few smaller things. Images optimise to WebP locally on commit, so the repo stays light. Nested corners use a concentric radius, so an inner card's curve runs parallel to the one around it. The nav frosts whatever scrolls behind it, and titles reveal a word at a time.
-
-The About page has the career side of things. If anything here looks like the sort of work you'd commission, get in touch.
+It'll be irregular. I'd rather post something I actually thought about every few weeks than something dutiful every Monday. If any of it is useful to you, good. Mostly I'm writing it down so I stop forgetting how I solved things.
