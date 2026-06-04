@@ -1,7 +1,6 @@
 'use client';
 import React, { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
-import { useReducedMotion } from 'motion/react';
 import styles from './Entrance.module.scss';
 
 /**
@@ -91,13 +90,15 @@ function revealWords(node: React.ReactNode, ctx: { i: number }): React.ReactNode
 
 /**
  * Per-word title reveal. The inner wrapper is keyed on the pathname so the CSS
- * stagger re-fires on every navigation (and on first load). Reduced motion =
- * plain heading, no wrapping/animation.
+ * stagger re-fires on every navigation (and on first load). Reduced motion is
+ * handled in CSS (the `.word` reduced-motion rule disables the animation) — the
+ * markup is identical regardless, so SSR and the client agree. (Branching the
+ * structure on `useReducedMotion()` caused a hydration mismatch: the server can't
+ * read the media query, so it emitted the word-spans while a reduced-motion
+ * client rendered plain text, regenerating the subtree on hydration.)
  */
 export function EntranceTitle({ children, className }: { children: React.ReactNode; className?: string }) {
   const pathname = usePathname();
-  const reduce = useReducedMotion();
-  if (reduce) return <h1 className={className}>{children}</h1>;
   return (
     <h1 className={`${styles.clipTitle} ${className ?? ''}`}>
       <span key={pathname} className={styles.inner}>
