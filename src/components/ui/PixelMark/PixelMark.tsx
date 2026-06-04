@@ -1,19 +1,20 @@
 'use client';
 // <PixelMark> — morphing 16×16 pixel brand mark. Bitmaps + geometry ported from
-// the design handoff exactly; the dissolve is reworked into ONE continuous
-// diagonal sweep (an e-ink / flip-clock style refresh) instead of the handoff's
+// the design handoff exactly. It draws itself in on first load and morphs
+// glyph-to-glyph on route change, both via ONE continuous top-left→bottom-right
+// diagonal sweep (an e-ink / flip-clock style refresh) — not the handoff's
 // two-phase clear-then-draw, which read as a jerky double-take.
 //
 // Performance: every dot is a fixed node (constant set — never mounts/unmounts),
 // each carries a STATIC per-cell delay (its position in the diagonal wave). A
-// route change only flips opacities; the browser runs plain CSS opacity
-// transitions (the animated area is ~30px, so paint cost is negligible). No JS
-// per-frame work, no global CSS, no deps.
+// render only flips opacities; the browser runs plain CSS opacity transitions
+// (the animated area is ~30px, so paint cost is negligible). No JS per-frame
+// work, no global CSS, no deps.
 //
 // Two host adaptations: circle `fill` is set via CSS so a `var(--…)` accent +
 // `currentColor` resolve in Safari; prefers-reduced-motion is read in an effect
 // (SSR-safe) → instant swap, no animation.
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ICONS, GRID, type IconKey } from './pixel-icons';
 
 const VBOX = 256;
@@ -83,21 +84,25 @@ export function PixelMark({
   pace = 1,
 }: PixelMarkProps) {
   const data = (ICONS[icon] ?? ICONS.home).data;
-  const prevRef = useRef(data);
-  useEffect(() => {
-    prevRef.current = data;
-  }, [data]);
-  const prev = prevRef.current;
 
-  // prefers-reduced-motion, read client-side so SSR renders cleanly; reduced ⇒
-  // instant swap. First paint never animates anyway (prev === current).
+  // `revealed` drives the initial draw-in: the mark renders empty on the server
+  // and the first client paint, then the dots sweep on after mount. It stays true
+  // afterwards, so route changes morph via the same opacity sweep (the browser
+  // transitions only the cells whose opacity actually changes). `reduced` ⇒ no
+  // transition (instant). Both default false so SSR and hydration agree.
   const [reduced, setReduced] = useState(false);
+  const [revealed, setRevealed] = useState(false);
   useEffect(() => {
     const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
     setReduced(mq.matches);
-    const on = () => setReduced(mq.matches);
-    mq.addEventListener('change', on);
-    return () => mq.removeEventListener('change', on);
+    const onChange = () => setReduced(mq.matches);
+    mq.addEventListener('change', onChange);
+    // next frame, so the empty state paints first and the 0→1 sweep actually runs
+    const id = requestAnimationFrame(() => setRevealed(true));
+    return () => {
+      mq.removeEventListener('change', onChange);
+      cancelAnimationFrame(id);
+    };
   }, []);
 
   const f = 1 / Math.max(0.1, pace);
@@ -107,11 +112,10 @@ export function PixelMark({
   const acc: React.ReactNode[] = [];
   for (const { r, c, d } of UNION) {
     const tv = data[r][c];
-    const changed = prev[r][c] !== tv;
     const isAcc = tv === 2;
     const style: React.CSSProperties = {
-      opacity: tv !== 0 ? 1 : 0,
-      transition: reduced || !changed ? 'none' : `opacity ${fade}ms ${EASE} ${Math.round(d * f)}ms`,
+      opacity: revealed && tv !== 0 ? 1 : 0,
+      transition: reduced ? 'none' : `opacity ${fade}ms ${EASE} ${Math.round(d * f)}ms`,
       fill: isAcc ? accent : color,
     };
     (isAcc ? acc : ink).push(
