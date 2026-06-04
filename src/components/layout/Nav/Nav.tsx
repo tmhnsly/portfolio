@@ -1,17 +1,16 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
-import type { IconType } from 'react-icons';
-import { BiMoon, BiSun, BiMenu, BiCodeAlt, BiVideo, BiHeadphone, BiPencil, BiUser } from 'react-icons/bi';
+import { BiMoon, BiSun } from 'react-icons/bi';
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import { DURATION, EASING } from '@/lib/motion';
-import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import { SITE, COPY } from '@/data';
 import { useTheme } from '@/lib/theme';
 import { LinkArrow } from '@/components/ui/LinkArrow';
 import { useEmail } from '@/components/ui/EmailLink';
 import { PixelMark, isIconKey, type IconKey } from '@/components/ui/PixelMark';
 import { Container } from '../Container';
+import { NavMenu } from './NavMenu';
 import styles from './Nav.module.scss';
 
 export interface NavProps {
@@ -23,15 +22,6 @@ export interface NavProps {
   accentInk: string;
   onAccent: string;
 }
-
-/** A relevant boxicon per nav destination, shown in the mobile burger menu. */
-const NAV_ICONS: Record<string, IconType> = {
-  '/code': BiCodeAlt,
-  '/video': BiVideo,
-  '/audio': BiHeadphone,
-  '/blog': BiPencil,
-  '/about': BiUser,
-};
 
 /**
  * The accent fill behind the monogram / CTA. On a zone change it crossfades — the
@@ -160,52 +150,7 @@ export function Nav({ active, accent, accentInk, onAccent }: NavProps) {
           </div>
 
           {/* Mobile: burger → glass dropdown */}
-          <DropdownMenu.Root>
-            <DropdownMenu.Trigger asChild>
-              <button type="button" className={styles.burger} aria-label="Open menu">
-                <BiMenu aria-hidden />
-              </button>
-            </DropdownMenu.Trigger>
-            <DropdownMenu.Portal>
-              <DropdownMenu.Content
-                className={styles.menu}
-                align="end"
-                sideOffset={12}
-                collisionPadding={16}
-                style={{ '--accent': accent, '--accent-ink': accentInk, '--on-accent': onAccent } as React.CSSProperties}
-              >
-                {SITE.nav.map((item) => {
-                  const Icon = NAV_ICONS[item.href];
-                  return (
-                    <DropdownMenu.Item key={item.href} asChild>
-                      <Link
-                        href={item.href}
-                        className={isActive(item.label) ? `${styles.menuItem} ${styles.menuItemActive}` : styles.menuItem}
-                        aria-current={isActive(item.label) ? 'page' : undefined}
-                      >
-                        {Icon && <Icon className={styles.menuIcon} aria-hidden />}
-                        {item.label}
-                      </Link>
-                    </DropdownMenu.Item>
-                  );
-                })}
-                <DropdownMenu.Separator className={styles.menuSep} />
-                <DropdownMenu.Item asChild>
-                  <a href={mailto()} className={styles.menuCta}>{email ?? 'Email me'} <LinkArrow /></a>
-                </DropdownMenu.Item>
-                <DropdownMenu.Item
-                  className={styles.menuItem}
-                  onSelect={(e) => {
-                    e.preventDefault();
-                    toggle();
-                  }}
-                >
-                  {theme === 'dark' ? <BiSun className={styles.menuIcon} aria-hidden /> : <BiMoon className={styles.menuIcon} aria-hidden />}
-                  {theme === 'dark' ? 'Light mode' : 'Dark mode'}
-                </DropdownMenu.Item>
-              </DropdownMenu.Content>
-            </DropdownMenu.Portal>
-          </DropdownMenu.Root>
+          <NavMenu active={active} accent={accent} accentInk={accentInk} onAccent={onAccent} />
         </nav>
       </Container>
     </header>
