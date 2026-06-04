@@ -24,7 +24,7 @@ export function ArmstrongThumb() {
             <span className={styles.pkg}>@rocketmakers/armstrong</span>
             <span className={styles.cursor} />
           </div>
-          <div className={styles.comment}>// React component library</div>
+          <div className={styles.comment}>{'// React component library'}</div>
         </div>
       </div>
     </div>

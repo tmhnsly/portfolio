@@ -94,6 +94,9 @@ export function PixelMark({
   const [revealed, setRevealed] = useState(false);
   useEffect(() => {
     const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+    // SSR-safe client read: prefers-reduced-motion can't be read during render,
+    // so sync it once on mount + subscribe to changes below
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setReduced(mq.matches);
     const onChange = () => setReduced(mq.matches);
     mq.addEventListener('change', onChange);

@@ -13,6 +13,9 @@ export function useReveal<T extends Element = HTMLDivElement>() {
   const { ref, inView } = useInView<T>();
   const [revealed, setRevealed] = useState(false);
   useEffect(() => {
+    // latch on the intersection observer's signal — a deliberate one-way setState
+    // from an external subscription, not a render-derived value
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     if (inView) setRevealed(true);
   }, [inView]);
   return { ref, revealed };
