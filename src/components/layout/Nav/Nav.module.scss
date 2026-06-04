@@ -20,24 +20,14 @@
     padding: var(--nav-pad-wide);
   }
 }
-/* monogram + wordmark are one "home" link (two visual pieces) */
+/* brand mark (PixelMark) + wordmark are one "home" link (two visual pieces) */
 .brand {
   display: flex; align-items: center; gap: var(--space-3); flex-shrink: 0;
   text-decoration: none; color: inherit; border-radius: var(--radius-md);
 }
 .brand:focus-visible { outline: 2px solid var(--accent-ink); outline-offset: 4px; }
-@include can-hover { .brand:hover .monogram { transform: scale(1.06); } }
-.monogram {
-  position: relative; isolation: isolate; /* contain the crossfade fill below "TH" */
-  width: 30px; height: 30px; border-radius: var(--radius-md);
-  color: var(--on-accent, var(--text-on-accent));
-  display: inline-flex; align-items: center; justify-content: center;
-  font-weight: 700; font-size: 14px; letter-spacing: -0.02em;
-  flex-shrink: 0;
-  transition: transform var(--duration-hover) var(--ease-standard);
-}
 /* accent fill that crossfades old→new on a zone change (see AccentFill, Nav.tsx);
-   negative z-index keeps it behind the in-flow text/label without a wrapper */
+   negative z-index keeps it behind the in-flow label without a wrapper */
 .fill { position: absolute; inset: 0; border-radius: inherit; z-index: -1; }
 .name {
   /* brand watermark — stays on the bar at every width (incl. burger mode) */

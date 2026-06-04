@@ -10,6 +10,7 @@ import { SITE, COPY } from '@/data';
 import { useTheme } from '@/lib/theme';
 import { LinkArrow } from '@/components/ui/LinkArrow';
 import { useEmail } from '@/components/ui/EmailLink';
+import { PixelMark, isIconKey, type IconKey } from '@/components/ui/PixelMark';
 import { Container } from '../Container';
 import styles from './Nav.module.scss';
 
@@ -62,6 +63,8 @@ export function Nav({ active, accent, accentInk, onAccent }: NavProps) {
   const reduce = useReducedMotion();
   const { email, mailto } = useEmail();
   const isActive = (label: string) => active != null && label.toLowerCase() === active.toLowerCase();
+  // active section → pixel-mark glyph (home on '/'); unknown segments fall back to home
+  const markIcon: IconKey = isIconKey(active) ? active : 'home';
   // accent/accentInk/onAccent come resolved from the Shell (single Zone source);
   // the dropdown portals to <body>, outside the Shell's --accent scope, so they're
   // set inline on the Content below.
@@ -95,7 +98,9 @@ export function Nav({ active, accent, accentInk, onAccent }: NavProps) {
         <nav className={styles.bar} aria-label="Primary">
           {/* monogram + wordmark are two visual pieces but one "home" button */}
           <Link href="/" className={styles.brand} aria-label={COPY.nav.homeAria}>
-            <span className={styles.monogram}><AccentFill accent={accent} reduce={reduce} />TH</span>
+            <span style={{ width: 30, height: 30, display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--text)' }}>
+              <PixelMark icon={markIcon} accent={accent} size={30} />
+            </span>
             <span className={styles.name}>Tom Hinsley</span>
           </Link>
 
