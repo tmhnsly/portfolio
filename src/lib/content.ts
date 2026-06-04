@@ -61,6 +61,16 @@ export function getPost(slug: string): BlogPost | undefined {
   return getAllPosts().find((p) => p.slug === slug);
 }
 
+/** The home "featured deck": a curated lead order, then topped up with the most
+    recent projects. Edit DECK_LEAD to change which projects open the deck. */
+const DECK_LEAD = ['chork', 'tv-bland'];
+export function featuredProjects(n = 4): Project[] {
+  const all = getAllProjects();
+  const lead = DECK_LEAD.map((slug) => all.find((p) => p.slug === slug)).filter((p): p is Project => !!p);
+  const seen = new Set(lead.map((p) => p.slug));
+  return [...lead, ...all.filter((p) => !seen.has(p.slug))].slice(0, n);
+}
+
 /* ── Queries: the questions pages actually ask, answered here once (sort order,
    neighbour and "related" rules live behind this seam, not in each page). ── */
 

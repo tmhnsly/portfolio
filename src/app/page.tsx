@@ -2,11 +2,11 @@ import { Container, Stack } from '@/components/layout';
 import { Hero } from '@/components/home/Hero';
 import { DisciplineScroller } from '@/components/home/DisciplineScroller';
 import { RecentWork } from '@/components/home/RecentWork';
-import { getAllProjects } from '@/lib/content';
+import { getAllProjects, featuredProjects } from '@/lib/content';
 
 export default function Home() {
   const projects = getAllProjects();
-  const deck = projects.slice(0, 4);
+  const deck = featuredProjects();
   return (
     <Container>
       <Stack>
