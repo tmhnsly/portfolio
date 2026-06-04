@@ -92,8 +92,10 @@
   }
 }
 
-/* animated fallback cover for image-less posts — shown only where the row has a
-   dedicated right column (desktop), so smaller screens keep the compact text row */
+/* animated fallback cover for image-less posts — shown only at desktop, where the
+   row gains its own right column; below that the cell wraps under the meta and the
+   thumb would be tiny and mislocated, so the compact text row is kept instead.
+   (Tablet/mobile still get thumbnails via the featured card and post pages.) */
 .thumb {
   display: none;
 

@@ -16,6 +16,7 @@ import { EmailLink } from '@/components/ui/EmailLink';
 import { LinkArrow } from '@/components/ui/LinkArrow';
 import { formatMonthYear, readingLabel } from '@/lib/format';
 import { BlogPostHero } from '@/components/blog/BlogPostHero';
+import { BlogThumb } from '@/components/blog/BlogThumb';
 import { PostBody } from '@/components/blog/PostBody';
 import { AuthorCard } from '@/components/blog/AuthorCard';
 import type { BlogPost } from '@/types';
@@ -50,7 +51,9 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
           alt={post.cover?.alt ?? post.title}
           ratio="16/7"
           sizes={IMG_SIZES.full}
-        />
+        >
+          {!post.cover?.src && <BlogThumb post={post} />}
+        </Media>
         <PostBody post={post} />
 
         {/* End matter: tags + "Send a note" link */}
@@ -132,7 +135,9 @@ function RelatedCard({ post, grad }: { post: BlogPost; grad: string }) {
         ratio="16/9"
         sizes={IMG_SIZES.grid3}
         rounded
-      />
+      >
+        {!post.cover?.src && <BlogThumb post={post} />}
+      </Media>
       <div className={styles.relatedMeta}>
         <Pill label={post.category} tone="discipline" />
       </div>
