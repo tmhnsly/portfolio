@@ -3,6 +3,7 @@ import {
   getAllProjects, getProject, getAllPosts,
   projectsInDiscipline, projectNeighbours, relatedProjects,
   postNeighbours, relatedPosts, disciplineCounts, titleMap, postCount, featuredPost,
+  featuredProjects, DECK_LEAD,
 } from './content';
 
 describe('content loaders', () => {
@@ -86,6 +87,20 @@ describe('content queries', () => {
     expect(featured?.slug).toBe(expected.slug);
     expect(rest.some((p) => p.slug === featured?.slug)).toBe(false);
     expect(rest.length).toBe(posts.length - 1); // uncapped — every other post
+  });
+
+  it('every DECK_LEAD slug resolves to a real project (no silent drop)', () => {
+    const slugs = new Set(getAllProjects().map((p) => p.slug));
+    for (const slug of DECK_LEAD) expect(slugs.has(slug), `DECK_LEAD slug "${slug}" has no project`).toBe(true);
+  });
+
+  it('featuredProjects leads with the DECK_LEAD order, then fills, capped at n', () => {
+    const deck = featuredProjects(4);
+    expect(deck.length).toBeLessThanOrEqual(4);
+    // the curated lead opens the deck, in order
+    expect(deck.slice(0, DECK_LEAD.length).map((p) => p.slug)).toEqual(DECK_LEAD);
+    // no duplicates
+    expect(new Set(deck.map((p) => p.slug)).size).toBe(deck.length);
   });
 
   it('disciplineCounts + titleMap + postCount agree with the corpus', () => {
