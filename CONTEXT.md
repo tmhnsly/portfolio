@@ -82,6 +82,9 @@ _Avoid_: gallery, slider, modal.
 A click-to-load video: a poster (custom, or YouTube's hosted still) that swaps in the player `<iframe>` only on click, so no YouTube script loads until play.
 _Avoid_: embed, player.
 
+**Chart**:
+A horizontal bar chart for **Post** bodies, authored in markdown as a fenced ```chart block (JSON: title, unit, note, data[]). Server-rendered HTML coloured from Radix hue vars, so it adapts to light/dark; each bar may pick a hue. See `ui/Chart`.
+
 **Pill**:
 A small label chip; when given a `color`/`onColor` it is tinted by a specific **Discipline** rather than the **Zone**.
 
