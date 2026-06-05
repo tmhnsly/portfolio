@@ -72,8 +72,8 @@ export const TIMELINE = z.array(timelineEntrySchema).parse([
     place: 'Apple · London',
     companyUrl: 'https://www.apple.com/uk/retail/',
     description:
-      'Mostly one-to-one with customers: troubleshooting hardware and software, from diagnostics to clean OS installs, and working out what someone actually needed to leave with it fixed. Teaching people their devices, and watching exactly where they got stuck, is where my eye for UX and interface began.',
-    tags: ['One-to-one teaching', 'Troubleshooting', 'UX'],
+      'Eight years at Apple, one-to-one and teaching group sessions: getting people of every age and skill level comfortable with their devices and the creative tools on them, and troubleshooting whatever had them stuck. Explaining technical things in plain language, to anyone who walked in, became second nature. Watching exactly where people hesitated and got lost is where my eye for UX and interface began.',
+    tags: ['Teaching', 'Troubleshooting', 'UX'],
     discipline: 'code',
     logo: '/images/about/logos/apple.svg',
   },
