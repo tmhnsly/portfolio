@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { getAllProjects, getProject, projectNeighbours, relatedProjects } from '@/lib/content';
+import { getAllProjects, getProjectInDiscipline, projectNeighbours, relatedProjects } from '@/lib/content';
 import { DISCIPLINES } from '@/lib/disciplines';
 import { projectHref } from '@/lib/routes';
 import { pageMeta } from '@/lib/metadata';
@@ -17,16 +17,16 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: Promise<{ discipline: string; slug: string }> }): Promise<Metadata> {
   const { discipline, slug } = await params;
-  const project = getProject(slug);
-  if (!project || project.discipline !== discipline) return {};
+  const project = getProjectInDiscipline(discipline, slug);
+  if (!project) return {};
   const description = project.desc ?? `${DISCIPLINES[project.discipline].label} work by Tom Hinsley.`;
   return pageMeta({ title: project.title, description, path: projectHref(project.discipline, slug), type: 'article' });
 }
 
 export default async function ProjectPage({ params }: { params: Promise<{ discipline: string; slug: string }> }) {
   const { discipline, slug } = await params;
-  const project = getProject(slug);
-  if (!project || project.discipline !== discipline) notFound();
+  const project = getProjectInDiscipline(discipline, slug);
+  if (!project) notFound();
 
   const { prev, next } = projectNeighbours(slug);
   const related = relatedProjects(slug);

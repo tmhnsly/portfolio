@@ -59,6 +59,13 @@ export function getAllPosts(): BlogPost[] {
 export function getProject(slug: string): Project | undefined {
   return getAllProjects().find((p) => p.slug === slug);
 }
+/** A Project resolved only if it actually lives in the given Discipline — the
+    `/[discipline]/[slug]` guard shared by the project page, its metadata, and its
+    OG card (a slug under the wrong discipline route is a 404, not a redirect). */
+export function getProjectInDiscipline(discipline: string, slug: string): Project | undefined {
+  const project = getProject(slug);
+  return project && project.discipline === discipline ? project : undefined;
+}
 export function getPost(slug: string): BlogPost | undefined {
   return getAllPosts().find((p) => p.slug === slug);
 }
