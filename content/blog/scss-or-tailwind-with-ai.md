@@ -40,7 +40,7 @@ Six tokens versus seventy-eight isn't the interesting number. The interesting bi
 
 ## What that actually costs
 
-In pounds, almost nothing. At roughly £2.50 per million input tokens, the difference above is a fraction of a penny per read. Nobody should pick a styling tool to save hundredths of a pence.
+In pounds, almost nothing. At around [$3 per million input tokens](https://platform.claude.com/docs/en/about-claude/pricing) for a mid-tier model, the difference above is a fraction of a penny per read. Nobody should pick a styling tool to save hundredths of a pence.
 
 The real cost is the context window, not the invoice. A model only has so much room to hold your code at once, and Tailwind-dense files fill it faster, so fewer files fit and the model "sees" less of the system while it works. The same tax hits a human reviewer: a diff that should read as "changed the padding" instead reads as a forty-token class string with one value different in the middle.
 
@@ -51,3 +51,11 @@ This is the part I didn't expect. Semantic class names give the model something 
 None of this means Tailwind is wrong. Its wins are real: no naming, no dead CSS, styles colocated with markup, a design system enforced by constraints. If a project is write-heavy and short-lived, that's a great trade.
 
 But most of mine are read-heavy and long-lived, and in the AI era "read-heavy" got more true, not less, because the model reads constantly. So this site is hand-written SCSS modules, and the thing I'm optimising for is the same thing that helps the assistant: markup you can actually read.
+
+## Sources
+
+The token counts are illustrative, not benchmarks. Paste the two markup snippets into a [tokeniser](https://platform.openai.com/tokenizer) and you'll get figures in the same ballpark; the gap, and the fact that it repeats per element, is the point.
+
+- [OpenAI tokenizer](https://platform.openai.com/tokenizer) — to reproduce the counts.
+- [Claude API pricing](https://platform.claude.com/docs/en/about-claude/pricing) — the per-million-token rate.
+- [Tailwind CSS: utility-first fundamentals](https://tailwindcss.com/docs/styling-with-utility-classes) — the approach, in its own words.
