@@ -4,7 +4,7 @@ import { createPortal } from 'react-dom';
 import { BiChevronLeft, BiChevronRight, BiX } from 'react-icons/bi';
 import type { MediaItem } from '@/types';
 import { IMG_SIZES } from '@/lib/breakpoints';
-import { dismissOnDragDown } from '@/lib/gesture';
+import { startDrag, moveDrag, dragVisual, dismissOnDragDown, idleDrag, type DragState } from '@/lib/gesture';
 import { pad2 } from '@/lib/format';
 import { Media } from '@/components/ui/Media';
 import { YouTubeEmbed } from '@/components/project/YouTubeEmbed';
@@ -18,7 +18,7 @@ export function MediaCarousel({ items, startIndex = 0, gradient, onClose }: {
   const [index, setIndex] = useState(startIndex);
   const backdropRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
-  const drag = useRef<{ x: number; y: number; locked: 'v' | 'h' | null; active: boolean }>({ x: 0, y: 0, locked: null, active: false });
+  const drag = useRef<DragState>(idleDrag);
 
   const go = useCallback((next: number) => {
     const clamped = (next + n) % n;
@@ -66,43 +66,37 @@ export function MediaCarousel({ items, startIndex = 0, gradient, onClose }: {
   const onTouchStart = (e: React.TouchEvent) => {
     const t = e.touches[0];
     if (!t) return;
-    drag.current = { x: t.clientX, y: t.clientY, locked: null, active: true };
+    drag.current = startDrag(t.clientX, t.clientY);
   };
   const onTouchMove = (e: React.TouchEvent) => {
-    const d = drag.current;
     const t = e.touches[0];
-    if (!d.active || !t) return;
-    const dx = t.clientX - d.x;
-    const dy = t.clientY - d.y;
-    if (!d.locked) {
-      if (Math.abs(dy) > 8 || Math.abs(dx) > 8) d.locked = Math.abs(dy) > Math.abs(dx) ? 'v' : 'h';
-      else return;
-    }
-    if (d.locked !== 'v' || dy <= 0) return;
+    if (!drag.current.active || !t) return;
+    const next = (drag.current = moveDrag(drag.current, t.clientX, t.clientY));
+    if (next.axis !== 'v' || next.dy <= 0) return; // horizontal stays native scroll-snap
     const track = trackRef.current, backdrop = backdropRef.current;
     if (!track || !backdrop) return;
-    const progress = Math.min(dy / 300, 1);
+    const { translateY, scale, backdrop: opacity } = dragVisual(next.dy);
     track.style.transition = 'none';
-    track.style.transform = `translateY(${dy}px) scale(${1 - progress * 0.15})`;
-    backdrop.style.setProperty('--dismiss', String(1 - progress));
+    track.style.transform = `translateY(${translateY}px) scale(${scale})`;
+    backdrop.style.setProperty('--dismiss', String(opacity));
   };
   const onTouchEnd = () => {
     const track = trackRef.current, backdrop = backdropRef.current;
-    const dy = track ? parseFloat((track.style.transform.match(/translateY\(([\d.]+)px\)/) ?? [])[1] ?? '0') : 0;
+    const { dy } = drag.current;
     if (track && backdrop) {
       if (dismissOnDragDown(dy)) {
         track.style.transition = 'transform 0.2s ease-out';
         track.style.transform = 'translateY(100vh) scale(0.85)';
         backdrop.style.setProperty('--dismiss', '0');
         window.setTimeout(onClose, 200);
-        drag.current.active = false;
+        drag.current = idleDrag;
         return;
       }
       track.style.transition = 'transform 0.3s cubic-bezier(0.2, 0.9, 0.3, 1)';
       track.style.transform = '';
       backdrop.style.setProperty('--dismiss', '1');
     }
-    drag.current = { x: 0, y: 0, locked: null, active: false };
+    drag.current = idleDrag;
   };
 
   if (typeof document === 'undefined') return null;
