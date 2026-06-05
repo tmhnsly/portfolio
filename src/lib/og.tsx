@@ -3,6 +3,7 @@ import { readFile } from 'node:fs/promises';
 import path from 'node:path';
 import { tomato, blue, green, orange, sand } from '@radix-ui/colors';
 import type { Discipline } from '@/types';
+import { SITE_HOST } from '@/lib/site-url';
 
 // Shared renderer for the per-page Open Graph cards (1200×630). satori can't read
 // the CSS vars the app themes with, so the cards rebuild the site's light look from
@@ -133,7 +134,7 @@ export async function ogImage({ eyebrow, title, accent }: { eyebrow: string; tit
           <div style={{ display: 'flex', width: '100%', height: 1, backgroundColor: sand.sand6, marginBottom: 28 }} />
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
             <span style={{ fontSize: 30, fontWeight: 700, color: sand.sand12 }}>Tom Hinsley</span>
-            <span style={{ fontSize: 28, fontWeight: 500, color: sand.sand11 }}>tomhinsley.com</span>
+            <span style={{ fontSize: 28, fontWeight: 500, color: sand.sand11 }}>{SITE_HOST}</span>
           </div>
         </div>
       </div>

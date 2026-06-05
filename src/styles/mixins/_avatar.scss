@@ -1,0 +1,8 @@
+// The blog author "orb" — a themed sphere: an accent radial gradient with a soft
+// top-left highlight, clipped to a circle. Shared by AuthorCard and BlogPostHero;
+// each call site sets its own diameter and drop-shadow (those scale with size).
+@mixin avatar-orb {
+  border-radius: 50%;
+  flex-shrink: 0;
+  background: radial-gradient(circle at 30% 30%, var(--on-media), var(--accent) 65%, color-mix(in srgb, var(--accent) 45%, black) 100%);
+}
