@@ -1,8 +1,8 @@
 'use client';
 import { createContext, useCallback, useEffect, useState } from 'react';
-import { THEME_STORAGE_KEY } from './theme-script';
+import { THEME_STORAGE_KEY, applyTheme, type Theme } from './theme-script';
 
-export type Theme = 'light' | 'dark';
+export type { Theme };
 export interface ThemeContextValue { theme: Theme; toggle: () => void; }
 export const ThemeContext = createContext<ThemeContextValue | null>(null);
 
@@ -18,9 +18,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const toggle = useCallback(() => {
     setTheme((prev) => {
       const next: Theme = prev === 'dark' ? 'light' : 'dark';
-      document.documentElement.setAttribute('data-theme', next);
-      document.documentElement.classList.remove('light', 'dark');
-      document.documentElement.classList.add(next);
+      applyTheme(document.documentElement, next);
       try { localStorage.setItem(THEME_STORAGE_KEY, next); } catch {}
       return next;
     });
