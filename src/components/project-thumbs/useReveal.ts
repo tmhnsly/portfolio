@@ -8,6 +8,10 @@ import { useInView } from '@/lib/motion';
  * The thumbnails gate their entrance animations on it (an `.inview` class toggling
  * a `--play` custom property) so they play once on reveal — not on mount, and not
  * again on every scroll-back.
+ *
+ * This is the CSS-class reveal path (the thumb entrances are authored in SCSS).
+ * For Motion-animated content blocks use <Reveal> instead — the two are kept
+ * separate on purpose (see ADR-0002).
  */
 export function useReveal<T extends Element = HTMLDivElement>() {
   const { ref, inView } = useInView<T>();

@@ -91,8 +91,15 @@ A small label chip; when given a `color`/`onColor` it is tinted by a specific **
 **LinkArrow**:
 The brand boxicon arrow that marks "this navigates / opens" (1.2em default, `inline` = text-sized), replacing assorted unicode arrows.
 
-**Entrance / Rolling**:
-Motion primitives — `Entrance`/`EntranceTitle` play a first-load / per-route reveal; `Rolling` slides a value to its new value when it changes.
+**Motion primitives**:
+The reusable animation building blocks — pick by trigger:
+- **Entrance** (`Entrance`/`EntranceItem`/`EntranceTitle`) — a first-load / per-route reveal, CSS-driven, plays once per page load.
+- **Reveal** — a scroll-triggered fade-up wrapper, **Motion**-driven (`whileInView`, fires at ~20% visible); for ordinary content blocks.
+- **RevealThumb** (over **`useReveal`**) — a scroll-triggered reveal for the bespoke project thumbs, **CSS-class**-driven (it toggles an `.inview` class the thumb's own SCSS keyframes hang off). Reach for this, not `Reveal`, when the entrance is authored in the component's stylesheet.
+- **Rolling** — slides a value to its new value when it changes.
+- **Marquee** — a continuous horizontal scroll, paused off-screen (via `useInView`).
+
+`Reveal` (Motion) and `RevealThumb`/`useReveal` (CSS) are deliberately **separate mechanisms, not duplicates** — see ADR-0002.
 
 ## Relationships
 
