@@ -1,5 +1,6 @@
 'use client';
 import { useEmail } from './useEmail';
+import { cx } from '@/lib/cx';
 import { LinkArrow } from '@/components/ui/LinkArrow';
 import btn from '@/components/ui/Button/Button.module.scss';
 
@@ -28,7 +29,7 @@ export function EmailLink({
   mask?: string;
 }) {
   const { email, mailto } = useEmail();
-  const cls = [variant && btn.btn, variant && btn[variant], className].filter(Boolean).join(' ') || undefined;
+  const cls = cx(variant && btn.btn, variant && btn[variant], className) || undefined;
   return (
     <a className={cls} href={mailto(subject)}>
       {children ?? email ?? mask}

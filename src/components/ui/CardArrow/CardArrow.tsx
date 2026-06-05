@@ -1,4 +1,5 @@
 import { LinkArrow } from '@/components/ui/LinkArrow';
+import { cx } from '@/lib/cx';
 import styles from './CardArrow.module.scss';
 
 /**
@@ -8,5 +9,5 @@ import styles from './CardArrow.module.scss';
  * (`.card:hover .<thatClass> { transform: translateX(3px); color: var(--accent-ink) }`).
  */
 export function CardArrow({ className }: { className?: string }) {
-  return <LinkArrow className={[styles.cardArrow, className].filter(Boolean).join(' ')} />;
+  return <LinkArrow className={cx(styles.cardArrow, className)} />;
 }

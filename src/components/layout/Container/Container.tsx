@@ -1,5 +1,6 @@
+import { cx } from '@/lib/cx';
 import styles from './Container.module.scss';
 
 export function Container({ children, className }: { children: React.ReactNode; className?: string }) {
-  return <div className={[styles.container, className].filter(Boolean).join(' ')}>{children}</div>;
+  return <div className={cx(styles.container, className)}>{children}</div>;
 }

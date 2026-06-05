@@ -10,6 +10,7 @@
  */
 import type { BlogPost } from '@/lib/schemas';
 import { useReveal } from '@/components/project-thumbs/useReveal';
+import { cx } from '@/lib/cx';
 import { pickMotif, type MotifKey } from './pickMotif';
 import styles from './BlogThumb.module.scss';
 
@@ -99,7 +100,7 @@ export function BlogThumb({ post }: { post: BlogPost }) {
   return (
     <div
       ref={ref}
-      className={[styles.root, hue && styles[hue], revealed && styles.inview].filter(Boolean).join(' ')}
+      className={cx(styles.root, hue && styles[hue], revealed && styles.inview)}
       aria-hidden
     >
       <Motif />

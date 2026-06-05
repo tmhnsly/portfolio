@@ -1,6 +1,7 @@
 'use client';
 import { useState } from 'react';
 import { useReducedMotion } from 'motion/react';
+import { cx } from '@/lib/cx';
 import styles from './Rolling.module.scss';
 
 type Dir = 'up' | 'down';
@@ -25,11 +26,9 @@ export function Rolling({ value, className }: { value: string | number; classNam
     setAnimKey((k) => k + 1);
   }
 
-  if (reduce) return <span className={[styles.static, className].filter(Boolean).join(' ')}>{value}</span>;
+  if (reduce) return <span className={cx(styles.static, className)}>{value}</span>;
 
-  const itemCls = [styles.item, dir === 'up' ? styles.up : '', dir === 'down' ? styles.down : '', className]
-    .filter(Boolean)
-    .join(' ');
+  const itemCls = cx(styles.item, dir === 'up' && styles.up, dir === 'down' && styles.down, className);
   return (
     <span className={styles.clip}>
       <span key={animKey} className={itemCls} onAnimationEnd={() => setDir(null)}>

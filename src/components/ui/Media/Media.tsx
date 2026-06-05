@@ -10,6 +10,7 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
+import { cx } from '@/lib/cx';
 import styles from './Media.module.scss';
 
 export interface MediaProps {
@@ -31,7 +32,7 @@ export function Media({ src, grad, alt = '', ratio = '4/3', sizes = '100vw', pri
   // fire — catch that case on mount via the element's `complete` flag.
   useEffect(() => { if (ref.current?.complete) setLoaded(true); }, []);
 
-  const cls = [styles.frame, rounded ? styles.rounded : '', className].filter(Boolean).join(' ');
+  const cls = cx(styles.frame, rounded && styles.rounded, className);
   return (
     <div className={cls} style={{ aspectRatio: ratio }}>
       {grad && (

@@ -1,13 +1,14 @@
 'use client';
 import { useInView } from '@/lib/motion';
+import { cx } from '@/lib/cx';
 import styles from './Marquee.module.scss';
 
 export function Marquee({ children, faded }: { children: React.ReactNode; faded?: boolean }) {
   // pause the scroll while off-screen (no animation when not visible)
   const { ref: viewportRef, inView } = useInView();
 
-  const viewportClass = [styles.viewport, faded ? styles.faded : undefined].filter(Boolean).join(' ');
-  const trackClass = [styles.track, !inView ? styles.paused : undefined].filter(Boolean).join(' ');
+  const viewportClass = cx(styles.viewport, faded && styles.faded);
+  const trackClass = cx(styles.track, !inView && styles.paused);
 
   return (
     <div ref={viewportRef} className={viewportClass}>

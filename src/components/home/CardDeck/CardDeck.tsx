@@ -8,6 +8,7 @@ import { EASING, useInView } from '@/lib/motion';
 import { IMG_SIZES } from '@/lib/breakpoints';
 import { projectPresentation } from '@/lib/project-presentation';
 import { rotate, rotateTo, swipeDir } from '@/lib/deck';
+import { pad2 } from '@/lib/format';
 import { ProjectThumb } from '@/components/project-thumbs';
 import { Pill } from '@/components/ui/Pill';
 import { Button } from '@/components/ui/Button';
@@ -23,8 +24,6 @@ const SWIPE_VELOCITY = 300;  // a quick flick advances even without much travel
 // softer, near-critically-damped spring → a weighty, smooth glide (was 340/34/0.9,
 // which snapped/settled hard). The exit recede uses its own ease (below).
 const stackSpring = { type: 'spring', stiffness: 240, damping: 30, mass: 1 } as const;
-
-const pad = (n: number) => String(n).padStart(2, '0');
 
 function CardFace({ project, priority }: { project: Project; priority?: boolean }) {
   const p = projectPresentation(project);
@@ -201,7 +200,7 @@ export function CardDeck({ items }: { items: Project[] }) {
             />
           ))}
         </span>
-        <span className={styles.counter}>{pad(activeIndex + 1)} / {pad(n)}</span>
+        <span className={styles.counter}>{pad2(activeIndex + 1)} / {pad2(n)}</span>
         <span className={styles.buttons}>
           <Button variant="icon" aria-label="previous" onClick={() => advance(1)}><BiChevronLeft className={styles.caret} aria-hidden /></Button>
           <Button variant="icon" aria-label="next" onClick={() => advance(-1)}><BiChevronRight className={styles.caret} aria-hidden /></Button>

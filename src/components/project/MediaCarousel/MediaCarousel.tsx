@@ -5,11 +5,10 @@ import { BiChevronLeft, BiChevronRight, BiX } from 'react-icons/bi';
 import type { MediaItem } from '@/types';
 import { IMG_SIZES } from '@/lib/breakpoints';
 import { dismissOnDragDown } from '@/lib/gesture';
+import { pad2 } from '@/lib/format';
 import { Media } from '@/components/ui/Media';
 import { YouTubeEmbed } from '@/components/project/YouTubeEmbed';
 import styles from './MediaCarousel.module.scss';
-
-const pad = (n: number) => String(n).padStart(2, '0');
 
 export function MediaCarousel({ items, startIndex = 0, gradient, onClose }: {
   items: MediaItem[]; startIndex?: number; gradient: string; onClose: () => void;
@@ -140,7 +139,7 @@ export function MediaCarousel({ items, startIndex = 0, gradient, onClose }: {
       {canNav && (
         <div className={styles.bottom}>
           <button type="button" className={styles.btn} aria-label="previous" onClick={() => go(index - 1)}><BiChevronLeft aria-hidden /></button>
-          <span className={styles.counter}>{pad(index + 1)} / {pad(n)}</span>
+          <span className={styles.counter}>{pad2(index + 1)} / {pad2(n)}</span>
           <button type="button" className={styles.btn} aria-label="next" onClick={() => go(index + 1)}><BiChevronRight aria-hidden /></button>
         </div>
       )}

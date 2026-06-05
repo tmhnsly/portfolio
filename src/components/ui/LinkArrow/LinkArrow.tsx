@@ -1,4 +1,5 @@
 import { BiRightArrowAlt } from 'react-icons/bi';
+import { cx } from '@/lib/cx';
 import styles from './LinkArrow.module.scss';
 
 /**
@@ -11,7 +12,7 @@ export function LinkArrow({ className, inline = false }: { className?: string; i
   return (
     <BiRightArrowAlt
       aria-hidden
-      className={[styles.arrow, inline && styles.inline, className].filter(Boolean).join(' ')}
+      className={cx(styles.arrow, inline && styles.inline, className)}
     />
   );
 }

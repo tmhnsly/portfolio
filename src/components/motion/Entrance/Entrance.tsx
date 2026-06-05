@@ -1,6 +1,7 @@
 'use client';
 import React, { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
+import { cx } from '@/lib/cx';
 import styles from './Entrance.module.scss';
 
 /**
@@ -93,7 +94,7 @@ export function EntranceTitle({
   // `.clipTitle` is an empty rule (Sass drops it), so styles.clipTitle is
   // undefined — filter it out rather than emit a literal "undefined" class.
   return (
-    <h1 className={[styles.clipTitle, className].filter(Boolean).join(' ')}>
+    <h1 className={cx(styles.clipTitle, className)}>
       <span key={pathname} className={styles.inner}>
         {lines.map((line, li) => {
           const isLastLine = li === lines.length - 1;

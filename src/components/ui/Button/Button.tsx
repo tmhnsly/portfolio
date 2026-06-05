@@ -1,3 +1,4 @@
+import { cx } from '@/lib/cx';
 import styles from './Button.module.scss';
 type Variant = 'primary' | 'secondary' | 'ghost' | 'icon';
 interface ButtonProps {
@@ -10,7 +11,7 @@ interface ButtonProps {
   'aria-label'?: string;
 }
 export function Button({ variant, children, href, onClick, type = 'button', className, 'aria-label': ariaLabel }: ButtonProps) {
-  const cls = [styles.btn, styles[variant], className].filter(Boolean).join(' ');
+  const cls = cx(styles.btn, styles[variant], className);
   if (href) return <a href={href} className={cls} aria-label={ariaLabel}>{children}</a>;
   return <button type={type} onClick={onClick} className={cls} aria-label={ariaLabel}>{children}</button>;
 }
