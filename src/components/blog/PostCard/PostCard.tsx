@@ -5,11 +5,12 @@ import { TechChip } from '@/components/ui/TechChip';
 import { LinkArrow } from '@/components/ui/LinkArrow';
 import { PostThumb } from '@/components/blog/PostThumb';
 import { formatMonthYear, readingLabel } from '@/lib/format';
+import { postHref } from '@/lib/routes';
 import styles from './PostCard.module.scss';
 
 export function PostCard({ post }: { post: BlogPost }) {
   return (
-    <Link href={`/blog/${post.slug}`} className={styles.row}>
+    <Link href={postHref(post.slug)} className={styles.row}>
       <div className={styles.meta}>
         <span className={styles.date}>{formatMonthYear(post.date)}</span>
         <span className={styles.category}>{post.category}</span>

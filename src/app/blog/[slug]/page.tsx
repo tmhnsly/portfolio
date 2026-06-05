@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { pageMeta } from '@/lib/metadata';
 import { BiLeftArrowAlt, BiRightArrowAlt } from 'react-icons/bi';
 import { getAllPosts, getPost, postNeighbours, relatedPosts } from '@/lib/content';
+import { postHref } from '@/lib/routes';
 import { IMG_SIZES } from '@/lib/breakpoints';
 import { COPY } from '@/data';
 import { Container, Stack } from '@/components/layout';
@@ -28,7 +29,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const post = getPost(slug);
   if (!post) return {};
-  return pageMeta({ title: post.title, description: post.excerpt, path: `/blog/${slug}`, type: 'article', publishedTime: post.date });
+  return pageMeta({ title: post.title, description: post.excerpt, path: postHref(slug), type: 'article', publishedTime: post.date });
 }
 
 export default async function PostPage({ params }: { params: Promise<{ slug: string }> }) {
@@ -70,7 +71,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
         {(older || newer) && (
           <nav className={styles.prevNext} aria-label="Post navigation">
             {older ? (
-              <Link href={`/blog/${older.slug}`} className={styles.navCard}>
+              <Link href={postHref(older.slug)} className={styles.navCard}>
                 <span className={styles.navDir}><BiLeftArrowAlt className={styles.navArrow} aria-hidden /> {COPY.blog.olderPost}</span>
                 <span className={styles.navTitle}>{older.title}</span>
               </Link>
@@ -81,7 +82,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
               </div>
             )}
             {newer ? (
-              <Link href={`/blog/${newer.slug}`} className={`${styles.navCard} ${styles.navCardRight}`}>
+              <Link href={postHref(newer.slug)} className={`${styles.navCard} ${styles.navCardRight}`}>
                 <span className={styles.navDir}>{COPY.blog.newerPost} <BiRightArrowAlt className={styles.navArrow} aria-hidden /></span>
                 <span className={styles.navTitle}>{newer.title}</span>
               </Link>
@@ -120,7 +121,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
 
 function RelatedCard({ post }: { post: BlogPost }) {
   return (
-    <Link href={`/blog/${post.slug}`} className={styles.relatedItem}>
+    <Link href={postHref(post.slug)} className={styles.relatedItem}>
       <PostThumb post={post} ratio="16/9" sizes={IMG_SIZES.grid3} rounded />
       <div className={styles.relatedMeta}>
         <Pill label={post.category} tone="discipline" />

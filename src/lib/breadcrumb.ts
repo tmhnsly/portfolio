@@ -2,6 +2,7 @@ import type { Discipline } from '@/types';
 import type { BreadcrumbData } from '@/lib/content';
 import { DISCIPLINES } from '@/lib/disciplines';
 import { disciplineFromPath } from '@/lib/zone';
+import { projectHref } from '@/lib/routes';
 
 export interface Crumb {
   slot: 'home' | 'section' | 'leaf';
@@ -45,10 +46,10 @@ export function buildCrumbs(
       return [home, { slot: 'section', label, count, unit: `${noun}${count === 1 ? '' : 's'}` }];
     }
     const leafSeg = segs[1]!; // segs.length >= 2 here (length === 1 returned above)
-    const path = `/${discipline}/${leafSeg}`;
+    const path = projectHref(discipline, leafSeg);
     return [
       home,
-      { slot: 'section', label, href: `/${discipline}` },
+      { slot: 'section', label, href: DISCIPLINES[discipline].route },
       { slot: 'leaf', label: titleMap[path] ?? humanize(leafSeg) },
     ];
   }

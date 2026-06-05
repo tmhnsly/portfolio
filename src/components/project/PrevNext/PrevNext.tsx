@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { BiLeftArrowAlt, BiRightArrowAlt } from 'react-icons/bi';
-import type { Project } from '@/types';
-import type { Discipline } from '@/types';
+import type { Project, Discipline } from '@/types';
+import { projectHref } from '@/lib/routes';
 import styles from './PrevNext.module.scss';
 
 interface PrevNextProps {
@@ -15,7 +15,7 @@ export function PrevNext({ discipline, prev, next }: PrevNextProps) {
     <nav className={styles.prevNext} aria-label="Project navigation">
       <div className={styles.card}>
         {prev ? (
-          <Link href={`/${discipline}/${prev.slug}`} className={styles.link}>
+          <Link href={projectHref(discipline, prev.slug)} className={styles.link}>
             <span className={styles.dir}><BiLeftArrowAlt className={styles.dirIcon} aria-hidden /> Previous in /{discipline}</span>
             <span className={styles.projectTitle}>{prev.title}</span>
           </Link>
@@ -29,7 +29,7 @@ export function PrevNext({ discipline, prev, next }: PrevNextProps) {
 
       <div className={styles.card}>
         {next ? (
-          <Link href={`/${discipline}/${next.slug}`} className={`${styles.link} ${styles.right}`}>
+          <Link href={projectHref(discipline, next.slug)} className={`${styles.link} ${styles.right}`}>
             <span className={styles.dir}>Next in /{discipline} <BiRightArrowAlt className={styles.dirIcon} aria-hidden /></span>
             <span className={styles.projectTitle}>{next.title}</span>
           </Link>

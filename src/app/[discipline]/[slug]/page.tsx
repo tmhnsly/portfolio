@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { getAllProjects, getProject, projectNeighbours, relatedProjects } from '@/lib/content';
 import { DISCIPLINES } from '@/lib/disciplines';
+import { projectHref } from '@/lib/routes';
 import { pageMeta } from '@/lib/metadata';
 import { Container, Stack } from '@/components/layout';
 import { ProjectHero } from '@/components/project/ProjectHero';
@@ -19,7 +20,7 @@ export async function generateMetadata({ params }: { params: Promise<{ disciplin
   const project = getProject(slug);
   if (!project || project.discipline !== discipline) return {};
   const description = project.desc ?? `${DISCIPLINES[project.discipline].label} work by Tom Hinsley.`;
-  return pageMeta({ title: project.title, description, path: `/${discipline}/${slug}`, type: 'article' });
+  return pageMeta({ title: project.title, description, path: projectHref(project.discipline, slug), type: 'article' });
 }
 
 export default async function ProjectPage({ params }: { params: Promise<{ discipline: string; slug: string }> }) {

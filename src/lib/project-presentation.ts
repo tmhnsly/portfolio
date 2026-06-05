@@ -1,6 +1,7 @@
 import type { Project } from '@/types';
 import { DISCIPLINES } from './disciplines';
 import { youTubeThumbnail } from './youtube';
+import { projectHref } from './routes';
 
 /**
  * The presentation facts a Project card needs — resolved from the Project's own
@@ -19,7 +20,7 @@ export interface ProjectPresentation {
 export function projectPresentation(project: Project): ProjectPresentation {
   const d = DISCIPLINES[project.discipline];
   return {
-    href: `/${project.discipline}/${project.slug}`,
+    href: projectHref(project.discipline, project.slug),
     label: d.label,
     gradient: d.gradient,
     color: d.color,

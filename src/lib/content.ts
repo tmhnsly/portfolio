@@ -4,6 +4,7 @@ import matter from 'gray-matter';
 import { projectFrontmatterSchema, postFrontmatterSchema } from './schemas';
 import type { Project, BlogPost, Author, Discipline } from './schemas';
 import { splitFeatured } from './facets';
+import { projectHref, postHref } from './routes';
 
 const ROOT = path.join(process.cwd(), 'content');
 const AUTHOR: Author = {
@@ -138,8 +139,8 @@ export function disciplineCounts(): Partial<Record<Discipline, number>> {
 /** Path → title for every project/post leaf (for the breadcrumb leaf label). */
 export function titleMap(): Record<string, string> {
   const map: Record<string, string> = {};
-  for (const p of getAllProjects()) map[`/${p.discipline}/${p.slug}`] = p.title;
-  for (const p of getAllPosts()) map[`/blog/${p.slug}`] = p.title;
+  for (const p of getAllProjects()) map[projectHref(p.discipline, p.slug)] = p.title;
+  for (const p of getAllPosts()) map[postHref(p.slug)] = p.title;
   return map;
 }
 

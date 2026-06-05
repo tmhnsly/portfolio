@@ -7,6 +7,7 @@ import { Pill } from '@/components/ui/Pill';
 import { TechChip } from '@/components/ui/TechChip';
 import { CardArrow } from '@/components/ui/CardArrow';
 import { formatMonthYear, readingLabel } from '@/lib/format';
+import { postHref } from '@/lib/routes';
 import styles from './FeaturedPost.module.scss';
 
 export function FeaturedPost({ post }: { post: BlogPost }) {
@@ -15,7 +16,7 @@ export function FeaturedPost({ post }: { post: BlogPost }) {
       <Eyebrow>
         Latest · {formatMonthYear(post.date)} · {readingLabel(post.readingTime)}
       </Eyebrow>
-      <Link href={`/blog/${post.slug}`} className={styles.card}>
+      <Link href={postHref(post.slug)} className={styles.card}>
         <div className={styles.grid}>
           <div className={styles.mediaWrap}>
             <PostThumb post={post} ratio="16/11" sizes={IMG_SIZES.featured} className={styles.media}>

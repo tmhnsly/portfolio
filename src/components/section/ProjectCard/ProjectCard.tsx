@@ -7,6 +7,7 @@ import { Pill } from '@/components/ui/Pill';
 import { TechChip } from '@/components/ui/TechChip';
 import { LinkArrow } from '@/components/ui/LinkArrow';
 import { coverImage } from '@/lib/project-presentation';
+import { projectHref } from '@/lib/routes';
 import { formatMonthYear } from '@/lib/format';
 import { cx } from '@/lib/cx';
 import styles from './ProjectCard.module.scss';
@@ -15,7 +16,7 @@ export function ProjectCard({ project, hideDiscipline = false, featured = false 
   const d = DISCIPLINES[project.discipline];
   const cover = coverImage(project);
   return (
-    <Link href={`/${project.discipline}/${project.slug}`} className={cx(styles.card, featured && styles.featured)}>
+    <Link href={projectHref(project.discipline, project.slug)} className={cx(styles.card, featured && styles.featured)}>
       <ProjectThumb project={project} grad={d.gradient}
         ratio={featured ? '16/10' : '4/3'} sizes={featured ? IMG_SIZES.full : IMG_SIZES.grid3} className={styles.media}>
         {!cover.src && !hasProjectThumb(project.slug) && <span className={styles.hatch} aria-hidden />}
