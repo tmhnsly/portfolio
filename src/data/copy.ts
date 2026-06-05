@@ -53,8 +53,8 @@ export const COPY = {
     // Intro section
     currentlyEyebrow: 'Currently',
     // headline parts — trailing '.' stays in JSX
-    currentlyLead: 'Freelance frontend developer, building ',
-    currentlyAccent: 'whatever I feel like',
+    currentlyLead: 'Freelance frontend developer, ',
+    currentlyAccent: 'open to new work',
     // note block (two lines separated by <br />)
     currentlyNote: 'Contract frontend for digital publishers, including the Financial Times.\nSide projects come and go: music one week, a video the next, the odd app like Chork.',
     // body paragraphs
