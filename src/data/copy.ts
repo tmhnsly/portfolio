@@ -43,8 +43,6 @@ export const COPY = {
   },
 
   about: {
-    // AboutHero eyebrow suffix after "About · Tom Hinsley · "
-    eyebrowLocation: 'London 51.5°N',
     // AboutHero intro paragraph. {years} is replaced at render time from SITE.experienceSince.
     intro: 'Frontend developer in London with {years}+ years building responsive, accessible interfaces for agencies, a software consultancy and editorial publishers. Sound-design background, still making things in the margins.',
     // AboutHero discipline chips
