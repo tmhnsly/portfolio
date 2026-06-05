@@ -79,9 +79,9 @@ export const COPY = {
 
     // ContactCTA section
     ctaEyebrow: 'Get in touch',
-    ctaHeading: 'Working on something',
-    ctaHeadingSoft: 'I should know about?',
-    ctaNote: 'usually replies within a day or two.',
+    ctaHeading: 'Got a project in mind?',
+    ctaHeadingSoft: 'Or just say hello.',
+    ctaNote: 'I usually reply within a day or two.',
   },
 
   blog: {
@@ -105,7 +105,7 @@ export const COPY = {
 
   project: {
     // RelatedWork eyebrow
-    relatedEyebrow: 'You might also like',
+    relatedEyebrow: 'More work',
     // RelatedWork heading — period is part of the string (no accent styling)
     relatedHeading: 'From across the practice.',
   },
