@@ -41,6 +41,10 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
   return (
     <Container>
       <Stack>
+        <aside className={styles.notice} role="note">
+          <span className={styles.noticeLabel}>{COPY.blog.postNotice.label}</span>
+          <span className={styles.noticeText}>{COPY.blog.postNotice.text}</span>
+        </aside>
           <BlogPostHero post={post} />
         <PostThumb post={post} ratio="16/7" sizes={IMG_SIZES.full} />
         <PostBody post={post} />
