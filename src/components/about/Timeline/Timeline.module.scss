@@ -23,6 +23,12 @@
 
 .timeline {
   position: relative;
+  /* x-position of the dot axis — the rail + its fill ride this line */
+  --rail-x: 11px; /* mobile: centre of the 22px marker rail */
+
+  @include tablet-up {
+    --rail-x: calc(200px + var(--space-7) + 20px);
+  }
 }
 
 .item {
@@ -31,7 +37,6 @@
   grid-template-columns: 22px 1fr;
   gap: var(--space-4);
   align-items: center; /* dot + year sit at the card's vertical centre */
-  position: relative; /* anchors the connecting rail */
   padding-bottom: var(--space-7);
 
   @include tablet-up {
@@ -40,31 +45,32 @@
   }
 }
 
-/* Vertical rail behind the dots — one segment per item so it stays continuous
-   through the gaps, and trims to the first/last dot at the two ends. */
-.item::before {
-  content: '';
+/* ── Connecting rail ─────────────────────────────────────────────────────── */
+/* One continuous line down the dot axis. (Was per-item ::before segments, which
+   faded in chunk-by-chunk with each card — that was the jank.) The faint track is
+   always present; the accent fill is drawn by scroll progress from Timeline.tsx.
+   Both fade at the ends so the line eases in and out rather than stopping hard. */
+.rail,
+.railFill {
   position: absolute;
   top: 0;
   bottom: 0;
-  left: 11px; /* mobile: centre of the 22px marker rail */
-  width: 1px;
-  background: var(--rule);
+  left: var(--rail-x);
+  width: 2px;
+  margin-left: -1px; /* centre the 2px line on the dot axis */
   z-index: 0;
-
-  @include tablet-up {
-    left: calc(200px + var(--space-7) + 20px);
-  }
+  border-radius: 1px;
+  mask-image: linear-gradient(to bottom, transparent, #000 80px, #000 calc(100% - 96px), transparent);
 }
 
-.item:first-child::before {
-  top: 50%; /* start at the first dot */
+.rail {
+  background: var(--rule);
 }
 
-.item:last-child::before {
-  /* keep the rail going past the last dot, then fade it out — an intentional
-     trail-off rather than an abrupt stop that doesn't quite meet the dot */
-  mask-image: linear-gradient(to bottom, #000 55%, transparent);
+.railFill {
+  background: var(--accent-ink);
+  transform-origin: top;
+  transform: scaleY(0); /* pre-hydration state; motion drives scaleY from scroll */
 }
 
 .year {
@@ -96,6 +102,12 @@
   position: relative;
   z-index: var(--z-card-overlay);
   display: block;
+}
+
+/* Wraps the card so the scroll-driven depth transform (scale/opacity) lives here,
+   leaving the card's own hover transform free to act independently. */
+.cardWrap {
+  min-width: 0; /* let the card's text wrap inside the 1fr grid column */
 }
 
 /* ── The entry card ─────────────────────────────────────────────────────── */
