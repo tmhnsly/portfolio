@@ -76,17 +76,18 @@ export const TIMELINE = z.array(timelineEntrySchema).parse([
   },
   {
     // One block for the whole Apple retail era — the stints overlapped uni and ran
-    // across a few stores (incl. an Apple Premium Reseller), so it reads cleanest as
-    // a single span rather than split rows.
+    // across several stores (plus an Apple Premium Reseller), so it reads cleanest as
+    // a single span. Framed around the one-to-one teaching: the root of the UX eye,
+    // hence the code accent (it's the bridge into the frontend work).
     id: 'apple-2011',
     period: 'Jun 2011 — Sep 2019',
     role: 'Specialist',
     place: 'Apple · London',
     companyUrl: 'https://www.apple.com/uk/retail/',
     description:
-      'Front-of-house at Apple’s Covent Garden flagship, with stints at an Apple Premium Reseller in between. Troubleshooting hardware and software, working out what each person actually needed, and sending them off with a complete fix. I also made in-store video here: the iPhone XS launch, an interview series on building a career at Apple, and a recruitment overview.',
-    tags: ['Customer service', 'Troubleshooting', 'Video'],
-    discipline: 'video',
+      'Front-of-house across four Apple stores (Regent Street, Covent Garden, the Bentall Centre and Festival Place in Basingstoke), with an Apple Premium Reseller in between. Mostly one-to-one: teaching people their devices and untangling whatever had them stuck, hardware or software. Years of watching how real people actually use software, and exactly where they trip up, is where my eye for UX and interface began.',
+    tags: ['One-to-one teaching', 'Troubleshooting', 'UX'],
+    discipline: 'code',
     logo: '/images/about/logos/apple.svg',
   },
 ]);
