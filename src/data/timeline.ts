@@ -51,8 +51,7 @@ export const TIMELINE = z.array(timelineEntrySchema).parse([
     period: 'Sep — Dec 2020',
     role: 'Full Stack Software Engineering',
     place: 'iO Academy · Bath',
-    // iO Academy closed in 2025; its own site is dead, so link the Course Report profile
-    companyUrl: 'https://www.coursereport.com/schools/io-academy',
+    companyUrl: COMPANIES.ioAcademy.url, // dead own-site → Course Report (see companies.ts)
     description:
       'Intensive four-month engineering bootcamp — finished top 10 globally and #2 in the UK. PHP, JavaScript, React, Node.js, MySQL, MongoDB, Git, OOP and Agile.',
     tags: ['JavaScript', 'React', 'Node.js', 'PHP'],
@@ -70,7 +69,7 @@ export const TIMELINE = z.array(timelineEntrySchema).parse([
     period: 'Jun 2011 — Sep 2019',
     role: 'Specialist',
     place: 'Apple · London',
-    companyUrl: 'https://www.apple.com/uk/retail/',
+    companyUrl: COMPANIES.apple.url,
     description:
       'Eight years at Apple, one-to-one and teaching group sessions: getting people of every age and skill level comfortable with their devices and the creative tools on them, and troubleshooting whatever had them stuck. Explaining technical things in plain language, to anyone who walked in, became second nature. Watching exactly where people hesitated and got lost is where my eye for UX and interface began.',
     tags: ['Teaching', 'Troubleshooting', 'UX'],

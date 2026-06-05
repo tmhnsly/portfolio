@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { SITE, TIMELINE } from './index';
+import { SITE, TIMELINE, COMPANIES } from './index';
 import { getSkills } from './skills';
 import { decodeEmail } from '@/lib/email';
 describe('data constants', () => {
@@ -12,5 +12,13 @@ describe('data constants', () => {
   });
   it('email decodes correctly (kept encoded, off the HTML/bundle)', () => {
     expect(decodeEmail()).toBe('hello@tomhinsley.com');
+  });
+  it('every timeline companyUrl comes from COMPANIES (no raw/typo links)', () => {
+    const known = new Set<string>(Object.values(COMPANIES).map((c) => c.url));
+    for (const entry of TIMELINE) {
+      if (entry.companyUrl) {
+        expect(known.has(entry.companyUrl), `${entry.id} links to a URL not in COMPANIES: ${entry.companyUrl}`).toBe(true);
+      }
+    }
   });
 });
