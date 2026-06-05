@@ -25,10 +25,12 @@
   display: flex; align-items: center; gap: var(--space-2); flex-shrink: 0;
   text-decoration: none; color: inherit; border-radius: var(--radius-lg);
   /* give the home link a real hit area + hover, matching the nav items (it had
-     none, so its clickable footprint was smaller). The negative margin offsets the
-     new left padding so the wordmark stays visually flush. */
+     none, so its clickable footprint was smaller). A small negative margin nudges
+     the brand toward the bar's left edge WITHOUT cancelling the whole left padding,
+     so the hover pill keeps a gap from the bar edge that mirrors the CTA's inset on
+     the right (was -10px, which jammed the pill against the bar). */
   padding: var(--nav-item-pad);
-  margin-left: -10px;
+  margin-left: -4px;
   transition: background var(--duration-fast) var(--ease-standard);
 }
 @include can-hover { .brand:hover { background: var(--surface-soft); } }
