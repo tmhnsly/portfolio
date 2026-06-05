@@ -66,7 +66,7 @@ export const COPY = {
     offTheClock: [
       { kind: 'book', label: 'Reading', title: 'A Scanner Darkly', href: '' },
       { kind: 'tv', label: 'Watching', title: 'Dragon Ball Z (again)', href: '' },
-      { kind: 'game', label: 'Playing', title: 'Game Boy classics, emulated', href: '' },
+      { kind: 'game', label: 'Playing', title: 'New Super Mario Bros. 2', href: '' },
     ],
 
     // Timeline section
