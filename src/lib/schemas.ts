@@ -97,3 +97,18 @@ export const siteConfigSchema = z.object({
   nav: z.array(z.object({ label: z.string(), href: z.string() })),
 });
 export type SiteConfig = z.infer<typeof siteConfigSchema>;
+
+/**
+ * Validate content frontmatter against a schema, throwing a message that names the
+ * source (`where`) and each offending field — so a bad markdown file fails the
+ * build with "which file and why", not an opaque ZodError. The single validation
+ * seam every content loader passes through.
+ */
+export function parseFrontmatter<S extends z.ZodTypeAny>(schema: S, data: unknown, where: string): z.infer<S> {
+  const result = schema.safeParse(data);
+  if (result.success) return result.data;
+  const detail = result.error.issues
+    .map((i) => `  • ${i.path.join('.') || '(root)'}: ${i.message}`)
+    .join('\n');
+  throw new Error(`Invalid frontmatter in ${where}:\n${detail}`);
+}

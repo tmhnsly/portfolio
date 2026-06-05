@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { projectFrontmatterSchema, postFrontmatterSchema, disciplineSchema } from './schemas';
+import { projectFrontmatterSchema, postFrontmatterSchema, disciplineSchema, parseFrontmatter } from './schemas';
 
 describe('schemas', () => {
   it('accepts valid project frontmatter and applies defaults', () => {
@@ -13,6 +13,15 @@ describe('schemas', () => {
   });
   it('requires a post excerpt', () => {
     expect(() => postFrontmatterSchema.parse({ title: 'x', date: '2026-01-01', category: 'Code' })).toThrow();
+  });
+  it('parseFrontmatter names the file and the offending field on failure', () => {
+    expect(() =>
+      parseFrontmatter(projectFrontmatterSchema, { title: 'X', discipline: 'cooking', date: '2026-01-01' }, 'content/projects/bad.md'),
+    ).toThrow(/content\/projects\/bad\.md[\s\S]*discipline/);
+  });
+  it('parseFrontmatter returns the parsed value on success', () => {
+    const fm = parseFrontmatter(projectFrontmatterSchema, { title: 'OK', discipline: 'code', date: '2026-03-01' }, 'content/projects/ok.md');
+    expect(fm.title).toBe('OK');
   });
   it('parses image and youtube media items and rejects unknown types', () => {
     const fm = projectFrontmatterSchema.parse({

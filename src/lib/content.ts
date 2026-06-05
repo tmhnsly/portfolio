@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import matter from 'gray-matter';
-import { projectFrontmatterSchema, postFrontmatterSchema } from './schemas';
+import { projectFrontmatterSchema, postFrontmatterSchema, parseFrontmatter } from './schemas';
 import type { Project, BlogPost, Author, Discipline } from './schemas';
 import { splitFeatured } from './facets';
 import { projectHref, postHref } from './routes';
@@ -36,7 +36,7 @@ function loadProjects(): Project[] {
   return listMd('projects')
     .map((file) => {
       const { slug, data, content } = read('projects', file);
-      return { ...projectFrontmatterSchema.parse(data), slug, body: content };
+      return { ...parseFrontmatter(projectFrontmatterSchema, data, `content/projects/${file}`), slug, body: content };
     })
     .sort((a, b) => b.date.localeCompare(a.date));
 }
@@ -44,7 +44,7 @@ function loadPosts(): BlogPost[] {
   return listMd('blog')
     .map((file) => {
       const { slug, data, content } = read('blog', file);
-      const fm = postFrontmatterSchema.parse(data);
+      const fm = parseFrontmatter(postFrontmatterSchema, data, `content/blog/${file}`);
       return { ...fm, slug, body: content, readingTime: fm.readingTime ?? estimateReading(content), author: AUTHOR };
     })
     .sort((a, b) => b.date.localeCompare(a.date));
