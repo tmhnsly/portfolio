@@ -15,53 +15,11 @@
 // `currentColor` resolve in Safari; prefers-reduced-motion is read in an effect
 // (SSR-safe) → instant swap, no animation.
 import { useEffect, useState } from 'react';
-import { ICONS, GRID, type IconKey } from './pixel-icons';
+import { ICONS, type IconKey } from './pixel-icons';
+import { UNION, VIEW, CELL, RAD } from './pixel-geometry';
 
-const VBOX = 256;
-const CELL = VBOX / GRID; // 16
-const RAD = CELL * 0.46; // round dots with breathing room
 const EASE = 'cubic-bezier(0.2, 0.7, 0.3, 1)';
 const FADE = 150; // ms — a single cell's flip (at pace 1)
-const SWEEP = 300; // ms — how long the diagonal wave takes to cross (at pace 1)
-
-// The fixed union of every cell used across all icons, each with its static delay
-// = its place in a top-left→bottom-right diagonal sweep (0..1 × SWEEP). Precomputed
-// once, so a render only sets opacities.
-const UNION: { r: number; c: number; d: number }[] = (() => {
-  const used = new Set<number>();
-  for (const ic of Object.values(ICONS)) {
-    for (let r = 0; r < GRID; r++) for (let c = 0; c < GRID; c++) if (ic.data[r]?.[c]) used.add(r * GRID + c);
-  }
-  const span = (GRID - 1) * 2; // max r+c
-  return [...used].map((n) => {
-    const r = Math.floor(n / GRID);
-    const c = n % GRID;
-    return { r, c, d: ((r + c) / span) * SWEEP };
-  });
-})();
-
-// Crop the viewBox to the glyphs' shared bounding box (+ the dot radius and a
-// little breathing room) so the mark fills its box like a logo instead of
-// floating in the 16-grid's empty margin — keeps it optically aligned with, and
-// evenly spaced from, the wordmark beside it.
-const VIEW = (() => {
-  let minR = GRID, minC = GRID, maxR = 0, maxC = 0;
-  for (const { r, c } of UNION) {
-    if (r < minR) minR = r;
-    if (r > maxR) maxR = r;
-    if (c < minC) minC = c;
-    if (c > maxC) maxC = c;
-  }
-  const pad = RAD + CELL * 0.25;
-  const x0 = minC * CELL + CELL / 2 - pad;
-  const y0 = minR * CELL + CELL / 2 - pad;
-  const x1 = maxC * CELL + CELL / 2 + pad;
-  const y1 = maxR * CELL + CELL / 2 + pad;
-  const side = Math.max(x1 - x0, y1 - y0);
-  const cx = (x0 + x1) / 2;
-  const cy = (y0 + y1) / 2;
-  return { x: cx - side / 2, y: cy - side / 2, side };
-})();
 
 export interface PixelMarkProps {
   /** route key into ICONS; unknown/missing falls back to 'home' */
