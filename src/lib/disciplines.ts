@@ -8,7 +8,9 @@ import type { Discipline, DisciplineMeta } from '@/types';
  * hue here AND import that hue's scale in `src/app/layout.tsx`.
  * code uses `tomato` = the primary brand accent.
  */
-const HUE: Record<Discipline, string> = {
+// The canonical Discipline → Radix hue map. Exported so the OG card renderer can
+// rebuild colours from the SAME source (it can't read the CSS vars; see og-palette).
+export const HUE: Record<Discipline, string> = {
   code: 'tomato',
   audio: 'blue',
   video: 'green',

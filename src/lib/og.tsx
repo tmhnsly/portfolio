@@ -1,9 +1,14 @@
 import { ImageResponse } from 'next/og';
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
-import { tomato, blue, green, orange, sand } from '@radix-ui/colors';
-import type { Discipline } from '@/types';
+import { sand } from '@radix-ui/colors';
 import { SITE_HOST } from '@/lib/site-url';
+import { ogAccent, type Palette } from '@/lib/og-palette';
+
+// ogAccent (the Discipline → fixed-hex palette, derived from lib/disciplines' HUE)
+// lives in og-palette so it's importable without pulling in next/og — re-exported
+// here for the route files that already import it from '@/lib/og'.
+export { ogAccent };
 
 // Shared renderer for the per-page Open Graph cards (1200×630). satori can't read
 // the CSS vars the app themes with, so the cards rebuild the site's light look from
@@ -12,17 +17,6 @@ import { SITE_HOST } from '@/lib/site-url';
 
 export const OG_SIZE = { width: 1200, height: 630 };
 export const OG_CONTENT_TYPE = 'image/png';
-
-// Per-discipline palette, mirroring lib/disciplines: solid = step-9 (monogram tile),
-// ink = step-11 (the accent period + eyebrow dot), bloom = step-5 (the soft glow).
-type Palette = { solid: string; ink: string; bloom: string };
-const PALETTE: Record<Discipline, Palette> = {
-  code: { solid: tomato.tomato9, ink: tomato.tomato11, bloom: tomato.tomato5 },
-  audio: { solid: blue.blue9, ink: blue.blue11, bloom: blue.blue5 },
-  video: { solid: green.green9, ink: green.green11, bloom: green.green5 },
-  blog: { solid: orange.orange9, ink: orange.orange11, bloom: orange.orange5 },
-};
-export const ogAccent = (d: Discipline): Palette => PALETTE[d];
 
 // The `>_` prompt glyph from the favicon (src/app/icon.svg), rebuilt as a data URI so
 // the tile can take any discipline colour. Cells are 16px on a 256 grid.
