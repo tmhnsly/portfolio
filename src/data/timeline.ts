@@ -74,4 +74,19 @@ export const TIMELINE = z.array(timelineEntrySchema).parse([
     monogram: 'Rv',
     logo: '/images/about/logos/ravensbourne.webp',
   },
+  {
+    // One block for the whole Apple retail era — the stints overlapped uni and ran
+    // across a few stores (incl. an Apple Premium Reseller), so it reads cleanest as
+    // a single span rather than split rows.
+    id: 'apple-2011',
+    period: 'Jun 2011 — Sep 2019',
+    role: 'Specialist',
+    place: 'Apple · London',
+    companyUrl: 'https://www.apple.com/uk/retail/',
+    description:
+      'Front-of-house at Apple’s Covent Garden flagship, with stints at an Apple Premium Reseller in between. Troubleshooting hardware and software, working out what each person actually needed, and sending them off with a complete fix. I also made in-store video here: the iPhone XS launch, an interview series on building a career at Apple, and a recruitment overview.',
+    tags: ['Customer service', 'Troubleshooting', 'Video'],
+    discipline: 'video',
+    logo: '/images/about/logos/apple.svg',
+  },
 ]);
