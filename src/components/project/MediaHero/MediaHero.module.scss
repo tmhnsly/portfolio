@@ -9,15 +9,7 @@
 .poster { display: block; width: 100%; padding: 0; border: 0; background: none; cursor: pointer; }
 
 .play {
-  position: absolute; inset: 0; margin: auto;
-  width: 72px; height: 72px;
-  display: grid; place-items: center;
-  border-radius: 999px;
-  color: var(--text); font-size: 1.7rem; line-height: 0;
-  background: var(--glass);
-  backdrop-filter: blur(16px);
-  box-shadow: inset 0 0 0 1px var(--glass-sheen), 0 6px 22px var(--black-a5);
-  transition: opacity var(--duration-hover) var(--ease-standard), transform var(--duration-hover) var(--ease-standard);
+  @include play-disc;
 }
 .play svg { transform: translateX(2px); }
 @include can-hover {

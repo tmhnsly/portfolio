@@ -68,8 +68,8 @@
     &:hover { color: var(--text-soft); }
   }
   &:focus-visible {
-    outline: 2px solid var(--accent-ink);
-    outline-offset: 2px;
+    // outline + offset come from the global :focus-visible reset; only the
+    // radius is element-specific, so the ring follows this control's corners.
     border-radius: var(--radius-sm);
   }
 }
