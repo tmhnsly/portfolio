@@ -39,7 +39,7 @@
 .fill { position: absolute; inset: 0; border-radius: inherit; z-index: -1; }
 .name {
   /* brand watermark — stays on the bar at every width (incl. burger mode) */
-  font-size: 16px; font-weight: 600; letter-spacing: -0.02em; color: var(--text);
+  font-size: 16px; font-weight: var(--fw-semibold); letter-spacing: -0.02em; color: var(--text);
   display: block;
 }
 
@@ -57,7 +57,7 @@
 .item {
   position: relative; z-index: 1; /* keep items (and labels) above the pill */
   display: inline-block; padding: var(--nav-item-pad-wide); border-radius: var(--radius-lg);
-  font-size: 14px; font-weight: 500; letter-spacing: -0.005em; color: var(--text);
+  font-size: 14px; font-weight: var(--fw-medium); letter-spacing: -0.005em; color: var(--text);
   transition: background var(--duration-fast) var(--ease-standard), color var(--duration-fast) var(--ease-standard);
   white-space: nowrap; flex-shrink: 0;
 }
@@ -95,7 +95,7 @@
   position: relative; isolation: isolate; /* contain the crossfade fill below the label */
   padding: var(--cta-pad-wide); border-radius: var(--radius-lg);
   color: var(--on-accent, var(--text-on-accent));
-  font-weight: 600; font-size: 14px; letter-spacing: -0.005em; white-space: nowrap;
+  font-weight: var(--fw-semibold); font-size: 14px; letter-spacing: -0.005em; white-space: nowrap;
   box-shadow: 0 6px 18px color-mix(in srgb, var(--accent) 27%, transparent);
   flex-shrink: 0;
 }
@@ -142,7 +142,7 @@
 .menuItem {
   display: flex; align-items: center; gap: var(--space-3);
   padding: 10px 14px; border-radius: var(--radius-lg);
-  font-size: 15px; font-weight: 500; color: var(--text); text-decoration: none; cursor: pointer;
+  font-size: 15px; font-weight: var(--fw-medium); color: var(--text); text-decoration: none; cursor: pointer;
   outline: none; white-space: nowrap;
   transition: background var(--duration-fast) var(--ease-standard);
 }
@@ -154,7 +154,7 @@
 .menuCta {
   display: block; padding: 10px 14px; border-radius: var(--radius-lg);
   background: var(--accent); color: var(--on-accent, var(--text-on-accent)); text-decoration: none; cursor: pointer;
-  font-size: 15px; font-weight: 600; outline: none; white-space: nowrap;
+  font-size: 15px; font-weight: var(--fw-semibold); outline: none; white-space: nowrap;
 }
 /* derive the hover from --accent (set inline on the portaled Content) so the
    menu CTA matches the zone, not the root accent-hover */

@@ -57,7 +57,7 @@
   margin: 0;
   font-family: var(--font-display);
   font-size: var(--fs-h3);
-  font-weight: 600;
+  font-weight: var(--fw-semibold);
   letter-spacing: -0.025em;
   line-height: 1.15;
   color: var(--text);
@@ -116,7 +116,7 @@
 .readLink {
   font-family: var(--font-display);
   font-size: var(--fs-caption);
-  font-weight: 600;
+  font-weight: var(--fw-semibold);
   letter-spacing: -0.005em;
   color: var(--text);
   display: inline-flex;

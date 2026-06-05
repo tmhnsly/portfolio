@@ -38,7 +38,7 @@
 .g { background: #28c840; }
 
 .body { padding: 6.5cqmin 5cqmin; display: flex; flex-direction: column; gap: 3.5cqmin; }
-.line { display: flex; align-items: center; gap: 1.4cqmin; font-size: 3.6cqmin; font-weight: 700; white-space: nowrap; }
+.line { display: flex; align-items: center; gap: 1.4cqmin; font-size: 3.6cqmin; font-weight: var(--fw-bold); white-space: nowrap; }
 .prompt { color: var(--arm); }
 .cmd { color: color-mix(in oklab, var(--code-text) 70%, transparent); }
 .pkg { color: var(--arm); }

@@ -50,7 +50,7 @@
   border-radius: 999px;
   background: color-mix(in oklab, var(--ft-claret) 14%, transparent);
   color: var(--ft-claret);
-  font-size: 3.2cqmin; font-weight: 700; letter-spacing: 0.14em;
+  font-size: 3.2cqmin; font-weight: var(--fw-bold); letter-spacing: 0.14em;
 }
 
 .headline { height: 6cqmin; width: 86%; border-radius: 1cqmin; background: var(--ft-ink); }

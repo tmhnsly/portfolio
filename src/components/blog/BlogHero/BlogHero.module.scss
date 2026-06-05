@@ -25,7 +25,7 @@
   margin: 0;
   font-family: var(--font-display);
   font-size: clamp(var(--fs-display-l), 12vw, var(--fs-display-xxl));
-  font-weight: 600;
+  font-weight: var(--fw-semibold);
   letter-spacing: var(--ls-display-xxl);
   line-height: var(--lh-display);
   color: var(--text);
@@ -38,7 +38,7 @@
   font-size: var(--fs-h4);
   line-height: 1.5;
   color: var(--text-soft);
-  font-weight: 400;
+  font-weight: var(--fw-regular);
 }
 
 .right {

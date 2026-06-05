@@ -33,7 +33,7 @@
 .thumb { flex: 1 1 auto; }
 /* meta aligns flush with the thumb edges (face padding handles the inset) */
 .meta { display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-2); }
-.title { font-family: var(--font-display); font-size: var(--fs-h4); font-weight: 600; letter-spacing: -0.025em; line-height: 1.2; color: var(--text); }
+.title { font-family: var(--font-display); font-size: var(--fs-h4); font-weight: var(--fw-semibold); letter-spacing: -0.025em; line-height: 1.2; color: var(--text); }
 .desc { font-size: var(--fs-caption); color: var(--text-soft); line-height: 1.4; }
 /* discipline-coloured pill, in the meta (replaced the tech tags + date) */
 .pill { display: inline-flex; margin-top: var(--space-1); }

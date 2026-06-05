@@ -33,20 +33,20 @@
 .brand { display: flex; align-items: center; gap: 2cqmin; }
 .mark { width: 6cqmin; height: 5.1cqmin; }
 .mark path { fill: none; stroke: var(--text); stroke-width: 3.5; stroke-linejoin: round; }
-.word { font-size: 3.6cqmin; font-weight: 800; letter-spacing: 0.14em; color: var(--text); }
+.word { font-size: 3.6cqmin; font-weight: var(--fw-extrabold); letter-spacing: 0.14em; color: var(--text); }
 
 .head {
   font-family: var(--font-display);
   font-size: 8.5cqmin;
-  font-weight: 700;
+  font-weight: var(--fw-bold);
   line-height: 1.04;
   letter-spacing: -0.01em;
   color: var(--text);
   max-width: 62cqmin;
 }
-.script { font-style: italic; font-weight: 600; color: var(--tu); }
+.script { font-style: italic; font-weight: var(--fw-semibold); color: var(--tu); }
 
-.sub { font-size: 3.4cqmin; font-weight: 500; color: var(--text-soft); }
+.sub { font-size: 3.4cqmin; font-weight: var(--fw-medium); color: var(--text-soft); }
 
 @media (prefers-reduced-motion: no-preference) {
   .root { --play: paused; }

@@ -44,8 +44,8 @@
   mask-position: left center;
   mask-size: contain;
 }
-.vip { font-family: var(--font-display); font-size: 9.5cqmin; font-weight: 700; line-height: 0.88; color: #1a1a1a; }
-.sub { font-size: 3cqmin; font-weight: 600; color: color-mix(in oklab, var(--green) 75%, transparent); }
+.vip { font-family: var(--font-display); font-size: 9.5cqmin; font-weight: var(--fw-bold); line-height: 0.88; color: #1a1a1a; }
+.sub { font-size: 3cqmin; font-weight: var(--fw-semibold); color: color-mix(in oklab, var(--green) 75%, transparent); }
 
 .perf { flex: none; width: 0; align-self: stretch; border-left: max(1.5px, 0.6cqmin) dashed color-mix(in oklab, var(--green) 45%, transparent); }
 
@@ -60,8 +60,8 @@
   background: var(--green);
   color: var(--cream);
 }
-.num { font-family: var(--font-display); font-size: 13cqmin; font-weight: 700; line-height: 0.9; }
-.left { font-size: 3cqmin; font-weight: 700; letter-spacing: 0.24em; }
+.num { font-family: var(--font-display); font-size: 13cqmin; font-weight: var(--fw-bold); line-height: 0.9; }
+.left { font-size: 3cqmin; font-weight: var(--fw-bold); letter-spacing: 0.24em; }
 
 @media (prefers-reduced-motion: no-preference) {
   .root { --play: paused; }

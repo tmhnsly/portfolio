@@ -48,12 +48,12 @@
   align-items: baseline;
   gap: 1.4cqmin;
   font-size: 7.6cqmin;
-  font-weight: 700;
+  font-weight: var(--fw-bold);
   line-height: 1;
   color: var(--text);
   font-variant-numeric: tabular-nums;
 }
-.pts small { font-size: 3.2cqmin; font-weight: 600; letter-spacing: 0.06em; color: var(--text-muted); }
+.pts small { font-size: 3.2cqmin; font-weight: var(--fw-semibold); letter-spacing: 0.06em; color: var(--text-muted); }
 
 .body { display: flex; align-items: center; gap: 5cqmin; }
 .rings { width: 34cqmin; height: 34cqmin; flex: none; }
@@ -64,8 +64,8 @@
 .sends { background: var(--sends); }
 .flash { background: var(--flash); }
 .zone  { background: var(--zone); }
-.label { font-size: 4.2cqmin; font-weight: 600; letter-spacing: 0.08em; color: var(--text-muted); }
-.num { margin-left: auto; font-size: 6cqmin; font-weight: 700; line-height: 1; color: var(--text); font-variant-numeric: tabular-nums; }
+.label { font-size: 4.2cqmin; font-weight: var(--fw-semibold); letter-spacing: 0.08em; color: var(--text-muted); }
+.num { margin-left: auto; font-size: 6cqmin; font-weight: var(--fw-bold); line-height: 1; color: var(--text); font-variant-numeric: tabular-nums; }
 
 /* Entrance: panel rises, the rings sweep in (staggered), the stats settle. Hidden
    state lives only here, so reduced-motion users get it composed and static. */

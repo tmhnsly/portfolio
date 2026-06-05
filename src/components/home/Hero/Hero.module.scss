@@ -7,7 +7,10 @@
   @include tablet-up { grid-template-columns: 1.4fr 1fr; gap: var(--space-8); align-items: start; }
   @include lg-up { grid-template-columns: 1.55fr 1fr; gap: var(--space-11); } }
 .lead { display: flex; flex-direction: column; min-width: 0; }
-.title { margin: var(--space-7) 0 0; font-family: var(--font-display); font-weight: 600;
+/* No top margin: the breadcrumb (space-7 below) + the Stack's top padding (space-8)
+   already sit above the hero. The old space-7 here triple-stacked into a ~104px gap
+   and pushed the home hero lower than every other page's first section. */
+.title { margin: 0; font-family: var(--font-display); font-weight: var(--fw-semibold);
   letter-spacing: var(--ls-display-xxl); line-height: var(--lh-display); color: var(--text);
   font-size: clamp(var(--fs-display), 13vw, var(--fs-display-l)); text-wrap: pretty;
   @include tablet-up { font-size: clamp(44px, 6.5vw, var(--fs-display-l)); }

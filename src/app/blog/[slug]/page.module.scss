@@ -115,7 +115,7 @@
 .navTitle {
   font-family: var(--font-display);
   font-size: var(--fs-h4);
-  font-weight: 600;
+  font-weight: var(--fw-semibold);
   color: var(--text);
   letter-spacing: -0.02em;
   line-height: var(--lh-heading);
@@ -139,7 +139,7 @@
   margin: var(--space-3) 0 0;
   font-family: var(--font-display);
   font-size: var(--fs-h2);
-  font-weight: 600;
+  font-weight: var(--fw-semibold);
   letter-spacing: var(--ls-h2);
   color: var(--text);
 }
@@ -200,7 +200,7 @@
 .relatedTitle {
   font-family: var(--font-display);
   font-size: var(--fs-h4);
-  font-weight: 600;
+  font-weight: var(--fw-semibold);
   color: var(--text);
   letter-spacing: -0.022em;
   line-height: 1.2;

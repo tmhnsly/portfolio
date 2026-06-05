@@ -7,7 +7,7 @@
 }
 @mixin display($size: var(--fs-display), $ls: var(--ls-display)) {
   font-family: var(--font-display);
-  font-weight: 600;
+  font-weight: var(--fw-semibold);
   font-size: $size;
   letter-spacing: $ls;
   line-height: var(--lh-display);

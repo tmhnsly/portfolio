@@ -77,7 +77,7 @@
   font-size: clamp(var(--fs-display), 12cqw, var(--fs-display-xxl));
   line-height: 0.88;
   letter-spacing: -0.05em;
-  font-weight: 600;
+  font-weight: var(--fw-semibold);
   color: var(--text);
 }
 
@@ -88,7 +88,7 @@
   font-size: var(--fs-h3);
   line-height: 1.35;
   color: var(--text-soft);
-  font-weight: 400;
+  font-weight: var(--fw-regular);
 }
 
 .meta {

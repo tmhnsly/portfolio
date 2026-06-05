@@ -55,7 +55,7 @@
   background: var(--surface);
 }
 .statLabel { width: 58%; height: 2.4cqmin; border-radius: 999px; background: var(--text); opacity: 0.4; }
-.statNum { font-size: 6.4cqmin; font-weight: 700; line-height: 1; font-variant-numeric: tabular-nums; }
+.statNum { font-size: 6.4cqmin; font-weight: var(--fw-bold); line-height: 1; font-variant-numeric: tabular-nums; }
 .accent { background: color-mix(in oklab, var(--agile) 12%, var(--surface)); border-color: color-mix(in oklab, var(--agile) 28%, transparent); }
 .accent .statNum { color: var(--agile); }
 .positive { background: color-mix(in oklab, var(--pos) 12%, var(--surface)); border-color: color-mix(in oklab, var(--pos) 28%, transparent); }

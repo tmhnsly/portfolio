@@ -50,10 +50,10 @@
   gap: 2.6cqmin;
 }
 .row { display: flex; align-items: baseline; justify-content: space-between; }
-.k { font-size: 2.8cqmin; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: color-mix(in oklab, var(--green) 55%, transparent); }
-.v { font-size: 3.6cqmin; font-weight: 700; color: var(--green); }
+.k { font-size: 2.8cqmin; font-weight: var(--fw-semibold); letter-spacing: 0.1em; text-transform: uppercase; color: color-mix(in oklab, var(--green) 55%, transparent); }
+.v { font-size: 3.6cqmin; font-weight: var(--fw-bold); color: var(--green); }
 
-.cta { padding: 2.2cqmin 6cqmin; border-radius: 999px; background: var(--coral); color: #fff; font-size: 3.6cqmin; font-weight: 700; }
+.cta { padding: 2.2cqmin 6cqmin; border-radius: 999px; background: var(--coral); color: #fff; font-size: 3.6cqmin; font-weight: var(--fw-bold); }
 
 @media (prefers-reduced-motion: no-preference) {
   .root { --play: paused; }

@@ -25,7 +25,7 @@
   font-size: clamp(var(--fs-display), 9vw, var(--fs-display-xl));
   line-height: 0.92;
   letter-spacing: -0.045em;
-  font-weight: 600;
+  font-weight: var(--fw-semibold);
   color: var(--text);
   text-wrap: pretty;
 }
@@ -62,7 +62,7 @@
 .authorName {
   font-family: var(--font-display);
   font-size: var(--fs-body-s);
-  font-weight: 600;
+  font-weight: var(--fw-semibold);
   letter-spacing: -0.015em;
   color: var(--text);
 }
