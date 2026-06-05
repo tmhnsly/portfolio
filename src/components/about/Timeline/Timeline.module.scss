@@ -116,9 +116,18 @@
   flex-direction: column;
   gap: var(--space-4);
   padding: var(--space-5);
-  background: var(--surface);
-  border: 1px solid var(--surface-edge);
+  /* Readable glass: a translucent fill with enough body to lift off the bloom and
+     stay legible, defined by a clear edge, a top sheen and a soft shadow rather than
+     a blur — the card lives inside the depth-transformed wrapper, where a
+     backdrop-filter wouldn't sample the page behind it. The --surface veil keeps it
+     theme-correct (a light lift in dark, a faint tint in light); the bg base under it
+     cuts the busy bloom so the panel reads cleanly. */
+  background:
+    linear-gradient(var(--surface), var(--surface)),
+    color-mix(in srgb, var(--bg) 82%, transparent);
+  border: 1px solid var(--rule);
   border-radius: var(--radius-2xl); /* outer (18px) — inner logo tile is radius-lg */
+  box-shadow: inset 0 1px 0 var(--glass-sheen), var(--shadow-md);
   color: inherit;
   text-decoration: none;
   position: relative;
@@ -251,7 +260,7 @@
   a.card:hover {
     transform: translateY(-3px);
     border-color: color-mix(in srgb, var(--tl-fill) 50%, var(--surface-edge));
-    box-shadow: var(--shadow-sm);
+    box-shadow: inset 0 1px 0 var(--glass-sheen), var(--shadow-lg);
   }
   a.card:hover .role {
     color: var(--tl-ink);
