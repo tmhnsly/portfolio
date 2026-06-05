@@ -53,20 +53,20 @@ export const COPY = {
     // Intro section
     currentlyEyebrow: 'Currently',
     // headline parts — trailing '.' stays in JSX
-    currentlyLead: 'Freelance frontend developer, ',
-    currentlyAccent: 'building Chork',
+    currentlyLead: 'Freelance frontend developer, building ',
+    currentlyAccent: 'whatever I feel like',
     // note block (two lines separated by <br />)
-    currentlyNote: 'Contract frontend for digital publishers, including the Financial Times.\nBuilding Chork, a rock-climbing app, on the side.',
+    currentlyNote: 'Contract frontend for digital publishers, including the Financial Times.\nSide projects come and go: music one week, a video the next, the odd app like Chork.',
     // body paragraphs
     bodyPara1: 'I’ve been building for the web for {years}+ years, across agencies, a software consultancy and editorial publishers like the Financial Times. Strong React, Next.js and TypeScript foundations, with full-stack capability when a project calls for it.',
-    bodyPara2: 'Most of what’s here is self-initiated: code that wanders into audio and writing, which is where the sound-design degree still leaks through. If it looks like the sort of thing you’d want to commission, send me a note.',
+    bodyPara2: 'Off the clock I tinker with retro games and the emulators that run them, mess about with music, and get to a climbing wall when I can. Proudest useless achievement: finishing Super Mario Land on a Game Boy Color. The self-initiated work here comes from the same itch, code that wanders into audio and writing, where the sound-design degree still leaks through.',
 
     // "Off the clock" — current book / TV series / game (Currently component).
     offTheClockEyebrow: 'Off the clock',
     offTheClock: [
       { kind: 'book', label: 'Reading', title: 'A Scanner Darkly', href: '' },
       { kind: 'tv', label: 'Watching', title: 'Dragon Ball Z (again)', href: '' },
-      { kind: 'game', label: 'Playing', title: 'New Super Mario Bros. 2', href: '' },
+      { kind: 'game', label: 'Playing', title: 'Game Boy classics, emulated', href: '' },
     ],
 
     // Timeline section
