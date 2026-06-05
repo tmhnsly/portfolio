@@ -13,4 +13,7 @@ a { color: inherit; text-decoration: none; }
 button { font: inherit; color: inherit; background: none; border: none; cursor: pointer; }
 img, svg { display: block; max-width: 100%; }
 ul { list-style: none; padding: 0; }
-:focus-visible { outline: 2px solid var(--accent-ink); outline-offset: 2px; border-radius: var(--radius-xs); }
+/* One consistent keyboard-focus ring everywhere: 2px accent-ink, 2px offset, and the
+   outline follows each element's OWN border-radius — don't force a radius here, that
+   squared the corners of rounded controls/cards on focus. */
+:focus-visible { outline: 2px solid var(--accent-ink); outline-offset: 2px; }

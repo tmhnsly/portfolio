@@ -23,9 +23,15 @@
 /* brand mark (PixelMark) + wordmark are one "home" link (two visual pieces) */
 .brand {
   display: flex; align-items: center; gap: var(--space-2); flex-shrink: 0;
-  text-decoration: none; color: inherit; border-radius: var(--radius-md);
+  text-decoration: none; color: inherit; border-radius: var(--radius-lg);
+  /* give the home link a real hit area + hover, matching the nav items (it had
+     none, so its clickable footprint was smaller). The negative margin offsets the
+     new left padding so the wordmark stays visually flush. */
+  padding: var(--nav-item-pad);
+  margin-left: -10px;
+  transition: background var(--duration-fast) var(--ease-standard);
 }
-.brand:focus-visible { outline: 2px solid var(--accent-ink); outline-offset: 4px; }
+@include can-hover { .brand:hover { background: var(--surface-soft); } }
 /* accent fill that crossfades old→new on a zone change (see AccentFill, Nav.tsx);
    negative z-index keeps it behind the in-flow label without a wrapper */
 .fill { position: absolute; inset: 0; border-radius: inherit; z-index: -1; }
@@ -160,10 +166,3 @@
 .menu:focus-visible,
 .menuItem:focus-visible,
 .menuCta:focus-visible { outline: none; }
-/* That same global rule also forces border-radius: var(--radius-xs). Because Radix
-   moves focus onto an item on pointer-hover, it squares the HOVERED item's corners
-   to xs while the selected item keeps its own lg — a visible radius mismatch.
-   Restore each element's own radius so hover matches selected. */
-.menu:focus-visible { border-radius: var(--radius-xl); }
-.menuItem:focus-visible,
-.menuCta:focus-visible { border-radius: var(--radius-lg); }
