@@ -1,6 +1,6 @@
 'use client';
 import type { CSSProperties } from 'react';
-import { useReveal } from './useReveal';
+import { RevealThumb } from './RevealThumb';
 import styles from './ChorkThumb.module.scss';
 
 /**
@@ -71,9 +71,8 @@ function Rings() {
 }
 
 export function ChorkThumb() {
-  const { ref, revealed } = useReveal();
   return (
-    <div ref={ref} className={revealed ? `${styles.root} ${styles.inview}` : styles.root} aria-hidden>
+    <RevealThumb root={styles.root} inview={styles.inview}>
       <div className={styles.panel}>
         <div className={styles.head}>
           <ChorkMark />
@@ -93,6 +92,6 @@ export function ChorkThumb() {
           </ul>
         </div>
       </div>
-    </div>
+    </RevealThumb>
   );
 }

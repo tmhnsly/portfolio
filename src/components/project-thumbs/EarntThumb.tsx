@@ -1,5 +1,5 @@
 'use client';
-import { useReveal } from './useReveal';
+import { RevealThumb } from './RevealThumb';
 import styles from './EarntThumb.module.scss';
 
 /**
@@ -8,9 +8,8 @@ import styles from './EarntThumb.module.scss';
  * + "VIP STATUS" on the stub, a green tear-off with "8 left". Reveals on scroll.
  */
 export function EarntThumb() {
-  const { ref, revealed } = useReveal();
   return (
-    <div ref={ref} className={revealed ? `${styles.root} ${styles.inview}` : styles.root} aria-hidden>
+    <RevealThumb root={styles.root} inview={styles.inview}>
       <div className={styles.ticket}>
         <div className={styles.main}>
           <span className={styles.logo} />
@@ -23,6 +22,6 @@ export function EarntThumb() {
           <span className={styles.left}>LEFT</span>
         </div>
       </div>
-    </div>
+    </RevealThumb>
   );
 }

@@ -1,5 +1,5 @@
 'use client';
-import { useReveal } from './useReveal';
+import { RevealThumb } from './RevealThumb';
 import styles from './MandyThumb.module.scss';
 
 /**
@@ -9,9 +9,8 @@ import styles from './MandyThumb.module.scss';
  * actual work); the frame, wall and plate follow the theme. Reveals on scroll.
  */
 export function MandyThumb() {
-  const { ref, revealed } = useReveal();
   return (
-    <div ref={ref} className={revealed ? `${styles.root} ${styles.inview}` : styles.root} aria-hidden>
+    <RevealThumb root={styles.root} inview={styles.inview}>
       <div className={styles.light} />
       <div className={styles.wall}>
         <div className={styles.frame}>
@@ -25,6 +24,6 @@ export function MandyThumb() {
           <span className={styles.sub} />
         </div>
       </div>
-    </div>
+    </RevealThumb>
   );
 }

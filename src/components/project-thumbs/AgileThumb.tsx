@@ -1,5 +1,5 @@
 'use client';
-import { useReveal } from './useReveal';
+import { RevealThumb } from './RevealThumb';
 import styles from './AgileThumb.module.scss';
 
 /**
@@ -16,9 +16,8 @@ const LINE = 'M0,26 C6,30 10,36 16,37 C22,38 26,28 32,18 C37,9 43,15 50,22 C56,2
 const AREA = `${LINE} L100,40 L0,40 Z`;
 
 export function AgileThumb() {
-  const { ref, revealed } = useReveal();
   return (
-    <div ref={ref} className={revealed ? `${styles.root} ${styles.inview}` : styles.root} aria-hidden>
+    <RevealThumb root={styles.root} inview={styles.inview}>
       <div className={styles.panel}>
         <div className={styles.chartCard}>
           <span className={styles.chartLabel} />
@@ -37,6 +36,6 @@ export function AgileThumb() {
           <span className={styles.statNum}>&minus;42%</span>
         </div>
       </div>
-    </div>
+    </RevealThumb>
   );
 }

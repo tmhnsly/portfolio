@@ -1,5 +1,5 @@
 'use client';
-import { useReveal } from './useReveal';
+import { RevealThumb } from './RevealThumb';
 import styles from './ClaysThumb.module.scss';
 
 /**
@@ -13,9 +13,8 @@ const ROWS = [
 ];
 
 export function ClaysThumb() {
-  const { ref, revealed } = useReveal();
   return (
-    <div ref={ref} className={revealed ? `${styles.root} ${styles.inview}` : styles.root} aria-hidden>
+    <RevealThumb root={styles.root} inview={styles.inview}>
       <div className={styles.panel}>
         <span className={styles.logo} />
         <div className={styles.card}>
@@ -28,6 +27,6 @@ export function ClaysThumb() {
         </div>
         <span className={styles.cta}>Book now</span>
       </div>
-    </div>
+    </RevealThumb>
   );
 }

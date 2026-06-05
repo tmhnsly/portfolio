@@ -1,5 +1,5 @@
 'use client';
-import { useReveal } from './useReveal';
+import { RevealThumb } from './RevealThumb';
 import styles from './ArmstrongThumb.module.scss';
 
 /**
@@ -8,9 +8,8 @@ import styles from './ArmstrongThumb.module.scss';
  * stays dark in both themes (the site's code blocks); cyan accent. Reveals on scroll.
  */
 export function ArmstrongThumb() {
-  const { ref, revealed } = useReveal();
   return (
-    <div ref={ref} className={revealed ? `${styles.root} ${styles.inview}` : styles.root} aria-hidden>
+    <RevealThumb root={styles.root} inview={styles.inview}>
       <div className={styles.win}>
         <div className={styles.bar}>
           <span className={`${styles.dot} ${styles.r}`} />
@@ -27,6 +26,6 @@ export function ArmstrongThumb() {
           <div className={styles.comment}>{'// React component library'}</div>
         </div>
       </div>
-    </div>
+    </RevealThumb>
   );
 }

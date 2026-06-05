@@ -1,5 +1,5 @@
 'use client';
-import { useReveal } from './useReveal';
+import { RevealThumb } from './RevealThumb';
 import styles from './TVBlandThumb.module.scss';
 
 /**
@@ -10,9 +10,8 @@ import styles from './TVBlandThumb.module.scss';
  * couple of static flickers.
  */
 export function TVBlandThumb() {
-  const { ref, revealed } = useReveal();
   return (
-    <div ref={ref} className={revealed ? `${styles.root} ${styles.inview}` : styles.root} aria-hidden>
+    <RevealThumb root={styles.root} inview={styles.inview}>
       <div className={styles.tv}>
         <div className={styles.screen}>
           <div className={styles.tube}>
@@ -31,6 +30,6 @@ export function TVBlandThumb() {
           <span className={styles.grille} />
         </div>
       </div>
-    </div>
+    </RevealThumb>
   );
 }
