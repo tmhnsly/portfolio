@@ -83,11 +83,11 @@ export const COPY = {
   },
 
   blog: {
-    // Temporary AI-content warning shown at the top of every post (blog/[slug]/page.tsx).
+    // Disclosure shown at the top of every post (blog/[slug]/page.tsx).
     // Remove this notice (and the .notice block in page.module.scss) when the posts are replaced.
     postNotice: {
       label: 'Heads up',
-      text: 'These posts are AI-written and unverified. They’re here to demo the blog, not to be read as fact, and they’ll be removed.',
+      text: 'These posts are AI-assisted, but the figures and quotes have been fact-checked against the cited primary sources. Where the numbers are contested or dated, the post says so and leaves the range in.',
     },
     // BlogHero eyebrow suffix
     heroSince: 'since 2024',

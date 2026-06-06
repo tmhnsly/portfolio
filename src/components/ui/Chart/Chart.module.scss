@@ -17,22 +17,25 @@
   margin-bottom: var(--space-5);
 }
 
+/* ── Bar / range chart ──
+   One shared grid so the bars and the (optional) axis tick row line up in the
+   same columns; .row and .axis are display:contents to drop their cells into it. */
 .rows {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-3);
-}
-
-.row {
   display: grid;
   grid-template-columns: minmax(5rem, 7rem) 1fr auto;
-  gap: var(--space-3);
+  column-gap: var(--space-3);
+  row-gap: var(--space-3);
   align-items: center;
 
   @include tablet-up {
     grid-template-columns: minmax(8rem, 11rem) 1fr auto;
-    gap: var(--space-4);
+    column-gap: var(--space-4);
   }
+}
+
+.row,
+.axis {
+  display: contents;
 }
 
 .label {
@@ -42,15 +45,35 @@
 }
 
 .track {
-  display: block;
+  position: relative;
+  height: 1.4rem;
   min-width: 0;
 }
 
 .bar {
-  display: block;
+  position: absolute;
+  inset: 0 auto 0 0;
   height: 1.4rem;
   min-width: 0.4rem;
   border-radius: var(--radius-sm);
+}
+
+/* Uncertainty band (low–high) with a marker at the central estimate. */
+.band {
+  position: absolute;
+  top: 0.15rem;
+  bottom: 0.15rem;
+  border: 1px solid;
+  border-radius: var(--radius-sm);
+}
+
+.marker {
+  position: absolute;
+  top: -0.1rem;
+  bottom: -0.1rem;
+  width: 2px;
+  margin-left: -1px;
+  border-radius: 1px;
 }
 
 .value {
@@ -59,6 +82,80 @@
   color: var(--text);
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
+}
+
+/* Log-scale tick row, aligned under the track column. */
+.axisTrack {
+  position: relative;
+  height: 1rem;
+  min-width: 0;
+}
+
+.tick {
+  position: absolute;
+  top: 0;
+  transform: translateX(-50%);
+  font-family: var(--font-mono);
+  font-size: var(--fs-mono-s);
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+/* ── Stacked (parts of a whole) ── */
+.stackWrap {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.stackBar {
+  display: flex;
+  width: 100%;
+  height: 1.6rem;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.segment {
+  height: 100%;
+
+  &:not(:last-child) {
+    border-right: 2px solid var(--bg-subtle);
+  }
+}
+
+.legend {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-4);
+}
+
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--fs-caption);
+}
+
+.swatch {
+  width: 0.7rem;
+  height: 0.7rem;
+  border-radius: 2px;
+  flex: none;
+}
+
+.legendLabel {
+  color: var(--text-soft);
+}
+
+.legendValue {
+  font-family: var(--font-mono);
+  font-size: var(--fs-mono-s);
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
 }
 
 .note {

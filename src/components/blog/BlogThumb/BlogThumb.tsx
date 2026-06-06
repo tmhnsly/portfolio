@@ -59,6 +59,57 @@ function Waves() {
   );
 }
 
+// AI's water + energy cost: a droplet falls into a glowing core and sends ripple
+// rings out across the field — warm at the centre (the energy), cooling to water
+// blue at the edges (where the cost lands)
+function Droplet() {
+  return (
+    <div className={styles.art}>
+      <span className={styles.dropletCore} aria-hidden />
+      <svg viewBox="0 0 100 100" className={styles.ripples} aria-hidden>
+        {[1, 2, 3, 4, 5].map((i) => (
+          <circle key={i} cx="50" cy="50" r={6 + i * 9} className={styles.ripple} style={v({ '--i': i })} />
+        ))}
+      </svg>
+      <span className={styles.drop} aria-hidden />
+      <span className={styles.grain} aria-hidden />
+    </div>
+  );
+}
+
+// tokens / styling cost: rows of token bars on a warm "editor" field — a dense
+// block (verbose, blue) over a sparse one (terse, tomato), the post's own point
+// turned into texture. Streams in left-to-right like code being written.
+const TOKEN_ROWS: ReadonlyArray<{ count: number; hue: string }> = [
+  { count: 8, hue: 'var(--blue-9)' },
+  { count: 7, hue: 'var(--blue-9)' },
+  { count: 9, hue: 'var(--blue-9)' },
+  { count: 6, hue: 'var(--blue-9)' },
+  { count: 2, hue: 'var(--tomato-9)' },
+  { count: 3, hue: 'var(--tomato-9)' },
+];
+function Tokens() {
+  let order = 0;
+  return (
+    <div className={styles.art}>
+      <div className={styles.tokens} aria-hidden>
+        {TOKEN_ROWS.map((row, r) => (
+          <div className={styles.tokenRow} key={r}>
+            {Array.from({ length: row.count }, (_, i) => (
+              <span
+                key={i}
+                className={styles.token}
+                style={v({ '--w': 2 + ((i * 5 + r * 3) % 6), '--i': order++, '--tok': row.hue })}
+              />
+            ))}
+          </div>
+        ))}
+      </div>
+      <span className={styles.grain} aria-hidden />
+    </div>
+  );
+}
+
 // a first post / a signal put out: a glowing orb rising with faint halos
 function Orb() {
   return (
@@ -78,18 +129,22 @@ const MOTIFS: Record<MotifKey, () => React.ReactNode> = {
   audio: Waves,
   motion: Waves,
   process: Rings,
-  datacenter: Rings,
+  datacenter: Droplet,
+  tokens: Tokens,
   feed: Orb,
 };
 
-// Each motif picks a Radix hue that fits its subject (orange = code/blog default,
-// blue = the water/energy piece, green = reading/process, tomato = motion).
-const MOTIF_HUE: Partial<Record<MotifKey, 'hueBlue' | 'hueGreen' | 'hueTomato'>> = {
+// Each motif picks a Radix hue for its gradient field (orange = code/blog default,
+// blue = the water/energy piece, green = reading/process, tomato = motion, sand =
+// the warm neutral "editor" field behind the tokens). The droplet + tokens motifs
+// layer a second hue inside the form, so they read as more than one colour.
+const MOTIF_HUE: Partial<Record<MotifKey, 'hueBlue' | 'hueGreen' | 'hueTomato' | 'hueSand'>> = {
   datacenter: 'hueBlue',
   audio: 'hueBlue',
   reading: 'hueGreen',
   process: 'hueGreen',
   motion: 'hueTomato',
+  tokens: 'hueSand',
 };
 
 export function BlogThumb({ post }: { post: BlogPost }) {

@@ -31,6 +31,8 @@ describe('pickMotif', () => {
   it('lets an explicit thumb override win over the heuristic', () => {
     expect(pickMotif({ category: 'Opinion', tags: ['CSS'], thumb: 'motion' })).toBe('motion');
     expect(pickMotif({ category: 'Opinion', tags: ['AI'], thumb: 'datacenter' })).toBe('datacenter');
+    // bespoke token motif, reached only via explicit thumb (the SCSS/Tailwind post)
+    expect(pickMotif({ category: 'Opinion', tags: ['SCSS', 'CSS'], thumb: 'tokens' })).toBe('tokens');
   });
 
   it('ignores an invalid thumb and falls back to the heuristic', () => {

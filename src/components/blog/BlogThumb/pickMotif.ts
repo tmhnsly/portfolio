@@ -5,13 +5,13 @@
  * waveform; about books → the stack; about code → the editor; and so on. Anything
  * unrecognised falls back to the brand feed mark.
  */
-export type MotifKey = 'code' | 'audio' | 'writing' | 'reading' | 'process' | 'feed' | 'datacenter' | 'motion';
+export type MotifKey = 'code' | 'audio' | 'writing' | 'reading' | 'process' | 'feed' | 'datacenter' | 'motion' | 'tokens';
 
-const KEYS: readonly MotifKey[] = ['code', 'audio', 'writing', 'reading', 'process', 'feed', 'datacenter', 'motion'];
+const KEYS: readonly MotifKey[] = ['code', 'audio', 'writing', 'reading', 'process', 'feed', 'datacenter', 'motion', 'tokens'];
 export const isMotifKey = (s: string | undefined): s is MotifKey => !!s && (KEYS as readonly string[]).includes(s);
 
 // Motifs the heuristic can pick from tags/category. `feed` is the catch-all;
-// `datacenter`/`motion` are bespoke and only reached via an explicit `thumb`.
+// `datacenter`/`motion`/`tokens` are bespoke and only reached via an explicit `thumb`.
 type HeuristicKey = 'code' | 'audio' | 'writing' | 'reading' | 'process';
 
 // Tags that pin a motif. Checked in the PRECEDENCE order below, so a dev log tagged
