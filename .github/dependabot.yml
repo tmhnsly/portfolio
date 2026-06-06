@@ -16,10 +16,19 @@ updates:
         dependency-type: production
       development:
         dependency-type: development
+    # Take minor + patch automatically; skip MAJOR bumps. Major upgrades of the
+    # tooling (e.g. ESLint 10, TypeScript 6) routinely outrun the Next/eslint
+    # ecosystem and break `pnpm lint`/`build`, which isn't worth babysitting on a
+    # portfolio. Do those by hand when the ecosystem catches up. This does NOT
+    # weaken security: Dependabot *security* updates ignore this filter, so a
+    # vulnerable package still gets a fix PR even when the fix is a major bump.
+    ignore:
+      - dependency-name: '*'
+        update-types: ['version-update:semver-major']
 
-  # The GitHub Actions used in the workflows above — pinned-version bumps land as
-  # PRs so the toolchain stays current (and so SHA pins, if you adopt them, are
-  # kept fresh automatically).
+  # The GitHub Actions used in the workflows above. We DO take action majors here
+  # (e.g. cache v4 → v5): they're GitHub-maintained and are usually the fix for
+  # runner/Node-version deprecations, so they're safe and worth keeping current.
   - package-ecosystem: github-actions
     directory: /
     schedule:
