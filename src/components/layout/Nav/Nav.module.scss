@@ -96,7 +96,9 @@
   padding: var(--cta-pad-wide); border-radius: var(--radius-lg);
   color: var(--on-accent, var(--text-on-accent));
   font-weight: var(--fw-semibold); font-size: 14px; letter-spacing: -0.005em; white-space: nowrap;
-  box-shadow: 0 6px 18px color-mix(in srgb, var(--accent) 27%, transparent);
+  /* a whisper of lift so the primary action still reads, but it sits ON the bar
+     like the other nav buttons instead of floating above it (was 0 6px 18px / 27%) */
+  box-shadow: 0 2px 6px color-mix(in srgb, var(--accent) 18%, transparent);
   flex-shrink: 0;
 }
 /* CTA scales: "Say hi →" in the lower desktop range, full email from 1440 up */
