@@ -34,7 +34,7 @@ jobs:
 
       # Cache Next's compiler output so incremental CI builds are faster. Keyed on
       # the lockfile + source so it busts when deps or code change.
-      - uses: actions/cache@v4
+      - uses: actions/cache@v5
         with:
           path: ${{ github.workspace }}/.next/cache
           key: ${{ runner.os }}-next-${{ hashFiles('pnpm-lock.yaml') }}-${{ hashFiles('src/**/*.[jt]s', 'src/**/*.[jt]sx', 'content/**') }}
