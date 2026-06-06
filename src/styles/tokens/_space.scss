@@ -21,10 +21,15 @@
   --card-min-w: 220px;        /* discipline scroller column min */
   /* nav + square icon controls */
   --control-size: 38px;       /* square icon button (theme toggle) */
-  --nav-pad: 10px 10px 10px 12px;
-  --nav-pad-wide: 10px 14px 10px 18px;
+  /* Corner-nesting math: the bar is radius-2xl (18px); buttons are radius-lg (10px).
+     For a button's corner to sit concentric inside the bar's corner, the gap must be
+     18 - 10 = 8px on BOTH adjacent sides. So the bar pads 8px to the corner buttons,
+     and the corner buttons are a uniform 40px tall → (56 - 40)/2 = 8px top/bottom gap. */
+  --nav-btn-h: 40px;
+  --nav-pad: 10px 8px 10px 12px;        /* right 8 = CTA gap; left 12 (brand margin -4) = 8 */
+  --nav-pad-wide: 10px 8px 10px 12px;
   --nav-item-gap: 6px;
-  --nav-item-pad: 9px 8px;     /* brand lockup only — tighter sides so the mark+wordmark sit snug */
+  --nav-item-pad: 8px 8px;     /* brand: 24px mark + 16 = 40px tall, 8px sides */
   --nav-item-pad-wide: 9px 14px;
   --cta-pad: 10px 12px;
   --cta-pad-wide: 10px 16px;
