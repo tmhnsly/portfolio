@@ -40,8 +40,11 @@ describe('content queries', () => {
         expect(n.slug).not.toBe(mid.slug);
       }
     }
-    // first item has no prev
-    expect(projectNeighbours(code[0]!.slug).prev).toBeUndefined();
+    // the ends wrap around: first item's prev is the last, last item's next is the first
+    if (code.length > 1) {
+      expect(projectNeighbours(code[0]!.slug).prev?.slug).toBe(code.at(-1)!.slug);
+      expect(projectNeighbours(code.at(-1)!.slug).next?.slug).toBe(code[0]!.slug);
+    }
   });
 
   it('relatedProjects prefers same discipline, excludes self, caps at n', () => {

@@ -98,15 +98,17 @@ export function projectsInDiscipline(discipline: Discipline): Project[] {
   return getAllProjects().filter((p) => p.discipline === discipline);
 }
 
-/** The previous/next project within the same discipline (date-desc order). */
+/** The previous/next project within the same discipline (date-desc order),
+    wrapping around so the ends loop back rather than dead-ending. */
 export function projectNeighbours(slug: string): { prev?: Project; next?: Project } {
   const project = getProject(slug);
   if (!project) return {};
   const list = projectsInDiscipline(project.discipline);
   const i = list.findIndex((p) => p.slug === slug);
+  if (i < 0 || list.length < 2) return {};
   return {
-    prev: i > 0 ? list[i - 1] : undefined,
-    next: i >= 0 && i < list.length - 1 ? list[i + 1] : undefined,
+    prev: list[(i - 1 + list.length) % list.length],
+    next: list[(i + 1) % list.length],
   };
 }
 
