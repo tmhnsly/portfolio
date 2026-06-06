@@ -93,6 +93,9 @@
 @include can-hover { .toggle:hover { background: var(--surface-soft); color: var(--text); } }
 .cta {
   position: relative; isolation: isolate; /* contain the crossfade fill below the label */
+  /* explicit height so the CTA's top/bottom gap is a uniform 8px (like its right gap),
+     letting its corners nest concentrically in the bar's corner — see --nav-btn-h */
+  height: var(--nav-btn-h); display: inline-flex; align-items: center; justify-content: center;
   padding: var(--cta-pad-wide); border-radius: var(--radius-lg);
   color: var(--on-accent, var(--text-on-accent));
   font-weight: var(--fw-semibold); font-size: 14px; letter-spacing: -0.005em; white-space: nowrap;
