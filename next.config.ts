@@ -1,23 +1,57 @@
 import type { NextConfig } from 'next';
 
 /**
- * Security response headers, applied to every route. The CSP is limited to
- * directives that DON'T need a per-request nonce or per-build hash: a strict
- * script-src/style-src isn't feasible on a statically-generated Next app (Next
- * emits inline bootstrap/flight scripts with no request-time nonce to whitelist),
- * so locking those would break hydration. What's here still blocks clickjacking,
- * base-tag and form-action hijacking, plugin embedding, and forces HTTPS.
+ * Content-Security-Policy, built from a directives map for legibility.
+ *
+ * `script-src`/`style-src` keep `'unsafe-inline'` on purpose: this is a
+ * statically-generated Next app, so Next emits inline bootstrap/flight scripts
+ * (and next/font + critical CSS emit inline styles) with no request-time nonce
+ * to whitelist. A nonce-based strict CSP would require a middleware that runs on
+ * every request, which would opt every route out of static generation. The XSS
+ * surface that buys back is small here: the only inline script we author is the
+ * static pre-paint theme script, and markdown is rendered by react-markdown with
+ * raw HTML disabled (no rehype-raw), so untrusted content can't inject markup.
+ *
+ * Everything else is locked to `'self'` plus the exact third-party origins the
+ * site actually loads: YouTube embeds (youtube-nocookie) and their thumbnails
+ * (i.ytimg.com). Fonts are self-hosted by next/font, so `font-src 'self'`.
+ */
+const csp = {
+  'default-src': ["'self'"],
+  'script-src': ["'self'", "'unsafe-inline'"],
+  'style-src': ["'self'", "'unsafe-inline'"],
+  'img-src': ["'self'", 'data:', 'blob:', 'https://i.ytimg.com'],
+  'font-src': ["'self'"],
+  'connect-src': ["'self'"],
+  'media-src': ["'self'", 'blob:'],
+  'frame-src': ['https://www.youtube-nocookie.com'],
+  'worker-src': ["'self'", 'blob:'],
+  'manifest-src': ["'self'"],
+  'base-uri': ["'self'"],
+  'form-action': ["'self'"],
+  'frame-ancestors': ["'none'"],
+  'object-src': ["'none'"],
+  'upgrade-insecure-requests': [],
+};
+const cspValue = Object.entries(csp)
+  .map(([directive, sources]) => (sources.length ? `${directive} ${sources.join(' ')}` : directive))
+  .join('; ');
+
+/**
+ * Security response headers, applied to every route. Together these block
+ * clickjacking (XFO + frame-ancestors), MIME sniffing, base-tag and form-action
+ * hijacking, plugin embedding, cross-origin window tampering (COOP), referrer
+ * leakage, and powerful-feature access, force HTTPS (HSTS, preload-eligible),
+ * and constrain where every resource may load from (CSP).
  */
 const securityHeaders = [
   { key: 'Strict-Transport-Security', value: 'max-age=63072000; includeSubDomains; preload' },
   { key: 'X-Content-Type-Options', value: 'nosniff' },
   { key: 'X-Frame-Options', value: 'DENY' },
   { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
+  { key: 'Cross-Origin-Opener-Policy', value: 'same-origin' },
   { key: 'Permissions-Policy', value: 'camera=(), microphone=(), geolocation=(), browsing-topics=(), interest-cohort=()' },
-  {
-    key: 'Content-Security-Policy',
-    value: "base-uri 'self'; form-action 'self'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests",
-  },
+  { key: 'Content-Security-Policy', value: cspValue },
 ];
 
 const nextConfig: NextConfig = {

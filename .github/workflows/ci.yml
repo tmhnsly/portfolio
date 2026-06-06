@@ -5,8 +5,15 @@ on:
     branches: [main]
   pull_request:
 
+# Least privilege: the default GITHUB_TOKEN can only read the repo.
 permissions:
   contents: read
+
+# Cancel an in-progress run when new commits land on the same branch/PR, so we
+# don't burn minutes finishing a build that's already superseded.
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   verify:
@@ -14,17 +21,42 @@ jobs:
     steps:
       - uses: actions/checkout@v6
 
-      # pnpm version comes from the "packageManager" field in package.json
+      # pnpm version is read from the "packageManager" field in package.json.
       - uses: pnpm/action-setup@v6
 
       - uses: actions/setup-node@v6
         with:
-          node-version: 20
+          node-version-file: .nvmrc # single source of truth, shared with local dev
           cache: pnpm
 
+      # Reproducible install: fails if pnpm-lock.yaml and package.json disagree.
       - run: pnpm install --frozen-lockfile
 
-      - run: pnpm typecheck
-      - run: pnpm lint
-      - run: pnpm test
-      - run: pnpm build
+      # Cache Next's compiler output so incremental CI builds are faster. Keyed on
+      # the lockfile + source so it busts when deps or code change.
+      - uses: actions/cache@v4
+        with:
+          path: ${{ github.workspace }}/.next/cache
+          key: ${{ runner.os }}-next-${{ hashFiles('pnpm-lock.yaml') }}-${{ hashFiles('src/**/*.[jt]s', 'src/**/*.[jt]sx', 'content/**') }}
+          restore-keys: |
+            ${{ runner.os }}-next-${{ hashFiles('pnpm-lock.yaml') }}-
+
+      - run: pnpm typecheck # tsc --noEmit: type errors fail the build
+      - run: pnpm lint # eslint (next/core-web-vitals + typescript rules)
+      - run: pnpm test # vitest run: unit + component tests
+      - run: pnpm build # next build: catches anything only a real build surfaces
+
+  # Security gate: fail the pipeline on a known high/critical advisory in a
+  # shipped (production) dependency. Runs in parallel with verify for a fast,
+  # independent signal. Dependabot (see .github/dependabot.yml) opens the fix PRs.
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: pnpm/action-setup@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm audit --prod --audit-level=high

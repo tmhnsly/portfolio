@@ -1,0 +1,26 @@
+# Dependabot keeps dependencies and CI actions patched, opening a PR per update
+# that runs through the full CI gate before you merge. This is the automated half
+# of the security story: the CI `audit` job *blocks* on known advisories;
+# Dependabot *fixes* them (and routine version drift) without manual tracking.
+version: 2
+updates:
+  # Application + tooling dependencies (Dependabot's "npm" ecosystem reads the
+  # pnpm-lock.yaml). Grouped so a quiet week is one PR, not a dozen.
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 10
+    groups:
+      production:
+        dependency-type: production
+      development:
+        dependency-type: development
+
+  # The GitHub Actions used in the workflows above — pinned-version bumps land as
+  # PRs so the toolchain stays current (and so SHA pins, if you adopt them, are
+  # kept fresh automatically).
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
