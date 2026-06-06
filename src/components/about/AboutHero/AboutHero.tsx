@@ -1,7 +1,9 @@
 import { SITE, COPY } from '@/data';
 import { yearsSince } from '@/lib/format';
+import { BiDownload } from 'react-icons/bi';
 import { TechChip } from '@/components/ui/TechChip';
 import { PixelMark } from '@/components/ui/PixelMark';
+import { Button } from '@/components/ui/Button';
 import { Entrance, EntranceItem, EntranceTitle } from '@/components/motion/Entrance';
 import styles from './AboutHero.module.scss';
 
@@ -27,6 +29,11 @@ export function AboutHero() {
             {COPY.about.chips.map((c) => (
               <TechChip key={c} label={c} />
             ))}
+          </EntranceItem>
+          <EntranceItem className={styles.cvRow}>
+            <Button variant="ghost" href="/tom-hinsley-cv.pdf" download="Tom-Hinsley-CV.pdf">
+              <BiDownload aria-hidden /> Download CV
+            </Button>
           </EntranceItem>
         </div>
       </div>

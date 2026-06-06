@@ -21,6 +21,7 @@ export const SITE = siteConfigSchema.parse({
   // Set href to your real URL. Remove this entry or add more as needed.
   socials: [
     { label: 'GitHub', href: 'https://github.com/tmhnsly' },
+    { label: 'LinkedIn', href: 'https://www.linkedin.com/in/tmhnsly/' },
     { label: 'YouTube', href: 'https://www.youtube.com/@tomhinsley' },
     { label: 'Instagram', href: 'https://instagram.com/tomhinsley' },
   ],
