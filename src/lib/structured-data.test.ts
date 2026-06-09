@@ -8,7 +8,7 @@ describe('projectVideoJsonLd', () => {
     expect(ld).toHaveLength(1);
     const video = ld![0]!;
     expect(video['@type']).toBe('VideoObject');
-    expect(video.thumbnailUrl).toBe('https://tomhinsley.com/images/projects/thumbnails/audio/wake.webp');
+    expect(video.thumbnailUrl).toBe('https://www.tomhinsley.com/images/projects/thumbnails/audio/wake.webp');
     expect(video.embedUrl).toContain('/embed/xHmZYM6n8G0');
     expect(video.uploadDate).toBe('2015-02-01');
     expect(video.name).toBe('Full film');
