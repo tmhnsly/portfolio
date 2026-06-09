@@ -4,6 +4,7 @@ import { getAllProjects, getProjectInDiscipline, projectNeighbours, relatedProje
 import { DISCIPLINES } from '@/lib/disciplines';
 import { projectHref } from '@/lib/routes';
 import { pageMeta } from '@/lib/metadata';
+import { projectVideoJsonLd } from '@/lib/structured-data';
 import { Container, Stack } from '@/components/layout';
 import { ProjectHero } from '@/components/project/ProjectHero';
 import { MediaHero } from '@/components/project/MediaHero';
@@ -30,9 +31,13 @@ export default async function ProjectPage({ params }: { params: Promise<{ discip
 
   const { prev, next } = projectNeighbours(slug);
   const related = relatedProjects(slug);
+  const videoLd = projectVideoJsonLd(project);
 
   return (
     <Container>
+      {videoLd && (
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(videoLd) }} />
+      )}
       <Stack>
         <ProjectHero project={project} />
         <MediaHero project={project} />
