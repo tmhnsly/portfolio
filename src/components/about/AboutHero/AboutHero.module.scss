@@ -11,26 +11,24 @@
   align-items: end;
 
   @include tablet-up {
-    grid-template-columns: 360px 1fr;
+    grid-template-columns: 260px 1fr;
     gap: var(--space-11);
   }
 }
 
+/* Headshot: kept modest (≤260px) and left-aligned in its column, rounded to the
+   site radius via <Media rounded> (--radius-xl). */
 .portrait {
-  max-width: 360px;
+  width: 100%;
+  max-width: 220px;
 
   @include tablet-up {
-    max-width: none;
+    max-width: 260px;
   }
 }
 
-/* Pixel-mark stand-in portrait: no frame or background, just the mark centred in
-   the 4:5 portrait slot. Swap the PixelMark for a <Media> photo later. */
-.markSlot {
-  aspect-ratio: 4 / 5;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.photo {
+  box-shadow: var(--shadow-md);
 }
 
 .copy {

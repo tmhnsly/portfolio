@@ -4,7 +4,8 @@ import { getAllProjects, getProjectInDiscipline, projectNeighbours, relatedProje
 import { DISCIPLINES } from '@/lib/disciplines';
 import { projectHref } from '@/lib/routes';
 import { pageMeta } from '@/lib/metadata';
-import { projectVideoJsonLd } from '@/lib/structured-data';
+import { projectVideoJsonLd, projectCreativeWorkJsonLd, breadcrumbJsonLd } from '@/lib/structured-data';
+import { JsonLd } from '@/components/seo';
 import { Container, Stack } from '@/components/layout';
 import { ProjectHero } from '@/components/project/ProjectHero';
 import { MediaHero } from '@/components/project/MediaHero';
@@ -32,12 +33,17 @@ export default async function ProjectPage({ params }: { params: Promise<{ discip
   const { prev, next } = projectNeighbours(slug);
   const related = relatedProjects(slug);
   const videoLd = projectVideoJsonLd(project);
+  const crumbs = [
+    { name: 'Home', url: '/' },
+    { name: DISCIPLINES[project.discipline].label, url: DISCIPLINES[project.discipline].route },
+    { name: project.title, url: projectHref(project.discipline, slug) },
+  ];
 
   return (
     <Container>
-      {videoLd && (
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(videoLd) }} />
-      )}
+      {videoLd && <JsonLd data={videoLd} />}
+      <JsonLd data={projectCreativeWorkJsonLd(project)} />
+      <JsonLd data={breadcrumbJsonLd(crumbs)} />
       <Stack>
         <ProjectHero project={project} />
         <MediaHero project={project} />

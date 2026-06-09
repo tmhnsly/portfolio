@@ -1,6 +1,14 @@
 import { describe, it, expect } from 'vitest';
-import { projectVideoJsonLd } from './structured-data';
-import { getProject } from './content';
+import {
+  projectVideoJsonLd,
+  projectCreativeWorkJsonLd,
+  blogPostingJsonLd,
+  breadcrumbJsonLd,
+  faqJsonLd,
+  identityGraphJsonLd,
+} from './structured-data';
+import { getProject, getPost } from './content';
+import { COPY } from '@/data';
 
 describe('projectVideoJsonLd', () => {
   it('emits a VideoObject with an absolute thumbnail for each video', () => {
@@ -16,5 +24,59 @@ describe('projectVideoJsonLd', () => {
 
   it('returns null for a project with no video', () => {
     expect(projectVideoJsonLd(getProject('chork')!)).toBeNull();
+  });
+});
+
+describe('identityGraphJsonLd', () => {
+  it('is a Person + WebSite graph with the right anchors and no email', () => {
+    const graph = identityGraphJsonLd() as { '@graph': Record<string, unknown>[] };
+    const person = graph['@graph'].find((n) => n['@type'] === 'Person')!;
+    const website = graph['@graph'].find((n) => n['@type'] === 'WebSite')!;
+    expect(person['@id']).toBe('https://www.tomhinsley.com/#person');
+    expect(person.jobTitle).toContain('Frontend Developer');
+    expect(person.image).toBe('https://www.tomhinsley.com/images/tom-hinsley.jpg');
+    expect(JSON.stringify(person)).not.toContain('mailto:');
+    expect(person.sameAs).toEqual(expect.arrayContaining(['https://github.com/tmhnsly']));
+    expect(website.publisher).toEqual({ '@id': person['@id'] });
+  });
+});
+
+describe('blogPostingJsonLd', () => {
+  it('points the author at the shared Person and uses an absolute URL', () => {
+    const post = getPost('the-water-cost-of-ai')!;
+    const ld = blogPostingJsonLd(post);
+    expect(ld['@type']).toBe('BlogPosting');
+    expect(ld.author).toEqual({ '@id': 'https://www.tomhinsley.com/#person' });
+    expect(ld.url).toBe('https://www.tomhinsley.com/blog/the-water-cost-of-ai');
+    expect(ld.datePublished).toBe(post.date);
+  });
+});
+
+describe('projectCreativeWorkJsonLd', () => {
+  it('emits a CreativeWork keyed to the project', () => {
+    const ld = projectCreativeWorkJsonLd(getProject('chork')!);
+    expect(ld['@type']).toBe('CreativeWork');
+    expect(ld.url).toBe('https://www.tomhinsley.com/code/chork');
+    expect(ld.author).toEqual({ '@id': 'https://www.tomhinsley.com/#person' });
+  });
+});
+
+describe('breadcrumbJsonLd', () => {
+  it('numbers items from 1 and absolutises urls', () => {
+    const ld = breadcrumbJsonLd([
+      { name: 'Home', url: '/' },
+      { name: 'Code', url: '/code' },
+    ]) as { itemListElement: Record<string, unknown>[] };
+    expect(ld.itemListElement[0]).toMatchObject({ position: 1, item: 'https://www.tomhinsley.com/' });
+    expect(ld.itemListElement[1]).toMatchObject({ position: 2, item: 'https://www.tomhinsley.com/code' });
+  });
+});
+
+describe('faqJsonLd', () => {
+  it('maps the about FAQ into Question/Answer nodes', () => {
+    const ld = faqJsonLd(COPY.about.faq) as { '@type': string; mainEntity: Record<string, unknown>[] };
+    expect(ld['@type']).toBe('FAQPage');
+    expect(ld.mainEntity).toHaveLength(COPY.about.faq.length);
+    expect(ld.mainEntity[0]).toMatchObject({ '@type': 'Question', name: COPY.about.faq[0]!.q });
   });
 });
