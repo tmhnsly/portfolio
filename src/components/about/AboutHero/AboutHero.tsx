@@ -14,7 +14,7 @@ export function AboutHero() {
       <div className={styles.grid}>
         <EntranceItem className={styles.portrait}>
           <Media
-            src="/images/tom-hinsley.jpg"
+            src="/images/about/tom-hinsley.jpg"
             alt={SITE.name}
             ratio="4/5"
             rounded

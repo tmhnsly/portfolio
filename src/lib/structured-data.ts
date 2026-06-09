@@ -35,7 +35,7 @@ function personNode(): JsonLdNode {
     '@id': PERSON_ID,
     name: SITE.name,
     url: SITE_URL,
-    image: abs('/images/tom-hinsley.jpg'),
+    image: abs('/images/about/tom-hinsley.jpg'),
     jobTitle: ['Full-Stack Developer', 'Frontend Developer', 'Software Engineer'],
     description: COPY.meta.summary,
     address: { '@type': 'PostalAddress', addressLocality: 'London', addressCountry: 'GB' },

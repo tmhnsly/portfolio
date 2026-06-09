@@ -93,12 +93,14 @@ export const COPY = {
     faqEyebrow: 'FAQ',
     faqHeading: 'Common questions',
     faq: [
-      { q: 'Is Tom available for work?', a: 'Yes. Open to permanent roles and freelance or contract work, remote or in London.' },
-      { q: 'What is Tom’s core stack?', a: 'React, Next.js and TypeScript, with full-stack capability and a strong accessibility focus. Comfortable picking up new tools as a project needs.' },
-      { q: 'Does Tom work remotely?', a: 'Yes, remotely across the UK and internationally, and on-site in London.' },
-      { q: 'What kind of work does Tom take on?', a: 'Full-stack and frontend for agencies, startups and digital publishers, including contract work for the Financial Times. He also takes on audio and video work, from music and sound design to film.' },
-      { q: 'Where is Tom based?', a: 'London, UK — available to work with teams and clients anywhere.' },
-      { q: 'How do I get in touch?', a: 'Email is best. Use the contact link below, or download the CV.' },
+      { q: 'Is Tom available for work?', a: 'Yes. Open to permanent roles and freelance or contract work, remote or in London. Get in touch and he’ll share current availability.' },
+      { q: 'What is Tom’s tech stack?', a: 'React, Next.js and TypeScript day to day, with Node, modern CSS and SCSS, and a CMS like Sanity when a project needs one. Strong on accessibility and performance.' },
+      { q: 'Does Tom do full-stack or just frontend?', a: 'Frontend is the specialism — React, Next.js, TypeScript — but he’s full-stack capable, comfortable with APIs, Node and a database when a feature needs end-to-end work.' },
+      { q: 'Has Tom worked with any notable companies?', a: 'Yes. Contract work for the Financial Times, plus roles at Rocketmakers and Neverbland, across agencies, a software consultancy and editorial publishers.' },
+      { q: 'How much experience does Tom have?', a: 'Building professionally for the web since 2021, with a sound-design degree and creative work going back further.' },
+      { q: 'Does Tom work remotely, and where is he based?', a: 'Based in London, UK. Works remotely across the UK and internationally, or on-site in London.' },
+      { q: 'Can Tom help with audio or video too?', a: 'Yes. Alongside development he takes on audio — music and sound design — and video, from editing to short films, as professional work.' },
+      { q: 'How do I hire Tom or get in touch?', a: 'Email is best — use the contact link or button, or download the CV.' },
     ],
 
     // ContactCTA section
@@ -156,21 +158,26 @@ export const COPY = {
   },
 
   // /hire landing page — not linked in the nav (discoverable via search + a subtle
-  // homepage link). Focused hire-intent copy.
+  // homepage link). Focused hire-intent copy. `services` are keyed to disciplines
+  // so each card takes that discipline's accent + pixel mark and links to its work.
   hire: {
     eyebrow: 'Work with me',
     title: 'Hire Tom Hinsley',
     lead: 'Full-stack developer and frontend specialist in London, open to permanent roles and freelance or contract work.',
     intro: 'React, Next.js and TypeScript are home base, with full-stack reach when a project needs it and a strong accessibility focus throughout. I’ve built for agencies, a software consultancy and editorial publishers including the Financial Times, and I pick up new tools fast. Alongside the web work I also take on audio and video.',
-    servicesHeading: 'What I can help with',
+    workedWithLabel: 'Worked with',
+    workedWith: ['Financial Times', 'Rocketmakers', 'Neverbland'] as string[],
+    servicesEyebrow: 'What I do',
+    servicesHeading: 'How I can help',
     services: [
-      { title: 'Frontend development', body: 'Responsive, accessible interfaces in React and Next.js, with design-system and performance work.' },
-      { title: 'Full-stack web development', body: 'End-to-end features with TypeScript, APIs and a CMS when a project calls for it.' },
-      { title: 'Audio production', body: 'Original music and sound design for film, games and brand work.' },
-      { title: 'Video production', body: 'Editing, motion and short films, from concept to final cut.' },
+      { discipline: 'code', title: 'Web development', body: 'Frontend and full-stack: responsive, accessible interfaces in React, Next.js and TypeScript, with design systems, APIs and performance work.', linkLabel: 'See code work' },
+      { discipline: 'audio', title: 'Audio', body: 'Original music and sound design for film, games and brand work, from a sound-design background.', linkLabel: 'See audio work' },
+      { discipline: 'video', title: 'Video', body: 'Editing, motion and short films, from concept to final cut.', linkLabel: 'See video work' },
     ],
-    ctaHeading: 'Let’s talk',
-    ctaNote: 'Tell me a bit about the project or role. I usually reply within a day or two.',
+    ctaEyebrow: 'Get in touch',
+    ctaHeading: 'Let’s talk.',
+    ctaHeadingSoft: 'Tell me about the project or role.',
+    ctaNote: 'I usually reply within a day or two.',
   },
 } as const;
 
