@@ -13,13 +13,16 @@ const esc = (s: string) =>
 export function GET() {
   const at = (p: string) => `${SITE_URL}${p}`;
   const items = getAllPosts()
-    .map((p) => `    <item>
+    .map((p) => {
+      const url = esc(at(postHref(p.slug)));
+      return `    <item>
       <title>${esc(p.title)}</title>
-      <link>${at(postHref(p.slug))}</link>
-      <guid>${at(postHref(p.slug))}</guid>
-      <pubDate>${new Date(p.date).toUTCString()}</pubDate>
+      <link>${url}</link>
+      <guid>${url}</guid>
+      <pubDate>${esc(new Date(p.date).toUTCString())}</pubDate>
       <description>${esc(p.excerpt)}</description>
-    </item>`)
+    </item>`;
+    })
     .join('\n');
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
