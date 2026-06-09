@@ -34,7 +34,7 @@ describe('identityGraphJsonLd', () => {
     const website = graph['@graph'].find((n) => n['@type'] === 'WebSite')!;
     expect(person['@id']).toBe('https://www.tomhinsley.com/#person');
     expect(person.jobTitle).toContain('Frontend Developer');
-    expect(person.image).toBe('https://www.tomhinsley.com/images/about/tom-hinsley.jpg');
+    expect(person.image).toBe('https://www.tomhinsley.com/images/about/tom-hinsley.webp');
     expect(JSON.stringify(person)).not.toContain('mailto:');
     expect(person.sameAs).toEqual(expect.arrayContaining(['https://github.com/tmhnsly']));
     expect(website.publisher).toEqual({ '@id': person['@id'] });
