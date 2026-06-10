@@ -62,6 +62,6 @@ But most of mine are read-heavy and long-lived, and in the AI era "read-heavy" g
 
 The token counts are measurements, not vibes, but they're illustrative of one component, not a benchmark of your codebase. Paste the two markup snippets into a [tokeniser](https://platform.openai.com/tokenizer) and you'll get figures in the same ballpark; the gap, and the fact that the inline cost repeats per element, is the point.
 
-- [OpenAI tokenizer](https://platform.openai.com/tokenizer) — to reproduce the counts (I used tiktoken's `o200k_base`).
-- [Claude API pricing](https://platform.claude.com/docs/en/about-claude/pricing) — the per-million-token rate.
-- [Tailwind CSS: utility-first fundamentals](https://tailwindcss.com/docs/styling-with-utility-classes) — the approach, in its own words.
+- [OpenAI tokenizer](https://platform.openai.com/tokenizer): to reproduce the counts (I used tiktoken's `o200k_base`).
+- [Claude API pricing](https://platform.claude.com/docs/en/about-claude/pricing): the per-million-token rate.
+- [Tailwind CSS: utility-first fundamentals](https://tailwindcss.com/docs/styling-with-utility-classes): the approach, in its own words.

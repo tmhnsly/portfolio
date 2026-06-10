@@ -4,7 +4,7 @@ export const FOOTER_FACTS: string[] = [
   'Honey never spoils.',
   'Octopuses have three hearts.',
   'A day on Venus is longer than its year.',
-  'Bananas are berries — strawberries aren’t.',
+  'Bananas are berries, strawberries aren’t.',
   'Wombat droppings are cube-shaped.',
   'There are more trees on Earth than stars in the Milky Way.',
   'Sharks are older than trees.',

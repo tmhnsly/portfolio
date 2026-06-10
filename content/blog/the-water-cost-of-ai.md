@@ -79,10 +79,10 @@ And the biggest lever isn't any of us using less. It's what powers the buildings
 ## Sources
 
 - [*Making AI Less Thirsty*](https://dl.acm.org/doi/10.1145/3724499), Li, Yang, Islam & Ren, Communications of the ACM, 2025 (peer-reviewed version of the [2023 preprint](https://arxiv.org/abs/2304.03271)); see also the [UC Riverside summary](https://news.ucr.edu/articles/2023/04/28/ai-programs-consume-large-volumes-scarce-water).
-- [Measuring the environmental impact of AI at Google scale](https://www.technologyreview.com/2025/08/21/1122288/google-gemini-ai-energy/) — Google's 2025 per-prompt disclosure (~0.24 Wh, ~0.26 ml), and the [critique](https://www.implicator.ai/google-says-a-prompt-uses-0-24-wh-researchers-say-the-math-is-incomplete/) that its water boundary is narrow.
-- [How much energy does ChatGPT use?](https://epoch.ai/gradient-updates/how-much-energy-does-chatgpt-use), Epoch AI, 2025 — ~0.3 Wh typical, up to ~40 Wh for long inputs.
-- [SCARF: water-stress-aware data-centre siting](https://arxiv.org/abs/2506.22773), Wu et al., Purdue, 2025 — the >1000x by-location figure and the consumption-vs-withdrawal framing.
-- [Intelligence per watt: local vs cloud inference](https://arxiv.org/abs/2511.07885), 2025 — cloud accelerators are more energy-efficient per answer on the same model.
-- [US data center energy usage report](https://eta-publications.lbl.gov/sites/default/files/2024-12/lbnl-2024-united-states-data-center-energy-usage-report_1.pdf), LBNL, 2024 — data centres at ~4% of US electricity, rising.
+- [Measuring the environmental impact of AI at Google scale](https://www.technologyreview.com/2025/08/21/1122288/google-gemini-ai-energy/): Google's 2025 per-prompt disclosure (~0.24 Wh, ~0.26 ml), and the [critique](https://www.implicator.ai/google-says-a-prompt-uses-0-24-wh-researchers-say-the-math-is-incomplete/) that its water boundary is narrow.
+- [How much energy does ChatGPT use?](https://epoch.ai/gradient-updates/how-much-energy-does-chatgpt-use), Epoch AI, 2025: ~0.3 Wh typical, up to ~40 Wh for long inputs.
+- [SCARF: water-stress-aware data-centre siting](https://arxiv.org/abs/2506.22773), Wu et al., Purdue, 2025: the >1000x by-location figure and the consumption-vs-withdrawal framing.
+- [Intelligence per watt: local vs cloud inference](https://arxiv.org/abs/2511.07885), 2025: cloud accelerators are more energy-efficient per answer on the same model.
+- [US data center energy usage report](https://eta-publications.lbl.gov/sites/default/files/2024-12/lbnl-2024-united-states-data-center-energy-usage-report_1.pdf), LBNL, 2024: data centres at ~4% of US electricity, rising.
 - [The carbon footprint of streaming video](https://www.iea.org/commentaries/the-carbon-footprint-of-streaming-video-fact-checking-the-headlines), IEA (George Kamiya), 2020.
 - [Water footprint of farm animal products](https://www.waterfootprint.org/resources/Mekonnen-Hoekstra-2012-WaterFootprintFarmAnimalProducts_1.pdf), Mekonnen & Hoekstra, 2012.
