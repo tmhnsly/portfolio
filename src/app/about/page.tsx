@@ -5,13 +5,10 @@ import { Intro } from '@/components/about/Intro';
 import { Currently } from '@/components/about/Currently';
 import { Timeline } from '@/components/about/Timeline';
 import { Skills } from '@/components/about/Skills';
-import { FAQ } from '@/components/about/FAQ';
 import { ContactCTA } from '@/components/about/ContactCTA';
-import { TIMELINE, COPY } from '@/data';
+import { TIMELINE } from '@/data';
 import { getSkills } from '@/data/skills';
 import { pageMeta } from '@/lib/metadata';
-import { faqJsonLd } from '@/lib/structured-data';
-import { JsonLd } from '@/components/seo';
 
 export const metadata: Metadata = pageMeta({
   title: 'About',
@@ -22,14 +19,12 @@ export const metadata: Metadata = pageMeta({
 export default function AboutPage() {
   return (
     <Container>
-      <JsonLd data={faqJsonLd(COPY.about.faq)} />
       <Stack>
         <AboutHero />
         <Intro />
         <Currently />
         <Timeline entries={TIMELINE} />
         <Skills skills={getSkills()} />
-        <FAQ />
         <ContactCTA />
       </Stack>
     </Container>
