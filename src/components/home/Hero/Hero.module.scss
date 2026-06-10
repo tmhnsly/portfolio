@@ -19,7 +19,7 @@
 .sub { margin-top: var(--space-7); max-width: 580px; font-size: var(--fs-body-l); color: var(--text-soft); line-height: var(--lh-body); }
 /* explicit hire/stack status line — mono caption under the subtitle */
 .hireLine { margin-top: var(--space-4); font-family: var(--font-mono); font-size: var(--fs-mono-s);
-  letter-spacing: 0.02em; color: var(--text-muted); }
+  letter-spacing: var(--ls-mono); color: var(--text-muted); }
 /* primary "Get in touch" + ghost "Download CV" under the subtitle */
 .cta { margin-top: var(--space-6); display: flex; flex-wrap: wrap; gap: var(--space-3); align-items: center; }
 /* deckCol spans the content width so its "Featured deck" eyebrow sits at the

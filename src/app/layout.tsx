@@ -40,7 +40,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: { default: COPY.meta.title, template: '%s · Tom Hinsley' },
   description: COPY.meta.description,
-  alternates: { canonical: '/' },
+  alternates: { canonical: '/', types: { 'application/rss+xml': '/feed.xml' } },
   openGraph: {
     type: 'website',
     siteName: 'Tom Hinsley',

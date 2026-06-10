@@ -4,7 +4,7 @@ import { isDiscipline, DISCIPLINE_ORDER, DISCIPLINES } from '@/lib/disciplines';
 import { projectsInDiscipline, topTagsByDiscipline } from '@/lib/content';
 import { SECTIONS } from '@/data';
 import { pageMeta } from '@/lib/metadata';
-import { breadcrumbJsonLd } from '@/lib/structured-data';
+import { breadcrumbJsonLd, disciplineCrumbs } from '@/lib/structured-data';
 import { JsonLd } from '@/components/seo';
 import { Container, Stack } from '@/components/layout';
 import { SectionHero } from '@/components/section/SectionHero';
@@ -27,13 +27,9 @@ export default async function SectionPage({ params }: { params: Promise<{ discip
   if (!isDiscipline(discipline)) notFound();
   const projects = projectsInDiscipline(discipline);
   const section = SECTIONS[discipline];
-  const crumbs = [
-    { name: 'Home', url: '/' },
-    { name: DISCIPLINES[discipline].label, url: DISCIPLINES[discipline].route },
-  ];
   return (
     <Container>
-      <JsonLd data={breadcrumbJsonLd(crumbs)} />
+      <JsonLd data={breadcrumbJsonLd(disciplineCrumbs(discipline))} />
       <Stack>
         <SectionHero discipline={discipline} intro={section.intro} tools={topTagsByDiscipline(discipline)} />
         <ProjectGrid projects={projects} />

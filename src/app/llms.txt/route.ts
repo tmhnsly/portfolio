@@ -1,6 +1,6 @@
 import { getAllProjects, getAllPosts } from '@/lib/content';
 import { projectHref, postHref } from '@/lib/routes';
-import { SITE_URL } from '@/lib/site-url';
+import { absUrl as at } from '@/lib/site-url';
 import { SITE, COPY } from '@/data';
 
 // Static at build — the brief only changes when content does.
@@ -11,7 +11,6 @@ export const dynamic = 'force-static';
  * Perplexity), generated from SITE + content so it never drifts from the site.
  */
 export function GET() {
-  const at = (p: string) => `${SITE_URL}${p}`;
   const lines = [
     '# Tom Hinsley',
     '',

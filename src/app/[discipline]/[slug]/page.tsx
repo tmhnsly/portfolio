@@ -1,10 +1,9 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { getAllProjects, getProjectInDiscipline, projectNeighbours, relatedProjects } from '@/lib/content';
-import { DISCIPLINES } from '@/lib/disciplines';
 import { projectHref } from '@/lib/routes';
 import { pageMeta } from '@/lib/metadata';
-import { projectVideoJsonLd, projectCreativeWorkJsonLd, breadcrumbJsonLd } from '@/lib/structured-data';
+import { projectVideoJsonLd, projectCreativeWorkJsonLd, breadcrumbJsonLd, projectCrumbs, projectDescription } from '@/lib/structured-data';
 import { JsonLd } from '@/components/seo';
 import { Container, Stack } from '@/components/layout';
 import { ProjectHero } from '@/components/project/ProjectHero';
@@ -21,8 +20,7 @@ export async function generateMetadata({ params }: { params: Promise<{ disciplin
   const { discipline, slug } = await params;
   const project = getProjectInDiscipline(discipline, slug);
   if (!project) return {};
-  const description = project.desc ?? `${DISCIPLINES[project.discipline].label} work by Tom Hinsley.`;
-  return pageMeta({ title: project.title, description, path: projectHref(project.discipline, slug), type: 'article' });
+  return pageMeta({ title: project.title, description: projectDescription(project), path: projectHref(project.discipline, slug), type: 'article' });
 }
 
 export default async function ProjectPage({ params }: { params: Promise<{ discipline: string; slug: string }> }) {
@@ -33,17 +31,12 @@ export default async function ProjectPage({ params }: { params: Promise<{ discip
   const { prev, next } = projectNeighbours(slug);
   const related = relatedProjects(slug);
   const videoLd = projectVideoJsonLd(project);
-  const crumbs = [
-    { name: 'Home', url: '/' },
-    { name: DISCIPLINES[project.discipline].label, url: DISCIPLINES[project.discipline].route },
-    { name: project.title, url: projectHref(project.discipline, slug) },
-  ];
 
   return (
     <Container>
       {videoLd && <JsonLd data={videoLd} />}
       <JsonLd data={projectCreativeWorkJsonLd(project)} />
-      <JsonLd data={breadcrumbJsonLd(crumbs)} />
+      <JsonLd data={breadcrumbJsonLd(projectCrumbs(project))} />
       <Stack>
         <ProjectHero project={project} />
         <MediaHero project={project} />

@@ -1,14 +1,12 @@
-import type { BlogPost, MediaItem, Project } from '@/types';
+import type { BlogPost, Discipline, MediaItem, Project } from '@/types';
 import { COPY, SITE } from '@/data';
 import { DISCIPLINES } from './disciplines';
-import { SITE_URL } from './site-url';
+import { SITE_URL, absUrl as abs } from './site-url';
 import { youTubeEmbedUrl, youTubeThumbnail } from './youtube';
 import { projectHref, postHref } from './routes';
 
 type YouTubeItem = Extract<MediaItem, { type: 'youtube' }>;
 type JsonLdNode = Record<string, unknown>;
-
-const abs = (path: string): string => (path.startsWith('http') ? path : `${SITE_URL}${path}`);
 
 // Stable @ids so every page's content nodes can point back to one Person/WebSite
 // entity (Google's Knowledge Graph + LLMs resolve the references into one identity).
@@ -28,6 +26,34 @@ const KNOWS_ABOUT = [
 // Services he can be hired for — frontend/full-stack lead, audio/video as real
 // professional offerings (not "side projects").
 const SERVICES = ['Frontend development', 'Full-stack web development', 'Audio production', 'Video production'];
+
+/** A project's description for metadata + structured data, with the shared
+    discipline fallback when frontmatter omits `desc`. */
+export function projectDescription(project: Project): string {
+  return project.desc ?? `${DISCIPLINES[project.discipline].label} work by Tom Hinsley.`;
+}
+
+export interface ProjectVideo {
+  title: string;
+  thumbnailUrl: string;
+  embedUrl: string;
+  description: string;
+}
+
+/** The YouTube videos in a project, resolved once to the facts both the on-page
+    VideoObject and the video sitemap need (so the two never drift). The thumbnail
+    is the project's custom `poster`, else the hosted YouTube still. */
+export function projectVideos(project: Project): ProjectVideo[] {
+  const description = projectDescription(project);
+  return project.media
+    .filter((m): m is YouTubeItem => m.type === 'youtube')
+    .map((m) => ({
+      title: m.title ?? project.title,
+      thumbnailUrl: abs(m.poster ?? youTubeThumbnail(m.id)),
+      embedUrl: youTubeEmbedUrl(m.id, { list: m.list }),
+      description,
+    }));
+}
 
 function personNode(): JsonLdNode {
   return {
@@ -80,23 +106,21 @@ export function identityGraphJsonLd(): JsonLdNode {
 /**
  * VideoObject JSON-LD for every YouTube item in a project. The hero embed is a
  * click-to-play facade, so the player never enters the crawled DOM and Google
- * can't infer a thumbnail — this hands it one explicitly (the project's `poster`,
- * else the hosted YouTube still), fixing the Search Console "No thumbnail URL
- * provided" video-indexing error. Returns null when a project has no video, so
- * the page can skip the script entirely.
+ * can't infer a thumbnail — this hands it one explicitly, fixing the Search
+ * Console "No thumbnail URL provided" video-indexing error. Returns null when a
+ * project has no video, so the page can skip the script entirely.
  */
 export function projectVideoJsonLd(project: Project): JsonLdNode[] | null {
-  const videos = project.media.filter((m): m is YouTubeItem => m.type === 'youtube');
+  const videos = projectVideos(project);
   if (videos.length === 0) return null;
-  const description = project.desc ?? `${DISCIPLINES[project.discipline].label} work by Tom Hinsley.`;
   return videos.map((v) => ({
     '@context': 'https://schema.org',
     '@type': 'VideoObject',
-    name: v.title ?? project.title,
-    description,
-    thumbnailUrl: abs(v.poster ?? youTubeThumbnail(v.id)),
+    name: v.title,
+    description: v.description,
+    thumbnailUrl: v.thumbnailUrl,
     uploadDate: project.date,
-    embedUrl: youTubeEmbedUrl(v.id, { list: v.list }),
+    embedUrl: v.embedUrl,
   }));
 }
 
@@ -107,7 +131,7 @@ export function projectCreativeWorkJsonLd(project: Project): JsonLdNode {
     '@context': 'https://schema.org',
     '@type': 'CreativeWork',
     name: project.title,
-    description: project.desc ?? `${DISCIPLINES[project.discipline].label} work by Tom Hinsley.`,
+    description: projectDescription(project),
     datePublished: project.date,
     author: PERSON_REF,
     image: abs(`${projectHref(project.discipline, project.slug)}/opengraph-image`),
@@ -150,6 +174,22 @@ export function breadcrumbJsonLd(items: { name: string; url: string }[]): JsonLd
     })),
   };
 }
+
+// ── Breadcrumb trails: defined once so every page's BreadcrumbList agrees ──
+const HOME_CRUMB = { name: 'Home', url: '/' };
+const disciplineCrumb = (d: Discipline) => ({ name: DISCIPLINES[d].label, url: DISCIPLINES[d].route });
+
+export const disciplineCrumbs = (d: Discipline) => [HOME_CRUMB, disciplineCrumb(d)];
+export const projectCrumbs = (project: Project) => [
+  HOME_CRUMB,
+  disciplineCrumb(project.discipline),
+  { name: project.title, url: projectHref(project.discipline, project.slug) },
+];
+export const postCrumbs = (post: BlogPost) => [
+  HOME_CRUMB,
+  { name: 'Blog', url: '/blog' },
+  { name: post.title, url: postHref(post.slug) },
+];
 
 /** FAQPage JSON-LD from visible Q&A (the answers are rendered on the page too). */
 export function faqJsonLd(items: readonly { q: string; a: string }[]): JsonLdNode {

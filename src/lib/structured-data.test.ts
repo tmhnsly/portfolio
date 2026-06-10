@@ -6,6 +6,8 @@ import {
   breadcrumbJsonLd,
   faqJsonLd,
   identityGraphJsonLd,
+  projectVideos,
+  projectCrumbs,
 } from './structured-data';
 import { getProject, getPost } from './content';
 import { COPY } from '@/data';
@@ -38,6 +40,26 @@ describe('identityGraphJsonLd', () => {
     expect(JSON.stringify(person)).not.toContain('mailto:');
     expect(person.sameAs).toEqual(expect.arrayContaining(['https://github.com/tmhnsly']));
     expect(website.publisher).toEqual({ '@id': person['@id'] });
+  });
+});
+
+describe('projectVideos', () => {
+  it('resolves the video facts shared by the VideoObject and the sitemap', () => {
+    const vids = projectVideos(getProject('wake')!);
+    expect(vids).toHaveLength(1);
+    expect(vids[0]!.thumbnailUrl).toBe('https://www.tomhinsley.com/images/projects/thumbnails/audio/wake.webp');
+    expect(vids[0]!.embedUrl).toContain('/embed/xHmZYM6n8G0');
+  });
+  it('is empty for a project with no video', () => {
+    expect(projectVideos(getProject('chork')!)).toEqual([]);
+  });
+});
+
+describe('projectCrumbs', () => {
+  it('builds Home / Discipline / title with the right urls', () => {
+    const c = projectCrumbs(getProject('wake')!);
+    expect(c.map((x) => x.name)).toEqual(['Home', 'Audio', 'Wake']);
+    expect(c[2]!.url).toBe('/audio/wake');
   });
 });
 

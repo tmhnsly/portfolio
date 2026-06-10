@@ -1,15 +1,11 @@
 import type { MetadataRoute } from 'next';
-import type { MediaItem } from '@/types';
 import { getAllProjects, getAllPosts } from '@/lib/content';
 import { DISCIPLINES, DISCIPLINE_ORDER } from '@/lib/disciplines';
 import { projectHref, postHref } from '@/lib/routes';
-import { youTubeEmbedUrl, youTubeThumbnail } from '@/lib/youtube';
-import { SITE_URL } from '@/lib/site-url';
-
-type YouTubeItem = Extract<MediaItem, { type: 'youtube' }>;
+import { projectVideos } from '@/lib/structured-data';
+import { absUrl as at } from '@/lib/site-url';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const at = (p: string) => `${SITE_URL}${p}`;
   const projects = getAllProjects();
   const posts = getAllPosts();
 
@@ -26,14 +22,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
   }));
   const projectEntries: MetadataRoute.Sitemap = projects.map((p) => {
     const href = projectHref(p.discipline, p.slug);
-    const description = p.desc ?? `${DISCIPLINES[p.discipline].label} work by Tom Hinsley.`;
-    const yt = p.media.filter((m): m is YouTubeItem => m.type === 'youtube');
-    const posters = yt.filter((m) => m.poster).map((m) => at(m.poster!));
-    const videos = yt.map((m) => ({
-      title: m.title ?? p.title,
-      thumbnail_loc: m.poster ? at(m.poster) : youTubeThumbnail(m.id),
-      description,
-      player_loc: youTubeEmbedUrl(m.id, { list: m.list }),
+    // Only the project's own hosted posters go in the image sitemap (not the
+    // YouTube CDN stills). Video facts come from the shared projectVideos seam.
+    const posters = p.media.flatMap((m) => (m.type === 'youtube' && m.poster ? [at(m.poster)] : []));
+    const videos = projectVideos(p).map((v) => ({
+      title: v.title,
+      thumbnail_loc: v.thumbnailUrl,
+      description: v.description,
+      player_loc: v.embedUrl,
     }));
     return {
       url: at(href),

@@ -1,6 +1,6 @@
 import { getAllPosts } from '@/lib/content';
 import { postHref } from '@/lib/routes';
-import { SITE_URL } from '@/lib/site-url';
+import { absUrl as at } from '@/lib/site-url';
 import { COPY } from '@/data';
 
 // Static at build — regenerated when posts change.
@@ -11,7 +11,6 @@ const esc = (s: string) =>
 
 /** /feed.xml — RSS 2.0 for the blog, a standard discovery surface (readers + some AI crawlers). */
 export function GET() {
-  const at = (p: string) => `${SITE_URL}${p}`;
   const items = getAllPosts()
     .map((p) => {
       const url = esc(at(postHref(p.slug)));
