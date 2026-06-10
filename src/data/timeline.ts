@@ -11,23 +11,23 @@ import { COMPANIES } from './companies';
 export const TIMELINE = z.array(timelineEntrySchema).parse([
   {
     id: 'freelance-2024',
-    period: 'Nov 2024 — Present',
+    period: 'Nov 2024 – Present',
     role: 'Freelance Frontend Developer',
     place: 'Self-employed · London',
     description:
-      'Contract frontend for digital publishers and product teams, including the Financial Times. Built interactive branded-content pages for FT clients (Julius Baer, Equinor) from Figma to production-ready, fully responsive code — working closely with designers and editorial, managing each project end to end.',
+      'Contract frontend for digital publishers and product teams, including the Financial Times. Built interactive branded-content pages for FT clients (Julius Baer, Equinor) from Figma to production-ready, fully responsive code, working closely with designers and editorial and managing each project end to end.',
     tags: ['Next.js', 'TypeScript', 'SCSS', 'Figma'],
     discipline: 'code',
     monogram: 'TH',
   },
   {
     id: 'neverbland-2023',
-    period: 'Jul 2023 — Aug 2024',
+    period: 'Jul 2023 – Aug 2024',
     role: 'Frontend Developer',
     place: 'Neverbland · London',
     companyUrl: COMPANIES.neverbland.url,
     description:
-      'Digital agency across hospitality, education and fintech. Led the frontend of a new booking flow for Clays, integrated with a custom orchestration API — it drove a 48% increase in spend per booking in week one. Built accessible component libraries (Tooled-Up Education), a Sanity-backed booking system and a Storybook design system (Earnt), and ran sprint planning.',
+      'Digital agency across hospitality, education and fintech. Led the frontend of a new booking flow for Clays, integrated with a custom orchestration API. It drove a 48% increase in spend per booking in week one. Built accessible component libraries (Tooled-Up Education), a Sanity-backed booking system and a Storybook design system (Earnt), and ran sprint planning.',
     tags: ['React', 'Next.js', 'Sanity', 'Storybook'],
     discipline: 'code',
     monogram: 'Nb',
@@ -35,7 +35,7 @@ export const TIMELINE = z.array(timelineEntrySchema).parse([
   },
   {
     id: 'rocketmakers-2021',
-    period: 'Jul 2021 — May 2023',
+    period: 'Jul 2021 – May 2023',
     role: 'Full Stack Software Developer',
     place: 'Rocketmakers · Bath',
     companyUrl: COMPANIES.rocketmakers.url,
@@ -48,12 +48,12 @@ export const TIMELINE = z.array(timelineEntrySchema).parse([
   },
   {
     id: 'io-academy-2020',
-    period: 'Sep — Dec 2020',
+    period: 'Sep – Dec 2020',
     role: 'Full Stack Software Engineering',
     place: 'iO Academy · Bath',
     companyUrl: COMPANIES.ioAcademy.url, // dead own-site → Course Report (see companies.ts)
     description:
-      'Intensive four-month engineering bootcamp — finished top 10 globally and #2 in the UK. PHP, JavaScript, React, Node.js, MySQL, MongoDB, Git, OOP and Agile.',
+      'Intensive four-month engineering bootcamp. Finished top 10 globally and #2 in the UK. PHP, JavaScript, React, Node.js, MySQL, MongoDB, Git, OOP and Agile.',
     tags: ['JavaScript', 'React', 'Node.js', 'PHP'],
     discipline: 'code',
     monogram: 'iO',
@@ -66,7 +66,7 @@ export const TIMELINE = z.array(timelineEntrySchema).parse([
     // reads cleanest as a single span. Framed around the one-to-one teaching: the
     // root of the UX eye, hence the code accent (the bridge into the frontend work).
     id: 'apple-2011',
-    period: 'Jun 2011 — Sep 2019',
+    period: 'Jun 2011 – Sep 2019',
     role: 'Specialist',
     place: 'Apple · London',
     companyUrl: COMPANIES.apple.url,
@@ -78,7 +78,7 @@ export const TIMELINE = z.array(timelineEntrySchema).parse([
   },
   {
     id: 'ravensbourne-2012',
-    period: '2012 — 2015',
+    period: '2012 – 2015',
     role: 'BA Sound Design',
     place: 'Ravensbourne University · London',
     companyUrl: COMPANIES.ravensbourne.url,

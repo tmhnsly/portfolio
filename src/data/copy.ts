@@ -95,12 +95,12 @@ export const COPY = {
     faq: [
       { q: 'Is Tom available for work?', a: 'Yes. Open to permanent roles and freelance or contract work, remote or in London. Get in touch and he’ll share current availability.' },
       { q: 'What is Tom’s tech stack?', a: 'React, Next.js and TypeScript day to day, with Node, modern CSS and SCSS, and a CMS like Sanity when a project needs one. Strong on accessibility and performance.' },
-      { q: 'Does Tom do full-stack or just frontend?', a: 'Frontend is the specialism — React, Next.js, TypeScript — but he’s full-stack capable, comfortable with APIs, Node and a database when a feature needs end-to-end work.' },
+      { q: 'Does Tom do full-stack or just frontend?', a: 'Frontend is the specialism (React, Next.js, TypeScript), but he’s full-stack capable, comfortable with APIs, Node and a database when a feature needs end-to-end work.' },
       { q: 'Has Tom worked with any notable companies?', a: 'Yes. Contract work for the Financial Times, plus roles at Rocketmakers and Neverbland, across agencies, a software consultancy and editorial publishers.' },
       { q: 'How much experience does Tom have?', a: 'Building professionally for the web since 2021, with a sound-design degree and creative work going back further.' },
       { q: 'Does Tom work remotely, and where is he based?', a: 'Based in London, UK. Works remotely across the UK and internationally, or on-site in London.' },
-      { q: 'Can Tom help with audio or video too?', a: 'Yes. Alongside development he takes on audio — music and sound design — and video, from editing to short films, as professional work.' },
-      { q: 'How do I hire Tom or get in touch?', a: 'Email is best — use the contact link or button, or download the CV.' },
+      { q: 'Can Tom help with audio or video too?', a: 'Yes. Alongside development he takes on audio (music and sound design) and video, from editing to short films, as professional work.' },
+      { q: 'How do I hire Tom or get in touch?', a: 'Email is best. Use the contact link or button, or download the CV.' },
     ],
 
     // ContactCTA section
