@@ -28,11 +28,19 @@
 .heading {
   margin: 0;
   font-family: var(--font-display);
-  font-size: clamp(var(--fs-display), 6vw, var(--fs-display-l));
+  /* Mobile scales DOWN with the viewport so a long single word (e.g.
+     "development.") fits the card instead of spilling into the padding — the
+     old floor of var(--fs-display)=56px held until ~933px, so phones never
+     shrank it. Desktop keeps the original 56→72 scale below. */
+  font-size: clamp(34px, 10vw, var(--fs-display));
   font-weight: var(--fw-semibold);
   letter-spacing: var(--ls-display);
   line-height: 0.95;
   color: var(--text);
+
+  @include tablet-up {
+    font-size: clamp(var(--fs-display), 6vw, var(--fs-display-l));
+  }
 }
 
 .soft {
