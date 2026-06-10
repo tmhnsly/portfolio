@@ -20,7 +20,7 @@ describe('projectVideoJsonLd', () => {
     expect(video['@type']).toBe('VideoObject');
     expect(video.thumbnailUrl).toBe('https://www.tomhinsley.com/images/projects/thumbnails/audio/wake.webp');
     expect(video.embedUrl).toContain('/embed/xHmZYM6n8G0');
-    expect(video.uploadDate).toBe('2015-02-01');
+    expect(video.uploadDate).toBe('2015-02-01T00:00:00Z');
     expect(video.name).toBe('Full film');
   });
 

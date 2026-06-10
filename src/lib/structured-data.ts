@@ -113,13 +113,17 @@ export function identityGraphJsonLd(): JsonLdNode {
 export function projectVideoJsonLd(project: Project): JsonLdNode[] | null {
   const videos = projectVideos(project);
   if (videos.length === 0) return null;
+  // Google wants uploadDate as a full ISO 8601 datetime WITH a timezone; the
+  // frontmatter date is date-only, so anchor it to midnight UTC (clears the
+  // "invalid datetime"/"missing timezone" non-critical warnings).
+  const uploadDate = `${project.date}T00:00:00Z`;
   return videos.map((v) => ({
     '@context': 'https://schema.org',
     '@type': 'VideoObject',
     name: v.title,
     description: v.description,
     thumbnailUrl: v.thumbnailUrl,
-    uploadDate: project.date,
+    uploadDate,
     embedUrl: v.embedUrl,
   }));
 }
