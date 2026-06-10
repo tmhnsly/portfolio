@@ -4,6 +4,8 @@ import { isDiscipline, DISCIPLINE_ORDER, DISCIPLINES } from '@/lib/disciplines';
 import { projectsInDiscipline, topTagsByDiscipline } from '@/lib/content';
 import { SECTIONS } from '@/data';
 import { pageMeta } from '@/lib/metadata';
+import { breadcrumbJsonLd, disciplineCrumbs } from '@/lib/structured-data';
+import { JsonLd } from '@/components/seo';
 import { Container, Stack } from '@/components/layout';
 import { SectionHero } from '@/components/section/SectionHero';
 import { ProjectGrid } from '@/components/section/ProjectGrid';
@@ -27,6 +29,7 @@ export default async function SectionPage({ params }: { params: Promise<{ discip
   const section = SECTIONS[discipline];
   return (
     <Container>
+      <JsonLd data={breadcrumbJsonLd(disciplineCrumbs(discipline))} />
       <Stack>
         <SectionHero discipline={discipline} intro={section.intro} tools={topTagsByDiscipline(discipline)} />
         <ProjectGrid projects={projects} />

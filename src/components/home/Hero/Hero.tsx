@@ -21,6 +21,9 @@ export function Hero({ featured }: { featured: Project[] }) {
           <p className={styles.sub}>{COPY.hero.sub}</p>
         </EntranceItem>
         <EntranceItem i={1}>
+          <p className={styles.hireLine}>{COPY.hero.hireLine}</p>
+        </EntranceItem>
+        <EntranceItem i={2}>
           <div className={styles.cta}>
             <EmailLink variant="primary">Get in touch</EmailLink>
             <Button variant="ghost" href="/tom-hinsley-cv.pdf" download="Tom-Hinsley-CV.pdf">
@@ -29,7 +32,7 @@ export function Hero({ featured }: { featured: Project[] }) {
           </div>
         </EntranceItem>
       </div>
-      <EntranceItem i={2} className={styles.deckCol}>
+      <EntranceItem i={3} className={styles.deckCol}>
         <Eyebrow>Featured deck</Eyebrow>
         <div className={styles.deck}>
           <CardDeck items={featured} />

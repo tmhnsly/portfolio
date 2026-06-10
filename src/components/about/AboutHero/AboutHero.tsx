@@ -2,7 +2,7 @@ import { SITE, COPY } from '@/data';
 import { yearsSince } from '@/lib/format';
 import { BiDownload } from 'react-icons/bi';
 import { TechChip } from '@/components/ui/TechChip';
-import { PixelMark } from '@/components/ui/PixelMark';
+import { Media } from '@/components/ui/Media';
 import { Button } from '@/components/ui/Button';
 import { Entrance, EntranceItem, EntranceTitle } from '@/components/motion/Entrance';
 import styles from './AboutHero.module.scss';
@@ -12,13 +12,15 @@ export function AboutHero() {
   return (
     <Entrance className={styles.section}>
       <div className={styles.grid}>
-        {/* Stand-in for a real portrait: the pixel-mark 'about' glyph (a pixel
-            person), no frame/background. Swap the PixelMark for a <Media> photo
-            when one's shot. */}
         <EntranceItem className={styles.portrait}>
-          <div className={styles.markSlot} aria-hidden>
-            <PixelMark icon="about" accent="var(--accent)" size="66%" />
-          </div>
+          <Media
+            src="/images/about/tom-hinsley.webp"
+            alt={SITE.name}
+            ratio="4/5"
+            rounded
+            sizes="(max-width: 768px) 60vw, 260px"
+            className={styles.photo}
+          />
         </EntranceItem>
         <div className={styles.copy}>
           <EntranceTitle className={styles.name} title={SITE.name} period />

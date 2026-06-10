@@ -5,6 +5,8 @@ import { pageMeta } from '@/lib/metadata';
 import { BiLeftArrowAlt, BiRightArrowAlt } from 'react-icons/bi';
 import { getAllPosts, getPost, postNeighbours, relatedPosts } from '@/lib/content';
 import { postHref } from '@/lib/routes';
+import { blogPostingJsonLd, breadcrumbJsonLd, postCrumbs } from '@/lib/structured-data';
+import { JsonLd } from '@/components/seo';
 import { IMG_SIZES } from '@/lib/breakpoints';
 import { COPY } from '@/data';
 import { Container, Stack } from '@/components/layout';
@@ -41,6 +43,8 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
 
   return (
     <Container>
+      <JsonLd data={blogPostingJsonLd(post)} />
+      <JsonLd data={breadcrumbJsonLd(postCrumbs(post))} />
       <Stack>
         <aside className={styles.notice} role="note">
           <span className={styles.noticeLabel}>{COPY.blog.postNotice.label}</span>

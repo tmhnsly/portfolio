@@ -2,7 +2,9 @@ import type { Metadata } from 'next';
 import { Space_Grotesk, Space_Mono } from 'next/font/google';
 import { ThemeProvider, THEME_SCRIPT } from '@/lib/theme';
 import { Shell } from '@/components/layout/Shell';
+import { JsonLd } from '@/components/seo';
 import { breadcrumbData } from '@/lib/content';
+import { identityGraphJsonLd } from '@/lib/structured-data';
 import { COPY } from '@/data';
 import { SITE_URL } from '@/lib/site-url';
 import '@radix-ui/colors/sand.css';
@@ -38,7 +40,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: { default: COPY.meta.title, template: '%s · Tom Hinsley' },
   description: COPY.meta.description,
-  alternates: { canonical: '/' },
+  alternates: { canonical: '/', types: { 'application/rss+xml': '/feed.xml' } },
   openGraph: {
     type: 'website',
     siteName: 'Tom Hinsley',
@@ -57,6 +59,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" className={`${display.variable} ${mono.variable}`} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }} />
+        <JsonLd data={identityGraphJsonLd()} />
       </head>
       <body>
         <ThemeProvider>

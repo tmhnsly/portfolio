@@ -1,10 +1,10 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { getAllProjects, getProjectInDiscipline, projectNeighbours, relatedProjects } from '@/lib/content';
-import { DISCIPLINES } from '@/lib/disciplines';
 import { projectHref } from '@/lib/routes';
 import { pageMeta } from '@/lib/metadata';
-import { projectVideoJsonLd } from '@/lib/structured-data';
+import { projectVideoJsonLd, projectCreativeWorkJsonLd, breadcrumbJsonLd, projectCrumbs, projectDescription } from '@/lib/structured-data';
+import { JsonLd } from '@/components/seo';
 import { Container, Stack } from '@/components/layout';
 import { ProjectHero } from '@/components/project/ProjectHero';
 import { MediaHero } from '@/components/project/MediaHero';
@@ -20,8 +20,7 @@ export async function generateMetadata({ params }: { params: Promise<{ disciplin
   const { discipline, slug } = await params;
   const project = getProjectInDiscipline(discipline, slug);
   if (!project) return {};
-  const description = project.desc ?? `${DISCIPLINES[project.discipline].label} work by Tom Hinsley.`;
-  return pageMeta({ title: project.title, description, path: projectHref(project.discipline, slug), type: 'article' });
+  return pageMeta({ title: project.title, description: projectDescription(project), path: projectHref(project.discipline, slug), type: 'article' });
 }
 
 export default async function ProjectPage({ params }: { params: Promise<{ discipline: string; slug: string }> }) {
@@ -35,9 +34,9 @@ export default async function ProjectPage({ params }: { params: Promise<{ discip
 
   return (
     <Container>
-      {videoLd && (
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(videoLd) }} />
-      )}
+      {videoLd && <JsonLd data={videoLd} />}
+      <JsonLd data={projectCreativeWorkJsonLd(project)} />
+      <JsonLd data={breadcrumbJsonLd(projectCrumbs(project))} />
       <Stack>
         <ProjectHero project={project} />
         <MediaHero project={project} />
