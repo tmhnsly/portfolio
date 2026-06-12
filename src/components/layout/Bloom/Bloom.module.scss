@@ -1,7 +1,10 @@
 /* Viewport-anchored (fixed, not absolute-to-page): the glow offsets are
    percentages, so anchoring to the page meant the same %s landed in different
    spots on taller pages (the blog looked different). Fixed = identical everywhere. */
-.bloom { position: fixed; inset: 0; overflow: hidden; pointer-events: none; z-index: var(--z-base); contain: paint; }
+/* will-change promotes the bloom to its own composited layer: un-promoted, Firefox
+   repaints the blurred glows on every scroll frame (content scrolls over a fixed
+   element); promoted, they rasterise once and only the zone crossfade touches them. */
+.bloom { position: fixed; inset: 0; overflow: hidden; pointer-events: none; z-index: var(--z-base); contain: paint; will-change: opacity; }
 .primary, .cool, .warm { position: absolute; border-radius: 50%; filter: blur(50px); }
 /* colour is the STATIC per-instance --bloom-tint (set by Shell), not the live
    --accent — so the blur layers rasterise once and never re-paint mid-transition.
@@ -21,5 +24,8 @@
 .grain {
   position: absolute; inset: 0;
   background-image: radial-gradient(var(--sand-a3) 1px, transparent 1px);
-  background-size: 3px 3px; opacity: 0.5; mix-blend-mode: multiply;
+  background-size: 3px 3px; opacity: 0.5;
+  /* no mix-blend-mode: contain: paint isolates blending to the bloom's own layers,
+     where multiply composes pixel-identically to normal (verified by screenshot
+     diff, light + dark) — but the blend forced Firefox onto a slow blending path. */
 }
