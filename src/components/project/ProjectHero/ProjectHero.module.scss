@@ -39,7 +39,7 @@
   gap: 6px;
   padding: var(--pad-pill);
   border-radius: var(--radius-full);
-  border: 1px solid var(--accent-ink);
+  border: var(--border-width) solid var(--accent-ink);
   color: var(--accent-ink);
   font-family: var(--font-mono);
   font-size: var(--fs-caption);
@@ -50,7 +50,7 @@
 .liveUrl {
   display: inline-flex;
   align-items: center;
-  gap: 4px;
+  gap: var(--space-1);
   max-width: 100%;
   min-width: 0; /* allow the text to shrink + ellipsis when the row wraps */
   font-family: var(--font-mono);
@@ -105,7 +105,7 @@
   grid-template-columns: 90px 1fr;
   gap: var(--space-5);
   padding-bottom: var(--space-4);
-  border-bottom: 1px solid var(--rule-soft);
+  border-bottom: var(--border-width) solid var(--rule-soft);
   font-family: var(--font-mono);
   font-size: var(--fs-body);
   min-width: 0;

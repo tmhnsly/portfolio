@@ -41,7 +41,7 @@
   border-radius: 999px; cursor: pointer;
   color: var(--white-a11);
   background: var(--white-a2);
-  border: 1px solid var(--white-a3);
+  border: var(--border-width) solid var(--white-a3);
   backdrop-filter: blur(12px);
   font-size: 1.1rem;
   transition: background 0.15s ease;

@@ -1,6 +1,6 @@
 .chip {
   display: inline-flex; padding: var(--pad-chip); border-radius: var(--radius-sm);
-  border: 1px solid var(--rule-soft); background: var(--surface-soft);
+  border: var(--border-width) solid var(--rule-soft); background: var(--surface-soft);
   font-family: var(--font-mono); font-size: var(--fs-mono); color: var(--text-soft);
   letter-spacing: var(--ls-mono); white-space: normal; overflow-wrap: anywhere; max-width: 100%;
 }

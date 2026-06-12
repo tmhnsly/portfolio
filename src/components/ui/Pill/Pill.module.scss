@@ -11,6 +11,6 @@
 .solid {
   background: color-mix(in srgb, white 60%, transparent);
   backdrop-filter: blur(6px);
-  border: 1px solid var(--white-a6);
+  border: var(--border-width) solid var(--white-a6);
   color: var(--black-a12);
 }

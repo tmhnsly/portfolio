@@ -39,7 +39,7 @@
 .quote {
   margin: var(--space-8) 0;
   padding: var(--space-6) var(--space-7);
-  border-left: 3px solid var(--accent-ink);
+  border-left: var(--border-width-3) solid var(--accent-ink);
   background: var(--surface-soft);
   border-radius: var(--radius-md);
   font-size: var(--fs-h3);
@@ -61,7 +61,7 @@
   padding: var(--pad-inline-code);
   border-radius: var(--radius-xs);
   background: var(--surface-soft);
-  border: 1px solid var(--rule-soft);
+  border: var(--border-width) solid var(--rule-soft);
 }
 
 .ul,

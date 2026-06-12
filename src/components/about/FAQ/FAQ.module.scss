@@ -2,7 +2,7 @@
 
 .head {
   padding-bottom: var(--space-6);
-  border-bottom: 1px solid var(--rule-soft);
+  border-bottom: var(--border-width) solid var(--rule-soft);
 }
 .heading {
   margin: var(--space-2) 0 0;
@@ -20,7 +20,7 @@
   display: flex;
   flex-direction: column;
 }
-.item { border-bottom: 1px solid var(--rule-soft); }
+.item { border-bottom: var(--border-width) solid var(--rule-soft); }
 .header { margin: 0; }
 .trigger {
   display: flex;

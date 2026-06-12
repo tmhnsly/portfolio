@@ -64,7 +64,7 @@
 /* ── Services: one discipline-accented glass card per hireable practice ── */
 .servicesHead {
   padding-bottom: var(--space-6);
-  border-bottom: 1px solid var(--rule-soft);
+  border-bottom: var(--border-width) solid var(--rule-soft);
 }
 .servicesHeading {
   margin: var(--space-2) 0 0;
