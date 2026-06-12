@@ -4,8 +4,8 @@
 /* will-change promotes the bloom to its own composited layer: un-promoted, Firefox
    repaints the blurred glows on every scroll frame (content scrolls over a fixed
    element); promoted, they rasterise once and only the zone crossfade touches them. */
-.bloom { position: fixed; inset: 0; overflow: hidden; pointer-events: none; z-index: var(--z-base); contain: paint; will-change: opacity; }
-.primary, .cool, .warm { position: absolute; border-radius: 50%; filter: blur(50px); }
+.bloom { position: fixed; inset: 0; overflow: hidden; pointer-events: none; z-index: var(--z-base); contain: paint; will-change: var(--bloom-wc, opacity); display: var(--bloom-display, block); }
+.primary, .cool, .warm { position: absolute; border-radius: 50%; filter: blur(var(--bloom-blur, 50px)); }
 /* colour is the STATIC per-instance --bloom-tint (set by Shell), not the live
    --accent — so the blur layers rasterise once and never re-paint mid-transition.
    Falls back to --accent if no tint is provided. */
