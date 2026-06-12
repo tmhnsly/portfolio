@@ -9,7 +9,7 @@ import { Container, Stack } from '@/components/layout';
 import { ProjectHero } from '@/components/project/ProjectHero';
 import { MediaHero } from '@/components/project/MediaHero';
 import { ProjectBody } from '@/components/project/ProjectBody';
-import { PrevNext } from '@/components/project/PrevNext';
+import { PrevNext } from '@/components/ui/PrevNext';
 import { RelatedWork } from '@/components/project/RelatedWork';
 
 export function generateStaticParams() {
@@ -41,7 +41,13 @@ export default async function ProjectPage({ params }: { params: Promise<{ discip
         <ProjectHero project={project} />
         <MediaHero project={project} />
         <ProjectBody project={project} />
-        <PrevNext discipline={project.discipline} prev={prev} next={next} />
+        <PrevNext
+          ariaLabel="Project navigation"
+          prevLabel={`Previous in /${project.discipline}`}
+          nextLabel={`Next in /${project.discipline}`}
+          prev={prev && { href: projectHref(project.discipline, prev.slug), title: prev.title }}
+          next={next && { href: projectHref(project.discipline, next.slug), title: next.title }}
+        />
         <RelatedWork projects={related} />
       </Stack>
     </Container>

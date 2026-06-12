@@ -2,7 +2,7 @@
 }
 
 .column {
-  max-width: 780px;
+  max-width: var(--measure-prose);
   margin-inline: auto;
 }
 

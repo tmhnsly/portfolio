@@ -36,7 +36,7 @@
   align-items: center;
   gap: var(--space-5);
   padding-top: var(--space-5);
-  border-top: 1px solid var(--surface-edge);
+  border-top: var(--border-width) solid var(--surface-edge);
   flex-wrap: wrap;
 }
 

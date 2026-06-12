@@ -1,3 +1,5 @@
+import { isMotifKey, type MotifKey } from '@/lib/motifs';
+
 /**
  * Pick an animated thumbnail motif for a post that ships no cover image, from its
  * category + tags. Pure + data-only (no React) so the choice is unit-testable and
@@ -5,10 +7,7 @@
  * waveform; about books → the stack; about code → the editor; and so on. Anything
  * unrecognised falls back to the brand feed mark.
  */
-export type MotifKey = 'code' | 'audio' | 'writing' | 'reading' | 'process' | 'feed' | 'datacenter' | 'motion' | 'tokens';
-
-const KEYS: readonly MotifKey[] = ['code', 'audio', 'writing', 'reading', 'process', 'feed', 'datacenter', 'motion', 'tokens'];
-export const isMotifKey = (s: string | undefined): s is MotifKey => !!s && (KEYS as readonly string[]).includes(s);
+export type { MotifKey }; // re-exported for the BlogThumb render maps (MOTIFS / MOTIF_HUE)
 
 // Motifs the heuristic can pick from tags/category. `feed` is the catch-all;
 // `datacenter`/`motion`/`tokens` are bespoke and only reached via an explicit `thumb`.

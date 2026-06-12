@@ -30,6 +30,9 @@
   --text-on-accent: var(--white-a12);
 
   /* rules / borders */
+  --border-width: 1px;        /* hairline — the default rule width */
+  --border-width-2: 2px;
+  --border-width-3: 3px;      /* accent emphasis bars (notice / blockquote) */
   --rule-soft: var(--sand-6);
   --rule: var(--sand-7);
   --rule-strong: var(--sand-8);

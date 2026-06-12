@@ -73,6 +73,13 @@ const nextConfig: NextConfig = {
       { source: '/sound/:slug', destination: '/audio/:slug', permanent: true },
       { source: '/photo', destination: '/', permanent: true },
       { source: '/photo/:slug', destination: '/', permanent: true },
+      // Renamed pieces → their new slug (the /sound,/music wildcards above already
+      // funnel the old-discipline prefixes into /audio, so keying on the post-merge
+      // path catches both). Deleted placeholder projects/posts are intentionally left
+      // to 404 — redirecting removed content to home would be a soft-404.
+      { source: '/audio/hands-ad-sound-replacement', destination: '/audio/the-phaeton', permanent: true },
+      { source: '/audio/the-pine-in-the-ash', destination: '/audio/pine-in-the-ash', permanent: true },
+      { source: '/video/stand-up', destination: '/video/party-lines', permanent: true },
     ];
   },
 };

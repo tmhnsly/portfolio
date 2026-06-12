@@ -4,8 +4,8 @@
   font-size: clamp(96px, 22vw, var(--fs-display-xxl)); letter-spacing: var(--ls-display-xxl);
   line-height: var(--lh-display); color: var(--text); }
 .period { color: var(--accent-ink-to, var(--accent-ink)); }
-.urlbar { margin-top: var(--space-5); display: inline-flex; padding: 10px 16px; border-radius: var(--radius-lg);
-  border: 1px solid var(--rule-soft); background: var(--surface-soft); font-family: var(--font-mono);
+.urlbar { margin-top: var(--space-5); display: inline-flex; padding: var(--pad-btn); border-radius: var(--radius-lg);
+  border: var(--border-width) solid var(--rule-soft); background: var(--surface-soft); font-family: var(--font-mono);
   font-size: var(--fs-mono); color: var(--text-muted); }
 .path { color: var(--accent-ink); }
 .lead { margin-top: var(--space-6); font-size: var(--fs-body-l); color: var(--text-soft); }
@@ -13,7 +13,7 @@
   @include tablet-up { grid-template-columns: repeat(2, 1fr); }
   @include desktop-up { grid-template-columns: repeat(3, 1fr); } }
 .cardLink { text-decoration: none; }
-.card { display: flex; align-items: center; gap: var(--space-3); padding: 16px 18px; }
+.card { display: flex; align-items: center; gap: var(--space-3); padding: var(--pad-card); }
 .dot { width: 10px; height: 10px; border-radius: 50%; flex: none; }
 .slug { font-family: var(--font-display); font-size: var(--fs-h4); font-weight: var(--fw-semibold); letter-spacing: -0.025em; color: var(--text); }
 .arrow { margin-left: auto; font-family: var(--font-mono); color: var(--text-muted); }

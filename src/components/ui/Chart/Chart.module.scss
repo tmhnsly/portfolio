@@ -3,7 +3,7 @@
 .chart {
   margin: var(--space-8) 0;
   padding: var(--space-6);
-  border: 1px solid var(--rule-soft);
+  border: var(--border-width) solid var(--rule-soft);
   border-radius: var(--radius-xl);
   background: var(--bg-subtle);
 }
@@ -63,7 +63,7 @@
   position: absolute;
   top: 0.15rem;
   bottom: 0.15rem;
-  border: 1px solid;
+  border: var(--border-width) solid;
   border-radius: var(--radius-sm);
 }
 
@@ -120,7 +120,7 @@
   height: 100%;
 
   &:not(:last-child) {
-    border-right: 2px solid var(--bg-subtle);
+    border-right: var(--border-width-2) solid var(--bg-subtle);
   }
 }
 

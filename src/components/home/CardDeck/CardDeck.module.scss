@@ -25,7 +25,7 @@
 /* the active card is defined by a crisp edge + deeper shadow. No backdrop-filter:
    blurring a dragged/animated element re-rasterises every frame (the lag). */
 .cardFront .face {
-  border: 1px solid var(--surface-edge);
+  border: var(--border-width) solid var(--surface-edge);
   box-shadow: var(--shadow-lg);
 }
 

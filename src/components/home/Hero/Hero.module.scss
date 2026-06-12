@@ -16,7 +16,7 @@
   @include tablet-up { font-size: clamp(44px, 6.5vw, var(--fs-display-l)); }
   @include lg-up { font-size: clamp(var(--fs-display-l), 6vw, var(--fs-display-xl)); }
   @include desktop-up { font-size: clamp(var(--fs-display-l), 7vw, var(--fs-display-xl)); } }
-.sub { margin-top: var(--space-7); max-width: 580px; font-size: var(--fs-body-l); color: var(--text-soft); line-height: var(--lh-body); }
+.sub { margin-top: var(--space-7); max-width: var(--measure-narrow); font-size: var(--fs-body-l); color: var(--text-soft); line-height: var(--lh-body); }
 /* explicit hire/stack status line — mono caption under the subtitle */
 .hireLine { margin-top: var(--space-4); font-family: var(--font-mono); font-size: var(--fs-mono-s);
   letter-spacing: var(--ls-mono); color: var(--text-muted); }

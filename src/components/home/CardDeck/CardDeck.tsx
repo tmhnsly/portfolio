@@ -33,7 +33,6 @@ function CardFace({ project, priority }: { project: Project; priority?: boolean 
     <Link href={p.href} className={styles.face} draggable={false}>
       <ProjectThumb
         project={project}
-        grad={p.gradient}
         ratio="5/4"
         sizes={IMG_SIZES.deck}
         priority={priority}

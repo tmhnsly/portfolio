@@ -1,7 +1,7 @@
 @mixin glass($surface: var(--surface), $blur: 12px, $border: true) {
   background: $surface;
   @if $border {
-    border: 1px solid var(--surface-edge);
+    border: var(--border-width) solid var(--surface-edge);
   }
   // UNPREFIXED + single-function only. The CSS minifier autoprefixes
   // backdrop-filter for us; writing our own `-webkit-backdrop-filter` made it

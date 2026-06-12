@@ -13,12 +13,17 @@
   /* padded primitives */
   --pad-chip: 4px 10px;       /* TechChip, on-media labels */
   --pad-pill: 5px 12px;       /* Pill, status pill */
+  --pad-btn: 10px 16px;       /* Button (primary/secondary/ghost) */
   --pad-inline-code: 2px 6px; /* inline `code` */
   --pad-code-block: 20px 22px;
   /* cards */
   --pad-card: var(--space-4) 18px; /* discipline card inner */
   --card-min-h: 148px;
   --card-min-w: 220px;        /* discipline scroller column min */
+  /* content measures — max reading width (line length) */
+  --measure-prose: 780px;     /* long-form body (post / project body) */
+  --measure: 640px;           /* standard content column (intros, section copy) */
+  --measure-narrow: 580px;    /* hero subtitle / blog intro */
   /* nav + square icon controls */
   --control-size: 38px;       /* square icon button (theme toggle) */
   /* Corner-nesting math: the bar is radius-2xl (18px); buttons are radius-lg (10px).

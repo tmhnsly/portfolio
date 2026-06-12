@@ -39,7 +39,7 @@
 .linkUrl {
   display: inline-flex;
   align-items: center;
-  gap: 4px;
+  gap: var(--space-1);
   min-width: 0; /* allow the URL text to shrink + ellipsis on narrow rows */
   font-family: var(--font-mono);
   font-size: var(--fs-caption);

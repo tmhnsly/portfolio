@@ -2,7 +2,7 @@
 
 .section {
   padding-top: var(--space-6);
-  border-top: 1px solid var(--rule-soft);
+  border-top: var(--border-width) solid var(--rule-soft);
 }
 
 .head {

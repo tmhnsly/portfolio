@@ -5,7 +5,7 @@
   grid-template-columns: 1fr;
   gap: var(--space-4);
   padding-block: var(--space-6);
-  border-bottom: 1px solid var(--rule-soft);
+  border-bottom: var(--border-width) solid var(--rule-soft);
   text-decoration: none;
   color: inherit;
 

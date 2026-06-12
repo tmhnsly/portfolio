@@ -1,12 +1,11 @@
 import type { ReactNode } from 'react';
 import type { Project } from '@/types';
 import { Media } from '@/components/ui/Media';
-import { coverImage } from '@/lib/project-presentation';
+import { coverImage, projectPresentation } from '@/lib/project-presentation';
 import { PROJECT_THUMBS } from './registry';
 
 export interface ProjectThumbProps {
   project: Project;
-  grad: string;          // discipline gradient — the <Media> fallback / vignette field
   ratio?: string;
   sizes?: string;
   priority?: boolean;
@@ -22,11 +21,14 @@ export interface ProjectThumbProps {
  * discipline gradient when there's no media. `children` are the card's overlay
  * chrome and layer on top of the cover either way.
  */
-export function ProjectThumb({ project, grad, ratio, sizes, priority, rounded, className, children }: ProjectThumbProps) {
+export function ProjectThumb({ project, ratio, sizes, priority, rounded, className, children }: ProjectThumbProps) {
+  // The <Media> fallback / vignette field is the project's OWN discipline gradient
+  // — resolved here so callers hand over only the project, never a derived `grad`.
+  const { gradient } = projectPresentation(project);
   const Thumb = PROJECT_THUMBS[project.slug];
   if (Thumb) {
     return (
-      <Media grad={grad} alt="" ratio={ratio} sizes={sizes} priority={priority} rounded={rounded} className={className}>
+      <Media grad={gradient} alt="" ratio={ratio} sizes={sizes} priority={priority} rounded={rounded} className={className}>
         <Thumb />
         {children}
       </Media>
@@ -34,7 +36,7 @@ export function ProjectThumb({ project, grad, ratio, sizes, priority, rounded, c
   }
   const cover = coverImage(project);
   return (
-    <Media grad={grad} src={cover.src} alt={cover.alt} ratio={ratio} sizes={sizes} priority={priority} rounded={rounded} className={className}>
+    <Media grad={gradient} src={cover.src} alt={cover.alt} ratio={ratio} sizes={sizes} priority={priority} rounded={rounded} className={className}>
       {children}
     </Media>
   );
