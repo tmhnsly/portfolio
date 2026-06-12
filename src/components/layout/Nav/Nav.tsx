@@ -2,8 +2,8 @@
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { BiMoon, BiSun } from 'react-icons/bi';
-import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
-import { DURATION, EASING } from '@/lib/motion';
+import { motion, useReducedMotion } from 'motion/react';
+import { ZoneCrossfade } from '@/components/motion/ZoneCrossfade';
 import { SITE, COPY } from '@/data';
 import { useTheme } from '@/lib/theme';
 import { LinkArrow } from '@/components/ui/LinkArrow';
@@ -24,28 +24,13 @@ export interface NavProps {
 }
 
 /**
- * The accent fill behind the monogram / CTA. On a zone change it crossfades — the
- * new colour fades in over the old, keyed on the accent — the same way the Bloom
- * does, so the change is a clean dissolve rather than an OKLab interpolation
- * through muddy midpoints. Sits behind the text via the parent's `isolation` +
- * the fill's negative z-index.
+ * The accent fill behind the monogram / CTA. Crossfades on a Zone change via
+ * ZoneCrossfade — the same dissolve the Bloom uses (a clean opacity fade rather
+ * than an OKLab interpolation through muddy midpoints). Sits behind the text via
+ * the parent's `isolation` + the fill's negative z-index.
  */
-function AccentFill({ accent, reduce }: { accent: string; reduce: boolean | null }) {
-  if (reduce) return <span className={styles.fill} style={{ background: accent }} aria-hidden />;
-  return (
-    <AnimatePresence initial={false}>
-      <motion.span
-        key={accent}
-        className={styles.fill}
-        style={{ background: accent }}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        transition={{ duration: DURATION.zone, ease: EASING.smooth }}
-        aria-hidden
-      />
-    </AnimatePresence>
-  );
+function AccentFill({ accent }: { accent: string }) {
+  return <ZoneCrossfade zoneKey={accent} as="span" className={styles.fill} style={{ background: accent }} />;
 }
 
 export function Nav({ active, accent, accentInk, onAccent }: NavProps) {
@@ -140,7 +125,7 @@ export function Nav({ active, accent, accentInk, onAccent }: NavProps) {
               {theme === 'dark' ? <BiSun aria-hidden /> : <BiMoon aria-hidden />}
             </button>
             <a className={styles.cta} href={mailto()}>
-              <AccentFill accent={accent} reduce={reduce} />
+              <AccentFill accent={accent} />
               {/* exactly one span is `display`-shown per breakpoint (the other is
                   display:none, so excluded from the a11y name) — so neither needs
                   aria-hidden; whichever is visible becomes the link's accessible name. */}

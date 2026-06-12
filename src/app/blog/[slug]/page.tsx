@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { pageMeta } from '@/lib/metadata';
-import { BiLeftArrowAlt, BiRightArrowAlt } from 'react-icons/bi';
+import { PrevNext } from '@/components/ui/PrevNext';
 import { getAllPosts, getPost, postNeighbours, relatedPosts } from '@/lib/content';
 import { postHref } from '@/lib/routes';
 import { blogPostingJsonLd, breadcrumbJsonLd, postCrumbs } from '@/lib/structured-data';
@@ -73,30 +73,13 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
 
         {/* Prev / Next */}
         {(older || newer) && (
-          <nav className={styles.prevNext} aria-label="Post navigation">
-            {older ? (
-              <Link href={postHref(older.slug)} className={styles.navCard}>
-                <span className={styles.navDir}><BiLeftArrowAlt className={styles.navArrow} aria-hidden /> {COPY.blog.olderPost}</span>
-                <span className={styles.navTitle}>{older.title}</span>
-              </Link>
-            ) : (
-              <div className={`${styles.navCard} ${styles.navDisabled}`}>
-                <span className={styles.navDir}><BiLeftArrowAlt className={styles.navArrow} aria-hidden /> {COPY.blog.olderPost}</span>
-                <span className={styles.navTitle}>—</span>
-              </div>
-            )}
-            {newer ? (
-              <Link href={postHref(newer.slug)} className={`${styles.navCard} ${styles.navCardRight}`}>
-                <span className={styles.navDir}>{COPY.blog.newerPost} <BiRightArrowAlt className={styles.navArrow} aria-hidden /></span>
-                <span className={styles.navTitle}>{newer.title}</span>
-              </Link>
-            ) : (
-              <div className={`${styles.navCard} ${styles.navCardRight} ${styles.navDisabled}`}>
-                <span className={styles.navDir}>{COPY.blog.newerPost} <BiRightArrowAlt className={styles.navArrow} aria-hidden /></span>
-                <span className={styles.navTitle}>—</span>
-              </div>
-            )}
-          </nav>
+          <PrevNext
+            ariaLabel="Post navigation"
+            prevLabel={COPY.blog.olderPost}
+            nextLabel={COPY.blog.newerPost}
+            prev={older && { href: postHref(older.slug), title: older.title }}
+            next={newer && { href: postHref(newer.slug), title: newer.title }}
+          />
         )}
 
         {/* Related posts */}

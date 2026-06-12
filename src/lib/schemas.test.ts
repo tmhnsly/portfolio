@@ -37,4 +37,10 @@ describe('schemas', () => {
       media: [{ type: 'audio', src: '/a.mp3' }],
     })).toThrow();
   });
+
+  it('rejects an unknown thumbnail motif and accepts a known one', () => {
+    const base = { title: 'x', excerpt: 'e', date: '2026-01-01', category: 'Code' };
+    expect(() => postFrontmatterSchema.parse({ ...base, thumb: 'sparkles' })).toThrow();
+    expect(postFrontmatterSchema.parse({ ...base, thumb: 'tokens' }).thumb).toBe('tokens');
+  });
 });

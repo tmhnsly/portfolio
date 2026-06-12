@@ -60,67 +60,6 @@
   text-transform: uppercase;
 }
 
-/* ── Prev / Next ── */
-.prevNext {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--space-4);
-
-  @include tablet-up {
-    grid-template-columns: 1fr 1fr;
-  }
-}
-
-.navCard {
-  @include glass;
-  border-radius: var(--radius-xl);
-  padding: var(--space-5) var(--space-6);
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-2);
-  text-decoration: none;
-  transition: background 0.15s ease;
-
-  &:hover {
-    background: var(--surface-soft);
-  }
-}
-
-.navCardRight {
-  text-align: right;
-}
-
-/* shown (greyed) when there's no older/newer post — matches project PrevNext */
-.navDisabled {
-  /* matches PrevNext: muted-but-legible "no older/newer post" placeholder (was 0.4) */
-  opacity: 0.6;
-  cursor: default;
-  pointer-events: none;
-}
-
-.navDir {
-  font-family: var(--font-mono);
-  font-size: var(--fs-caption);
-  color: var(--text-muted);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-}
-/* brand directional arrow sized to the dir text (replaces the unicode ←/→) */
-.navArrow {
-  display: inline-block;
-  font-size: 1.2em;
-  vertical-align: -0.25em;
-}
-
-.navTitle {
-  font-family: var(--font-display);
-  font-size: var(--fs-h4);
-  font-weight: var(--fw-semibold);
-  color: var(--text);
-  letter-spacing: -0.02em;
-  line-height: var(--lh-heading);
-}
-
 /* ── Related ── */
 .related {
 }

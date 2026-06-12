@@ -51,7 +51,7 @@ export function RecentWork({ projects }: { projects: Project[] }) {
               const tp = projectPresentation(p);
               return (
                 <Link key={p.slug} href={tp.href} className={styles.thumb}>
-                  <ProjectThumb project={p} grad={tp.gradient}
+                  <ProjectThumb project={p}
                     ratio="4/3" sizes={IMG_SIZES.thumb} className={styles.thumbMedia} />
                   <div className={styles.thumbMeta}>
                     <div className={styles.thumbTitle}>{p.title}</div>

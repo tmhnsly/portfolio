@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import { TAGS } from './tags';
+import { MOTIF_KEYS } from './motifs';
 
 export const disciplineSchema = z.enum(['code', 'audio', 'video', 'blog']);
 export type Discipline = z.infer<typeof disciplineSchema>;
@@ -70,7 +71,7 @@ export const postFrontmatterSchema = z.object({
   tags: z.array(tagSchema).default([]),
   featured: z.boolean().default(false), // lead the blog index (else most-recent leads) — parity with Project
   cover: imageRef.optional(),
-  thumb: z.string().optional(), // override the auto fallback-thumbnail motif (see BlogThumb/pickMotif)
+  thumb: z.enum(MOTIF_KEYS).optional(), // fallback-thumbnail motif override, validated against lib/motifs (see BlogThumb/pickMotif)
 });
 export type PostFrontmatter = z.infer<typeof postFrontmatterSchema>;
 export type BlogPost = PostFrontmatter & { slug: string; body: string; readingTime: number; author: Author };

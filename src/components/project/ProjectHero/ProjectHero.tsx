@@ -1,5 +1,5 @@
 import type { Project } from '@/types';
-import { DISCIPLINES } from '@/lib/disciplines';
+import { projectPresentation } from '@/lib/project-presentation';
 import { Pill } from '@/components/ui/Pill';
 import { LinkArrow } from '@/components/ui/LinkArrow';
 import { Entrance, EntranceItem, EntranceTitle } from '@/components/motion/Entrance';
@@ -12,7 +12,7 @@ import styles from './ProjectHero.module.scss';
 const hostLabel = (url: string) => url.replace(/^https?:\/\//, '').replace(/^www\./, '').replace(/\/.*$/, '');
 
 export function ProjectHero({ project }: { project: Project }) {
-  const d = DISCIPLINES[project.discipline];
+  const { label } = projectPresentation(project);
   const primaryLink = project.liveUrl ?? project.links?.[0]?.url;
 
   const metaRows: [string, string][] = [];
@@ -26,7 +26,7 @@ export function ProjectHero({ project }: { project: Project }) {
       <div className={styles.layout}>
         <div className={styles.main}>
           <EntranceItem className={styles.pillRow}>
-            <Pill label={d.label} tone="discipline" />
+            <Pill label={label} tone="discipline" />
             {project.status && (
               <span className={styles.statusPill}>{project.status}</span>
             )}

@@ -1,4 +1,4 @@
-import type { Project } from '@/types';
+import type { MediaItem, Project } from '@/types';
 import { DISCIPLINES } from './disciplines';
 import { youTubeThumbnail } from './youtube';
 import { projectHref } from './routes';
@@ -37,4 +37,29 @@ export function coverImage(project: Project): { src?: string; alt: string } {
   if (!first) return { src: undefined, alt: project.title };
   if (first.type === 'image') return { src: first.src, alt: first.alt ?? project.title };
   return { src: first.poster ?? youTubeThumbnail(first.id), alt: first.alt ?? first.title ?? project.title };
+}
+
+type YouTubeItem = Extract<MediaItem, { type: 'youtube' }>;
+
+/**
+ * How a Project's ordered `media` presents in the Media hero — the pure branch
+ * the hero renders from:
+ *   - `gradient`: no media → the discipline gradient (via ProjectThumb)
+ *   - `video`: a lone YouTube item → plays inline (no pop-out carousel)
+ *   - `poster`: the cover still (`media[0]`) → clickable, opens the Media carousel;
+ *      `isVideo` flags a video cover (play badge), `count` drives the "1 / N" badge.
+ * Pure over the media list, so the three-way choice is table-testable without
+ * mounting the hero (where it previously hid as inline conditionals).
+ */
+export type MediaHeroView =
+  | { mode: 'gradient' }
+  | { mode: 'video'; item: YouTubeItem }
+  | { mode: 'poster'; cover: { src?: string; alt: string }; isVideo: boolean; count: number };
+
+export function mediaHeroView(project: Project): MediaHeroView {
+  const { media } = project;
+  const first = media[0];
+  if (!first) return { mode: 'gradient' };
+  if (media.length === 1 && first.type === 'youtube') return { mode: 'video', item: first };
+  return { mode: 'poster', cover: coverImage(project), isVideo: first.type === 'youtube', count: media.length };
 }

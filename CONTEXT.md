@@ -71,7 +71,7 @@ A content item's card/hero cover, resolved once per type by parallel modules ove
 _Avoid_: thumbnail, image, asset.
 
 **Media hero**:
-The project page's top "pride of place" poster (`media[0]`); clicking it opens the **Media carousel**. Replaced the former cover embed.
+The project page's top "pride of place" poster (`media[0]`); clicking it opens the **Media carousel**. Replaced the former cover embed. Its three view modes — gradient (no media), inline lone-video, and clickable poster — are chosen by the pure `mediaHeroView` seam in `lib/project-presentation.ts`, not by inline conditionals in the component.
 _Avoid_: embed, banner.
 
 **Media carousel**:
@@ -98,6 +98,7 @@ The reusable animation building blocks — pick by trigger:
 - **RevealThumb** (over **`useReveal`**) — a scroll-triggered reveal for the bespoke project thumbs, **CSS-class**-driven (it toggles an `.inview` class the thumb's own SCSS keyframes hang off). Reach for this, not `Reveal`, when the entrance is authored in the component's stylesheet.
 - **Rolling** — slides a value to its new value when it changes.
 - **Marquee** — a continuous horizontal scroll, paused off-screen (via `useInView`).
+- **ZoneCrossfade** — dissolves a tinted layer to its new colour when the **Zone** changes (opacity crossfade, not colour interpolation — an OKLab tween would pass through muddy midpoints). Drives the **Bloom** tint and the **Nav** accent fill.
 
 `Reveal` (Motion) and `RevealThumb`/`useReveal` (CSS) are deliberately **separate mechanisms, not duplicates** — see ADR-0002.
 
