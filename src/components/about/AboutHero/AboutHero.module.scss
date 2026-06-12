@@ -47,7 +47,7 @@
 
 .intro {
   margin: var(--space-6) 0 0;
-  max-width: 640px;
+  max-width: var(--measure);
   font-family: var(--font-display);
   font-size: var(--fs-h3);
   line-height: 1.4;
