@@ -48,9 +48,13 @@ export function Shell({
         '--on-accent': onAccent,
       } as React.CSSProperties}
     >
+      {/* First focusable element on every route: lets keyboard/SR users skip the
+          persistent Nav + Breadcrumb straight to page content. Off-screen until
+          focused (see Shell.module.scss). */}
+      <a href="#main" className={styles.skipLink}>Skip to content</a>
       <Bloom zone={discipline ?? 'default'} tint={accent} />
       <Nav active={active} accent={accent} accentInk={accentInk} onAccent={onAccent} />
-      <main className={styles.content}>
+      <main id="main" className={styles.content}>
         {/* persistent breadcrumb — one consistent, clickable trail for every
             route, so its position never shifts and the changing segment rolls */}
         <Breadcrumb data={breadcrumbData} discipline={discipline} />

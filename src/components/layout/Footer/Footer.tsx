@@ -48,7 +48,7 @@ export function Footer() {
           </div>
           <div className={styles.col}>
             <div className={styles.label}>{COPY.footer.elsewhere}</div>
-            {SITE.socials.map((s) => <a className={styles.link} href={s.href} key={s.label}>{s.label}</a>)}
+            {SITE.socials.map((s) => <a className={styles.link} href={s.href} key={s.label} target="_blank" rel="noopener noreferrer">{s.label}</a>)}
           </div>
           <div className={styles.col}>
             <div className={styles.label}>{COPY.footer.factLabel}</div>
