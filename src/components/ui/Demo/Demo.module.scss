@@ -1,0 +1,30 @@
+.demo {
+  margin: var(--space-7) 0;
+}
+
+.label {
+  display: block;
+  margin-bottom: var(--space-2);
+  font-family: var(--font-mono);
+  font-size: var(--fs-mono-xs);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+// The framed stage the real component renders inside — gives the preview room to
+// breathe and signals "this is rendered, not described".
+.stage {
+  padding: var(--space-6);
+  border: var(--border-width) solid var(--rule-soft);
+  border-radius: var(--radius-lg);
+  background: var(--surface-soft);
+}
+
+// Button demo: lay the variants out in a wrapping row.
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-4);
+}
