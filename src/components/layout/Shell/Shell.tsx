@@ -54,7 +54,7 @@ export function Shell({
           focused (see Shell.module.scss). */}
       <a href="#main" className={styles.skipLink}>Skip to content</a>
       <Bloom zone={discipline ?? 'default'} tint={accent} />
-      <Nav active={active} accent={accent} accentInk={accentInk} onAccent={onAccent} />
+      <Nav active={active} accent={accent} accentInk={accentInk} accentHover={accentHover} onAccent={onAccent} />
       <main id="main" className={styles.content}>
         {/* persistent breadcrumb — one consistent, clickable trail for every
             route, so its position never shifts and the changing segment rolls */}

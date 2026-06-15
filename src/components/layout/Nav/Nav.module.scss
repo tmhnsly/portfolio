@@ -37,7 +37,7 @@
 .brand:active { background: var(--surface-active); }
 /* accent fill that crossfades old→new on a zone change (see AccentFill, Nav.tsx);
    negative z-index keeps it behind the in-flow label without a wrapper */
-.fill { position: absolute; inset: 0; border-radius: inherit; z-index: -1; }
+.fill { position: absolute; inset: 0; border-radius: inherit; z-index: -2; }
 .name {
   /* brand watermark — stays on the bar at every width (incl. burger mode) */
   font-size: var(--fs-body); font-weight: var(--fw-semibold); letter-spacing: -0.02em; color: var(--text);
@@ -110,11 +110,17 @@
   transition: background var(--duration-fast) var(--ease-standard),
     transform var(--duration-fast) var(--ease-standard);
 }
-/* CTA hover/press. The accent fill is the AccentFill span behind the label
-   (z-index -1); the .cta's own background paints over it, so hover → step-10
-   (--accent-hover, zone-aware from the Shell). Solids have no pressed scale step,
-   so a subtle press. */
-@include can-hover { .cta:hover { background: var(--accent-hover); } }
+/* CTA hover/press. The crossfade AccentFill (.fill, z-index -2) paints over the
+   .cta's own background, so a plain :hover background never shows. Instead a
+   step-10 tint layer sits ABOVE the fill but BELOW the in-flow label (z-index -1),
+   faded in on hover. --accent-hover is zone-aware (set by the Shell). Solids have
+   no pressed scale step, so a subtle press. */
+.cta::after {
+  content: ''; position: absolute; inset: 0; z-index: -1; border-radius: inherit;
+  background: var(--accent-hover); opacity: 0;
+  transition: opacity var(--duration-fast) var(--ease-standard);
+}
+@include can-hover { .cta:hover::after { opacity: 1; } }
 .cta:active { transform: translateY(1px); }
 /* CTA scales: "Say hi →" in the lower desktop range, full email from 1440 up */
 .ctaFull { display: none; }
@@ -177,9 +183,9 @@
   transition: background var(--duration-fast) var(--ease-standard),
     transform var(--duration-fast) var(--ease-standard);
 }
-/* derive the hover from --accent (set inline on the portaled Content) so the
-   menu CTA matches the zone, not the root accent-hover */
-.menuCta[data-highlighted] { background: color-mix(in srgb, var(--accent) 88%, black); }
+/* step-10 hover, consistent with the bar CTA and Button. --accent-hover is set
+   inline on the portaled Content (the menu lives outside the Shell's accent scope). */
+.menuCta[data-highlighted] { background: var(--accent-hover); }
 .menuCta:active { transform: translateY(1px); }
 
 /* Radix moves focus onto an item on pointer-hover, and the global :focus-visible ring
