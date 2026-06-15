@@ -16,9 +16,13 @@ import type { NextConfig } from 'next';
  * site actually loads: YouTube embeds (youtube-nocookie) and their thumbnails
  * (i.ytimg.com). Fonts are self-hosted by next/font, so `font-src 'self'`.
  */
+// Turbopack's dev runtime evaluates modules with eval() for HMR, which needs
+// 'unsafe-eval'. Added in development only; production builds ship no eval, so the
+// production CSP stays strict (no 'unsafe-eval').
+const isDev = process.env.NODE_ENV === 'development';
 const csp = {
   'default-src': ["'self'"],
-  'script-src': ["'self'", "'unsafe-inline'"],
+  'script-src': ["'self'", "'unsafe-inline'", ...(isDev ? ["'unsafe-eval'"] : [])],
   'style-src': ["'self'", "'unsafe-inline'"],
   'img-src': ["'self'", 'data:', 'blob:', 'https://i.ytimg.com'],
   'font-src': ["'self'"],

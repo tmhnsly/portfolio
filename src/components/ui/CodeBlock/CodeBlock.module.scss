@@ -1,17 +1,41 @@
-.block {
-  margin: var(--space-7) 0;
+@mixin scroller {
+  margin: 0;
   padding: var(--pad-code-block);
-  border-radius: var(--radius-lg);
-  background: var(--code-bg);
-  color: var(--code-text);
+  overflow-x: auto;
   font-family: var(--font-mono);
-  font-size: var(--fs-caption);
   line-height: 1.7;
   letter-spacing: var(--ls-mono);
-  box-shadow: var(--shadow-md);
-  overflow-x: auto;
+}
+
+// Framing shared with the page's other cards (Chart, Demo): a soft rule + radius,
+// no shadow, so the code block reads as a sibling card.
+@mixin card-frame {
+  margin: var(--space-7) 0;
+  border: var(--border-width) solid var(--rule-soft);
+  border-radius: var(--radius-xl);
+  font-size: var(--fs-caption);
+}
+
+// Plain <pre> when the language has no grammar loaded — site's dark code surface.
+.fallback {
+  @include card-frame;
+  @include scroller;
+  background: var(--code-bg);
+  color: var(--code-text);
 
   code {
     font-family: inherit;
+  }
+}
+
+// Wrapper around Shiki's injected <pre class="shiki">. The One Dark Pro theme
+// supplies the dark background and per-token colours inline, so this just frames
+// and clips the editor — no theme-switching CSS, identical in light and dark mode.
+.block {
+  @include card-frame;
+  overflow: hidden; // clip the dark editor fill to the rounded frame
+
+  :global(.shiki) {
+    @include scroller;
   }
 }

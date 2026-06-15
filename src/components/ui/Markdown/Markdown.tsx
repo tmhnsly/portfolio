@@ -2,6 +2,7 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { CodeBlock } from '../CodeBlock';
 import { Chart } from '../Chart';
+import { Demo } from '../Demo';
 import styles from './Markdown.module.scss';
 
 export function Markdown({ children }: { children: string }) {
@@ -22,9 +23,12 @@ export function Markdown({ children }: { children: string }) {
             const cls = className ?? '';
             // ```chart blocks render a Radix-coloured bar chart (see Chart)
             if (cls.includes('language-chart')) return <Chart json={String(children)} />;
-            const isBlock = /language-/.test(cls);
-            return isBlock
-              ? <CodeBlock>{String(children).replace(/\n$/, '')}</CodeBlock>
+            // ```demo blocks render a real component inline (see Demo)
+            if (cls.includes('language-demo')) return <Demo spec={String(children)} />;
+            // any other ```lang fence → Shiki-highlighted block; bare `code` → inline
+            const lang = /language-([\w-]+)/.exec(cls)?.[1];
+            return lang
+              ? <CodeBlock code={String(children).replace(/\n$/, '')} lang={lang} />
               : <code className={styles.inlineCode}>{children}</code>;
           },
         }}
