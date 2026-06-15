@@ -76,7 +76,7 @@ export default function HirePage() {
                   href={d.route}
                   className={styles.card}
                   style={{ ['--accent']: d.color, ['--accent-ink']: d.ink } as React.CSSProperties}
-                  aria-label={s.linkLabel}
+                  aria-label={`${s.title}: ${s.linkLabel}`}
                 >
                   <span className={styles.cardBar} aria-hidden />
                   <span className={styles.mark}>
