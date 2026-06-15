@@ -23,3 +23,26 @@
   position: relative;
   z-index: var(--z-content);
 }
+
+/* Skip-to-content: present in the tab order but pulled off-screen until focused,
+   then it drops into the top-left above everything (z-overlay) so the first Tab
+   on any route can jump past the nav + breadcrumb to the page content. */
+.skipLink {
+  position: fixed;
+  top: var(--space-3);
+  left: var(--space-3);
+  z-index: var(--z-overlay);
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-md);
+  background: var(--bg);
+  color: var(--text);
+  border: 1px solid var(--accent);
+  font-family: var(--font-mono);
+  font-size: var(--fs-mono);
+  font-weight: var(--fw-medium);
+  text-decoration: none;
+  transform: translateY(calc(-100% - var(--space-4)));
+  transition: transform 0.2s var(--ease-standard);
+
+  &:focus-visible { transform: translateY(0); }
+}
