@@ -11,6 +11,7 @@ import { DISCIPLINES, isDiscipline } from './disciplines';
 export interface ZoneAccent {
   accent: string; // --accent: step-9 solid fill
   accentInk: string; // --accent-ink: step-11 legible coloured text
+  accentHover: string; // --accent-hover: step-10 solid hover
   onAccent: string; // --on-accent: text drawn on the accent fill
 }
 
@@ -23,6 +24,7 @@ export interface Zone extends ZoneAccent {
 const DEFAULT_ACCENT: ZoneAccent = {
   accent: 'var(--tomato-9)',
   accentInk: 'var(--tomato-11)',
+  accentHover: 'var(--tomato-10)',
   onAccent: 'var(--white-a12)',
 };
 
@@ -36,7 +38,7 @@ export function disciplineFromPath(pathname: string): Discipline | undefined {
 export function zoneAccent(discipline?: Discipline): ZoneAccent {
   if (!discipline) return DEFAULT_ACCENT;
   const m = DISCIPLINES[discipline];
-  return { accent: m.color, accentInk: m.ink, onAccent: m.onAccent };
+  return { accent: m.color, accentInk: m.ink, accentHover: m.hover, onAccent: m.onAccent };
 }
 
 /** Resolve the current Zone (discipline + nav-active segment + accent tokens). */

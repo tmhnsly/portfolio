@@ -33,7 +33,8 @@
   margin-left: -4px;
   transition: background var(--duration-fast) var(--ease-standard);
 }
-@include can-hover { .brand:hover { background: var(--surface-soft); } }
+@include can-hover { .brand:hover { background: var(--surface); } }
+.brand:active { background: var(--surface-active); }
 /* accent fill that crossfades old→new on a zone change (see AccentFill, Nav.tsx);
    negative z-index keeps it behind the in-flow label without a wrapper */
 .fill { position: absolute; inset: 0; border-radius: inherit; z-index: -1; }
@@ -61,8 +62,10 @@
   transition: background var(--duration-fast) var(--ease-standard), color var(--duration-fast) var(--ease-standard);
   white-space: nowrap; flex-shrink: 0;
 }
-/* hover bg only on inactive items — the active item's pill already fills it */
-@include can-hover { .item:not(.active):hover { background: var(--surface-soft); } }
+/* hover/press bg only on inactive items — the active item's pill already fills it.
+   Radix component-bg: step 4 on hover, step 5 on press. */
+@include can-hover { .item:not(.active):hover { background: var(--surface); } }
+.item:not(.active):active { background: var(--surface-active); }
 /* the active item carries a CSS fill so first paint (pre-JS-measure) is flash-free;
    once the sprung pill is measured, .hasPill hands the fill over to it */
 .active { color: var(--bg); background: var(--text); }
@@ -90,7 +93,8 @@
   flex-shrink: 0;
   transition: background var(--duration-fast) var(--ease-standard), color var(--duration-fast) var(--ease-standard);
 }
-@include can-hover { .toggle:hover { background: var(--surface-soft); color: var(--text); } }
+@include can-hover { .toggle:hover { background: var(--surface); color: var(--text); } }
+.toggle:active { background: var(--surface-active); color: var(--text); }
 .cta {
   position: relative; isolation: isolate; /* contain the crossfade fill below the label */
   /* explicit height so the CTA's top/bottom gap is a uniform 8px (like its right gap),
@@ -103,7 +107,15 @@
      like the other nav buttons instead of floating above it (was 0 6px 18px / 27%) */
   box-shadow: 0 2px 6px color-mix(in srgb, var(--accent) 18%, transparent);
   flex-shrink: 0;
+  transition: background var(--duration-fast) var(--ease-standard),
+    transform var(--duration-fast) var(--ease-standard);
 }
+/* CTA hover/press. The accent fill is the AccentFill span behind the label
+   (z-index -1); the .cta's own background paints over it, so hover → step-10
+   (--accent-hover, zone-aware from the Shell). Solids have no pressed scale step,
+   so a subtle press. */
+@include can-hover { .cta:hover { background: var(--accent-hover); } }
+.cta:active { transform: translateY(1px); }
 /* CTA scales: "Say hi →" in the lower desktop range, full email from 1440 up */
 .ctaFull { display: none; }
 .ctaShort { display: inline; }
@@ -122,8 +134,9 @@
 
   @include tablet-up { display: none; }
 }
-.burger[data-state='open'] { background: var(--surface-soft); color: var(--text); }
-@include can-hover { .burger:hover { background: var(--surface-soft); color: var(--text); } }
+.burger[data-state='open'] { background: var(--surface-active); color: var(--text); } /* open = active → step 5 */
+@include can-hover { .burger:hover { background: var(--surface); color: var(--text); } }
+.burger:active { background: var(--surface-active); color: var(--text); }
 
 .menu {
   min-width: 196px;
@@ -152,18 +165,22 @@
   transition: background var(--duration-fast) var(--ease-standard);
 }
 .menuIcon { font-size: 18px; flex: none; } /* react-icons render at 1em (currentColor) */
-.menuItem[data-highlighted] { background: var(--surface-soft); }
-@include can-hover { .menuItem:hover { background: var(--surface-soft); } }
+.menuItem[data-highlighted] { background: var(--surface); }
+@include can-hover { .menuItem:hover { background: var(--surface); } }
+.menuItem:active { background: var(--surface-active); }
 .menuItemActive, .menuItemActive[data-highlighted] { background: var(--text); color: var(--bg); }
 .menuSep { height: 1px; background: var(--rule-soft); margin: var(--space-2) 4px; }
 .menuCta {
   display: block; padding: 10px 14px; border-radius: var(--radius-lg);
   background: var(--accent); color: var(--on-accent, var(--text-on-accent)); text-decoration: none; cursor: pointer;
   font-size: 15px; font-weight: var(--fw-semibold); outline: none; white-space: nowrap;
+  transition: background var(--duration-fast) var(--ease-standard),
+    transform var(--duration-fast) var(--ease-standard);
 }
 /* derive the hover from --accent (set inline on the portaled Content) so the
    menu CTA matches the zone, not the root accent-hover */
 .menuCta[data-highlighted] { background: color-mix(in srgb, var(--accent) 88%, black); }
+.menuCta:active { transform: translateY(1px); }
 
 /* Radix moves focus onto an item on pointer-hover, and the global :focus-visible ring
    (in _reset) misfires there — and it beats the plain `outline: none` above (equal

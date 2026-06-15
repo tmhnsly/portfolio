@@ -9,8 +9,9 @@
   /* surfaces / backgrounds */
   --bg: var(--sand-1);
   --bg-subtle: var(--sand-2);
-  --surface: var(--sand-a4);        /* neutral translucent glass fill */
-  --surface-soft: var(--sand-a3);
+  --surface: var(--sand-a4);        /* neutral translucent glass fill (Radix step 4 = component hover) */
+  --surface-soft: var(--sand-a3);   /* Radix step 3 = component rest */
+  --surface-active: var(--sand-a5); /* Radix step 5 = component pressed/active */
   --surface-edge: var(--sand-7);    /* card border (subtle, step 7) */
 
   /* apple-style glass (nav): milky translucent fill from --bg so it frosts
