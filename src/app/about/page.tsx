@@ -1,14 +1,16 @@
 import type { Metadata } from 'next';
+import { COPY, TIMELINE } from '@/data';
+import { pageMeta } from '@/lib/metadata';
+import { faqJsonLd } from '@/lib/structured-data';
+import { JsonLd } from '@/components/seo';
 import { Container, Stack } from '@/components/layout';
 import { AboutHero } from '@/components/about/AboutHero';
 import { Intro } from '@/components/about/Intro';
 import { Currently } from '@/components/about/Currently';
 import { Timeline } from '@/components/about/Timeline';
-import { Skills } from '@/components/about/Skills';
+import { Help } from '@/components/about/Help';
+import { FAQ } from '@/components/about/FAQ';
 import { ContactCTA } from '@/components/about/ContactCTA';
-import { TIMELINE } from '@/data';
-import { getSkills } from '@/data/skills';
-import { pageMeta } from '@/lib/metadata';
 
 export const metadata: Metadata = pageMeta({
   title: 'About',
@@ -19,12 +21,14 @@ export const metadata: Metadata = pageMeta({
 export default function AboutPage() {
   return (
     <Container>
+      <JsonLd data={faqJsonLd(COPY.about.faq)} />
       <Stack>
         <AboutHero />
         <Intro />
         <Currently />
         <Timeline entries={TIMELINE} />
-        <Skills skills={getSkills()} />
+        <Help />
+        <FAQ />
         <ContactCTA />
       </Stack>
     </Container>

@@ -20,7 +20,7 @@ export function GET() {
     '- Open to: permanent roles and freelance or contract work (remote or on-site)',
     '- Specialism: frontend — React, Next.js, TypeScript; full-stack capable',
     '- Also works in: audio and video',
-    `- Hire: ${at('/hire')}`,
+    `- About / hire: ${at('/about')}`,
     `- CV: ${at('/tom-hinsley-cv.pdf')}`,
     '',
     '## Selected work',

@@ -77,6 +77,8 @@ const nextConfig: NextConfig = {
       { source: '/sound/:slug', destination: '/audio/:slug', permanent: true },
       { source: '/photo', destination: '/', permanent: true },
       { source: '/photo/:slug', destination: '/', permanent: true },
+      // /hire retired — its "how I can help" + FAQ now live on /about.
+      { source: '/hire', destination: '/about', permanent: true },
       // Renamed pieces → their new slug (the /sound,/music wildcards above already
       // funnel the old-discipline prefixes into /audio, so keying on the post-merge
       // path catches both). Deleted placeholder projects/posts are intentionally left
