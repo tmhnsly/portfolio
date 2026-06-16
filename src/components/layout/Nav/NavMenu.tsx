@@ -27,11 +27,13 @@ export function NavMenu({
   active,
   accent,
   accentInk,
+  accentHover,
   onAccent,
 }: {
   active?: string;
   accent: string;
   accentInk: string;
+  accentHover: string;
   onAccent: string;
 }) {
   const { theme, toggle } = useTheme();
@@ -51,7 +53,7 @@ export function NavMenu({
           align="end"
           sideOffset={12}
           collisionPadding={16}
-          style={{ '--accent': accent, '--accent-ink': accentInk, '--on-accent': onAccent } as React.CSSProperties}
+          style={{ '--accent': accent, '--accent-ink': accentInk, '--accent-hover': accentHover, '--on-accent': onAccent } as React.CSSProperties}
         >
           {SITE.nav.map((item) => {
             const Icon = NAV_ICONS[item.href];

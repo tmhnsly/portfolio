@@ -32,7 +32,7 @@ export function Shell({
   breadcrumbData: BreadcrumbData;
 }) {
   const pathname = usePathname();
-  const { discipline, active, accent, accentInk, onAccent } = resolveZone(pathname);
+  const { discipline, active, accent, accentInk, accentHover, onAccent } = resolveZone(pathname);
 
   // Reliably start each route at the top: the persistent Shell means the window
   // scroll position can otherwise carry over from the previous route on navigation.
@@ -45,6 +45,7 @@ export function Shell({
         '--accent': accent,
         '--accent-ink': accentInk,
         '--accent-ink-to': accentInk, // the title period reads this — now just the accent ink
+        '--accent-hover': accentHover, // step-10 — solid hover for accent fills (Button, nav CTA)
         '--on-accent': onAccent,
       } as React.CSSProperties}
     >
@@ -53,7 +54,7 @@ export function Shell({
           focused (see Shell.module.scss). */}
       <a href="#main" className={styles.skipLink}>Skip to content</a>
       <Bloom zone={discipline ?? 'default'} tint={accent} />
-      <Nav active={active} accent={accent} accentInk={accentInk} onAccent={onAccent} />
+      <Nav active={active} accent={accent} accentInk={accentInk} accentHover={accentHover} onAccent={onAccent} />
       <main id="main" className={styles.content}>
         {/* persistent breadcrumb — one consistent, clickable trail for every
             route, so its position never shifts and the changing segment rolls */}

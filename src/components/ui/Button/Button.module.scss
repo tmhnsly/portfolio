@@ -1,9 +1,32 @@
+@use '../../../styles/mixins/breakpoints' as *;
+
 .btn { display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2);
   font-family: var(--font-display); font-weight: var(--fw-semibold); font-size: var(--fs-body-s); letter-spacing: -0.005em;
-  border-radius: var(--radius-lg); cursor: pointer; text-decoration: none; }
+  border-radius: var(--radius-lg); cursor: pointer; text-decoration: none;
+  transition: background var(--duration-fast) var(--ease-standard),
+    border-color var(--duration-fast) var(--ease-standard),
+    transform var(--duration-fast) var(--ease-standard); }
 .primary { padding: var(--pad-btn); background: var(--accent); color: var(--on-accent, var(--text-on-accent));
   box-shadow: 0 6px 18px color-mix(in srgb, var(--accent) 27%, transparent); }
 .secondary { padding: var(--pad-btn); background: var(--text); color: var(--bg); }
 .ghost { padding: var(--pad-btn); background: transparent; color: var(--text); border: var(--border-width) solid var(--rule-soft); }
 .icon { width: var(--control-size); height: var(--control-size); background: var(--surface-soft); border: var(--border-width) solid var(--rule-soft);
   color: var(--text); font-family: var(--font-mono); }
+
+/* Hover — Radix semantics: solid fills step 9 → 10; outline/icon component-bg
+   step 3 → 4 with the border stepping 6 → 7. Gated to real pointers so taps don't
+   leave a stuck hover. */
+@include can-hover {
+  .primary:hover { background: var(--accent-hover); }
+  .secondary:hover { background: color-mix(in srgb, var(--text) 86%, var(--bg)); }
+  .ghost:hover,
+  .icon:hover { background: var(--surface); border-color: var(--rule); }
+}
+
+/* Pressed — Radix component-bg step 5 + border step 8 for the outline/icon
+   variants (the scale defines a pressed step for these). Solid fills have no
+   pressed step in the 9/10 scale, so they get a subtle press instead. Not gated:
+   press feedback should fire on touch too. */
+.btn:active { transform: translateY(1px); }
+.ghost:active,
+.icon:active { background: var(--surface-active); border-color: var(--rule-strong); }

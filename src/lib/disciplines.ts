@@ -34,6 +34,7 @@ function meta(slug: Discipline): DisciplineMeta {
     label: LABEL[slug],
     color: `var(--${h}-9)`,
     ink: `var(--${h}-11)`,
+    hover: `var(--${h}-10)`,
     // Radix: step-9 solids take white OR black text. Use FIXED black/white
     // (alpha scales, theme-independent) — NOT --gray-12, which flips to light in
     // dark mode and would break the text on a bright (yellow/orange) pill there.

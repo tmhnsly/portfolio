@@ -20,6 +20,7 @@ export interface NavProps {
       dropdown, which renders outside the Shell's --accent scope */
   accent: string;
   accentInk: string;
+  accentHover: string;
   onAccent: string;
 }
 
@@ -33,7 +34,7 @@ function AccentFill({ accent }: { accent: string }) {
   return <ZoneCrossfade zoneKey={accent} as="span" className={styles.fill} style={{ background: accent }} />;
 }
 
-export function Nav({ active, accent, accentInk, onAccent }: NavProps) {
+export function Nav({ active, accent, accentInk, accentHover, onAccent }: NavProps) {
   const { theme, toggle } = useTheme();
   const reduce = useReducedMotion();
   const { email, mailto } = useEmail();
@@ -135,7 +136,7 @@ export function Nav({ active, accent, accentInk, onAccent }: NavProps) {
           </div>
 
           {/* Mobile: burger → glass dropdown */}
-          <NavMenu active={active} accent={accent} accentInk={accentInk} onAccent={onAccent} />
+          <NavMenu active={active} accent={accent} accentInk={accentInk} accentHover={accentHover} onAccent={onAccent} />
         </nav>
       </Container>
     </header>
