@@ -10,8 +10,8 @@ import styles from './Availability.module.scss';
 
 /**
  * Homepage "open to work" block — the one visible hire signal, doubling as a
- * strong on-page keyword cue. The subtle `more` link is the only internal route
- * to /hire (kept out of the nav on purpose), so that page isn't orphaned.
+ * strong on-page keyword cue. The subtle `more` link points to the About page,
+ * which carries the "how I can help" cards + FAQ (the old /hire content).
  */
 export function Availability() {
   const a = COPY.home.availability;
@@ -28,7 +28,7 @@ export function Availability() {
           <Button variant="ghost" href="/tom-hinsley-cv.pdf" download="Tom-Hinsley-CV.pdf">
             <BiDownload aria-hidden /> Download CV
           </Button>
-          <Link href="/hire" className={styles.more}>{a.more} <LinkArrow inline /></Link>
+          <Link href="/about" className={styles.more}>{a.more} <LinkArrow inline /></Link>
         </div>
       </GlassCard>
     </section>

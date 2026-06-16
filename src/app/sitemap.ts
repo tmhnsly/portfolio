@@ -11,8 +11,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const top: MetadataRoute.Sitemap = [
     { url: at('/'), lastModified: projects[0]?.date, changeFrequency: 'monthly', priority: 1 },
-    { url: at('/about'), changeFrequency: 'yearly', priority: 0.7 },
-    { url: at('/hire'), changeFrequency: 'yearly', priority: 0.8 },
+    { url: at('/about'), changeFrequency: 'yearly', priority: 0.8 },
     { url: at('/blog'), lastModified: posts[0]?.date, changeFrequency: 'weekly', priority: 0.7 },
   ];
   const sections: MetadataRoute.Sitemap = DISCIPLINE_ORDER.filter((d) => d !== 'blog').map((d) => ({

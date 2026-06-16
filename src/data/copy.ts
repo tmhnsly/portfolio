@@ -36,7 +36,7 @@ export const COPY = {
       eyebrow: 'Open to work',
       heading: 'Open to roles & freelance',
       body: 'React, Next.js and TypeScript are home base, with full-stack reach when a project needs it. I pick up new tools fast, and I take on audio and video work too. London, remote or on-site.',
-      // subtle link to the /hire page (kept out of the nav on purpose)
+      // subtle link to the About page's "how I can help" section
       more: 'More on working together',
     },
   },
@@ -84,9 +84,16 @@ export const COPY = {
     timelineEyebrow: 'Career timeline',
     timelineHeading: 'Where I’ve been',
 
-    // Skills section
-    skillsEyebrow: 'Tools and craft',
-    skillsHeading: 'What I work with',
+    // "How I can help" section — one card per hireable practice, keyed to a
+    // discipline so each takes that discipline's accent + pixel mark and links to
+    // its work. Moved here when the /hire page was retired.
+    helpEyebrow: 'What I do',
+    helpHeading: 'How I can help',
+    help: [
+      { discipline: 'code', title: 'Web development', body: 'Frontend and full-stack: responsive, accessible interfaces in React, Next.js and TypeScript, with design systems, APIs and performance work.', linkLabel: 'See code work' },
+      { discipline: 'audio', title: 'Audio', body: 'Original music and sound design for film, games and brand work, from a sound-design background.', linkLabel: 'See audio work' },
+      { discipline: 'video', title: 'Video', body: 'Editing, motion and short films, from concept to final cut.', linkLabel: 'See video work' },
+    ],
 
     // FAQ — visible Q&A that also drives FAQPage structured data. Strong AI-EO:
     // assistants lift these answers verbatim, so keep them factual and specific.
@@ -155,29 +162,6 @@ export const COPY = {
     urlPath: '/the-page-you-wanted',
     lead: 'That page doesn’t exist, but here’s everything that does.',
     cta: 'Or get in touch.',
-  },
-
-  // /hire landing page — not linked in the nav (discoverable via search + a subtle
-  // homepage link). Focused hire-intent copy. `services` are keyed to disciplines
-  // so each card takes that discipline's accent + pixel mark and links to its work.
-  hire: {
-    eyebrow: 'Work with me',
-    title: 'Hire Tom Hinsley',
-    lead: 'Full-stack developer and frontend specialist in London, open to permanent roles and freelance or contract work.',
-    intro: 'React, Next.js and TypeScript are home base, with full-stack reach when a project needs it and a strong accessibility focus throughout. I’ve built for agencies, a software consultancy and editorial publishers including the Financial Times, and I pick up new tools fast. Alongside the web work I also take on audio and video.',
-    workedWithLabel: 'Worked with',
-    workedWith: ['Financial Times', 'Rocketmakers', 'Neverbland'] as string[],
-    servicesEyebrow: 'What I do',
-    servicesHeading: 'How I can help',
-    services: [
-      { discipline: 'code', title: 'Web development', body: 'Frontend and full-stack: responsive, accessible interfaces in React, Next.js and TypeScript, with design systems, APIs and performance work.', linkLabel: 'See code work' },
-      { discipline: 'audio', title: 'Audio', body: 'Original music and sound design for film, games and brand work, from a sound-design background.', linkLabel: 'See audio work' },
-      { discipline: 'video', title: 'Video', body: 'Editing, motion and short films, from concept to final cut.', linkLabel: 'See video work' },
-    ],
-    ctaEyebrow: 'Get in touch',
-    ctaHeading: 'Let’s talk.',
-    ctaHeadingSoft: 'Tell me about the project or role.',
-    ctaNote: 'I usually reply within a day or two.',
   },
 } as const;
 
