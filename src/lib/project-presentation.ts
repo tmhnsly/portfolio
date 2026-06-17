@@ -1,6 +1,6 @@
 import type { MediaItem, Project } from '@/types';
 import { DISCIPLINES } from './disciplines';
-import { youTubeThumbnail } from './youtube';
+import { youTubePoster } from './youtube';
 import { projectHref } from './routes';
 
 /**
@@ -36,7 +36,7 @@ export function coverImage(project: Project): { src?: string; alt: string } {
   const first = project.media[0];
   if (!first) return { src: undefined, alt: project.title };
   if (first.type === 'image') return { src: first.src, alt: first.alt ?? project.title };
-  return { src: first.poster ?? youTubeThumbnail(first.id), alt: first.alt ?? first.title ?? project.title };
+  return { src: youTubePoster(first.id, first.poster), alt: first.alt ?? first.title ?? project.title };
 }
 
 type YouTubeItem = Extract<MediaItem, { type: 'youtube' }>;
