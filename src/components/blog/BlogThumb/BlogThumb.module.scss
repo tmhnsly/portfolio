@@ -30,8 +30,12 @@
   place-items: center;
   overflow: hidden;
   isolation: isolate;
+  /* Fade the glow to a TRANSPARENT VERSION OF ITS OWN COLOUR, not the bare
+     `transparent` keyword (= rgba(0,0,0,0)). Fading to bare transparent makes
+     Safari/iOS interpolate through grey-black, which showed the glow as a dark
+     oval blob instead of a soft tint. color-mix keeps the fade in-hue. */
   background:
-    radial-gradient(78% 68% at 24% 16%, var(--c-glow), transparent 60%),
+    radial-gradient(78% 68% at 24% 16%, var(--c-glow), color-mix(in srgb, var(--c-glow), transparent) 60%),
     linear-gradient(150deg, var(--c-hi), var(--c-lo));
 }
 
@@ -51,7 +55,7 @@
 .dotgrid {
   position: absolute;
   inset: -22%;
-  background-image: radial-gradient(circle, var(--c-form) 26%, transparent 30%);
+  background-image: radial-gradient(circle, var(--c-form) 26%, color-mix(in srgb, var(--c-form), transparent) 30%);
   background-size: 7cqmin 7cqmin;
   transform: rotate(-12deg);
   -webkit-mask-image: radial-gradient(58% 58% at 33% 36%, #000 4%, transparent 74%);
@@ -64,7 +68,7 @@
   width: 56cqmin;
   height: 56cqmin;
   border-radius: 50%;
-  background: radial-gradient(circle, var(--c-glow), transparent 62%);
+  background: radial-gradient(circle, var(--c-glow), color-mix(in srgb, var(--c-glow), transparent) 62%);
   filter: blur(1.2cqmin);
 }
 .rings { width: 98cqmin; height: 98cqmin; overflow: visible; }
@@ -83,7 +87,7 @@
   width: 30cqmin;
   height: 30cqmin;
   border-radius: 50%;
-  background: radial-gradient(circle, var(--tomato-7), color-mix(in oklab, var(--tomato-6), transparent 50%) 45%, transparent 68%);
+  background: radial-gradient(circle, var(--tomato-7), color-mix(in oklab, var(--tomato-6), transparent 50%) 45%, color-mix(in srgb, var(--tomato-6), transparent) 68%);
   filter: blur(1cqmin);
 }
 .ripples { width: 100cqmin; height: 100cqmin; overflow: visible; }
@@ -148,7 +152,7 @@
   width: 30cqmin;
   height: 30cqmin;
   border-radius: 50%;
-  background: radial-gradient(circle at 50% 42%, var(--c-form), transparent 70%);
+  background: radial-gradient(circle at 50% 42%, var(--c-form), color-mix(in srgb, var(--c-form), transparent) 70%);
 }
 .halo {
   position: absolute;
