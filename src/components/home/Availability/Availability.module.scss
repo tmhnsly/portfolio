@@ -35,7 +35,7 @@
   font-family: var(--font-mono);
   font-size: var(--fs-mono-s);
   text-transform: uppercase;
-  letter-spacing: 0.06em;
+  letter-spacing: var(--ls-caps);
   color: var(--text-muted);
   transition: color var(--duration-hover) var(--ease-standard);
 }

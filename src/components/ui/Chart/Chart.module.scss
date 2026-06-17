@@ -11,7 +11,7 @@
 .title {
   font-family: var(--font-mono);
   font-size: var(--fs-mono-s);
-  letter-spacing: 0.08em;
+  letter-spacing: var(--ls-caps);
   text-transform: uppercase;
   color: var(--text-muted);
   margin-bottom: var(--space-5);

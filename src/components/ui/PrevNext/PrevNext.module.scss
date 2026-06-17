@@ -48,7 +48,7 @@
   font-family: var(--font-mono);
   font-size: var(--fs-caption);
   color: var(--text-muted);
-  letter-spacing: 0.1em;
+  letter-spacing: var(--ls-caps-wide);
   text-transform: uppercase;
 }
 
