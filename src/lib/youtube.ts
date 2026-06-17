@@ -17,3 +17,10 @@ export function youTubeEmbedUrl(id: string, { autoplay = false, list }: { autopl
 export function youTubeThumbnail(id: string): string {
   return `https://i.ytimg.com/vi/${id}/maxresdefault.jpg`;
 }
+
+/** The still a YouTube media item shows before play: its custom `poster`, else
+    YouTube's hosted thumbnail. One home for the fallback the YouTube facade and
+    the cover-image resolver otherwise each spelled out. */
+export function youTubePoster(id: string, poster?: string): string {
+  return poster ?? youTubeThumbnail(id);
+}

@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { youTubeEmbedUrl, youTubeThumbnail } from './youtube';
+import { youTubeEmbedUrl, youTubeThumbnail, youTubePoster } from './youtube';
 
 describe('youtube', () => {
   it('builds a privacy-friendly embed url with minimal chrome', () => {
@@ -14,5 +14,9 @@ describe('youtube', () => {
   });
   it('builds the hosted thumbnail url', () => {
     expect(youTubeThumbnail('abc123')).toBe('https://i.ytimg.com/vi/abc123/maxresdefault.jpg');
+  });
+  it('youTubePoster prefers a custom poster, else the hosted thumbnail', () => {
+    expect(youTubePoster('abc123', '/covers/x.webp')).toBe('/covers/x.webp');
+    expect(youTubePoster('abc123')).toBe(youTubeThumbnail('abc123'));
   });
 });
