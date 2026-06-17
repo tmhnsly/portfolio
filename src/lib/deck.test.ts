@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { rotate, rotateTo, swipeDir } from './deck';
+import { rotate, rotateTo, swipeDir, deckReducer, initialDeck } from './deck';
 
 describe('rotate', () => {
   it('advance (dir<0) sends the front to the back', () => {
@@ -35,5 +35,23 @@ describe('swipeDir', () => {
   });
   it('no-ops below both thresholds', () => {
     expect(swipeDir(20, 50, 64, 300)).toBe(0);
+  });
+});
+
+describe('deckReducer', () => {
+  it('starts front-first with advance direction', () => {
+    expect(initialDeck(4)).toEqual({ order: [0, 1, 2, 3], dir: -1 });
+  });
+  it('advance rotates the order and records the direction', () => {
+    const s = deckReducer(initialDeck(4), { type: 'advance', dir: -1 });
+    expect(s).toEqual({ order: [1, 2, 3, 0], dir: -1 });
+    expect(deckReducer(s, { type: 'advance', dir: 1 })).toEqual({ order: [0, 1, 2, 3], dir: 1 });
+  });
+  it('jumpTo brings an item to the front and sets a forward direction', () => {
+    expect(deckReducer(initialDeck(4), { type: 'jumpTo', index: 2 })).toEqual({ order: [2, 3, 0, 1], dir: -1 });
+  });
+  it('jumpTo to the current front is a no-op (same state reference)', () => {
+    const s = initialDeck(4);
+    expect(deckReducer(s, { type: 'jumpTo', index: 0 })).toBe(s);
   });
 });
