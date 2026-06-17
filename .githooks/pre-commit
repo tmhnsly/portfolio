@@ -1,4 +1,18 @@
 #!/bin/sh
+# Token gate: block staged SCSS that uses magic numbers where a design token is
+# required (see stylelint.config.mjs). Skips silently if stylelint isn't installed
+# yet (e.g. a fresh clone pre-install).
+if node -e "require.resolve('stylelint')" >/dev/null 2>&1; then
+  scss=$(git diff --cached --name-only --diff-filter=ACM -- '*.scss')
+  if [ -n "$scss" ]; then
+    # shellcheck disable=SC2086
+    if ! npx stylelint $scss; then
+      echo "✖ stylelint: use a design token (var(--…)), not a magic number — see stylelint.config.mjs"
+      exit 1
+    fi
+  fi
+fi
+
 # Auto-optimise newly-staged images to WebP before they enter a commit, so the
 # large originals never land in git history. See scripts/optimize-images.mjs.
 # Skips silently if sharp isn't installed yet (e.g. a fresh clone pre-install).
