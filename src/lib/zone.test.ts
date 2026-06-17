@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { resolveZone, disciplineFromPath, zoneAccent } from './zone';
+import { resolveZone, disciplineFromPath, zoneAccent, accentVars } from './zone';
 import { DISCIPLINES } from './disciplines';
 
 describe('zone', () => {
@@ -41,5 +41,14 @@ describe('zone', () => {
   it('zoneAccent defaults to tomato when no discipline', () => {
     expect(zoneAccent(undefined).accent).toBe('var(--tomato-9)');
     expect(zoneAccent('audio').accent).toBe(DISCIPLINES.audio.color);
+  });
+
+  it('accentVars maps a zone accent to its four CSS custom properties', () => {
+    expect(accentVars(zoneAccent('audio'))).toEqual({
+      '--accent': DISCIPLINES.audio.color,
+      '--accent-ink': DISCIPLINES.audio.ink,
+      '--accent-hover': DISCIPLINES.audio.hover,
+      '--on-accent': DISCIPLINES.audio.onAccent,
+    });
   });
 });

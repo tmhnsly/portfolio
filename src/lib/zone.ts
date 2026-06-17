@@ -7,7 +7,7 @@ import { DISCIPLINES, isDiscipline } from './disciplines';
  * which the Shell, Nav and Breadcrumb otherwise each re-derive.
  */
 
-/** The three accent CSS-var strings a Zone resolves to. */
+/** The accent CSS-var strings a Zone resolves to. */
 export interface ZoneAccent {
   accent: string; // --accent: step-9 solid fill
   accentInk: string; // --accent-ink: step-11 legible coloured text
@@ -49,5 +49,20 @@ export function resolveZone(pathname: string): Zone {
     discipline,
     active: seg || undefined, // home ('') → no nav highlight
     ...zoneAccent(discipline),
+  };
+}
+
+/**
+ * The CSS custom properties a Zone's accent paints. One home for the var set the
+ * Shell sets on its root AND the Nav dropdown re-sets inline (the dropdown portals
+ * outside the Shell's scope), so a new accent var is declared once, not in both.
+ * Returns a plain record; callers cast to React.CSSProperties.
+ */
+export function accentVars(a: ZoneAccent): Record<string, string> {
+  return {
+    '--accent': a.accent,
+    '--accent-ink': a.accentInk,
+    '--accent-hover': a.accentHover,
+    '--on-accent': a.onAccent,
   };
 }
