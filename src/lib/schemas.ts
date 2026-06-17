@@ -88,9 +88,6 @@ export const timelineEntrySchema = z.object({
 });
 export type TimelineEntry = z.infer<typeof timelineEntrySchema>;
 
-export const skillGroupSchema = z.object({ discipline: disciplineSchema, tools: z.array(z.string()) });
-export type SkillGroup = z.infer<typeof skillGroupSchema>;
-
 export const siteConfigSchema = z.object({
   // contact email is NOT in site config — it's encoded in src/lib/email.ts
   name: z.string(), role: z.string(), location: z.string(),
