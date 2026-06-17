@@ -15,7 +15,7 @@ import { TechChip } from '@/components/ui/TechChip';
 import { Pill } from '@/components/ui/Pill';
 import { EmailLink } from '@/components/ui/EmailLink';
 import { LinkArrow } from '@/components/ui/LinkArrow';
-import { formatMonthYear, readingLabel } from '@/lib/format';
+import { postPresentation } from '@/lib/post-presentation';
 import { BlogPostHero } from '@/components/blog/BlogPostHero';
 import { PostThumb } from '@/components/blog/PostThumb';
 import { PostBody } from '@/components/blog/PostBody';
@@ -107,16 +107,17 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
 }
 
 function RelatedCard({ post }: { post: BlogPost }) {
+  const p = postPresentation(post);
   return (
-    <Link href={postHref(post.slug)} className={styles.relatedItem}>
+    <Link href={p.href} className={styles.relatedItem}>
       <PostThumb post={post} ratio="16/9" sizes={IMG_SIZES.grid3} rounded />
       <div className={styles.relatedMeta}>
-        <Pill label={post.category} tone="discipline" />
+        <Pill label={p.category} tone="discipline" />
       </div>
       <div className={styles.relatedTitle}>{post.title}</div>
       <div className={styles.relatedFoot}>
-        <span>{formatMonthYear(post.date)}</span>
-        <span>{readingLabel(post.readingTime)} <LinkArrow inline /></span>
+        <span>{p.date}</span>
+        <span>{p.reading} <LinkArrow inline /></span>
       </div>
     </Link>
   );
