@@ -82,7 +82,7 @@
   font-family: var(--font-display);
   font-size: var(--fs-caption);
   font-weight: var(--fw-semibold);
-  letter-spacing: -0.005em;
+  letter-spacing: var(--ls-body);
   color: var(--text);
   display: inline-flex;
   align-items: center;

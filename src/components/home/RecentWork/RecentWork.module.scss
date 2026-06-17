@@ -26,4 +26,4 @@
 .foot { margin-top: var(--space-6); padding-top: var(--space-4); border-top: var(--border-width) solid var(--rule-soft);
   display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: var(--fs-mono-s);
   color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em; }
-.everything { color: var(--text); font-family: var(--font-display); font-weight: var(--fw-semibold); text-transform: none; letter-spacing: -0.005em; }
+.everything { color: var(--text); font-family: var(--font-display); font-weight: var(--fw-semibold); text-transform: none; letter-spacing: var(--ls-body); }
