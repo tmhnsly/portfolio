@@ -19,7 +19,7 @@
   font-family: var(--font-mono);
   font-size: var(--fs-caption);
   color: var(--accent-ink);
-  letter-spacing: 0.06em;
+  letter-spacing: var(--ls-caps);
   text-transform: uppercase;
 }
 
@@ -56,7 +56,7 @@
   font-family: var(--font-mono);
   font-size: var(--fs-caption);
   color: var(--text-muted);
-  letter-spacing: 0.06em;
+  letter-spacing: var(--ls-caps);
   text-transform: uppercase;
 }
 
@@ -91,7 +91,7 @@
   font-family: var(--font-mono);
   font-size: var(--fs-caption);
   color: var(--text);
-  letter-spacing: 0.06em;
+  letter-spacing: var(--ls-caps);
   text-transform: uppercase;
   text-decoration: none;
   padding: var(--space-2) var(--space-3);
@@ -141,7 +141,7 @@
   font-size: var(--fs-h4);
   font-weight: var(--fw-semibold);
   color: var(--text);
-  letter-spacing: -0.022em;
+  letter-spacing: var(--ls-h3);
   line-height: 1.2;
   transition: color 0.15s ease;
 }
@@ -152,6 +152,6 @@
   font-family: var(--font-mono);
   font-size: var(--fs-mono-xs);
   color: var(--text-muted);
-  letter-spacing: 0.06em;
+  letter-spacing: var(--ls-caps);
   text-transform: uppercase;
 }

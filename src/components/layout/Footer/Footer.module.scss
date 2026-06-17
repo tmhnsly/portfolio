@@ -19,7 +19,7 @@
   font-family: var(--font-display);
   font-size: clamp(40px, 12vw, 88px);
   font-weight: var(--fw-semibold);
-  letter-spacing: -0.05em; line-height: 1.2; padding-block: 0.06em; color: var(--text); white-space: nowrap;
+  letter-spacing: var(--ls-display-xxl); line-height: 1.2; padding-block: 0.06em; color: var(--text); white-space: nowrap;
 }
 .dot { color: var(--accent-ink); font-size: 24px; } /* zone-accent separator — matches the page colour */
 .grid {

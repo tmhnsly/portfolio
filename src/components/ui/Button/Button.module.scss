@@ -1,7 +1,7 @@
 @use '../../../styles/mixins/breakpoints' as *;
 
 .btn { display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2);
-  font-family: var(--font-display); font-weight: var(--fw-semibold); font-size: var(--fs-body-s); letter-spacing: -0.005em;
+  font-family: var(--font-display); font-weight: var(--fw-semibold); font-size: var(--fs-body-s); letter-spacing: var(--ls-body);
   border-radius: var(--radius-lg); cursor: pointer; text-decoration: none;
   transition: background var(--duration-fast) var(--ease-standard),
     border-color var(--duration-fast) var(--ease-standard),

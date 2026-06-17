@@ -40,7 +40,7 @@
 .fill { position: absolute; inset: 0; border-radius: inherit; z-index: -2; }
 .name {
   /* brand watermark — stays on the bar at every width (incl. burger mode) */
-  font-size: var(--fs-body); font-weight: var(--fw-semibold); letter-spacing: -0.02em; color: var(--text);
+  font-size: var(--fs-body); font-weight: var(--fw-semibold); letter-spacing: var(--ls-h3); color: var(--text);
   display: block;
 }
 
@@ -58,7 +58,7 @@
 .item {
   position: relative; z-index: 1; /* keep items (and labels) above the pill */
   display: inline-block; padding: var(--nav-item-pad-wide); border-radius: var(--radius-lg);
-  font-size: var(--fs-body-s); font-weight: var(--fw-medium); letter-spacing: -0.005em; color: var(--text);
+  font-size: var(--fs-body-s); font-weight: var(--fw-medium); letter-spacing: var(--ls-body); color: var(--text);
   transition: background var(--duration-fast) var(--ease-standard), color var(--duration-fast) var(--ease-standard);
   white-space: nowrap; flex-shrink: 0;
 }
@@ -102,7 +102,7 @@
   height: var(--nav-btn-h); display: inline-flex; align-items: center; justify-content: center;
   padding: var(--cta-pad-wide); border-radius: var(--radius-lg);
   color: var(--on-accent, var(--text-on-accent));
-  font-weight: var(--fw-semibold); font-size: var(--fs-body-s); letter-spacing: -0.005em; white-space: nowrap;
+  font-weight: var(--fw-semibold); font-size: var(--fs-body-s); letter-spacing: var(--ls-body); white-space: nowrap;
   /* a whisper of lift so the primary action still reads, but it sits ON the bar
      like the other nav buttons instead of floating above it (was 0 6px 18px / 27%) */
   box-shadow: 0 2px 6px color-mix(in srgb, var(--accent) 18%, transparent);

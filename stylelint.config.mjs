@@ -7,10 +7,10 @@
  * from container-query units and fixed art values on purpose, so it's exempt — the
  * gate is for reusable UI, where every repeated value should be a named token.
  *
- * Scope is intentionally narrow: colours + font-weight are already 100% clean in the
- * UI, so locking them now is zero-risk. Widen in follow-up passes — letter-spacing
- * (needs a new caps token + a consolidate-or-add decision), font-size (split icon
- * sizes from text), z-index (global layers only; local stacking stays literal).
+ * Enforced: colours, font-weight, and letter-spacing (the latter swept onto the
+ * --ls-* scale, adding --ls-caps / --ls-caps-wide and snapping near-duplicates).
+ * Widen in follow-up passes — font-size (split icon sizes from text), z-index
+ * (global layers only; local stacking stays literal).
  */
 const config = {
   customSyntax: 'postcss-scss',
@@ -22,7 +22,7 @@ const config = {
   ],
   rules: {
     'scale-unlimited/declaration-strict-value': [
-      ['/color$/', 'fill', 'stroke', 'font-weight'],
+      ['/color$/', 'fill', 'stroke', 'font-weight', 'letter-spacing'],
       {
         ignoreValues: [
           'currentColor', 'transparent', 'inherit', 'unset', 'initial',

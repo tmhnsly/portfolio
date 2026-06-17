@@ -7,7 +7,7 @@
   margin-bottom: var(--space-2);
   font-family: var(--font-mono);
   font-size: var(--fs-mono-xs);
-  letter-spacing: 0.12em;
+  letter-spacing: var(--ls-caps-wide);
   text-transform: uppercase;
   color: var(--text-muted);
 }

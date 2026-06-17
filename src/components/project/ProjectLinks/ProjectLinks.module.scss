@@ -44,7 +44,7 @@
   font-family: var(--font-mono);
   font-size: var(--fs-caption);
   color: var(--text-muted);
-  letter-spacing: 0.04em;
+  letter-spacing: var(--ls-mono);
 }
 .linkUrlText {
   overflow: hidden;
