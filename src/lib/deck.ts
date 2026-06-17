@@ -26,3 +26,27 @@ export function swipeDir(offsetX: number, velocityX: number, dist: number, vel: 
   if (offsetX > dist || velocityX > vel) return 1;
   return 0;
 }
+
+/**
+ * The deck's state machine, pure over the order maths above. `order[0]` is the
+ * front card; `dir` is the last swap direction (drives the enter/exit animation).
+ * Lifting the transitions here makes the deck's behaviour under a swipe/jump
+ * sequence a table test — the useDeck hook owns the timing lock + auto-advance,
+ * the component owns the spring/DOM.
+ */
+export type DeckState = { order: number[]; dir: number };
+export type DeckAction = { type: 'advance'; dir: number } | { type: 'jumpTo'; index: number };
+
+export const initialDeck = (n: number): DeckState => ({ order: Array.from({ length: n }, (_, i) => i), dir: -1 });
+
+export function deckReducer(state: DeckState, action: DeckAction): DeckState {
+  switch (action.type) {
+    case 'advance':
+      return { order: rotate(state.order, action.dir), dir: action.dir };
+    case 'jumpTo': {
+      const next = rotateTo(state.order, action.index);
+      // rotateTo no-ops (same ref) when already front/absent — leave dir untouched then.
+      return next === state.order ? state : { order: next, dir: -1 };
+    }
+  }
+}

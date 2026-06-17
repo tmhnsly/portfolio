@@ -1,20 +1,20 @@
 'use client';
 import Link from 'next/link';
-import { useCallback, useEffect, useRef, useState, type KeyboardEvent } from 'react';
-import { AnimatePresence, motion, useReducedMotion, type PanInfo, type Variants } from 'motion/react';
+import { type KeyboardEvent } from 'react';
+import { AnimatePresence, motion, type PanInfo, type Variants } from 'motion/react';
 import { BiChevronLeft, BiChevronRight } from 'react-icons/bi';
 import type { Project } from '@/types';
-import { EASING, useInView } from '@/lib/motion';
+import { EASING } from '@/lib/motion';
 import { IMG_SIZES } from '@/lib/breakpoints';
 import { projectPresentation } from '@/lib/project-presentation';
-import { rotate, rotateTo, swipeDir } from '@/lib/deck';
+import { swipeDir } from '@/lib/deck';
 import { pad2 } from '@/lib/format';
 import { ProjectThumb } from '@/components/project-thumbs';
 import { Pill } from '@/components/ui/Pill';
 import { Button } from '@/components/ui/Button';
+import { useDeck } from './useDeck';
 import styles from './CardDeck.module.scss';
 
-const AUTO_MS = 8000;
 const VISIBLE = 3;            // front card + 2 peeking behind
 const PEEK_Y = 16;           // px each card sits below the one in front
 const PEEK_SCALE = 0.05;     // scale step per depth
@@ -49,40 +49,16 @@ function CardFace({ project, priority }: { project: Project; priority?: boolean 
 
 export function CardDeck({ items }: { items: Project[] }) {
   const n = items.length;
-  // `order` holds item indices; order[0] is the front card. Advancing rotates it,
-  // so every card springs to its new stack slot together (feels like a real deck).
-  const [order, setOrder] = useState<number[]>(() => items.map((_, i) => i));
-  const [dir, setDir] = useState(-1); // exit/enter direction for the swap
-  const [hovered, setHovered] = useState(false);
-  const reduce = useReducedMotion();
-  // one advance per gesture — a fast mobile swipe was firing several at once
-  const lockUntil = useRef(0);
-  // pause the auto-advance timer when the deck is scrolled off-screen (no
-  // timer-driven re-renders/springs when it's not visible)
-  const { ref: wrapRef, inView } = useInView();
-
-  const advance = useCallback((d: number) => {
-    const now = Date.now();
-    if (now < lockUntil.current) return;
-    lockUntil.current = now + 380;
-    setDir(d);
-    setOrder((o) => rotate(o, d));
-  }, []);
-
-  const jumpTo = useCallback((itemIndex: number) => {
-    setOrder((o) => {
-      const next = rotateTo(o, itemIndex);
-      if (next !== o) setDir(-1); // only when it actually moves
-      return next;
-    });
-  }, []);
+  // The deck's state machine, gesture lock, and off-screen-paused auto-advance live
+  // in useDeck; this component just maps gestures/keys to advance/jumpTo and renders.
+  const { order, dir, activeIndex, reduce, wrapRef, advance, jumpTo, onPointerEnter, onPointerLeave } = useDeck(n);
 
   // ←/→ flip the deck from anywhere inside it: keydown bubbles up to the wrap, so it
   // fires whether the front card OR a control (prev/next/tick) is focused — no
   // focusable container, no giant ring. If the front CARD is the focused element it
   // unmounts on advance, so move focus to the matching prev/next button (stable, stays
   // in the deck) — keyboard focus is never dropped to <body>.
-  const onArrowKey = useCallback((e: KeyboardEvent<HTMLDivElement>) => {
+  const onArrowKey = (e: KeyboardEvent<HTMLDivElement>) => {
     if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
     e.preventDefault();
     const wrap = wrapRef.current;
@@ -93,21 +69,11 @@ export function CardDeck({ items }: { items: Project[] }) {
       const label = e.key === 'ArrowRight' ? 'next' : 'previous';
       wrap?.querySelector<HTMLButtonElement>(`button[aria-label="${label}"]`)?.focus();
     }
-  }, [advance, wrapRef]); // wrapRef is the hook's stable ref — listed to satisfy exhaustive-deps
-
-  // `order` in the deps resets the timer on every advance (manual nav OR auto),
-  // so pressing prev/next/tick/arrow gives a full AUTO_MS to look at the new card
-  // instead of it auto-advancing again moments later.
-  useEffect(() => {
-    if (reduce || hovered || n <= 1 || !inView) return;
-    const id = setInterval(() => advance(-1), AUTO_MS);
-    return () => clearInterval(id);
-  }, [reduce, hovered, n, inView, advance, order]);
+  };
 
   if (n === 0) return null;
 
   const visible = order.slice(0, Math.min(VISIBLE, n));
-  const activeIndex = order[0] ?? 0; // order is non-empty here (n === 0 returned above)
 
   // enter/stack are position-driven (custom = pos). It reads like a real deck shuffle:
   // a JOINING card rises from one slot deeper in the stack to its slot (bring-to-front),
@@ -144,8 +110,8 @@ export function CardDeck({ items }: { items: Project[] }) {
         role="group"
         aria-roledescription="carousel"
         aria-label="Featured work"
-        onPointerEnter={() => setHovered(true)}
-        onPointerLeave={() => setHovered(false)}
+        onPointerEnter={onPointerEnter}
+        onPointerLeave={onPointerLeave}
       >
         <AnimatePresence initial={false} custom={dir}>
           {visible.map((itemIndex, pos) => {
