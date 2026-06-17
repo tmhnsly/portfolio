@@ -32,6 +32,9 @@ _Avoid_: work, case study, post.
 A blog article in `content/blog/*.md` (Markdown + Zod), with a reading-time estimate and an **Author**.
 _Avoid_: article, blog, entry.
 
+**Post presentation**:
+The display facts a **Post** card shows — route, formatted date, reading-time label, category — resolved once by `postPresentation` (`lib/post-presentation.ts`). The Post-side mirror of `projectPresentation`: the blog surfaces (index list, **FeaturedPost**, post hero, related) consume resolved facts instead of each re-running the date/reading formatters.
+
 **Timeline entry**:
 One career/education step in the About CV timeline; may carry a `companyUrl` linking out to a **Company**.
 _Avoid_: job, role, experience.

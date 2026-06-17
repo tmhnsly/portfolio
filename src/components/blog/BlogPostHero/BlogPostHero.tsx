@@ -1,17 +1,18 @@
 import type { BlogPost } from '@/types';
 import { Pill } from '@/components/ui/Pill';
 import { TechChip } from '@/components/ui/TechChip';
-import { formatMonthYear, readingLabel } from '@/lib/format';
+import { postPresentation } from '@/lib/post-presentation';
 import { Entrance, EntranceItem, EntranceTitle } from '@/components/motion/Entrance';
 import styles from './BlogPostHero.module.scss';
 
 export function BlogPostHero({ post }: { post: BlogPost }) {
+  const p = postPresentation(post);
   return (
     <Entrance className={styles.hero}>
       <EntranceItem className={styles.metaRow}>
-        <Pill label={post.category} tone="discipline" />
+        <Pill label={p.category} tone="discipline" />
         <span className={styles.metaMono}>
-          {formatMonthYear(post.date)} · {readingLabel(post.readingTime)} · in /blog
+          {p.date} · {p.reading} · in /blog
         </span>
       </EntranceItem>
 

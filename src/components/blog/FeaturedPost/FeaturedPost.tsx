@@ -6,22 +6,22 @@ import { PostThumb } from '@/components/blog/PostThumb';
 import { Pill } from '@/components/ui/Pill';
 import { TechChip } from '@/components/ui/TechChip';
 import { CardArrow } from '@/components/ui/CardArrow';
-import { formatMonthYear, readingLabel } from '@/lib/format';
-import { postHref } from '@/lib/routes';
+import { postPresentation } from '@/lib/post-presentation';
 import styles from './FeaturedPost.module.scss';
 
 export function FeaturedPost({ post }: { post: BlogPost }) {
+  const p = postPresentation(post);
   return (
     <section className={styles.section}>
       <Eyebrow>
-        Latest · {formatMonthYear(post.date)} · {readingLabel(post.readingTime)}
+        Latest · {p.date} · {p.reading}
       </Eyebrow>
-      <Link href={postHref(post.slug)} className={styles.card}>
+      <Link href={p.href} className={styles.card}>
         <div className={styles.grid}>
           <div className={styles.mediaWrap}>
             <PostThumb post={post} ratio="16/11" sizes={IMG_SIZES.featured} className={styles.media}>
               <span className={styles.categoryPill}>
-                <Pill label={post.category} tone="solid" />
+                <Pill label={p.category} tone="solid" />
               </span>
             </PostThumb>
           </div>
