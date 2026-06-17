@@ -2,7 +2,7 @@
 import { useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import type { BreadcrumbData } from '@/lib/content';
-import { resolveZone } from '@/lib/zone';
+import { resolveZone, accentVars } from '@/lib/zone';
 import { Nav } from '../Nav';
 import { Footer } from '../Footer';
 import { Bloom } from '../Bloom';
@@ -42,11 +42,8 @@ export function Shell({
     <div
       className={styles.shell}
       style={{
-        '--accent': accent,
-        '--accent-ink': accentInk,
+        ...accentVars({ accent, accentInk, accentHover, onAccent }),
         '--accent-ink-to': accentInk, // the title period reads this — now just the accent ink
-        '--accent-hover': accentHover, // step-10 — solid hover for accent fills (Button, nav CTA)
-        '--on-accent': onAccent,
       } as React.CSSProperties}
     >
       {/* First focusable element on every route: lets keyboard/SR users skip the

@@ -5,6 +5,7 @@ import { BiMenu, BiMoon, BiSun, BiCodeAlt, BiVideo, BiHeadphone, BiPencil, BiUse
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import { SITE } from '@/data';
 import { useTheme } from '@/lib/theme';
+import { accentVars } from '@/lib/zone';
 import { useEmail } from '@/components/ui/EmailLink';
 import { LinkArrow } from '@/components/ui/LinkArrow';
 import styles from './Nav.module.scss';
@@ -53,7 +54,7 @@ export function NavMenu({
           align="end"
           sideOffset={12}
           collisionPadding={16}
-          style={{ '--accent': accent, '--accent-ink': accentInk, '--accent-hover': accentHover, '--on-accent': onAccent } as React.CSSProperties}
+          style={accentVars({ accent, accentInk, accentHover, onAccent }) as React.CSSProperties}
         >
           {SITE.nav.map((item) => {
             const Icon = NAV_ICONS[item.href];
