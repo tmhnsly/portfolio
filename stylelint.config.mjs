@@ -9,8 +9,10 @@
  *
  * Enforced: colours, font-weight, and letter-spacing (the latter swept onto the
  * --ls-* scale, adding --ls-caps / --ls-caps-wide and snapping near-duplicates).
- * Widen in follow-up passes — font-size (split icon sizes from text), z-index
- * (global layers only; local stacking stays literal).
+ * font-size and z-index are intentionally NOT gated (see ADR-0004): font-size is
+ * fluid clamp() + react-icon glyph dims (a control axis, not text) + contextual
+ * em/rem, not a discrete text scale; z-index's global layers already use --z-*,
+ * and the rest is local stacking that should stay literal.
  */
 const config = {
   customSyntax: 'postcss-scss',
