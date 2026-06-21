@@ -32,6 +32,10 @@ _Avoid_: work, case study, post.
 A blog article in `content/blog/*.md` (Markdown + Zod), with a reading-time estimate and an **Author**.
 _Avoid_: article, blog, entry.
 
+**Page head**:
+The metadata and Open Graph card a content route presents itself with, resolved once per route by `projectHead` / `postHead` / `disciplineHead` (`lib/page-head.ts`). Each returns `{ meta, og }` — the `<head>` `Metadata` (title, description, canonical, OG text, via `pageMeta`) and the OG-card params (eyebrow, title, accent, fed to `ogImage`). A route's `generateMetadata` reads `.meta` and its `opengraph-image` reads `.og`, so the two can't drift (the project route once omitted the article `publishedTime` the blog route set). Builds on **Post presentation** / `projectPresentation`, `projectDescription`, and `ogAccent`.
+_Avoid_: SEO, meta, head tags.
+
 **Post presentation**:
 The display facts a **Post** card shows — route, formatted date, reading-time label, category — resolved once by `postPresentation` (`lib/post-presentation.ts`). The Post-side mirror of `projectPresentation`: the blog surfaces (index list, **FeaturedPost**, post hero, related) consume resolved facts instead of each re-running the date/reading formatters.
 

@@ -1,5 +1,6 @@
 import type { MediaItem, Project } from '@/types';
 import { DISCIPLINES } from './disciplines';
+import { formatMonthYear } from './format';
 import { youTubePoster } from './youtube';
 import { projectHref } from './routes';
 
@@ -7,11 +8,14 @@ import { projectHref } from './routes';
  * The presentation facts a Project card needs — resolved from the Project's own
  * Discipline (NOT the page zone). Concentrates the `DISCIPLINES[p.discipline]`
  * reads that the bespoke home cards (CardDeck face, RecentWork featured/thumb)
- * otherwise each repeat. `color`/`onColor` match the <Pill> prop names.
+ * otherwise each repeat, and the `formatMonthYear(date)` the card otherwise ran
+ * itself. `color`/`onColor` match the <Pill> prop names. Mirrors
+ * `postPresentation` so both content types resolve "what a card shows" one way.
  */
 export interface ProjectPresentation {
   href: string; // route to the project
   label: string; // discipline label (e.g. "Code")
+  date: string; // formatMonthYear(project.date) — e.g. "Feb 2015"
   gradient: string; // <Media> fallback gradient
   color: string; // discipline accent fill → <Pill color>
   onColor: string; // contrast text on the fill → <Pill onColor>
@@ -22,6 +26,7 @@ export function projectPresentation(project: Project): ProjectPresentation {
   return {
     href: projectHref(project.discipline, project.slug),
     label: d.label,
+    date: formatMonthYear(project.date),
     gradient: d.gradient,
     color: d.color,
     onColor: d.onAccent,

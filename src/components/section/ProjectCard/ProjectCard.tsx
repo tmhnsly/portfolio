@@ -7,12 +7,11 @@ import { TechChip } from '@/components/ui/TechChip';
 import { LinkArrow } from '@/components/ui/LinkArrow';
 import { coverImage, projectPresentation } from '@/lib/project-presentation';
 import { projectHref } from '@/lib/routes';
-import { formatMonthYear } from '@/lib/format';
 import { cx } from '@/lib/cx';
 import styles from './ProjectCard.module.scss';
 
 export function ProjectCard({ project, hideDiscipline = false, featured = false }: { project: Project; hideDiscipline?: boolean; featured?: boolean }) {
-  const { label } = projectPresentation(project);
+  const { label, date } = projectPresentation(project);
   const cover = coverImage(project);
   return (
     <Link href={projectHref(project.discipline, project.slug)} className={cx(styles.card, featured && styles.featured)}>
@@ -25,7 +24,7 @@ export function ProjectCard({ project, hideDiscipline = false, featured = false 
       <div className={styles.body}>
         <div className={styles.titleRow}>
           <span className={styles.title}>{project.title}</span>
-          <span className={styles.date}>{formatMonthYear(project.date)}</span>
+          <span className={styles.date}>{date}</span>
         </div>
         {project.desc && <div className={styles.desc}>{project.desc}</div>}
         <div className={styles.chips}>{project.tags.map((t) => <TechChip key={t} label={t} />)}</div>
