@@ -24,6 +24,17 @@ export function filterByFacet<T>(items: T[], facetOf: (item: T) => string, activ
 }
 
 /**
+ * The facet label to treat as active: `label` when it still exists in `filters`,
+ * otherwise 'All'. Guards the case where the item set changed and the previously
+ * selected facet has gone — without it a stale selection would silently filter to
+ * a different or empty set. Keying selection by label (not list index) makes this
+ * the single place that decides "is the selection still valid?".
+ */
+export function activeFacet(filters: Facet[], label: string): string {
+  return filters.some((f) => f.label === label) ? label : 'All';
+}
+
+/**
  * Split a list into a featured item + the rest (capped at `restCount`). Featured
  * is the first item flagged `featured`, else the first item; the rest excludes it.
  */

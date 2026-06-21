@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import { pageMeta } from '@/lib/metadata';
+import { postHead } from '@/lib/page-head';
 import { PrevNext } from '@/components/ui/PrevNext';
 import { getAllPosts, getPost, postNeighbours, relatedPosts } from '@/lib/content';
 import { postHref } from '@/lib/routes';
@@ -31,7 +31,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const post = getPost(slug);
   if (!post) return {};
-  return pageMeta({ title: post.title, description: post.excerpt, path: postHref(slug), type: 'article', publishedTime: post.date });
+  return postHead(post).meta;
 }
 
 export default async function PostPage({ params }: { params: Promise<{ slug: string }> }) {

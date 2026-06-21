@@ -2,8 +2,8 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { getAllProjects, getProjectInDiscipline, projectNeighbours, relatedProjects } from '@/lib/content';
 import { projectHref } from '@/lib/routes';
-import { pageMeta } from '@/lib/metadata';
-import { projectVideoJsonLd, projectCreativeWorkJsonLd, breadcrumbJsonLd, projectCrumbs, projectDescription } from '@/lib/structured-data';
+import { projectHead } from '@/lib/page-head';
+import { projectVideoJsonLd, projectCreativeWorkJsonLd, breadcrumbJsonLd, projectCrumbs } from '@/lib/structured-data';
 import { JsonLd } from '@/components/seo';
 import { Container, Stack } from '@/components/layout';
 import { ProjectHero } from '@/components/project/ProjectHero';
@@ -20,7 +20,7 @@ export async function generateMetadata({ params }: { params: Promise<{ disciplin
   const { discipline, slug } = await params;
   const project = getProjectInDiscipline(discipline, slug);
   if (!project) return {};
-  return pageMeta({ title: project.title, description: projectDescription(project), path: projectHref(project.discipline, slug), type: 'article' });
+  return projectHead(project).meta;
 }
 
 export default async function ProjectPage({ params }: { params: Promise<{ discipline: string; slug: string }> }) {

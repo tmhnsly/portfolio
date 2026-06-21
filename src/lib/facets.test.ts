@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { buildFacets, filterByFacet, splitFeatured } from './facets';
+import { activeFacet, buildFacets, filterByFacet, splitFeatured } from './facets';
 
 const items = [
   { id: 1, kind: 'a' }, { id: 2, kind: 'b' }, { id: 3, kind: 'a' }, { id: 4, kind: 'c' },
@@ -33,6 +33,19 @@ describe('filterByFacet', () => {
   });
   it('a label returns only matching items', () => {
     expect(filterByFacet(items, kindOf, 'a').map((i) => i.id)).toEqual([1, 3]);
+  });
+});
+
+describe('activeFacet', () => {
+  const filters = buildFacets(items, kindOf); // All, a, b, c
+  it('keeps a label that still exists', () => {
+    expect(activeFacet(filters, 'a')).toBe('a');
+  });
+  it('falls back to All when the selected label is gone (item set changed under it)', () => {
+    expect(activeFacet(filters, 'z')).toBe('All');
+  });
+  it("'All' is always valid", () => {
+    expect(activeFacet(filters, 'All')).toBe('All');
   });
 });
 

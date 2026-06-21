@@ -1,9 +1,9 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { isDiscipline, DISCIPLINE_ORDER, DISCIPLINES } from '@/lib/disciplines';
+import { isDiscipline, DISCIPLINE_ORDER } from '@/lib/disciplines';
 import { projectsInDiscipline, topTagsByDiscipline } from '@/lib/content';
 import { SECTIONS } from '@/data';
-import { pageMeta } from '@/lib/metadata';
+import { disciplineHead } from '@/lib/page-head';
 import { breadcrumbJsonLd, disciplineCrumbs } from '@/lib/structured-data';
 import { JsonLd } from '@/components/seo';
 import { Container, Stack } from '@/components/layout';
@@ -19,7 +19,7 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<{ discipline: string }> }): Promise<Metadata> {
   const { discipline } = await params;
   if (!isDiscipline(discipline)) return {};
-  return pageMeta({ title: DISCIPLINES[discipline].label, description: SECTIONS[discipline].intro, path: `/${discipline}` });
+  return disciplineHead(discipline).meta;
 }
 
 export default async function SectionPage({ params }: { params: Promise<{ discipline: string }> }) {

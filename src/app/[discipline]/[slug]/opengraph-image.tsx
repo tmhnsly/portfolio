@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation';
 import { getProjectInDiscipline } from '@/lib/content';
-import { DISCIPLINES } from '@/lib/disciplines';
-import { ogImage, ogAccent, OG_SIZE, OG_CONTENT_TYPE } from '@/lib/og';
+import { ogImage, OG_SIZE, OG_CONTENT_TYPE } from '@/lib/og';
+import { projectHead } from '@/lib/page-head';
 
 export { generateStaticParams } from './page';
 export const size = OG_SIZE;
@@ -12,5 +12,5 @@ export default async function Image({ params }: { params: Promise<{ discipline: 
   const { discipline, slug } = await params;
   const project = getProjectInDiscipline(discipline, slug);
   if (!project) notFound();
-  return ogImage({ eyebrow: DISCIPLINES[project.discipline].label, title: project.title, accent: ogAccent(project.discipline) });
+  return ogImage(projectHead(project).og);
 }
