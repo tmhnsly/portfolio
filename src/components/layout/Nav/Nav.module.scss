@@ -122,13 +122,6 @@
 }
 @include can-hover { .cta:hover::after { opacity: 1; } }
 .cta:active { transform: translateY(1px); }
-/* CTA scales: "Say hi →" in the lower desktop range, full email from 1440 up */
-.ctaFull { display: none; }
-.ctaShort { display: inline; }
-@include wide-up {
-  .ctaFull { display: inline; }
-  .ctaShort { display: none; }
-}
 
 /* ── Burger → glass dropdown (shown below desktop) ── */
 .burger {

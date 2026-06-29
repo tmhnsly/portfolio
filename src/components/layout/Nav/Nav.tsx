@@ -37,7 +37,7 @@ function AccentFill({ accent }: { accent: string }) {
 export function Nav({ active, accent, accentInk, accentHover, onAccent }: NavProps) {
   const { theme, toggle } = useTheme();
   const reduce = useReducedMotion();
-  const { email, mailto } = useEmail();
+  const { mailto } = useEmail();
   const isActive = (label: string) => active != null && label.toLowerCase() === active.toLowerCase();
   // active section → pixel-mark glyph (home on '/'); unknown segments fall back to home
   const markIcon: IconKey = isIconKey(active) ? active : 'home';
@@ -125,13 +125,13 @@ export function Nav({ active, accent, accentInk, accentHover, onAccent }: NavPro
             >
               {theme === 'dark' ? <BiSun aria-hidden /> : <BiMoon aria-hidden />}
             </button>
+            {/* Static label at every width: the address is kept out of the markup
+                (anti-scraper, see useEmail) and only powers the mailto — printing it
+                would force a post-mount text swap (the flicker), so the button just
+                says "Email me". mailto() is undefined until mount, then filled in. */}
             <a className={styles.cta} href={mailto()}>
               <AccentFill accent={accent} />
-              {/* exactly one span is `display`-shown per breakpoint (the other is
-                  display:none, so excluded from the a11y name) — so neither needs
-                  aria-hidden; whichever is visible becomes the link's accessible name. */}
-              <span className={styles.ctaFull}>{email ?? 'Email me'} <LinkArrow /></span>
-              <span className={styles.ctaShort}>{COPY.nav.sayHi} <LinkArrow /></span>
+              <span>Email me <LinkArrow /></span>
             </a>
           </div>
 
