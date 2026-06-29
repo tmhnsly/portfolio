@@ -113,7 +113,7 @@ There isn't a single best way; there's a fit per project. The numbers and constr
 - **You want Tailwind's speed but semantic call sites:** shadcn is the middle path, utilities and a constrained system, but the components are yours and read as `Card` and `Button` rather than utility strings. The catch the numbers show is that layout utilities still live inline, so it's lighter than bare Tailwind, not as light as a class name.
 - **Server-first (RSC):** any of the static options fits; runtime CSS-in-JS is the one that fights the grain.
 
-For this site I use hand-written CSS Modules. It's read-heavy and long-lived, and the markup stays legible to me and to the assistant for the same reason. That's a fit for these constraints, not a recommendation for yours. The honest answer to the title is that Tailwind can be the best way, for the right project, and the question worth asking isn't "which tool wins" but "which surface do I want a model to read ten thousand times."
+For this site I use CSS Modules. It's read-heavy and long-lived, and the markup stays legible to me and to the assistant for the same reason. That's a fit for these constraints, not a recommendation for yours. The honest answer to the title is that Tailwind can be the best way, for the right project, and the question worth asking isn't "which tool wins" but "which surface do I want a model to read ten thousand times."
 
 ## Sources
 
