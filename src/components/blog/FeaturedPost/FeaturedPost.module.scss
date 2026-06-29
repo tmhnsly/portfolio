@@ -39,8 +39,8 @@
 
 .categoryPill {
   position: absolute;
-  left: 18px;
-  top: 18px;
+  left: var(--space-5);
+  top: var(--space-5);
   z-index: var(--z-card-overlay);
 }
 
