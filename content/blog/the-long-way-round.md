@@ -15,7 +15,7 @@ Lived with filmmakers there. Shoots were the most fun I'd had, so I picked up a 
 
 The computer thread was always running underneath. I'd used Windows until I was seventeen, then got a job at Apple, switched to a Mac, and learned my way around it on the shop floor and at home until I knew it cold. I delivered Apple's "Learning to Code with Sphero" course there, getting beginners to write the code that drove a little robot around the floor. Teaching people to make a computer do something turned out to be what I wanted to do myself, so I moved into the web.
 
-That's the day job now. React, Next.js and TypeScript, for agencies, a software consultancy, and editorial publishers like the Financial Times. A booking flow that lifted spend per booking by 48% in its first week. And Chork, a climbing app I design and build, that my friends and I use.
+That's where I've landed. React, Next.js and TypeScript, for agencies, a software consultancy, and editorial publishers like the Financial Times. A booking flow that lifted spend per booking by 48% in its first week. And Chork, a climbing app I design and build, that my friends and I use.
 
 For years the rest of it sat in different places, or nowhere. The films on a YouTube channel, the code on GitHub, the audio more or less lost. You move on to the next thing and set the last one down, and after a while the through-line stops being visible, even to you.
 
