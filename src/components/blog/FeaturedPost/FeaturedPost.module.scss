@@ -86,16 +86,10 @@
   color: var(--text);
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: var(--space-1);
 }
 
-/* head row: title (left) + the card-link arrow (top-right), nudging + accenting
-   on whole-card hover (CardArrow handles right-alignment) */
-.head {
-  display: flex;
-  align-items: flex-start;
-  gap: var(--space-4);
-}
+/* the inline read-arrow — nudges + accents on whole-card hover, matching PostCard */
 .arrow {
   color: var(--text-soft);
 }

@@ -5,7 +5,7 @@ import { Eyebrow } from '@/components/ui/Eyebrow';
 import { PostThumb } from '@/components/blog/PostThumb';
 import { Pill } from '@/components/ui/Pill';
 import { TechChip } from '@/components/ui/TechChip';
-import { CardArrow } from '@/components/ui/CardArrow';
+import { LinkArrow } from '@/components/ui/LinkArrow';
 import { postPresentation } from '@/lib/post-presentation';
 import styles from './FeaturedPost.module.scss';
 
@@ -26,17 +26,15 @@ export function FeaturedPost({ post }: { post: BlogPost }) {
             </PostThumb>
           </div>
           <div className={styles.content}>
-            <div className={styles.head}>
-              <h2 className={styles.title}>{post.title}</h2>
-              <CardArrow className={styles.arrow} />
-            </div>
+            <h2 className={styles.title}>{post.title}</h2>
             <p className={styles.excerpt}>{post.excerpt}</p>
             <div className={styles.chips}>
               {post.tags.map((tag) => (
                 <TechChip key={tag} label={tag} />
               ))}
             </div>
-            <div className={styles.readMore}>Read the post</div>
+            {/* one read affordance, inline like the older PostCards' "read →" */}
+            <div className={styles.readMore}>Read the post <LinkArrow className={styles.arrow} /></div>
           </div>
         </div>
       </Link>
