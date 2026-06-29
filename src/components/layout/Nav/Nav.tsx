@@ -130,7 +130,10 @@ export function Nav({ active, accent, accentInk, accentHover, onAccent }: NavPro
               {/* exactly one span is `display`-shown per breakpoint (the other is
                   display:none, so excluded from the a11y name) — so neither needs
                   aria-hidden; whichever is visible becomes the link's accessible name. */}
-              <span className={styles.ctaFull}>{email ?? 'Email me'} <LinkArrow /></span>
+              {/* the address is revealed client-side (anti-scraper, see useEmail), so
+                  it's absent on first paint — reserve its width on .ctaEmail so the
+                  "Email me" → full-address swap doesn't shift the button on hydration */}
+              <span className={styles.ctaFull}><span className={styles.ctaEmail}>{email ?? 'Email me'}</span> <LinkArrow /></span>
               <span className={styles.ctaShort}>{COPY.nav.sayHi} <LinkArrow /></span>
             </a>
           </div>

@@ -124,6 +124,11 @@
 .cta:active { transform: translateY(1px); }
 /* CTA scales: "Say hi →" in the lower desktop range, full email from 1440 up */
 .ctaFull { display: none; }
+/* Reserve the revealed email's width (hello@tomhinsley.com ≈ 17.2ch in Space
+   Grotesk at this size) so the post-hydration reveal — "Email me" → the full
+   address, a ~97px change — doesn't shift the CTA. Lives only inside .ctaFull,
+   which is shown from wide-up, so the "Say hi" state below 1440 is untouched. */
+.ctaEmail { display: inline-block; min-width: 17.2ch; text-align: center; }
 .ctaShort { display: inline; }
 @include wide-up {
   .ctaFull { display: inline; }
