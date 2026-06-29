@@ -1,7 +1,15 @@
+@use '../../../styles/mixins/breakpoints' as *;
+
 .section { }
 .head { margin-bottom: var(--space-4); }
+/* Four disciplines, so step 1 → 2×2 → one row of 4 and SKIP the 3-column state —
+   auto-fit landed on 3 in the ~700–930px band, orphaning the 4th card on its own
+   row. (Tuned to the four-discipline set; revisit if that count changes.) */
 .track {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(var(--card-min-w), 1fr));
+  grid-template-columns: 1fr;
   gap: var(--space-4);
+
+  @include tablet-up { grid-template-columns: repeat(2, 1fr); }
+  @include lg-up { grid-template-columns: repeat(4, 1fr); }
 }

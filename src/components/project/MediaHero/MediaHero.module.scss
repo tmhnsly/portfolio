@@ -18,8 +18,8 @@
 }
 
 .badge {
-  position: absolute; bottom: 0.75rem; right: 0.75rem;
-  padding: 0.3rem 0.6rem; border-radius: 999px;
+  position: absolute; bottom: var(--space-3); right: var(--space-3);
+  padding: var(--pad-pill); border-radius: var(--radius-full);
   color: var(--text); font-size: 0.72rem; font-variant-numeric: tabular-nums;
   @include glass(var(--glass), 8px);
 }

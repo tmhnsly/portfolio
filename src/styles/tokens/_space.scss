@@ -6,41 +6,44 @@
   --space-13: 96px; --space-14: 128px;
   --section-space: var(--space-12);
 
-  /* ── semantic spacing — named by use so spacing stays consistent (values preserved) ── */
+  /* ── semantic spacing — named by use; every value sourced from the scale above so
+     the scale is the single source of rhythm (was a parallel set of off-scale values:
+     5/6/9/10/14/18/22/28/38). Snapping rule: nearest scale step, ties round up. Each
+     comment notes old px → new px. ── */
   /* rows of small inline items */
-  --gap-chip: 5px;            /* tech-chip + swatch rows */
-  --gap-controls: 18px;       /* embed control cluster */
+  --gap-chip: var(--space-1);                  /* 5 → 4   tech-chip + swatch rows */
+  --gap-controls: var(--space-5);              /* 18 → 20  embed control cluster */
   /* padded primitives */
-  --pad-chip: 4px 10px;       /* TechChip, on-media labels */
-  --pad-pill: 5px 12px;       /* Pill, status pill */
-  --pad-btn: 10px 16px;       /* Button (primary/secondary/ghost) */
-  --pad-inline-code: 2px 6px; /* inline `code` */
-  --pad-code-block: 20px 22px;
+  --pad-chip: var(--space-1) var(--space-3);   /* 4 10 → 4 12  TechChip, on-media labels */
+  --pad-pill: var(--space-1) var(--space-3);   /* 5 12 → 4 12  Pill, status pill */
+  --pad-btn: var(--space-3) var(--space-4);    /* 10 16 → 12 16  Button */
+  --pad-inline-code: 2px var(--space-2);       /* 2 6 → 2 8  inline `code` (2px = sub-grid hairline, kept) */
+  --pad-code-block: var(--space-5) var(--space-6); /* 20 22 → 20 24 */
   /* cards */
-  --pad-card: var(--space-4) 18px; /* discipline card inner */
-  --card-min-h: 148px;
-  --card-min-w: 220px;        /* discipline scroller column min */
-  /* content measures — max reading width (line length) */
+  --pad-card: var(--space-4) var(--space-5);   /* 16 18 → 16 20  discipline card inner */
+  --card-min-h: 148px;        /* element min-size (not spacing rhythm) — kept literal */
+  --card-min-w: 220px;        /* discipline scroller column min — kept literal */
+  /* content measures — max reading width (line length), not spacing — kept literal */
   --measure-prose: 780px;     /* long-form body (post / project body) */
   --measure: 640px;           /* standard content column (intros, section copy) */
   --measure-narrow: 580px;    /* hero subtitle / blog intro */
   /* nav + square icon controls */
-  --control-size: 38px;       /* square icon button (theme toggle) */
+  --control-size: var(--space-8);  /* 38 → 40  square icon button (theme toggle) */
   /* Corner-nesting math: the bar is radius-2xl (18px); buttons are radius-lg (10px).
-     For a button's corner to sit concentric inside the bar's corner, the gap must be
-     18 - 10 = 8px on BOTH adjacent sides. So the bar pads 8px to the corner buttons,
-     and the corner buttons are a uniform 40px tall → (56 - 40)/2 = 8px top/bottom gap. */
-  --nav-btn-h: 40px;
-  --nav-pad: 10px 8px 10px 12px;        /* right 8 = CTA gap; left 12 (brand margin -4) = 8 */
-  --nav-pad-wide: 10px 8px 10px 12px;
-  --nav-item-gap: 6px;
-  --nav-item-pad: 8px 8px;     /* brand: 24px mark + 16 = 40px tall, 8px sides */
-  --nav-item-pad-wide: 9px 14px;
-  --cta-pad: 10px 12px;
-  --cta-pad-wide: 10px 16px;
+     For a button's corner to sit concentric inside the bar's corner the gap is 8px on
+     both adjacent sides — so the bar's right pad = 8 (space-2) and left = 12 (space-3,
+     less the −4 brand margin = 8). Vertical is centred by the bar's fixed height. */
+  --nav-btn-h: var(--space-8);     /* 40 */
+  --nav-pad: var(--space-3) var(--space-2) var(--space-3) var(--space-3);      /* 10 8 10 12 → 12 8 12 12 */
+  --nav-pad-wide: var(--space-3) var(--space-2) var(--space-3) var(--space-3);
+  --nav-item-gap: var(--space-2);  /* 6 → 8 */
+  --nav-item-pad: var(--space-2) var(--space-2);       /* 8 8 (brand: 24px mark + 16 = 40px tall) */
+  --nav-item-pad-wide: var(--space-2) var(--space-4);  /* 9 14 → 8 16 */
+  --cta-pad: var(--space-3) var(--space-3);            /* 10 12 → 12 12 */
+  --cta-pad-wide: var(--space-3) var(--space-4);       /* 10 16 → 12 16 */
   /* project embed (mock device) structural spacing */
-  --embed-min-h: 480px;
+  --embed-min-h: 480px;       /* element min-height — kept literal */
   --embed-min-h-wide: 560px;
-  --embed-chrome-pad: 0 28px;
-  --embed-pad-gap: 14px;
+  --embed-chrome-pad: 0 var(--space-7);  /* 0 28 → 0 32 */
+  --embed-pad-gap: var(--space-3);       /* 14 → 12 */
 }

@@ -91,8 +91,8 @@ export const COPY = {
     helpHeading: 'How I can help',
     help: [
       { discipline: 'code', title: 'Web development', body: 'Frontend and full-stack: responsive, accessible interfaces in React, Next.js and TypeScript, with design systems, APIs and performance work.', linkLabel: 'See code work' },
-      { discipline: 'audio', title: 'Audio', body: 'Original music and sound design for film, games and brand work, from a sound-design background.', linkLabel: 'See audio work' },
       { discipline: 'video', title: 'Video', body: 'Editing, motion and short films, from concept to final cut.', linkLabel: 'See video work' },
+      { discipline: 'audio', title: 'Audio', body: 'Original music and sound design for film, games and brand work, from a sound-design background.', linkLabel: 'See audio work' },
     ],
 
     // FAQ — visible Q&A that also drives FAQPage structured data. Strong AI-EO:

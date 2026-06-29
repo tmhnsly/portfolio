@@ -16,10 +16,10 @@
 
 .slide {
   flex: 0 0 100%; min-width: 0;
-  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: var(--space-3, 0.75rem);
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: var(--space-3);
   scroll-snap-align: start;
-  padding: clamp(0.75rem, 3vw, 2rem);
-  padding-bottom: 4.5rem;
+  padding: clamp(var(--space-3), 3vw, var(--space-7));
+  padding-bottom: var(--space-12);
 }
 .stage { width: 100%; max-width: min(1100px, 92vw); }
 .media { width: 100%; }
@@ -29,16 +29,16 @@
   font-size: 0.8rem; letter-spacing: var(--ls-mono); text-align: center;
 }
 
-.top { position: absolute; top: 0; right: 0; padding: var(--space-3, 0.75rem); z-index: 2; }
+.top { position: absolute; top: 0; right: 0; padding: var(--space-3); z-index: 2; }
 .bottom {
   position: absolute; bottom: 0; left: 0; right: 0; z-index: 2;
-  display: flex; align-items: center; justify-content: center; gap: 0.5rem;
-  padding: var(--space-4, 1rem);
+  display: flex; align-items: center; justify-content: center; gap: var(--space-2);
+  padding: var(--space-4);
 }
 
 .btn {
-  width: 44px; height: 44px; display: grid; place-items: center;
-  border-radius: 999px; cursor: pointer;
+  width: 44px; height: 44px; display: grid; place-items: center; /* 44 = min touch target, kept off-scale on purpose */
+  border-radius: var(--radius-full); cursor: pointer;
   color: var(--white-a11);
   background: var(--white-a2);
   border: var(--border-width) solid var(--white-a3);
@@ -49,8 +49,8 @@
 .btn:hover { background: var(--white-a4); }
 
 .counter {
-  min-width: 4rem; text-align: center;
-  padding: 0.4rem 0.75rem; border-radius: 999px;
+  min-width: var(--space-11); text-align: center;
+  padding: var(--pad-pill); border-radius: var(--radius-full);
   color: var(--white-a9); font-size: 0.8rem; font-variant-numeric: tabular-nums;
   background: var(--white-a2);
   backdrop-filter: blur(12px);
