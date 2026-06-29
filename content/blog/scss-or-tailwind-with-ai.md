@@ -15,7 +15,7 @@ What it doesn't change is reading. When a model writes most of the code, the exp
 
 ## The unit: one button
 
-Here is a real button from this site, the component every design system has, with a hover, focus and dark story. The markup names it once:
+Here is a real button from this site, the component every design system has, with hover, focus and dark-mode states. The markup names it once:
 
 ```tsx
 export function Button({ variant, children, href, ...rest }: ButtonProps) {
@@ -27,11 +27,23 @@ export function Button({ variant, children, href, ...rest }: ButtonProps) {
 and the rule lives once, in a file the model only opens when it's editing styles:
 
 ```scss
-.btn { display: inline-flex; align-items: center; justify-content: center;
-  gap: var(--space-2); font-weight: var(--fw-semibold); font-size: var(--fs-body-s);
-  letter-spacing: -0.005em; border-radius: var(--radius-lg); cursor: pointer; }
-.primary { padding: var(--pad-btn); background: var(--accent); color: var(--on-accent);
-  box-shadow: 0 6px 18px color-mix(in srgb, var(--accent) 27%, transparent); }
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  font-weight: var(--fw-semibold);
+  font-size: var(--fs-body-s);
+  letter-spacing: -0.005em;
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+}
+.primary {
+  padding: var(--pad-btn);
+  background: var(--accent);
+  color: var(--on-accent);
+  box-shadow: 0 6px 18px color-mix(in srgb, var(--accent) 27%, transparent);
+}
 ```
 
 The Tailwind translation of the same button carries the whole description inline, on the element:
