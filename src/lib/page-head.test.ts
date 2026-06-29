@@ -1,19 +1,9 @@
 import { describe, it, expect } from 'vitest';
 import { disciplineHead, postHead, projectHead } from './page-head';
-import { projectFrontmatterSchema } from './schemas';
-import type { BlogPost, Project } from '@/types';
+import { makeProject, makePost } from './test-fixtures';
 
-const project: Project = {
-  ...projectFrontmatterSchema.parse({ title: 'Wake', discipline: 'audio', date: '2015-02-01', media: [] }),
-  slug: 'wake',
-  body: '',
-};
-
-const post = {
-  slug: 'hello-world', title: 'Hello World', excerpt: 'A short hello.', date: '2026-06-04',
-  category: 'Opinion', tags: [], featured: false, body: '', readingTime: 6,
-  author: { name: '', role: '', bio: '' },
-} as BlogPost;
+const project = makeProject();
+const post = makePost();
 
 describe('projectHead', () => {
   it('builds article metadata with publishedTime + canonical path', () => {

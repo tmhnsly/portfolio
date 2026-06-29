@@ -8,10 +8,17 @@ import {
 
 describe('content loaders', () => {
   it('loads + validates projects, derives slug from filename', () => {
-    expect(getAllProjects().length).toBeGreaterThan(0);
-    const chork = getProject('chork');
-    expect(chork?.featured).toBe(true);
-    expect(chork?.body).toContain('Chork');
+    const all = getAllProjects();
+    expect(all.length).toBeGreaterThan(0);
+    // slug derived from filename (kebab); title + body populated from the file
+    for (const p of all) {
+      expect(p.slug).toMatch(/^[a-z0-9-]+$/);
+      expect(p.title.length).toBeGreaterThan(0);
+    }
+    // getProject round-trips a real slug back to the same project
+    const first = all[0]!;
+    expect(getProject(first.slug)?.title).toBe(first.title);
+    expect(first.body.length).toBeGreaterThan(0);
   });
   it('loads posts and computes reading time when absent', () => {
     const posts = getAllPosts();

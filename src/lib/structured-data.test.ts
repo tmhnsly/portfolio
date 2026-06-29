@@ -9,23 +9,32 @@ import {
   projectVideos,
   projectCrumbs,
 } from './structured-data';
-import { getProject, getPost } from './content';
+import { makeProject, makePost } from './test-fixtures';
 import { COPY } from '@/data';
+
+// Fixtures, not live content: the functions under test are pure over a Project /
+// Post, so they take a constructed object rather than a Markdown file that can be
+// renamed or deleted (see test-fixtures). One project with a video, one without, a post.
+const videoProject = makeProject({
+  media: [{ type: 'youtube', id: 'xHmZYM6n8G0', poster: '/images/wake-poster.webp', title: 'Full film' }],
+});
+const noVideoProject = makeProject({ slug: 'demo-app', discipline: 'code', title: 'Demo App' });
+const post = makePost();
 
 describe('projectVideoJsonLd', () => {
   it('emits a VideoObject with an absolute thumbnail for each video', () => {
-    const ld = projectVideoJsonLd(getProject('wake')!);
+    const ld = projectVideoJsonLd(videoProject);
     expect(ld).toHaveLength(1);
     const video = ld![0]!;
     expect(video['@type']).toBe('VideoObject');
-    expect(video.thumbnailUrl).toBe('https://www.tomhinsley.com/images/projects/thumbnails/audio/wake.webp');
+    expect(video.thumbnailUrl).toBe('https://www.tomhinsley.com/images/wake-poster.webp');
     expect(video.embedUrl).toContain('/embed/xHmZYM6n8G0');
     expect(video.uploadDate).toBe('2015-02-01T00:00:00Z');
     expect(video.name).toBe('Full film');
   });
 
   it('returns null for a project with no video', () => {
-    expect(projectVideoJsonLd(getProject('chork')!)).toBeNull();
+    expect(projectVideoJsonLd(noVideoProject)).toBeNull();
   });
 });
 
@@ -45,19 +54,19 @@ describe('identityGraphJsonLd', () => {
 
 describe('projectVideos', () => {
   it('resolves the video facts shared by the VideoObject and the sitemap', () => {
-    const vids = projectVideos(getProject('wake')!);
+    const vids = projectVideos(videoProject);
     expect(vids).toHaveLength(1);
-    expect(vids[0]!.thumbnailUrl).toBe('https://www.tomhinsley.com/images/projects/thumbnails/audio/wake.webp');
+    expect(vids[0]!.thumbnailUrl).toBe('https://www.tomhinsley.com/images/wake-poster.webp');
     expect(vids[0]!.embedUrl).toContain('/embed/xHmZYM6n8G0');
   });
   it('is empty for a project with no video', () => {
-    expect(projectVideos(getProject('chork')!)).toEqual([]);
+    expect(projectVideos(noVideoProject)).toEqual([]);
   });
 });
 
 describe('projectCrumbs', () => {
   it('builds Home / Discipline / title with the right urls', () => {
-    const c = projectCrumbs(getProject('wake')!);
+    const c = projectCrumbs(videoProject);
     expect(c.map((x) => x.name)).toEqual(['Home', 'Audio', 'Wake']);
     expect(c[2]!.url).toBe('/audio/wake');
   });
@@ -65,20 +74,19 @@ describe('projectCrumbs', () => {
 
 describe('blogPostingJsonLd', () => {
   it('points the author at the shared Person and uses an absolute URL', () => {
-    const post = getPost('the-water-cost-of-ai')!;
     const ld = blogPostingJsonLd(post);
     expect(ld['@type']).toBe('BlogPosting');
     expect(ld.author).toEqual({ '@id': 'https://www.tomhinsley.com/#person' });
-    expect(ld.url).toBe('https://www.tomhinsley.com/blog/the-water-cost-of-ai');
+    expect(ld.url).toBe('https://www.tomhinsley.com/blog/hello-world');
     expect(ld.datePublished).toBe(post.date);
   });
 });
 
 describe('projectCreativeWorkJsonLd', () => {
   it('emits a CreativeWork keyed to the project', () => {
-    const ld = projectCreativeWorkJsonLd(getProject('chork')!);
+    const ld = projectCreativeWorkJsonLd(noVideoProject);
     expect(ld['@type']).toBe('CreativeWork');
-    expect(ld.url).toBe('https://www.tomhinsley.com/code/chork');
+    expect(ld.url).toBe('https://www.tomhinsley.com/code/demo-app');
     expect(ld.author).toEqual({ '@id': 'https://www.tomhinsley.com/#person' });
   });
 });
