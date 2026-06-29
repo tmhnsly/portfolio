@@ -1,11 +1,9 @@
 import { describe, it, expect } from 'vitest';
 import { coverImage, mediaHeroView, projectPresentation } from './project-presentation';
-import { projectFrontmatterSchema } from './schemas';
-import type { Project, MediaItem } from '@/types';
+import { makeProject } from './test-fixtures';
+import type { MediaItem } from '@/types';
 
-function project(media: MediaItem[]): Project {
-  return { ...projectFrontmatterSchema.parse({ title: 'Wake', discipline: 'audio', date: '2015-02-01', media }), slug: 'wake', body: '' };
-}
+const project = (media: MediaItem[]) => makeProject({ media });
 
 describe('projectPresentation', () => {
   it('resolves a project to its card display facts (incl. formatted date, mirroring postPresentation)', () => {

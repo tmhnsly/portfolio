@@ -122,6 +122,40 @@ function Orb() {
   );
 }
 
+// git-graph: the code (tomato) trunk runs straight through as the main day job, with
+// audio (blue) and video (green) branches forking off and carrying on to the edge —
+// all still active, none merged away, code the line everything else hangs off
+const BR_MAIN = 'M-4,30 L104,30';
+const BR_AUDIO = 'M16,30 C28,30 30,14 42,14 L104,14';
+const BR_VIDEO = 'M40,30 C52,30 54,46 66,46 L104,46';
+const COMMITS: ReadonlyArray<{ x: number; y: number; c: string; r: number; i: number }> = [
+  { x: 16, y: 30, c: 'var(--tomato-9)', r: 6, i: 3 },
+  { x: 40, y: 30, c: 'var(--tomato-9)', r: 6, i: 4 },
+  { x: 72, y: 30, c: 'var(--tomato-9)', r: 6, i: 5 },
+  { x: 76, y: 14, c: 'var(--blue-9)', r: 5, i: 6 },
+  { x: 88, y: 46, c: 'var(--green-9)', r: 5, i: 7 },
+];
+function Branches() {
+  return (
+    <div className={styles.art}>
+      <svg viewBox="0 0 100 60" className={styles.branches} preserveAspectRatio="none" aria-hidden>
+        <path d={BR_AUDIO} className={cx(styles.branch, styles.branchAudio)} style={v({ '--i': 1 })} pathLength={1} strokeDasharray={1} />
+        <path d={BR_VIDEO} className={cx(styles.branch, styles.branchVideo)} style={v({ '--i': 2 })} pathLength={1} strokeDasharray={1} />
+        <path d={BR_MAIN} className={cx(styles.branch, styles.branchCode)} style={v({ '--i': 0 })} pathLength={1} strokeDasharray={1} />
+      </svg>
+      {COMMITS.map((d, k) => (
+        <span
+          key={k}
+          className={styles.commit}
+          style={v({ left: `${d.x}%`, top: `${(d.y / 60) * 100}%`, '--dot': d.c, '--r': d.r, '--i': d.i })}
+          aria-hidden
+        />
+      ))}
+      <span className={styles.grain} aria-hidden />
+    </div>
+  );
+}
+
 const MOTIFS: Record<MotifKey, () => React.ReactNode> = {
   code: DotField,
   writing: DotField,
@@ -131,6 +165,7 @@ const MOTIFS: Record<MotifKey, () => React.ReactNode> = {
   process: Rings,
   datacenter: Droplet,
   tokens: Tokens,
+  branches: Branches,
   feed: Orb,
 };
 
@@ -145,6 +180,7 @@ const MOTIF_HUE: Partial<Record<MotifKey, 'hueBlue' | 'hueGreen' | 'hueTomato' |
   process: 'hueGreen',
   motion: 'hueTomato',
   tokens: 'hueSand',
+  branches: 'hueSand',
 };
 
 export function BlogThumb({ post }: { post: BlogPost }) {

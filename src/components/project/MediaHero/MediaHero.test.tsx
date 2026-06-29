@@ -1,15 +1,13 @@
 import { describe, it, expect, vi, beforeAll } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { ThemeProvider } from '@/lib/theme';
-import { projectFrontmatterSchema } from '@/lib/schemas';
-import type { Project, MediaItem } from '@/types';
+import { makeProject } from '@/lib/test-fixtures';
+import type { MediaItem } from '@/types';
 import { MediaHero } from './MediaHero';
 
 beforeAll(() => { Element.prototype.scrollIntoView = vi.fn(); });
 
-function project(media: MediaItem[], slug = 'wake'): Project {
-  return { ...projectFrontmatterSchema.parse({ title: 'Wake', discipline: 'audio', date: '2015-02-01', media }), slug, body: '' };
-}
+const project = (media: MediaItem[], slug = 'wake') => makeProject({ media, slug });
 
 describe('MediaHero', () => {
   it('plays a lone video inline, without opening the carousel', () => {

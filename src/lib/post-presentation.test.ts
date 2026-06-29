@@ -1,19 +1,8 @@
 import { describe, it, expect } from 'vitest';
 import { postPresentation } from './post-presentation';
-import type { BlogPost } from '@/types';
+import { makePost } from './test-fixtures';
 
-const post = {
-  slug: 'hello-world',
-  title: 'Hello World',
-  excerpt: '',
-  date: '2026-06-04',
-  category: 'Opinion',
-  tags: [],
-  featured: false,
-  body: '',
-  readingTime: 6,
-  author: { name: '', role: '', bio: '' },
-} as BlogPost;
+const post = makePost();
 
 describe('postPresentation', () => {
   it('resolves a post to its display facts', () => {
