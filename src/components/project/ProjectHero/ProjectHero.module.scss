@@ -1,28 +1,22 @@
 @use '../../../styles/mixins/breakpoints' as *;
 
 .hero {
+  /* the title sizes to the full hero width (cqw below), not the viewport */
+  container-type: inline-size;
 }
 
-.layout {
+/* lead (left) + meta (right) row beneath the full-width title */
+.lower {
   display: grid;
   grid-template-columns: 1fr;
   gap: var(--space-8);
+  margin-top: var(--space-6);
 
   @include desktop-up {
     grid-template-columns: 1.4fr 1fr;
     gap: var(--space-10);
+    align-items: start;
   }
-}
-
-.main {
-  display: flex;
-  flex-direction: column;
-  min-width: 0; /* grid item: let the live-URL ellipsis engage on long URLs */
-  /* Size the title to THIS column (cqw), not the viewport (vw). On the desktop
-     2-col layout the title shares width with the meta column, so a long title word
-     at 12vw renders wider than its 1.4fr track and overflows right — the trailing
-     period dot landing on the meta rows. cqw bounds it to the column. */
-  container-type: inline-size;
 }
 
 .pillRow {
@@ -74,15 +68,17 @@
 .title {
   margin: 0;
   font-family: var(--font-display);
-  font-size: clamp(var(--fs-display), 12cqw, var(--fs-display-xxl));
-  line-height: 0.88;
-  letter-spacing: var(--ls-display-xxl);
+  /* full hero width now (cqw of .hero); capped at display-xl so it reads big but
+     stays below the home hero's display-xxl */
+  font-size: clamp(var(--fs-display), 11cqw, var(--fs-display-xl));
+  line-height: 0.9;
+  letter-spacing: var(--ls-display-xl);
   font-weight: var(--fw-semibold);
   color: var(--text);
 }
 
 .lead {
-  margin: var(--space-6) 0 0;
+  margin: 0;
   max-width: 620px;
   font-family: var(--font-display);
   font-size: var(--fs-h3);
@@ -94,9 +90,7 @@
 .meta {
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
   gap: var(--space-5);
-  padding-bottom: var(--space-3);
   min-width: 0; /* let long values (e.g. a repo URL) wrap instead of forcing the column wide */
 }
 

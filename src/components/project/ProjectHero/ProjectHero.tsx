@@ -23,41 +23,45 @@ export function ProjectHero({ project }: { project: Project }) {
 
   return (
     <Entrance className={styles.hero}>
-      <div className={styles.layout}>
-        <div className={styles.main}>
-          <EntranceItem className={styles.pillRow}>
-            <Pill label={label} tone="discipline" />
-            {project.status && (
-              <span className={styles.statusPill}>{project.status}</span>
-            )}
-            {primaryLink && (
-              <a className={styles.liveUrl} href={primaryLink} target="_blank" rel="noopener noreferrer">
-                <span className={styles.liveUrlText}>{hostLabel(primaryLink)}</span>
-                <LinkArrow inline />
-              </a>
-            )}
-          </EntranceItem>
+      {/* Pills + title span the FULL hero width (title sized to the whole hero, not
+          a column) so they use the space confidently; lead + meta sit in a row
+          beneath. Previously the title was boxed into a 1.4fr column while the meta
+          column reserved 1fr even when sparse — small title, empty right side. */}
+      <EntranceItem className={styles.pillRow}>
+        <Pill label={label} tone="discipline" />
+        {project.status && (
+          <span className={styles.statusPill}>{project.status}</span>
+        )}
+        {primaryLink && (
+          <a className={styles.liveUrl} href={primaryLink} target="_blank" rel="noopener noreferrer">
+            <span className={styles.liveUrlText}>{hostLabel(primaryLink)}</span>
+            <LinkArrow inline />
+          </a>
+        )}
+      </EntranceItem>
 
-          <EntranceTitle className={styles.title} title={project.title} period />
+      <EntranceTitle className={styles.title} title={project.title} period />
 
-          {project.desc && (
+      {(project.desc || metaRows.length > 0) && (
+        <div className={styles.lower}>
+          {project.desc ? (
             <EntranceItem>
               <p className={styles.lead}>{project.desc}</p>
             </EntranceItem>
+          ) : <span />}
+
+          {metaRows.length > 0 && (
+            <EntranceItem className={styles.meta}>
+              {metaRows.map(([key, val]) => (
+                <div key={key} className={styles.metaRow}>
+                  <div className={styles.metaKey}>{key}</div>
+                  <div className={styles.metaVal}>{val}</div>
+                </div>
+              ))}
+            </EntranceItem>
           )}
         </div>
-
-        {metaRows.length > 0 && (
-          <EntranceItem className={styles.meta}>
-            {metaRows.map(([key, val]) => (
-              <div key={key} className={styles.metaRow}>
-                <div className={styles.metaKey}>{key}</div>
-                <div className={styles.metaVal}>{val}</div>
-              </div>
-            ))}
-          </EntranceItem>
-        )}
-      </div>
+      )}
     </Entrance>
   );
 }
