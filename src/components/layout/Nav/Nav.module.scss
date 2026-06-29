@@ -100,6 +100,13 @@
   /* explicit height so the CTA's top/bottom gap is a uniform 8px (like its right gap),
      letting its corners nest concentrically in the bar's corner — see --nav-btn-h */
   height: var(--nav-btn-h); display: inline-flex; align-items: center; justify-content: center;
+  /* Reserve width so the font swap can't reflow the button. With display:swap the
+     metric-matched fallback renders "Email me" a few px WIDER than Space Grotesk, so
+     the content-sized box shrank on load and (pinned to the bar's right edge) shifted
+     left. A min-width ≥ the fallback's width holds the box steady through the swap;
+     the label centres in it. Font-independent unit (the box must not depend on the
+     font being measured). */
+  min-width: 7.375rem;
   padding: var(--cta-pad-wide); border-radius: var(--radius-lg);
   color: var(--on-accent, var(--text-on-accent));
   font-weight: var(--fw-semibold); font-size: var(--fs-body-s); letter-spacing: var(--ls-body); white-space: nowrap;
