@@ -14,7 +14,12 @@ export function Markdown({ children }: { children: string }) {
           h2: ({ children }) => <h2 className={styles.h2}>{children}</h2>,
           h3: ({ children }) => <h3 className={styles.h3}>{children}</h3>,
           p: ({ children }) => <p className={styles.p}>{children}</p>,
-          a: ({ href, children }) => <a className={styles.a} href={href}>{children}</a>,
+          a: ({ href, children }) => {
+            // external links open in a new tab (so readers don't lose the post)
+            const external = !!href && /^https?:\/\//.test(href);
+            const ext = external ? { target: '_blank', rel: 'noopener noreferrer' } : {};
+            return <a className={styles.a} href={href} {...ext}>{children}</a>;
+          },
           ul: ({ children }) => <ul className={styles.ul}>{children}</ul>,
           ol: ({ children }) => <ol className={styles.ol}>{children}</ol>,
           blockquote: ({ children }) => <blockquote className={styles.quote}>{children}</blockquote>,
