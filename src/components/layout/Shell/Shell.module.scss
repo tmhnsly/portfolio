@@ -22,6 +22,10 @@
 .content {
   position: relative;
   z-index: var(--z-content);
+  /* <main> is focused programmatically on route change (see Shell.tsx) purely to
+     move keyboard focus to the top — it's not a user-facing focus target, so don't
+     paint a ring around the whole page. The skip link remains the visible cue. */
+  &:focus { outline: none; }
 }
 
 /* Skip-to-content: present in the tab order but pulled off-screen until focused,

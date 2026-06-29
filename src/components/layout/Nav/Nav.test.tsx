@@ -9,7 +9,9 @@ describe('Nav', () => {
     render(<ThemeProvider><Nav {...resolveZone('/code')} /></ThemeProvider>);
     expect(screen.getByRole('link', { name: /^code$/i })).toBeInTheDocument();
     expect(screen.getByRole('link', { name: /about/i })).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: /hello@tomhinsley\.com/i })).toBeInTheDocument();
+    // CTA shows a static "Email me" label; the address is kept out of the markup
+    // (anti-scraper) and only powers the mailto, so it's not asserted as text here
+    expect(screen.getByRole('link', { name: /email me/i })).toBeInTheDocument();
     expect(screen.getByRole('link', { name: /^code$/i })).toHaveAttribute('aria-current', 'page');
   });
 });
