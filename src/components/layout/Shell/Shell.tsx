@@ -1,5 +1,5 @@
 'use client';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { usePathname } from 'next/navigation';
 import type { BreadcrumbData } from '@/lib/content';
 import { resolveZone, accentVars } from '@/lib/zone';
@@ -34,9 +34,21 @@ export function Shell({
   const pathname = usePathname();
   const { discipline, active, accent, accentInk, accentHover, onAccent } = resolveZone(pathname);
 
+  const mainRef = useRef<HTMLElement>(null);
+  // skip the focus move on first paint (don't steal focus on initial load); only
+  // do it on subsequent client navigations
+  const isFirstRender = useRef(true);
+
   // Reliably start each route at the top: the persistent Shell means the window
   // scroll position can otherwise carry over from the previous route on navigation.
-  useEffect(() => { window.scrollTo(0, 0); }, [pathname]);
+  // On a client navigation we also move keyboard focus to <main> — otherwise focus
+  // stays on the persistent Nav/Footer link that was just activated, so the page
+  // scrolls to the top but the next Tab resumes from the footer at the bottom.
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    if (isFirstRender.current) { isFirstRender.current = false; return; }
+    mainRef.current?.focus({ preventScroll: true });
+  }, [pathname]);
 
   return (
     <div
@@ -52,7 +64,9 @@ export function Shell({
       <a href="#main" className={styles.skipLink}>Skip to content</a>
       <Bloom zone={discipline ?? 'default'} tint={accent} />
       <Nav active={active} accent={accent} accentInk={accentInk} accentHover={accentHover} onAccent={onAccent} />
-      <main id="main" className={styles.content}>
+      {/* tabIndex -1 makes <main> a programmatic focus target (not in the Tab
+          order) so a route change can reset keyboard focus here — see the effect */}
+      <main id="main" ref={mainRef} tabIndex={-1} className={styles.content}>
         {/* persistent breadcrumb — one consistent, clickable trail for every
             route, so its position never shifts and the changing segment rolls */}
         <Breadcrumb data={breadcrumbData} discipline={discipline} />
