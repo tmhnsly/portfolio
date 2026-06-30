@@ -33,6 +33,23 @@ yarn-error.log*
 # env files (can opt-in for committing if needed)
 .env*
 
+# secrets, keys & credentials
+*.key
+*.p12
+*.pfx
+*.crt
+*.cert
+*.keystore
+*.jks
+.npmrc
+.netrc
+.pgpass
+*service-account*.json
+*firebase-adminsdk*.json
+
+# claude local settings (don't rely on the machine-global ignore)
+.claude/settings.local.json
+
 # vercel
 .vercel
 
