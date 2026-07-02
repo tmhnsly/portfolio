@@ -75,7 +75,7 @@ export function getPost(slug: string): BlogPost | undefined {
     not flag-driven). Edit DECK_LEAD to change which projects open the deck. Exported
     so a test can assert every lead slug still resolves (a stale slug is otherwise
     silently dropped at line below). */
-export const DECK_LEAD = ['chork', 'tv-bland'];
+export const DECK_LEAD = ['chork'];
 export function featuredProjects(n = 4): Project[] {
   const all = getAllProjects();
   const lead = DECK_LEAD.map((slug) => all.find((p) => p.slug === slug)).filter((p): p is Project => !!p);
