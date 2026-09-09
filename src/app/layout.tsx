@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { Space_Grotesk, Space_Mono } from 'next/font/google';
+import { Analytics } from '@vercel/analytics/next';
 import { ThemeProvider, THEME_SCRIPT } from '@/lib/theme';
 import { Shell } from '@/components/layout/Shell';
 import { JsonLd } from '@/components/seo';
@@ -67,6 +68,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             {children}
           </Shell>
         </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   );
