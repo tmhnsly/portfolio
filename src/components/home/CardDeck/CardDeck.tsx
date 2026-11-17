@@ -41,7 +41,7 @@ function CardFace({ project, priority }: { project: Project; priority?: boolean 
       <div className={styles.meta}>
         <div className={styles.title}>{project.title}</div>
         {project.desc && <div className={styles.desc}>{project.desc}</div>}
-        <span className={styles.pill}><Pill label={p.label} tone="discipline" color={p.color} onColor={p.onColor} /></span>
+        <span className={styles.pill}><Pill label={p.label} tone="quiet" color={p.color} /></span>
       </div>
     </Link>
   );

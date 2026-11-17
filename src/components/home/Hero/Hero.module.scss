@@ -4,21 +4,20 @@
      (it's capped below the column width here), so the wide one-column "deck
      stranded bottom-left with an empty right half" is gone. The split widens and
      the gap opens up at lg/desktop where there's more room. */
-  @include tablet-up { grid-template-columns: 1.4fr 1fr; gap: var(--space-8); align-items: start; }
-  @include lg-up { grid-template-columns: 1.55fr 1fr; gap: var(--space-11); } }
+  @include tablet-up { grid-template-columns: 1.4fr 1fr; gap: var(--space-8); align-items: center; }
+  @include lg-up { grid-template-columns: 1.1fr 1fr; gap: var(--space-11); } }
 .lead { display: flex; flex-direction: column; min-width: 0; }
 /* No top margin: the breadcrumb (space-7 below) + the Stack's top padding (space-8)
    already sit above the hero. The old space-7 here triple-stacked into a ~104px gap
    and pushed the home hero lower than every other page's first section. */
-.title { margin: 0; font-family: var(--font-display); font-weight: var(--fw-semibold);
-  letter-spacing: var(--ls-display-xxl); line-height: var(--lh-display); color: var(--text);
-  font-size: clamp(var(--fs-display), 13vw, var(--fs-display-l)); text-wrap: pretty;
+.title { margin: 0; font-family: var(--font-display); font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-h1); line-height: var(--lh-display); color: var(--text);
+  font-size: clamp(44px, 13vw, var(--fs-display-l)); text-wrap: pretty;
   @include tablet-up { font-size: clamp(44px, 6.5vw, var(--fs-display-l)); }
-  @include lg-up { font-size: clamp(var(--fs-display-l), 6vw, var(--fs-display-xl)); }
-  @include desktop-up { font-size: clamp(var(--fs-display-l), 7vw, var(--fs-display-xl)); } }
+  @include lg-up { font-size: clamp(var(--fs-display), 6.4vw, 96px); } }
 .sub { margin-top: var(--space-7); max-width: var(--measure-narrow); font-size: var(--fs-body-l); color: var(--text-soft); line-height: var(--lh-body); }
 /* explicit hire/stack status line — mono caption under the subtitle */
-.hireLine { margin-top: var(--space-4); font-family: var(--font-mono); font-size: var(--fs-mono-s);
+.hireLine { margin-top: var(--space-4); font-family: var(--font-mono); font-size: var(--fs-mono);
   letter-spacing: var(--ls-mono); color: var(--text-muted); }
 /* primary "Get in touch" + ghost "Download CV" under the subtitle */
 .cta { margin-top: var(--space-6); display: flex; flex-wrap: wrap; gap: var(--space-3); align-items: center; }
@@ -26,10 +25,11 @@
    gutter, in line with the other section eyebrows; from desktop it becomes the
    right-hand hero column. */
 .deckCol { display: flex; flex-direction: column; gap: var(--space-4); width: 100%;
-  @include lg-up { justify-self: end; } }
+  @include lg-up { justify-self: end; max-width: 520px; } }
 /* The deck sits left-aligned under its eyebrow at the gutter, so the whole
    one-column hero (title, sub, eyebrow, deck) reads as one left column. It fills
    the full column width on phones (capped at 440 from tablet up so it doesn't
    become huge); a centred deck floated away from the gutter eyebrow, so it stays
    left-aligned. Desktop: the right column. */
-.deck { width: 100%; max-width: 440px; }
+.deck { width: 100%; max-width: 440px;
+  @include lg-up { max-width: none; } }

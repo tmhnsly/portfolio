@@ -6,10 +6,10 @@
 export const COPY = {
   meta: {
     title: 'Tom Hinsley · Full-Stack Developer, Frontend Specialist',
-    description: 'London-based full-stack developer, frontend specialist in React, Next.js and TypeScript. Open to roles and freelance. Also works in audio and video.',
+    description: 'Full-stack developer, frontend specialist in React, Next.js and TypeScript. Open to roles and freelance, remote or on-site in London. Also works in audio and video.',
     // The liftable one-paragraph bio — what AI search quotes, and what the Person
     // JSON-LD + llms.txt share verbatim. Keep it factual and specific.
-    summary: 'Tom Hinsley is a London-based full-stack developer and frontend specialist in React, Next.js and TypeScript, open to permanent roles and freelance or contract work. Previously at Neverbland and Rocketmakers, with contract work for the Financial Times. He also works in audio and video.',
+    summary: 'Tom Hinsley is a full-stack developer and frontend specialist in React, Next.js and TypeScript, open to permanent roles and freelance or contract work, remote or on-site in London. Previously at Neverbland and Rocketmakers, with contract work for the Financial Times. He also works in audio and video.',
   },
 
   hero: {
@@ -17,25 +17,24 @@ export const COPY = {
     titleLead: 'Tom Hinsley,',
     titleMuted: 'digital creative',
     // subtitle paragraph
-    sub: 'Full-stack developer and frontend specialist in London, working across web, audio and video.',
+    sub: 'Full-stack developer and frontend specialist, working across web, audio and video.',
     // small mono status line under the sub — the explicit hire/stack signal
     hireLine: 'React, Next.js & TypeScript · Open to roles and freelance',
+    // label above the project deck
+    featured: 'Featured',
   },
 
   home: {
-    // RecentWork eyebrow
-    selectedWork: 'Selected work',
     // RecentWork h2 — accent period stays in JSX
-    recent: 'Recent',
+    selectedWork: 'Selected work',
     // RecentWork "see all" link
     everything: 'Everything',
     // DisciplineScroller eyebrow + aria-label
     exploreByDiscipline: 'Explore by discipline',
     // Availability section (homepage) — the visible hire block
     availability: {
-      eyebrow: 'Open to work',
       heading: 'Open to roles & freelance',
-      body: 'React, Next.js and TypeScript are home base, with full-stack reach when a project needs it. I pick up new tools fast, and I take on audio and video work too. London, remote or on-site.',
+      body: 'React, Next.js and TypeScript are home base, with full-stack reach when a project needs it. I pick up new tools fast, and I take on audio and video work too. Remote, or on-site in London.',
       // subtle link to the About page's "how I can help" section
       more: 'More on working together',
     },
@@ -43,9 +42,7 @@ export const COPY = {
 
   footer: {
     // Bio paragraph in first column (name comes from SITE.name above it)
-    bio: 'A digital creative based in London. Full-stack developer and frontend specialist, who also works in audio and video.',
-    // Marquee items that are NOT SITE.name / SITE.email (those are composed in Footer.tsx)
-    marqueeExtra: ['London 51.5°N', 'Get in touch'] as string[],
+    bio: 'A digital creative. Full-stack developer and frontend specialist, who also works in audio and video.',
     // Column header labels
     sections: 'Sections',
     elsewhere: 'Elsewhere',
@@ -56,8 +53,8 @@ export const COPY = {
   },
 
   about: {
-    // AboutHero intro paragraph. {years} is replaced at render time from SITE.experienceSince.
-    intro: 'Full-stack developer and frontend specialist in London with {years}+ years building responsive, accessible interfaces for agencies, a software consultancy and editorial publishers. Sound-design background, working across audio and video too.',
+    // AboutHero intro paragraph. Says "since 2021" rather than a computed "{years}+ years" (2026 was independent work, so the count overstated paid experience).
+    intro: 'Full-stack developer and frontend specialist, building responsive, accessible interfaces professionally since 2021 for a digital agency, a software consultancy and the Financial Times. Sound-design background, working across audio and video too.',
     // AboutHero discipline chips
     chips: ['Frontend', 'Full-stack', 'React', 'Next.js', 'TypeScript', 'Accessibility', 'Audio', 'Video'] as string[],
 
@@ -67,9 +64,9 @@ export const COPY = {
     currentlyLead: 'Full-stack developer and frontend specialist, ',
     currentlyAccent: 'open to roles and freelance',
     // note block (two lines separated by <br />)
-    currentlyNote: 'Frontend and full-stack contracts for digital publishers, including the Financial Times.\nAlso audio and video work, from music and sound design to film, plus the odd app like Chork.',
+    currentlyNote: 'Building my own products: Chork, a live bouldering competition app, and Raditz, a React design system.\nBefore that, contract frontend for the Financial Times. Also audio and video work, from music and sound design to film.',
     // body paragraphs
-    bodyPara1: 'I’ve been building for the web for {years}+ years, across agencies, a software consultancy and editorial publishers like the Financial Times. Strong React, Next.js and TypeScript foundations, with full-stack capability when a project calls for it.',
+    bodyPara1: 'I’ve been building for the web professionally since 2021, at a digital agency and a software consultancy, and on contract for the Financial Times. Strong React, Next.js and TypeScript foundations, with full-stack capability when a project calls for it.',
     bodyPara2: 'Off the clock I tinker with retro games and the emulators that run them, and get to a climbing wall when I can. Proudest useless achievement: finishing Super Mario Land on a Game Boy Color. The audio and video work here sits alongside the code, where the sound-design degree still leaks through.',
 
     // "Off the clock" — current book / TV series / game (Currently component).
@@ -100,12 +97,12 @@ export const COPY = {
     faqEyebrow: 'FAQ',
     faqHeading: 'Common questions',
     faq: [
-      { q: 'Is Tom available for work?', a: 'Yes. Open to permanent roles and freelance or contract work, remote or in London. Get in touch and he’ll share current availability.' },
+      { q: 'Is Tom available for work?', a: 'Yes. Open to permanent roles and freelance or contract work, remote or on-site in London. Get in touch and he’ll share current availability.' },
       { q: 'What is Tom’s tech stack?', a: 'React, Next.js and TypeScript day to day, with Node, modern CSS and SCSS, and a CMS like Sanity when a project needs one. Strong on accessibility and performance.' },
       { q: 'Does Tom do full-stack or just frontend?', a: 'Frontend is the specialism (React, Next.js, TypeScript), but he’s full-stack capable, comfortable with APIs, Node and a database when a feature needs end-to-end work.' },
-      { q: 'Has Tom worked with any notable companies?', a: 'Yes. Contract work for the Financial Times, plus roles at Rocketmakers and Neverbland, across agencies, a software consultancy and editorial publishers.' },
+      { q: 'Has Tom worked with any notable companies?', a: 'Yes. Contract work for the Financial Times, plus roles at Neverbland, a digital agency, and Rocketmakers, a software consultancy.' },
       { q: 'How much experience does Tom have?', a: 'Building professionally for the web since 2021, with a sound-design degree and creative work going back further.' },
-      { q: 'Does Tom work remotely, and where is he based?', a: 'Based in London, UK. Works remotely across the UK and internationally, or on-site in London.' },
+      { q: 'Does Tom work remotely or on-site?', a: 'Both. Remote across the UK and internationally, or on-site in London.' },
       { q: 'Can Tom help with audio or video too?', a: 'Yes. Alongside development he takes on audio (music and sound design) and video, from editing to short films, as professional work.' },
       { q: 'How do I hire Tom or get in touch?', a: 'Email is best. Use the contact link or button, or download the CV.' },
     ],

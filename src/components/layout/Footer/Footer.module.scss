@@ -1,27 +1,25 @@
 @use '../../../styles/mixins/breakpoints' as *;
 
 .footer { padding-block: var(--space-12) var(--space-8); }
-/* full-bleed ticker band with simple top/bottom rules (no glass) */
+/* full-bleed sign-off band with simple top/bottom rules (no glass) */
 .rules {
   border-top: var(--border-width) solid var(--rule);
   border-bottom: var(--border-width) solid var(--rule);
   padding-block: var(--space-5);
 }
-.row { display: inline-flex; align-items: center; }
-.marqueeLink {
+.row { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: var(--space-2) var(--space-6); }
+.emailLink {
   color: inherit; text-decoration: none;
   transition: color var(--duration-fast) var(--ease-standard);
 }
-@include can-hover { .marqueeLink:hover { color: var(--accent-ink); } }
+@include can-hover { .emailLink:hover { color: var(--accent-ink); } }
 .item {
-  display: inline-flex; align-items: center; gap: var(--space-6);
-  margin-right: var(--space-6);
   font-family: var(--font-display);
-  font-size: clamp(40px, 12vw, 88px);
-  font-weight: var(--fw-semibold);
-  letter-spacing: var(--ls-display-xxl); line-height: 1.2; padding-block: 0.06em; color: var(--text); white-space: nowrap;
+  font-size: clamp(var(--fs-h2), 5vw, 64px);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-h1); line-height: var(--lh-heading); color: var(--text); white-space: nowrap;
 }
-.dot { color: var(--accent-ink); font-size: 24px; } /* zone-accent separator — matches the page colour */
+.period { color: var(--accent-ink); }
 .grid {
   padding-top: var(--space-7);
   display: grid;
@@ -35,8 +33,8 @@
   }
 }
 .label {
-  color: var(--text); font-family: var(--font-mono); font-size: var(--fs-mono-xs);
-  letter-spacing: var(--ls-eyebrow); text-transform: uppercase; margin-bottom: var(--space-2);
+  color: var(--text); font-family: var(--font-mono); font-size: var(--fs-mono);
+  letter-spacing: var(--ls-mono); margin-bottom: var(--space-2);
 }
 .col p { margin: 0; }
 .link {

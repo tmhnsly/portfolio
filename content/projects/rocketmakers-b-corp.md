@@ -2,7 +2,7 @@
 title: Rocketmakers B Corp
 desc: A film announcing a studio's B Corp certification
 discipline: video
-date: "2023-07-01"
+date: "2023-03-01"
 tags: ["Lumix G7", "Final Cut Pro X"]
 role: Writer, director, presenter, camera + edit
 year: 2023

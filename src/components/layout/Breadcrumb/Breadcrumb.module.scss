@@ -19,7 +19,7 @@
   padding: 0;
   min-width: 0;
   overflow: hidden;
-  @include eyebrow; /* font-mono · fs-mono-s · ls-eyebrow · uppercase · text-muted */
+  @include eyebrow; /* font-mono · fs-mono · ls-mono · text-muted */
 }
 
 .crumb {

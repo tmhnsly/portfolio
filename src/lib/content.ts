@@ -9,8 +9,8 @@ import { projectHref, postHref } from './routes';
 const ROOT = path.join(process.cwd(), 'content');
 const AUTHOR: Author = {
   name: 'Tom Hinsley',
-  role: 'A digital creative in London',
-  bio: 'A digital creative in London. Mostly writes about code, sometimes about everything else.',
+  role: 'A digital creative',
+  bio: 'A digital creative. Mostly writes about code, sometimes about everything else.',
 };
 const WORDS_PER_MIN = 220;
 const estimateReading = (body: string) => Math.max(1, Math.round(body.split(/\s+/).length / WORDS_PER_MIN));

@@ -10,15 +10,26 @@ import { COMPANIES } from './companies';
  */
 export const TIMELINE = z.array(timelineEntrySchema).parse([
   {
-    id: 'freelance-2024',
-    period: 'Nov 2024 – Present',
-    role: 'Freelance Frontend Developer',
-    place: 'Self-employed · London',
+    id: 'independent-2026',
+    period: 'Jan 2026 – Present',
+    role: 'Frontend Engineer',
+    place: 'Self-employed · Guildford',
     description:
-      'Contract frontend for digital publishers and product teams, including the Financial Times. Built interactive branded-content pages for FT clients (Julius Baer, Equinor) from Figma to production-ready, fully responsive code, working closely with designers and editorial and managing each project end to end.',
-    tags: ['Next.js', 'TypeScript', 'SCSS', 'Figma'],
+      'Designing and building my own products. Chork, a climbing app for bouldering comps where everyone shares one live leaderboard. Raditz, an exploration of how an accessible, themeable React component library could work. Plus an energy-tariff dashboard and Dreamscene, a story-development app.',
+    tags: ['Next.js', 'TypeScript', 'Storybook', 'Accessibility'],
     discipline: 'code',
     monogram: 'TH',
+  },
+  {
+    id: 'freelance-2024',
+    period: 'Nov 2024 – Oct 2025',
+    role: 'Freelance Frontend Developer',
+    place: 'Financial Times · London',
+    description:
+      'Contract frontend for the Financial Times. Built two interactive branded-content pages for FT partners, Julius Baer and Equinor, inside the FT’s existing codebase: from Figma designs to production-ready, fully responsive code, working with designers and editorial and delivering to publication deadlines.',
+    tags: ['Next.js', 'TypeScript', 'SCSS', 'Figma'],
+    discipline: 'code',
+    monogram: 'FT',
   },
   {
     id: 'neverbland-2023',
@@ -31,7 +42,7 @@ export const TIMELINE = z.array(timelineEntrySchema).parse([
     tags: ['React', 'Next.js', 'Sanity', 'Storybook'],
     discipline: 'code',
     monogram: 'Nb',
-    logo: '/images/about/logos/neverbland.svg',
+    logo: '/images/about/logos/neverbland.webp',
   },
   {
     id: 'rocketmakers-2021',
@@ -44,7 +55,7 @@ export const TIMELINE = z.array(timelineEntrySchema).parse([
     tags: ['React', 'TypeScript', 'Node.js', 'REST APIs'],
     discipline: 'code',
     monogram: 'Rm',
-    logo: '/images/about/logos/rocketmakers.svg',
+    logo: '/images/about/logos/rocketmakers.webp',
   },
   {
     id: 'io-academy-2020',
@@ -61,17 +72,15 @@ export const TIMELINE = z.array(timelineEntrySchema).parse([
     logoFilled: true,
   },
   {
-    // One block for the whole Apple era — the stints overlapped uni and ran across
-    // several stores plus an Apple Premium Reseller (folded in as Apple here), so it
-    // reads cleanest as a single span. Framed around the one-to-one teaching: the
-    // root of the UX eye, hence the code accent (the bridge into the frontend work).
+    // Two stints across three stores (2011–2015, 2018–2019). The Apple Premium
+    // Reseller and other jobs in between are deliberately not folded in here.
     id: 'apple-2011',
-    period: 'Jun 2011 – Sep 2019',
+    period: '2011 – 2015, 2018 – 2019',
     role: 'Specialist',
-    place: 'Apple · London',
+    place: 'Apple · Basingstoke, Covent Garden, Kingston',
     companyUrl: COMPANIES.apple.url,
     description:
-      'Eight years at Apple, one-to-one and teaching group sessions: getting people of every age and skill level comfortable with their devices and the creative tools on them, and troubleshooting whatever had them stuck. Explaining technical things in plain language, to anyone who walked in, became second nature. Watching exactly where people hesitated and got lost is where my eye for UX and interface began.',
+      'Six years across three Apple stores, one-to-one and in group sessions: getting people of every age and skill level comfortable with their devices and the creative tools on them, and troubleshooting whatever had them stuck. Ran Today at Apple sessions, including Swift Playgrounds and Sphero coding, photography and video editing. Watching exactly where people hesitated and got lost is where my eye for UX and interface began.',
     tags: ['Teaching', 'Troubleshooting', 'UX'],
     discipline: 'video',
     logo: '/images/about/logos/apple.svg',

@@ -2,14 +2,29 @@
 
 .section { }
 .head { margin-bottom: var(--space-4); }
-/* Four disciplines, so step 1 → 2×2 → one row of 4 and SKIP the 3-column state —
-   auto-fit landed on 3 in the ~700–930px band, orphaning the 4th card on its own
-   row. (Tuned to the four-discipline set; revisit if that count changes.) */
-.track {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--space-4);
+.list { list-style: none; margin: 0; padding: 0; border-top: var(--border-width) solid var(--rule-soft); }
+.row {
+  display: grid; grid-template-columns: 1fr auto; align-items: center;
+  gap: var(--space-2) var(--space-6); padding-block: var(--space-5);
+  border-bottom: var(--border-width) solid var(--rule-soft); color: var(--text); text-decoration: none;
 
-  @include tablet-up { grid-template-columns: repeat(2, 1fr); }
-  @include lg-up { grid-template-columns: repeat(4, 1fr); }
+  @include tablet-up { grid-template-columns: minmax(0, 1fr) minmax(0, 2fr) auto; }
 }
+.route {
+  display: inline-flex; align-items: center; gap: var(--space-3);
+  font-family: var(--font-display); font-size: var(--fs-h3); font-weight: var(--fw-medium); letter-spacing: var(--ls-h3);
+  transition: color var(--duration-fast) var(--ease-standard);
+}
+.dot { width: var(--space-2); height: var(--space-2); border-radius: var(--radius-full); flex: none; }
+.tools {
+  grid-column: 1 / -1; grid-row: 2;
+  font-family: var(--font-mono); font-size: var(--fs-mono); letter-spacing: var(--ls-mono); color: var(--text-soft);
+
+  @include tablet-up { grid-column: auto; grid-row: auto; }
+}
+.arrow { color: var(--text-soft); transition: transform var(--duration-fast) var(--ease-standard), color var(--duration-fast) var(--ease-standard); }
+@include can-hover {
+  .row:hover .route { color: var(--accent-ink); }
+  .row:hover .arrow { color: var(--accent-ink); transform: translateX(2px); }
+}
+@include reduced-motion { .route, .arrow { transition: none; } .row:hover .arrow { transform: none; } }

@@ -4,7 +4,17 @@
 /* will-change promotes the bloom to its own composited layer: un-promoted, Firefox
    repaints the glows on every scroll frame (content scrolls over a fixed element);
    promoted, they rasterise once and only the zone crossfade touches them. */
-.bloom { position: fixed; inset: 0; overflow: hidden; pointer-events: none; z-index: var(--z-base); contain: paint; will-change: opacity; }
+/* Height is the LARGE viewport, not `inset: 0`. On iOS Safari `bottom: 0` sizes this
+   layer against the viewport with the URL bar SHOWING; when the bar retracts on
+   scroll the viewport grows but the layer doesn't, so it slides up with the viewport
+   top, stops, and leaves a hard clipped edge with bare --bg revealed below it.
+   100lvh is always the taller of the two chrome states, so no gap can appear.
+   (100vh first as a fallback for engines without lvh; on iOS vh is already the
+   large viewport.) */
+.bloom {
+  position: fixed; inset: 0 0 auto; height: 100vh; height: 100lvh;
+  overflow: hidden; pointer-events: none; z-index: var(--z-base); contain: paint; will-change: opacity;
+}
 /* No filter: blur — the radial gradients are already soft, and a large blur() over
    fixed full-viewport layers was the iOS-Safari first-load cost; the glows render
    from the gradient alone. */
