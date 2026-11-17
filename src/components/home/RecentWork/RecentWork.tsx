@@ -8,7 +8,6 @@ import { splitFeatured } from '@/lib/facets';
 import { IMG_SIZES } from '@/lib/breakpoints';
 import { DURATION, EASING } from '@/lib/motion';
 import { COPY } from '@/data';
-import { Eyebrow } from '@/components/ui/Eyebrow';
 import { FilterPills, useFacets } from '@/components/ui/FilterPills';
 import { ProjectThumb } from '@/components/project-thumbs';
 import { Pill } from '@/components/ui/Pill';
@@ -30,10 +29,7 @@ export function RecentWork({ projects }: { projects: Project[] }) {
   return (
     <section className={styles.section}>
       <div className={styles.head}>
-        <div>
-          <Eyebrow>{COPY.home.selectedWork}</Eyebrow>
-          <h2 className={styles.title}>{COPY.home.recent}<span className={styles.period}>.</span></h2>
-        </div>
+        <h2 className={styles.title}>{COPY.home.selectedWork}<span className={styles.period}>.</span></h2>
         <FilterPills items={filters} active={active} onSelect={setActive} />
       </div>
       <AnimatePresence mode="wait" initial={false}>
@@ -56,7 +52,7 @@ export function RecentWork({ projects }: { projects: Project[] }) {
                   <div className={styles.thumbMeta}>
                     <div className={styles.thumbTitle}>{p.title}</div>
                     {p.desc && <div className={styles.thumbDesc}>{p.desc}</div>}
-                    <span className={styles.pill}><Pill label={tp.label} tone="discipline" color={tp.color} onColor={tp.onColor} /></span>
+                    <span className={styles.pill}><Pill label={tp.label} tone="quiet" color={tp.color} /></span>
                   </div>
                   <CardArrow className={styles.arrow} />
                 </Link>

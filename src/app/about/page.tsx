@@ -14,7 +14,7 @@ import { ContactCTA } from '@/components/about/ContactCTA';
 
 export const metadata: Metadata = pageMeta({
   title: 'About',
-  description: 'Full-stack developer and frontend specialist in London with a sound-design background. Open to roles and freelance, working across web, audio and video.',
+  description: 'Full-stack developer and frontend specialist with a sound-design background. Open to roles and freelance, working across web, audio and video.',
   path: '/about',
 });
 

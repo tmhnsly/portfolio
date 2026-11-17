@@ -25,7 +25,7 @@ export function Hero({ featured }: { featured: Project[] }) {
         </EntranceItem>
         <EntranceItem i={2}>
           <div className={styles.cta}>
-            <EmailLink variant="primary">Get in touch</EmailLink>
+            <EmailLink variant="secondary">Get in touch</EmailLink>
             <Button variant="ghost" href="/tom-hinsley-cv.pdf" download="Tom-Hinsley-CV.pdf">
               <BiDownload aria-hidden /> Download CV
             </Button>
@@ -33,7 +33,7 @@ export function Hero({ featured }: { featured: Project[] }) {
         </EntranceItem>
       </div>
       <EntranceItem i={3} className={styles.deckCol}>
-        <Eyebrow>Featured deck</Eyebrow>
+        <Eyebrow>{COPY.hero.featured}</Eyebrow>
         <div className={styles.deck}>
           <CardDeck items={featured} />
         </div>

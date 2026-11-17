@@ -2,10 +2,10 @@
 title: Agile Energy Dashboard
 desc: Real-time energy tariff dashboard with load-shifting simulation
 discipline: code
-date: "2025-06-01"
+date: "2026-02-01"
 tags: ["React", "TypeScript", "Storybook", "Charts"]
 role: Design + engineering
-year: 2025
+year: 2026
 status: "Live"
 liveUrl: https://agile-energy-dashboard.vercel.app
 repo: github.com/tmhnsly/agile-energy-dashboard

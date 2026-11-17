@@ -2,7 +2,7 @@
 title: Rocketmakers 15th Birthday
 desc: Staff interviews marking a studio's 15th birthday
 discipline: video
-date: "2023-09-01"
+date: "2023-02-01"
 tags: ["Lumix G7", "Final Cut Pro X"]
 role: Director, camera, edit + sound
 year: 2023

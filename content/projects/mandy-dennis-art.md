@@ -2,10 +2,10 @@
 title: Mandy Dennis Art
 desc: Portfolio and commission site for a UK artist
 discipline: code
-date: "2024-11-01"
-tags: ["React", "Tailwind", "Vercel"]
+date: "2026-04-01"
+tags: ["React", "Tailwind", "Sanity", "Vercel"]
 role: Design + build
-year: 2024
+year: 2026
 status: "Live"
 liveUrl: https://mandydennis.art
 repo: github.com/tmhnsly/mandydennis-art

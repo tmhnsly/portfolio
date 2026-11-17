@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import { SITE, COPY } from '@/data';
-import { Marquee } from '@/components/motion/Marquee';
 import { EmailLink } from '@/components/ui/EmailLink';
 import { Container } from '../Container';
 import { FullBleed } from '../FullBleed';
@@ -8,32 +7,17 @@ import { FooterFact } from './FooterFact';
 import styles from './Footer.module.scss';
 
 export function Footer() {
-  // `email` items render via <EmailLink> (address revealed client-side); `label`
-  // set = a worded link (e.g. "Get in touch"), omitted = show the address.
-  const marqueeItems: { text?: string; email?: boolean; label?: string }[] = [
-    { text: SITE.name },
-    { email: true },
-    ...COPY.footer.marqueeExtra.map((text) => (/touch/i.test(text) ? { email: true, label: text } : { text })),
-  ];
-
   return (
     <footer className={styles.footer}>
       <FullBleed>
         <div className={styles.rules}>
-          <Marquee faded>
-            <span className={styles.row}>
-              {marqueeItems.map((item, i) => (
-                <span key={i} className={styles.item}>
-                  {item.email ? (
-                    <EmailLink className={styles.marqueeLink}>{item.label}</EmailLink>
-                  ) : (
-                    item.text
-                  )}
-                  <span className={styles.dot} aria-hidden>●</span>
-                </span>
-              ))}
-            </span>
-          </Marquee>
+          <Container>
+            <div className={styles.row}>
+              <span className={styles.item}>{SITE.name}<span className={styles.period}>.</span></span>
+              {/* no children: the address is revealed client-side by EmailLink */}
+              <span className={styles.item}><EmailLink className={styles.emailLink} /></span>
+            </div>
+          </Container>
         </div>
       </FullBleed>
       <Container>

@@ -8,7 +8,7 @@ import btn from '@/components/ui/Button/Button.module.scss';
  * A mailto link whose address is revealed client-side (see useEmail) — no literal
  * email in the SSR HTML. Drop into server components freely.
  * - `children` = visible label (e.g. "Say hi"); omit to show the email address.
- * - `variant` = reuse Button's primary/ghost styling.
+ * - `variant` = reuse Button's primary/secondary/ghost styling.
  * - `showArrow`/`inline` = append the brand LinkArrow.
  */
 export function EmailLink({
@@ -23,7 +23,7 @@ export function EmailLink({
   subject?: string;
   children?: React.ReactNode;
   className?: string;
-  variant?: 'primary' | 'ghost';
+  variant?: 'primary' | 'secondary' | 'ghost';
   showArrow?: boolean;
   inline?: boolean;
   mask?: string;

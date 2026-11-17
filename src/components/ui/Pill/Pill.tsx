@@ -6,7 +6,7 @@ export function Pill({
   onColor,
 }: {
   label: string;
-  tone?: 'discipline' | 'solid';
+  tone?: 'discipline' | 'solid' | 'quiet';
   /** Override the discipline tone's fill (e.g. a specific project's discipline,
       not the page zone accent). Sets the local --pill-fill (UNregistered, so it
       re-resolves the Radix scale on a dark/light toggle — unlike --accent). */
@@ -21,6 +21,7 @@ export function Pill({
       : undefined;
   return (
     <span className={`${styles.pill} ${styles[tone]}`} style={style}>
+      {tone === 'quiet' && <span className={styles.dot} aria-hidden />}
       {label}
     </span>
   );

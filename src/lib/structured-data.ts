@@ -64,7 +64,6 @@ function personNode(): JsonLdNode {
     image: abs('/images/about/tom-hinsley.webp'),
     jobTitle: ['Full-Stack Developer', 'Frontend Developer', 'Software Engineer'],
     description: COPY.meta.summary,
-    address: { '@type': 'PostalAddress', addressLocality: 'London', addressCountry: 'GB' },
     knowsAbout: KNOWS_ABOUT,
     knowsLanguage: 'en-GB',
     alumniOf: { '@type': 'CollegeOrUniversity', name: 'Ravensbourne University London' },
