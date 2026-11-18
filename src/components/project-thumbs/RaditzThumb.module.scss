@@ -1,0 +1,143 @@
+@use '../../styles/mixins/breakpoints' as *;
+
+/* Raditz — a mini of its showcase: header, accent swatches, then a button, a ghost
+   button, a switch and a slider. Every coloured part reads one registered custom
+   property, --raditz-accent, so animating that single value re-themes them all at
+   once: the point of the library. Everything sits on one size scale (--u) so the
+   rows line up. Panel/text follow the theme via tokens; the Radix accents are fixed.
+   Scales with the card via container-query units. Decorative. */
+
+/* Registered so it interpolates as a colour (unregistered custom properties would
+   snap). Global by nature, hence the project-specific name. */
+@property --raditz-accent {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #00a2c7;
+}
+
+.root {
+  position: absolute;
+  inset: 0;
+  --raditz-from: #00a2c7;  /* Radix cyan 9 */
+  --raditz-to: #6e56cf;    /* Radix violet 9 */
+  --raditz-accent: var(--raditz-from);
+  --u: 8cqmin;             /* control height: swatches, buttons and switch share it */
+  --gap: 3cqmin;
+  container-type: size;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: radial-gradient(125% 95% at 80% 6%, color-mix(in oklab, var(--raditz-accent) 30%, transparent), transparent 58%);
+}
+
+.panel {
+  width: 76cqw;
+  max-width: 100cqh;
+  background: var(--bg);
+  border: max(1px, 0.5cqmin) solid var(--rule);
+  border-radius: 7cqmin;
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+}
+
+/* header: logo + wordmark, theme icon pinned right, a rule underneath */
+.head {
+  display: flex;
+  align-items: center;
+  gap: 2.4cqmin;
+  padding: 4cqmin 5cqmin;
+  border-bottom: max(1px, 0.4cqmin) solid var(--rule);
+}
+.logo {
+  width: 6.4cqmin; height: 6.4cqmin; flex: none;
+  display: grid; place-items: center;
+  border-radius: 1.8cqmin;
+  background: var(--raditz-accent);
+}
+.planet { width: 2.6cqmin; height: 2.6cqmin; border-radius: 50%; background: #fff; }
+.wordmark { height: 2.6cqmin; width: 16cqmin; border-radius: 999px; background: var(--text); opacity: 0.72; }
+.themeIcon {
+  margin-left: auto;
+  width: 4.4cqmin; height: 4.4cqmin; border-radius: 50%;
+  border: 0.6cqmin solid var(--text-muted);
+  background: linear-gradient(90deg, var(--text-muted) 50%, transparent 50%);
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: 4.4cqmin;
+  padding: 5cqmin 5cqmin 6cqmin;
+}
+
+/* swatches: same height as the controls below; the ring steps cyan → violet */
+.swatches { position: relative; display: flex; gap: var(--gap); }
+.swatch { width: var(--u); height: var(--u); border-radius: 50%; flex: none; }
+.ring {
+  position: absolute;
+  top: -1.2cqmin; left: -1.2cqmin;
+  width: calc(var(--u) + 2.4cqmin); height: calc(var(--u) + 2.4cqmin);
+  border-radius: 50%;
+  border: 0.6cqmin solid var(--text);
+  transform: translateX(calc(1 * (var(--u) + var(--gap))));
+}
+
+/* controls: one height, left-aligned, switch pinned right */
+.controls { display: flex; align-items: center; gap: var(--gap); }
+.button, .ghost {
+  height: var(--u);
+  padding: 0 4.4cqmin;
+  display: grid; place-items: center;
+  border-radius: 2cqmin;
+}
+.button { background: var(--raditz-accent); }
+.buttonLabel { width: 11cqmin; height: 2.2cqmin; border-radius: 999px; background: #fff; }
+.ghost { box-shadow: inset 0 0 0 0.5cqmin color-mix(in oklab, var(--raditz-accent) 75%, transparent); }
+.ghostLabel { width: 9cqmin; height: 2.2cqmin; border-radius: 999px; background: var(--raditz-accent); }
+.switch {
+  margin-left: auto;
+  position: relative;
+  width: calc(var(--u) * 1.75); height: var(--u); flex: none;
+  border-radius: 999px;
+  background: var(--raditz-accent);
+}
+.knob {
+  position: absolute; top: 1cqmin; right: 1cqmin;
+  width: calc(var(--u) - 2cqmin); height: calc(var(--u) - 2cqmin); border-radius: 50%;
+  background: #fff;
+}
+
+.slider {
+  position: relative;
+  height: 1.6cqmin;
+  border-radius: 999px;
+  background: color-mix(in oklab, var(--text) 14%, transparent);
+}
+.fill { position: absolute; inset: 0 38% 0 0; border-radius: inherit; background: var(--raditz-accent); }
+.thumb {
+  position: absolute; top: 50%; left: 62%;
+  width: 5cqmin; height: 5cqmin; margin: -2.5cqmin 0 0 -2.5cqmin;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 0.7cqmin solid var(--raditz-accent);
+}
+
+/* One moment, kept short: the panel lands and, as it settles, the ring steps to
+   violet and the library re-tints with it. Reduced motion: composed, static, cyan. */
+@media (prefers-reduced-motion: no-preference) {
+  /* plays only once the thumbnail is scrolled into view (.inview) */
+  .root { --play: paused; }
+  .inview { --play: running; }
+  .root, .root * { animation-play-state: var(--play); }
+
+  .panel { animation: raditzRise 0.5s var(--ease-standard) both; }
+  .root { animation: raditzRetheme 0.45s var(--ease-standard) 0.55s both; }
+  .ring { animation: raditzStep 0.45s var(--ease-standard) 0.55s both; }
+}
+
+@keyframes raditzRetheme { from { --raditz-accent: var(--raditz-from); } to { --raditz-accent: var(--raditz-to); } }
+@keyframes raditzStep {
+  from { transform: translateX(calc(1 * (var(--u) + var(--gap)))); }
+  to { transform: translateX(calc(3 * (var(--u) + var(--gap)))); }
+}
+@keyframes raditzRise { from { opacity: 0; transform: translateY(6cqmin) scale(0.98); } to { opacity: 1; transform: none; } }
