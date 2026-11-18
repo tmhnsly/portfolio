@@ -3,7 +3,7 @@ title: Raditz
 desc: An exploration of how an accessible, themeable React component library could work
 discipline: code
 date: "2026-06-01"
-tags: ["React", "TypeScript", "Storybook", "Accessibility", "Open source"]
+tags: ["React", "TypeScript", "Storybook", "Accessibility"]
 role: Design + engineering
 year: 2026
 status: "v0.3 · in progress"
@@ -12,15 +12,6 @@ repo: github.com/tmhnsly/raditz
 links:
   - label: In use · Beatz DJ Studio concept
     url: "https://beats-dj-studio.vercel.app"
-media:
-  - type: image
-    src: "/images/projects/code/raditz-showcase.webp"
-    alt: "The Raditz showcase: a component tree beside the colour foundations and theme picker"
-    title: "Showcase"
-  - type: image
-    src: "/images/projects/code/raditz-beatz-demo.webp"
-    alt: "Beatz DJ Studio homepage built from Raditz sections, with a dark hero over a DJ booth photo"
-    title: "In use: Beatz DJ Studio"
 ---
 
 Raditz is my exploration of how an accessible, themeable component library could work. I wanted something I could prototype with quickly that didn't look like a prototype, so it grew into 106 React components and 26 page sections.

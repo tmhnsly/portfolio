@@ -8,11 +8,6 @@ role: Design + engineering
 year: 2026
 status: "Live"
 liveUrl: https://dreamscene-sigma.vercel.app
-media:
-  - type: image
-    src: "/images/projects/code/dreamscene.webp"
-    alt: "Dreamscene homepage: a serif headline beside story cards arranged around a circle"
-    title: "Dreamscene"
 ---
 
 Dreamscene is a story-development app for the messy front end of writing. You scatter ideas as cards, find their shape with Dan Harmon's Story Circle, read them back as a reel, then draft scenes in focused sprints. The idea running through it is chaos to order.
