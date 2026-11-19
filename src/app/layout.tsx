@@ -7,6 +7,8 @@ import { breadcrumbData } from '@/lib/content';
 import { identityGraphJsonLd } from '@/lib/structured-data';
 import { COPY } from '@/data';
 import { SITE_URL } from '@/lib/site-url';
+import { Analytics } from '@vercel/analytics/next';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 import '@radix-ui/colors/sand.css';
 import '@radix-ui/colors/sand-dark.css';
 import '@radix-ui/colors/sand-alpha.css';
@@ -67,6 +69,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             {children}
           </Shell>
         </ThemeProvider>
+        {/* Vercel Web Analytics (cookieless page views) + Speed Insights (real-user Core Web Vitals). */}
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
