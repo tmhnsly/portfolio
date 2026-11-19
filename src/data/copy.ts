@@ -26,7 +26,7 @@ export const COPY = {
 
   home: {
     // RecentWork h2 — accent period stays in JSX
-    selectedWork: 'Selected work',
+    recentWork: 'Recent work',
     // RecentWork "see all" link
     everything: 'Everything',
     // DisciplineScroller eyebrow + aria-label

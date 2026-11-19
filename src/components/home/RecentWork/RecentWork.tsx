@@ -4,7 +4,6 @@ import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import type { Project } from '@/types';
 import { DISCIPLINE_ORDER, DISCIPLINES } from '@/lib/disciplines';
 import { projectPresentation } from '@/lib/project-presentation';
-import { splitFeatured } from '@/lib/facets';
 import { IMG_SIZES } from '@/lib/breakpoints';
 import { DURATION, EASING } from '@/lib/motion';
 import { COPY } from '@/data';
@@ -20,16 +19,22 @@ import styles from './RecentWork.module.scss';
 const disciplineLabel = (p: Project) => DISCIPLINES[p.discipline].label;
 const DISCIPLINE_LABELS = DISCIPLINE_ORDER.map((s) => DISCIPLINES[s].label);
 
+/**
+ * Home "Recent work": the newest projects (the page passes everything not already in
+ * the featured carousel), filterable by discipline. The newest leads as the large card,
+ * the next three sit beside it.
+ */
 export function RecentWork({ projects }: { projects: Project[] }) {
   const reduce = useReducedMotion();
   const { filters, active, setActive, activeLabel, filtered } = useFacets(projects, disciplineLabel, DISCIPLINE_LABELS);
-  const { featured, rest: thumbs } = splitFeatured(filtered, 3);
+  const [featured, ...others] = filtered;
+  const thumbs = others.slice(0, 3);
   if (!featured) return null;
 
   return (
     <section className={styles.section}>
       <div className={styles.head}>
-        <h2 className={styles.title}>{COPY.home.selectedWork}<span className={styles.period}>.</span></h2>
+        <h2 className={styles.title}>{COPY.home.recentWork}<span className={styles.period}>.</span></h2>
         <FilterPills items={filters} active={active} onSelect={setActive} />
       </div>
       <AnimatePresence mode="wait" initial={false}>
