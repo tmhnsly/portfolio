@@ -20,9 +20,9 @@ const disciplineLabel = (p: Project) => DISCIPLINES[p.discipline].label;
 const DISCIPLINE_LABELS = DISCIPLINE_ORDER.map((s) => DISCIPLINES[s].label);
 
 /**
- * Home "Recent work": the newest projects (the page passes everything not already in
- * the featured carousel), filterable by discipline. The newest leads as the large card,
- * the next three sit beside it.
+ * Home "Recent work": the newest projects, newest first, filterable by discipline.
+ * The newest leads as the large card and the next three sit beside it. Independent of
+ * the hand-picked featured carousel, so a project can appear in both.
  */
 export function RecentWork({ projects }: { projects: Project[] }) {
   const reduce = useReducedMotion();
