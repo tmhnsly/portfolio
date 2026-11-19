@@ -6,11 +6,10 @@ import { Availability } from '@/components/home/Availability';
 import { getAllProjects, featuredProjects } from '@/lib/content';
 
 export default function Home() {
+  // The carousel is the hand-picked best (DECK_LEAD); "Recent work" is simply the
+  // newest projects, newest first, even if some are also in the carousel.
   const deck = featuredProjects();
-  // "Recent work" is everything else, newest first: the carousel shows the best
-  // pieces, this shows what's been shipped lately, and nothing appears in both.
-  const inDeck = new Set(deck.map((p) => p.slug));
-  const recent = getAllProjects().filter((p) => !inDeck.has(p.slug));
+  const recent = getAllProjects();
   return (
     <Container>
       <Stack>
